@@ -23,4 +23,5 @@ class AppOnBoardingAssets {
   static String onBoarding3 = "assets/onBoardingAssets/onBoarding_3.svg";
   static String onBoarding4 = "assets/onBoardingAssets/onBoarding_4.svg";
   static String onBoarding5 = "assets/onBoardingAssets/onBoarding_5.svg";
+  static String onBoarding6 = "assets/onBoardingAssets/onBoarding_6.svg";
 }

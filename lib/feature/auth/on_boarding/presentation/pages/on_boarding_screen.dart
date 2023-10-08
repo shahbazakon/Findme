@@ -66,7 +66,7 @@ class OnBoardingScreen extends StatelessWidget {
                 subTitle: "Lets Get Started!",
                 subText:
                     "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
-                image: AppOnBoardingAssets.onBoarding1,
+                image: AppOnBoardingAssets.onBoarding6,
               ),
             ),
           ],
