@@ -14,32 +14,36 @@ double fontSizeH10 = 16.0;
 double fontSizeH11 = 14.0;
 double fontSizeH12 = 12.0;
 
+class AppFonts {
+  static String montserrat = "Montserrat";
+}
+
 /// Simple Text
 class TextHelper {
-  static var h1 = const TextStyle(
+  static var h1 = TextStyle(
     fontSize: 24,
     color: Colors.black,
+    fontFamily: AppFonts.montserrat,
 
     // fontWeight: FontWeight.w600
   );
-  static var h1Second = const TextStyle(
+  static var h1Second = TextStyle(
     fontSize: 24,
     color: Colors.black,
+    fontFamily: AppFonts.montserrat,
 
     // fontWeight: FontWeight.w600
   );
 
-  static var h2 = const TextStyle(
+  static var h2 = TextStyle(
     fontSize: 23,
     color: Colors.black,
-
-    // fontWeight: FontWeight.w800
+    fontFamily: AppFonts.montserrat,
   );
-  static var h3 = const TextStyle(
+  static var h3 = TextStyle(
     fontSize: 20,
     color: Colors.black,
-
-    // fontWeight: FontWeight.w600
+    fontFamily: AppFonts.montserrat,
   );
   static var h4 = const TextStyle(
     fontSize: 18,
@@ -47,18 +51,22 @@ class TextHelper {
 
     // fontWeight: FontWeight.w500
   );
-  static var h5 = const TextStyle(
+  static var h5 = TextStyle(
     fontSize: 16,
     color: Colors.black,
-
-    // fontWeight: FontWeight.w400
+    fontFamily: AppFonts.montserrat,
   );
-  static var h6 = const TextStyle(
+  static var h6 = TextStyle(
     fontSize: 15,
     color: Colors.black,
+    fontFamily: AppFonts.montserrat,
   );
-  static var h7 = const TextStyle(
-      fontSize: 10, color: Colors.black, fontWeight: FontWeight.w400);
+  static var h7 = TextStyle(
+    fontSize: 10,
+    color: Colors.black,
+    fontWeight: FontWeight.w400,
+    fontFamily: AppFonts.montserrat,
+  );
 }
 
 /// Title Text
@@ -66,55 +74,68 @@ class TitleHelper {
   static var h1 = TextStyle(
     fontSize: fontSizeH1,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h1Second = TextStyle(
     fontSize: fontSizeH2,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
 
   static var h2 = TextStyle(
     fontSize: fontSizeH2,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h3 = TextStyle(
     fontSize: fontSizeH3,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h4 = TextStyle(
     fontSize: fontSizeH4,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h5 = TextStyle(
     fontSize: fontSizeH5,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h6 = TextStyle(
     fontSize: fontSizeH6,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h7 = TextStyle(
     fontSize: fontSizeH7,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h8 = TextStyle(
     fontSize: fontSizeH8,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h9 = TextStyle(
     fontSize: fontSizeH9,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h10 = TextStyle(
     fontSize: fontSizeH10,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h11 = TextStyle(
     fontSize: fontSizeH11,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h12 = TextStyle(
     fontSize: fontSizeH12,
     fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
 }
 
@@ -122,39 +143,51 @@ class TitleHelper {
 class SubtitleHelper {
   static var h1 = TextStyle(
     fontSize: fontSizeH1,
+    fontFamily: AppFonts.montserrat,
   );
 
   static var h2 = TextStyle(
     fontSize: fontSizeH2,
+    fontFamily: AppFonts.montserrat,
   );
   static var h3 = TextStyle(
     fontSize: fontSizeH3,
+    fontFamily: AppFonts.montserrat,
   );
   static var h4 = TextStyle(
     fontSize: fontSizeH4,
+    fontFamily: AppFonts.montserrat,
   );
   static var h5 = TextStyle(
     fontSize: fontSizeH5,
+    fontFamily: AppFonts.montserrat,
   );
   static var h6 = TextStyle(
     fontSize: fontSizeH6,
+    fontFamily: AppFonts.montserrat,
   );
   static var h7 = TextStyle(
     fontSize: fontSizeH7,
+    fontFamily: AppFonts.montserrat,
   );
   static var h8 = TextStyle(
     fontSize: fontSizeH8,
+    fontFamily: AppFonts.montserrat,
   );
   static var h9 = TextStyle(
     fontSize: fontSizeH9,
+    fontFamily: AppFonts.montserrat,
   );
   static var h10 = TextStyle(
     fontSize: fontSizeH10,
+    fontFamily: AppFonts.montserrat,
   );
   static var h11 = TextStyle(
     fontSize: fontSizeH11,
+    fontFamily: AppFonts.montserrat,
   );
   static var h12 = TextStyle(
     fontSize: fontSizeH12,
+    fontFamily: AppFonts.montserrat,
   );
 }

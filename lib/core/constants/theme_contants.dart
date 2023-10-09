@@ -1,4 +1,5 @@
 import 'package:find_me/core/utils/app_color.dart';
+import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ThemeConstants {
@@ -7,6 +8,7 @@ class ThemeConstants {
       dialogTheme: const DialogTheme(backgroundColor: Colors.white),
       primaryColor: AppColors.primary,
       primarySwatch: Colors.cyan,
+      fontFamily: AppFonts.montserrat,
       appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0.0,
