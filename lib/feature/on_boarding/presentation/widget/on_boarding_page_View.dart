@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/utils/text_style.dart';
-import '../../../../core/utils/utils_methods.dart';
+import '../../../../../core/utils/text_style.dart';
+import '../../../../../core/utils/utils_methods.dart';
 
 class OnBoardingPageView extends StatelessWidget {
   const OnBoardingPageView(
