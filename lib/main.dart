@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'core/constants/theme_contants.dart';
 import 'core/utils/utils_methods.dart';
-import 'feature/on_boarding/presentation/pages/splash_screen.dart';
+import 'feature/onBoarding/presentation/pages/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Find me',
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: ThemeConstants.getTheme(context),
       home: const SplashScreen(),
     );
   }

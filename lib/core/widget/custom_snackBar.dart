@@ -11,7 +11,7 @@ void showSnackBar({required String title, Duration? duration}) {
     behavior: SnackBarBehavior.floating,
     content: Text(
       title,
-      style: SubtitleHelper.h10
+      style: SubTitleHelper.h10
           .copyWith(color: Colors.white, fontWeight: FontWeight.normal),
     ),
   );

@@ -20,17 +20,19 @@ class AppButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       borderRadius: BorderRadius.circular(30),
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
-        width: buttonWidth ?? width * .88,
-        child: Text(
-          label,
-          style: TitleHelper.h8.copyWith(color: AppFontsColors.light),
-          textAlign: TextAlign.center,
+      child: Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
+          width: buttonWidth ?? width,
+          child: Text(
+            label,
+            style: TitleHelper.h9.copyWith(color: AppFontsColors.light),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
