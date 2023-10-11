@@ -42,11 +42,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 SizedBox(height: height * .06),
                 CustomTestField(
-                    controller: _passwordController, label: "Password"),
+                  controller: _passwordController,
+                  label: "Password",
+                  isObscureButton: true,
+                ),
                 SizedBox(height: height * .04),
                 CustomTestField(
-                    controller: _confirmPasswordController,
-                    label: "Confirm Password"),
+                  controller: _confirmPasswordController,
+                  label: "Confirm Password",
+                  isObscureButton: true,
+                ),
                 SizedBox(height: height * .12),
                 AppButton(
                   label: "Reset",
