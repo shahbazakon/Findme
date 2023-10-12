@@ -15,6 +15,7 @@ class AppIcons {
 class AppImages {
   static String logo = "assets/images/find_me_logo.svg";
   static String success = "assets/images/success.svg";
+  static String bgWhite = "assets/images/bg_white.png";
 }
 
 class AppOnBoardingAssets {

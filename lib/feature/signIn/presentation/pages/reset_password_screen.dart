@@ -1,3 +1,5 @@
+import 'package:find_me/core/helper/navigators.dart';
+import 'package:find_me/core/widget/success_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/text_style.dart';
@@ -55,7 +57,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 SizedBox(height: height * .12),
                 AppButton(
                   label: "Reset",
-                  onPressed: () {},
+                  onPressed: () {
+                    cupertinoNavigator(
+                        type: NavigatorType.PUSHREMOVEUNTIL,
+                        screenName: const SuccessScreen(
+                          subTitle: "Your Password reset is successful!",
+                          isHomeButtonVisible: true,
+                        ));
+                  },
                 ),
                 const SizedBox(
                   height: 5,

@@ -101,29 +101,28 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         Container(
                           width: double.infinity,
                           alignment: Alignment.bottomCenter,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomDotsIndicator(
-                                    numPages: _numPages,
-                                    pageController: _pageController),
-                                SizedBox(
-                                  height: size.height * .03,
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomDotsIndicator(
+                                  numPages: _numPages,
+                                  pageController: _pageController),
+                              SizedBox(
+                                height: size.height * .03,
+                              ),
+                              Visibility(
+                                visible: currentPageValue == 5,
+                                child: AppButton(
+                                  label: "Get Started",
+                                  onPressed: () {
+                                    cupertinoNavigator(
+                                        type: NavigatorType.PUSHREMOVEUNTIL,
+                                        screenName: const SignInScreen());
+                                  },
                                 ),
-                                Visibility(
-                                  visible: currentPageValue == 5,
-                                  child: AppButton(
-                                    label: "Get Started",
-                                    onPressed: () {
-                                      cupertinoNavigator(
-                                          screenName: const SignInScreen());
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ),
                       ],
