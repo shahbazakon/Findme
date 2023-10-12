@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
@@ -5,8 +7,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/utils_methods.dart';
+import '../../../../core/widget/Text Field/custom_checkbox.dart';
 import '../../../../core/widget/Text Field/custom_test_field.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
+import '../../../signUp/presentation/pages/sign_up_screen.dart';
 import 'forget_password_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -56,14 +60,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Row(
                       children: [
-                        Checkbox(
-                          value: isRememberMe,
-                          onChanged: (value) {
-                            setState(() {
-                              isRememberMe = !isRememberMe;
-                            });
-                          },
-                        ),
+                        CustomCheckBox(onChanged: (value) {
+                          isRememberMe = value;
+                          log(" value: $value");
+                        }),
                         const Text("Remember me"),
                       ],
                     ),
@@ -100,7 +100,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                       .copyWith(color: AppColors.primary),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      // TODO: Navigate to login Screen
+                                      cupertinoNavigator(
+                                          screenName: const SignUpScreen());
                                     },
                                 )
                               ])

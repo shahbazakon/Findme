@@ -19,7 +19,12 @@ class CustomTestField extends StatefulWidget {
 }
 
 class _CustomTestFieldState extends State<CustomTestField> {
-  bool isObscure = true;
+  bool isObscure = false;
+  @override
+  void initState() {
+    isObscure = widget.isObscureButton;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

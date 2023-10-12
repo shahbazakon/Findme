@@ -4,7 +4,7 @@ import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/utils_methods.dart';
 import '../../../../core/helper/navigators.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
-import '../../../signIn/presentation/pages/sign_in_screen.dart';
+import '../../../signUp/presentation/pages/sign_up_screen.dart';
 import '../widget/dots_indicator_widget.dart';
 import '../widget/on_boarding_page_View.dart';
 
@@ -118,7 +118,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                   onPressed: () {
                                     cupertinoNavigator(
                                         type: NavigatorType.PUSHREMOVEUNTIL,
-                                        screenName: const SignInScreen());
+                                        screenName: const SignUpScreen());
                                   },
                                 ),
                               )
