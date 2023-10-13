@@ -7,9 +7,14 @@ import 'package:flutter_svg/svg.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen(
-      {super.key, this.subTitle, this.title, this.isHomeButtonVisible = false});
+      {super.key,
+      this.subTitle,
+      this.title,
+      this.isHomeButtonVisible = false,
+      this.subTitleWidget});
   final String? title;
   final String? subTitle;
+  final Widget? subTitleWidget;
   final bool isHomeButtonVisible;
 
   @override
@@ -17,6 +22,7 @@ class SuccessScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.light,
       body: Container(
+        padding: primaryPadding,
         decoration: BoxDecoration(
             color: AppColors.light,
             image: DecorationImage(
@@ -43,6 +49,7 @@ class SuccessScreen extends StatelessWidget {
                   style: TitleHelper.h7,
                 ),
                 SizedBox(height: height * .02),
+                subTitleWidget ?? const SizedBox.shrink(),
                 Visibility(
                   visible: subTitle != null,
                   child: Text(

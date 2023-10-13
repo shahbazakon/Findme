@@ -11,6 +11,7 @@ import '../../../../core/utils/text_style.dart';
 import '../../../../core/widget/Text Field/custom_checkbox.dart';
 import '../../../../core/widget/Text Field/custom_test_field.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
+import 'otp_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -43,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Text(
                 "Hi! Welcome back, you’ve been missed",
-                style: TextHelper.h12,
+                style: SubTitleHelper.h12,
               ),
               SizedBox(height: height * .06),
               CustomTestField(controller: _nameController, label: "Name"),
@@ -72,7 +73,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: height * .06),
               AppButton(
                 label: "Sign Up",
-                onPressed: () {},
+                onPressed: () {
+                  cupertinoNavigator(screenName: const OTPScreen());
+                },
               ),
               const SizedBox(
                 height: 5,

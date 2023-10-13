@@ -17,8 +17,8 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
     return Checkbox(
       value: isRememberMe,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-      fillColor:
-          MaterialStateColor.resolveWith((states) => AppColors.lightGrey2),
+      fillColor: MaterialStateColor.resolveWith(
+          (states) => isRememberMe ? AppColors.primary : AppColors.lightGrey2),
       side: BorderSide(
         color: AppColors.lightGrey3,
       ),
