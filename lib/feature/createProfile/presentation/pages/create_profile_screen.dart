@@ -81,7 +81,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   Expanded(
                     flex: 85,
                     child: CustomTestField(
-                      controller: _nameController,
+                      controller: _phoneNumberCodeController,
                       label: "Phone Number",
                     ),
                   ),

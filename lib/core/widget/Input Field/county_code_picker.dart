@@ -24,6 +24,7 @@ class CustomCountryCodePicker extends StatelessWidget {
       showFlagDialog: true,
       padding: EdgeInsets.zero,
       initialSelection: "+91",
+      favorite: ['+91', 'IN'],
       backgroundColor: AppColors.lightGrey3,
       textStyle: textStyle ?? TextHelper.h10,
       searchStyle: TextHelper.h10,

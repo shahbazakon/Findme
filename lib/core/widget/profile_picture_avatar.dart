@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/app_color.dart';
+import 'dialogBox/pick_images_dialogbox.dart';
 
 class ProfilePictureAvatar extends StatefulWidget {
   const ProfilePictureAvatar(
@@ -14,6 +15,7 @@ class ProfilePictureAvatar extends StatefulWidget {
 }
 
 class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
+  AppDialogBox dialogBox = AppDialogBox();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -40,13 +42,18 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
           child: Positioned(
             bottom: 8,
             right: 8,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(100),
+            child: InkWell(
+              onTap: () {
+                dialogBox.pickImages();
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: SvgPicture.asset(AppIcons.edit, height: 25),
               ),
-              child: SvgPicture.asset(AppIcons.edit, height: 25),
             ),
           ),
         )

@@ -64,7 +64,7 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
               SizedBox(height: height * .1),
               Text(
-                "Didn’t receive code?",
+                "Did’t receive code?",
                 style: SubTitleHelper.h11,
               ),
               SizedBox(height: height * .02),
