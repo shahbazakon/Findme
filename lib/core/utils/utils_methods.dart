@@ -7,7 +7,3 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Size size = MediaQuery.of(navigatorKey.currentContext!).size;
 double height = size.height;
 double width = size.width;
-
-//app Padding
-
-EdgeInsetsGeometry primaryPadding = const EdgeInsets.symmetric(horizontal: 15);

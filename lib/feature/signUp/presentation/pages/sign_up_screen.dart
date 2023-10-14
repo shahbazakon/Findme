@@ -5,11 +5,12 @@ import 'package:find_me/feature/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/common_ui.dart';
 import '../../../../core/helper/navigators.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/text_style.dart';
-import '../../../../core/widget/Text Field/custom_checkbox.dart';
-import '../../../../core/widget/Text Field/custom_test_field.dart';
+import '../../../../core/widget/Input Field/custom_checkbox.dart';
+import '../../../../core/widget/Input Field/custom_test_field.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
 import 'otp_screen.dart';
 
@@ -46,14 +47,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               SizedBox(height: height * .06),
               CustomTestField(controller: _nameController, label: "Name"),
-              SizedBox(height: height * .02),
               CustomTestField(controller: _emailController, label: "Email"),
-              SizedBox(height: height * .02),
               CustomTestField(
                   controller: _passwordController,
                   label: "Password",
                   isObscureButton: true),
-              SizedBox(height: height * .02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

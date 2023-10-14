@@ -6,9 +6,10 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/common_ui.dart';
 import '../../../../core/utils/utils_methods.dart';
-import '../../../../core/widget/Text Field/custom_checkbox.dart';
-import '../../../../core/widget/Text Field/custom_test_field.dart';
+import '../../../../core/widget/Input Field/custom_checkbox.dart';
+import '../../../../core/widget/Input Field/custom_test_field.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
 import '../../../createProfile/presentation/pages/create_profile_screen.dart';
 import '../../../signUp/presentation/pages/sign_up_screen.dart';
@@ -49,12 +50,10 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               SizedBox(height: height * .04),
               CustomTestField(controller: _emailController, label: "Email"),
-              SizedBox(height: height * .02),
               CustomTestField(
                   controller: _passwordController,
                   label: "Password",
                   isObscureButton: true),
-              SizedBox(height: height * .02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

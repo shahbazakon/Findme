@@ -1,7 +1,12 @@
-import 'package:find_me/core/utils/app_color.dart';
+import 'package:find_me/core/constants/common_ui.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/widget/Input Field/county_code_picker.dart';
+import '../../../../core/widget/button/app_Button_widget.dart';
+import '../../../../core/widget/profile_picture_avatar.dart';
 
 class CreateProfile extends StatefulWidget {
   const CreateProfile({super.key});
@@ -11,38 +16,106 @@ class CreateProfile extends StatefulWidget {
 }
 
 class _CreateProfileState extends State<CreateProfile> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _countryCodeController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
+  final TextEditingController _statusCodeController = TextEditingController();
+  final TextEditingController _phoneNumberCodeController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    _phoneNumberCodeController.dispose();
+    _countryCodeController.dispose();
+    _emailController.dispose();
+    _nameController.dispose();
+    _countryController.dispose();
+    _statusCodeController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: primaryPadding,
-        child: Column(
-          children: [
-            Text("Complete Your Profile", style: TitleHelper.h4),
-            SizedBox(height: height * .02),
-            Text(
-                "Don’t worry only you can see your personal data . No one else will be able to see it.",
-                style: SubTitleHelper.h11,
-                textAlign: TextAlign.center),
-            SizedBox(height: height * .05),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(width: 10, color: AppColors.light),
-                  boxShadow: [
-                    BoxShadow(
-                        offset: const Offset(0, 0),
-                        blurRadius: 10,
-                        color: AppColors.lightGrey3)
-                  ]),
-              child: const CircleAvatar(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: primaryPadding,
+          child: Column(
+            children: [
+              Text("Complete Your Profile", style: TitleHelper.h4),
+              SizedBox(height: height * .02),
+              Text(
+                  "Don’t worry only you can see your personal data . No one else will be able to see it.",
+                  style: SubTitleHelper.h11,
+                  textAlign: TextAlign.center),
+              SizedBox(height: height * .05),
+              const ProfilePictureAvatar(
                 radius: 80,
-                backgroundImage: NetworkImage(
-                    "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3569&q=80"),
+                showEditButton: true,
               ),
-            )
-          ],
+              SizedBox(height: height * .04),
+              CustomTestField(
+                controller: _nameController,
+                label: "Name",
+              ),
+              CustomTestField(
+                controller: _emailController,
+                label: "Email",
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 25,
+                    child: Container(
+                      decoration: appBoxDecoration,
+                      child: CustomCountryCodePicker(
+                        onChanged: (value) {
+                          _countryCodeController.text = value.code!;
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: width * .02),
+                  Expanded(
+                    flex: 85,
+                    child: CustomTestField(
+                      controller: _nameController,
+                      label: "Phone Number",
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: width,
+                margin: EdgeInsets.symmetric(vertical: height * .01),
+                decoration: appBoxDecoration,
+                alignment: Alignment.centerLeft,
+                child: CustomCountryCodePicker(
+                  showOnlyCountryWhenClosed: true,
+                  showCountryOnly: true,
+                  // textStyle: _countryController.text != "Country"
+                  //     ? null
+                  //     : TextHelper.h10
+                  //         .copyWith(color: AppFontsColors.lightGrey3),
+                  onChanged: (value) {
+                    setState(() {
+                      _countryController.text = value.name!;
+                    });
+                  },
+                ),
+              ),
+              CustomTestField(
+                controller: _statusCodeController,
+                label: "Status",
+              ),
+              AppButton(
+                label: "Complete Profile",
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

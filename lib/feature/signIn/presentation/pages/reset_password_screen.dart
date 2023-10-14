@@ -2,9 +2,10 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/widget/success_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/common_ui.dart';
 import '../../../../core/utils/text_style.dart';
 import '../../../../core/utils/utils_methods.dart';
-import '../../../../core/widget/Text Field/custom_test_field.dart';
+import '../../../../core/widget/Input Field/custom_test_field.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             children: [
               Padding(
                 padding:
-                    EdgeInsets.only(top: height * .1, bottom: height * .04),
+                    EdgeInsets.only(top: height * .05, bottom: height * .02),
                 child: Text(
                   "Reset Password",
                   style: TitleHelper.h1,
@@ -47,13 +48,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 label: "Password",
                 isObscureButton: true,
               ),
-              SizedBox(height: height * .04),
               CustomTestField(
                 controller: _confirmPasswordController,
                 label: "Confirm Password",
                 isObscureButton: true,
               ),
-              SizedBox(height: height * .12),
+              SizedBox(height: height * .06),
               AppButton(
                 label: "Reset",
                 onPressed: () {

@@ -1,10 +1,11 @@
+import 'package:find_me/core/constants/common_ui.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/feature/signIn/presentation/pages/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/text_style.dart';
 import '../../../../core/utils/utils_methods.dart';
-import '../../../../core/widget/Text Field/custom_test_field.dart';
+import '../../../../core/widget/Input Field/custom_test_field.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             children: [
               Padding(
                 padding:
-                    EdgeInsets.only(top: height * .1, bottom: height * .04),
+                    EdgeInsets.only(top: height * .05, bottom: height * .02),
                 child: Text(
                   "Forgot Password",
                   style: TitleHelper.h1,
@@ -39,9 +40,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 style: SubTitleHelper.h12,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: height * .06),
+              SizedBox(height: height * .04),
               CustomTestField(controller: _emailController, label: "Email"),
-              SizedBox(height: height * .06),
+              SizedBox(height: height * .04),
               AppButton(
                 label: "Send",
                 onPressed: () {
