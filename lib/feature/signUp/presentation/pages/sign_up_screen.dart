@@ -29,19 +29,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: primaryPadding,
           child: Column(
             children: [
-              Padding(
-                padding:
-                    EdgeInsets.only(top: height * .06, bottom: height * .02),
-                child: Text(
-                  "Sign Up",
-                  style: TitleHelper.h1,
-                ),
+              Text(
+                "Sign Up",
+                style: TitleHelper.h1,
               ),
+              SizedBox(height: height * .02),
               Text(
                 "Hi! Welcome back, you’ve been missed",
                 style: SubTitleHelper.h12,

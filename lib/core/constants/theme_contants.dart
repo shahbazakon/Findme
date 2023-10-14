@@ -6,14 +6,12 @@ class ThemeConstants {
   static ThemeData getTheme(context) {
     return ThemeData(
       dialogTheme: const DialogTheme(backgroundColor: Colors.white),
+      scaffoldBackgroundColor: AppColors.light,
       primaryColor: AppColors.primary,
-      primarySwatch: Colors.cyan,
       fontFamily: AppFonts.montserrat,
-      appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          elevation: 0.0,
-          titleTextStyle: TextStyle(fontSize: 20, color: Color(0xfff11403A)),
-          iconTheme: IconThemeData(color: Colors.blue)),
+      appBarTheme: AppBarTheme(
+          centerTitle: true, elevation: 0.0, backgroundColor: AppColors.light),
+      colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
     );
   }
 }

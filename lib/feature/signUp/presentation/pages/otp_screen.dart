@@ -25,19 +25,17 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: primaryPadding,
           child: Column(
             children: [
-              Padding(
-                padding:
-                    EdgeInsets.only(top: height * .06, bottom: height * .02),
-                child: Text(
-                  "Verify Code",
-                  style: TitleHelper.h1,
-                ),
+              Text(
+                "Verify Code",
+                style: TitleHelper.h1,
               ),
+              SizedBox(height: height * .0),
               Text(
                 "Please enter the verification code we sent to your email",
                 style: SubTitleHelper.h12,

@@ -19,41 +19,41 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: primaryPadding,
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: height * .1, bottom: height * .04),
-                  child: Text(
-                    "Forgot Password",
-                    style: TitleHelper.h1,
-                  ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: primaryPadding,
+          child: Column(
+            children: [
+              Padding(
+                padding:
+                    EdgeInsets.only(top: height * .1, bottom: height * .04),
+                child: Text(
+                  "Forgot Password",
+                  style: TitleHelper.h1,
                 ),
-                Text(
-                  "Enter your email address to change your password",
-                  style: SubTitleHelper.h12,
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: height * .06),
-                CustomTestField(controller: _emailController, label: "Email"),
-                SizedBox(height: height * .06),
-                AppButton(
-                  label: "Send",
-                  onPressed: () {
-                    cupertinoNavigator(screenName: const ResetPasswordScreen());
-                  },
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
+              ),
+              Text(
+                "Enter your email address to change your password",
+                style: SubTitleHelper.h12,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: height * .06),
+              CustomTestField(controller: _emailController, label: "Email"),
+              SizedBox(height: height * .06),
+              AppButton(
+                label: "Send",
+                onPressed: () {
+                  cupertinoNavigator(
+                      type: NavigatorType.PUSHREPLACE,
+                      screenName: const ResetPasswordScreen());
+                },
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
           ),
         ),
       ),

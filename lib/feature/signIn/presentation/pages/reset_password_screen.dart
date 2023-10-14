@@ -21,56 +21,54 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: primaryPadding,
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: height * .1, bottom: height * .04),
-                  child: Text(
-                    "Reset Password",
-                    style: TitleHelper.h1,
-                  ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: primaryPadding,
+          child: Column(
+            children: [
+              Padding(
+                padding:
+                    EdgeInsets.only(top: height * .1, bottom: height * .04),
+                child: Text(
+                  "Reset Password",
+                  style: TitleHelper.h1,
                 ),
-                Text(
-                  "Your new password should be different from older passwords",
-                  style: SubTitleHelper.h12,
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: height * .06),
-                CustomTestField(
-                  controller: _passwordController,
-                  label: "Password",
-                  isObscureButton: true,
-                ),
-                SizedBox(height: height * .04),
-                CustomTestField(
-                  controller: _confirmPasswordController,
-                  label: "Confirm Password",
-                  isObscureButton: true,
-                ),
-                SizedBox(height: height * .12),
-                AppButton(
-                  label: "Reset",
-                  onPressed: () {
-                    cupertinoNavigator(
-                        type: NavigatorType.PUSHREMOVEUNTIL,
-                        screenName: const SuccessScreen(
-                          subTitle: "Your Password reset is successful!",
-                          isHomeButtonVisible: true,
-                        ));
-                  },
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
+              ),
+              Text(
+                "Your new password should be different from older passwords",
+                style: SubTitleHelper.h12,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: height * .06),
+              CustomTestField(
+                controller: _passwordController,
+                label: "Password",
+                isObscureButton: true,
+              ),
+              SizedBox(height: height * .04),
+              CustomTestField(
+                controller: _confirmPasswordController,
+                label: "Confirm Password",
+                isObscureButton: true,
+              ),
+              SizedBox(height: height * .12),
+              AppButton(
+                label: "Reset",
+                onPressed: () {
+                  cupertinoNavigator(
+                      type: NavigatorType.PUSHREMOVEUNTIL,
+                      screenName: const SuccessScreen(
+                        subTitle: "Your Password reset is successful!",
+                        isHomeButtonVisible: true,
+                      ));
+                },
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
           ),
         ),
       ),

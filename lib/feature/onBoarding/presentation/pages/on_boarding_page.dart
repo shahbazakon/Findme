@@ -36,6 +36,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(),
       body: Padding(
         padding: primaryPadding,
         child: Column(
@@ -48,10 +49,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
-                          height: height * .03,
-                        ),
-                        SizedBox(
-                          height: height * .75,
+                          height: height * .68,
                           child: PageView(
                             controller: _pageController,
                             onPageChanged: (value) {
