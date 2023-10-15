@@ -1,13 +1,28 @@
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../constants/common_ui.dart';
 import '../../utils/text_style.dart';
 import '../../utils/utils_methods.dart';
 
 class AppDialogBox {
+  final ImagePicker _picker = ImagePicker();
+
+  Future getImageFromGallery() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    Navigator.pop(navigatorKey.currentContext!, image);
+    return image;
+  }
+
+  Future getImageFromCamera() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    Navigator.pop(navigatorKey.currentContext!, image);
+    return image;
+  }
+
   @override
-  Future<void> pickImages() {
+  Future<XFile?> pickImages() {
     return showDialog(
       context: navigatorKey.currentContext!,
       builder: (context) {
@@ -24,11 +39,15 @@ class AppDialogBox {
                   pickerSourceButton(
                       label: "Pick form Gallery",
                       icon: Icons.image_outlined,
-                      onClick: () {}),
+                      onClick: () {
+                        getImageFromGallery();
+                      }),
                   pickerSourceButton(
                       label: "Pick form Camera",
                       icon: Icons.camera_alt_outlined,
-                      onClick: () {}),
+                      onClick: () {
+                        getImageFromCamera();
+                      }),
                 ],
               )),
         );
