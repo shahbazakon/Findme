@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:find_me/core/utils/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../utils/app_color.dart';
@@ -63,7 +62,7 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(100),
                 ),
-                child: SvgPicture.asset(AppIcons.edit, height: 25),
+                child: Image.asset(AppIcons.edit, height: 25),
               ),
             ),
           ),

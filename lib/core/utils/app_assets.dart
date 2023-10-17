@@ -1,24 +1,21 @@
 class AppIcons {
-  static String bell = "assets/icons/bell.svg";
-  static String camera = "assets/icons/camera.svg";
-  static String pen = "assets/icons/pen.svg";
-  static String phoneBook = "assets/icons/phone_book.svg";
-  static String settings = "assets/icons/settings.svg";
-  static String store = "assets/icons/store.svg";
-  static String user = "assets/icons/user.svg";
-  static String attachFile = "assets/icons/attach_file.svg";
-  static String calendar = "assets/icons/calendar.svg";
-  static String edit = "assets/icons/edit.svg";
-  static String upload = "assets/icons/upload.svg";
+  static String bell = "assets/icons/bell.png";
+  static String camera = "assets/icons/camera.png";
+  static String phoneBook = "assets/icons/phone_book.png";
+  static String settings = "assets/icons/settings.png";
+  static String store = "assets/icons/store.png";
+  static String user = "assets/icons/user.png";
+  static String calendar = "assets/icons/calendar.png";
+  static String edit = "assets/icons/edit.png";
+  static String upload = "assets/icons/upload.png";
+  static String menu = "assets/icons/menu.png";
+  static String search = "assets/icons/search.png";
+  static String bgWhite = "assets/images/bg_white.png";
 }
 
 class AppImages {
   static String logo = "assets/images/find_me_logo.svg";
   static String success = "assets/images/success.svg";
-  static String bgWhite = "assets/images/bg_white.png";
-}
-
-class AppOnBoardingAssets {
   static String onBoarding1 = "assets/onBoardingAssets/onBoarding_1.svg";
   static String onBoarding2 = "assets/onBoardingAssets/onBoarding_2.svg";
   static String onBoarding3 = "assets/onBoardingAssets/onBoarding_3.svg";

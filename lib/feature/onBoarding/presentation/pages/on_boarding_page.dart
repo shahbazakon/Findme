@@ -61,38 +61,38 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                 title: "Academic",
                                 subText:
                                     "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
-                                image: AppOnBoardingAssets.onBoarding1,
+                                image: AppImages.onBoarding1,
                               ),
                               OnBoardingPageView(
                                 title: "Corporate",
                                 subText:
                                     "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
-                                image: AppOnBoardingAssets.onBoarding2,
+                                image: AppImages.onBoarding2,
                               ),
                               OnBoardingPageView(
                                 title: "Business",
                                 subText:
                                     "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
-                                image: AppOnBoardingAssets.onBoarding3,
+                                image: AppImages.onBoarding3,
                               ),
                               OnBoardingPageView(
                                 title: "Matrimony",
                                 subText:
                                     "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
-                                image: AppOnBoardingAssets.onBoarding4,
+                                image: AppImages.onBoarding4,
                               ),
                               OnBoardingPageView(
                                 title: "Personal",
                                 subText:
                                     "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
-                                image: AppOnBoardingAssets.onBoarding5,
+                                image: AppImages.onBoarding5,
                               ),
                               OnBoardingPageView(
                                 title: "Get Started!",
                                 subTitle: "Lets Get Started!",
                                 subText:
                                     "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
-                                image: AppOnBoardingAssets.onBoarding6,
+                                image: AppImages.onBoarding6,
                               ),
                             ],
                           ),

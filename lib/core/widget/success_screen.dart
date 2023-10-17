@@ -28,7 +28,7 @@ class SuccessScreen extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppColors.light,
             image: DecorationImage(
-              image: AssetImage(AppImages.bgWhite),
+              image: AssetImage(AppIcons.bgWhite),
               fit: BoxFit.cover,
             )),
         child: SizedBox(
