@@ -21,7 +21,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(onPressed: () {}, icon: Image.asset(AppIcons.bell)),
         const Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.only(top: 10, right: 15),
           child: ProfilePictureAvatar(radius: 18),
         ),
       ],

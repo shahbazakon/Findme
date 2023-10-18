@@ -9,7 +9,9 @@ class AppIcons {
   static String edit = "assets/icons/edit.png";
   static String upload = "assets/icons/upload.png";
   static String menu = "assets/icons/menu.png";
+  static String menuCircular = "assets/icons/menu_circular.png";
   static String search = "assets/icons/search.png";
+  static String share = "assets/icons/share.png";
   static String bgWhite = "assets/images/bg_white.png";
 }
 

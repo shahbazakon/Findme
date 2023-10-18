@@ -10,7 +10,11 @@ class ThemeConstants {
       primaryColor: AppColors.primary,
       fontFamily: AppFonts.montserrat,
       appBarTheme: AppBarTheme(
-          centerTitle: true, elevation: 0.0, backgroundColor: AppColors.light),
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: AppColors.light,
+        titleTextStyle: SubTitleHelper.h7,
+      ),
       colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
     );
   }

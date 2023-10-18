@@ -3,12 +3,12 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
-import 'package:find_me/feature/Home/presentation/pages/home_Screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widget/Input Field/county_code_picker.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
 import '../../../../core/widget/profile_picture_avatar.dart';
+import '../../../dashboard/presentation/pages/dashboard_Screen.dart';
 
 class CreateProfile extends StatefulWidget {
   const CreateProfile({super.key});
@@ -117,7 +117,7 @@ class _CreateProfileState extends State<CreateProfile> {
                 onPressed: () {
                   cupertinoNavigator(
                       type: NavigatorType.PUSHREMOVEUNTIL,
-                      screenName: const HomeScreen());
+                      screenName: Dashboard());
                 },
               ),
             ],
