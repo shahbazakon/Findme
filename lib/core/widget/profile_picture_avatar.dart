@@ -9,9 +9,15 @@ import 'dialogBox/pick_images_dialogbox.dart';
 
 class ProfilePictureAvatar extends StatefulWidget {
   const ProfilePictureAvatar(
-      {super.key, this.showEditButton = false, required this.radius});
+      {super.key,
+      required this.radius,
+      this.showEditButton = false,
+      this.isShadowDown = false,
+      this.isBorderVisible = true});
   final bool showEditButton;
   final double radius;
+  final bool isBorderVisible;
+  final bool isShadowDown;
   @override
   State<ProfilePictureAvatar> createState() => _ProfilePictureAvatarState();
 }
@@ -27,11 +33,16 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
-                  width: widget.radius * .10, color: AppColors.light),
+                  width: widget.isBorderVisible ? widget.radius * .10 : 0,
+                  color: AppColors.light),
               boxShadow: [
                 BoxShadow(
-                    offset: const Offset(0, 0),
-                    blurRadius: widget.radius * .20,
+                    offset: widget.isShadowDown
+                        ? const Offset(1, 6)
+                        : const Offset(0, 0),
+                    blurRadius: widget.isShadowDown
+                        ? widget.radius * .1
+                        : widget.radius * .21,
                     color: AppColors.lightGrey3)
               ]),
           child: CircleAvatar(

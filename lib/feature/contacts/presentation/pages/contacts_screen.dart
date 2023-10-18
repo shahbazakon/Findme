@@ -28,7 +28,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return CustomListTile(
                     title: 'Mustafa Jamail',

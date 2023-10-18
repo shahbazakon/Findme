@@ -4,6 +4,7 @@ import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/utils_methods.dart';
 import '../../../contacts/presentation/pages/contacts_screen.dart';
 import '../../../home/presentation/pages/home_screen.dart';
+import '../../../settings/presentation/settings_screen.dart';
 import '../widget/dashboard_navigation_bar.dart';
 
 class Dashboard extends StatefulWidget {
@@ -35,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
       bottomNavigationBar: HomeNavigationBar(
           pageController: pageController, selectedIndex: selectedIndex),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: height,
           child: PageView(
             onPageChanged: (value) {
@@ -47,11 +48,9 @@ class _DashboardState extends State<Dashboard> {
             children: const <Widget>[
               HomeScreen(),
               ContactsScreen(),
+              SettingsScreen(),
               Center(
-                child: Text("profile"),
-              ),
-              Center(
-                child: Text("store"),
+                child: Text("Profile"),
               ),
             ],
           ),

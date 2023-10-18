@@ -12,6 +12,7 @@ class AppIcons {
   static String menuCircular = "assets/icons/menu_circular.png";
   static String search = "assets/icons/search.png";
   static String share = "assets/icons/share.png";
+  static String pen = "assets/icons/pen.png";
   static String bgWhite = "assets/images/bg_white.png";
 }
 

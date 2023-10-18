@@ -16,4 +16,5 @@ class AppFontsColors {
   static Color lightGrey1 = const Color.fromRGBO(246, 246, 246, 1);
   static Color lightGrey2 = const Color.fromRGBO(232, 232, 232, 1);
   static Color lightGrey3 = const Color.fromRGBO(189, 189, 189, 1);
+  static Color lightGrey4 = const Color.fromRGBO(124, 124, 124, 1);
 }
