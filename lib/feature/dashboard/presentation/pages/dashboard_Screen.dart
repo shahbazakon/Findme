@@ -4,7 +4,7 @@ import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/utils_methods.dart';
 import '../../../contacts/presentation/pages/contacts_screen.dart';
 import '../../../home/presentation/pages/home_screen.dart';
-import '../../../settings/presentation/settings_screen.dart';
+import '../../../settings/presentation/pages/settings_screen.dart';
 import '../widget/dashboard_navigation_bar.dart';
 
 class Dashboard extends StatefulWidget {

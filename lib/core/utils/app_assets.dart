@@ -1,19 +1,28 @@
 class AppIcons {
+  static String about = "assets/icons/about.png";
   static String bell = "assets/icons/bell.png";
-  static String camera = "assets/icons/camera.png";
-  static String phoneBook = "assets/icons/phone_book.png";
-  static String settings = "assets/icons/settings.png";
-  static String store = "assets/icons/store.png";
-  static String user = "assets/icons/user.png";
+  static String bellSimple = "assets/icons/bell_simple.png";
+  static String beg = "assets/icons/beg.png";
+  static String bgWhite = "assets/images/bg_white.png";
   static String calendar = "assets/icons/calendar.png";
+  static String calender = "assets/icons/calendar.png";
+  static String camera = "assets/icons/camera.png";
+  static String creditCard = "assets/icons/credit_card.png";
   static String edit = "assets/icons/edit.png";
-  static String upload = "assets/icons/upload.png";
+  static String help = "assets/icons/help.png";
+  static String logOut = "assets/icons/log_out.png";
   static String menu = "assets/icons/menu.png";
   static String menuCircular = "assets/icons/menu_circular.png";
-  static String search = "assets/icons/search.png";
-  static String share = "assets/icons/share.png";
   static String pen = "assets/icons/pen.png";
-  static String bgWhite = "assets/images/bg_white.png";
+  static String phoneBook = "assets/icons/phone_book.png";
+  static String portfolio = "assets/icons/portfolio.png";
+  static String promoCode = "assets/icons/promo_code.png";
+  static String search = "assets/icons/search.png";
+  static String settings = "assets/icons/settings.png";
+  static String share = "assets/icons/share.png";
+  static String store = "assets/icons/store.png";
+  static String upload = "assets/icons/upload.png";
+  static String user = "assets/icons/user.png";
 }
 
 class AppImages {
