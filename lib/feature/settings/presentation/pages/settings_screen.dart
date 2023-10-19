@@ -1,9 +1,11 @@
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/feature/settings/presentation/widget/profile_banner.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_color.dart';
+import '../../../followRequest/presentation/pages/follow_request_screen.dart';
 import '../widget/custom_list_tile.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -32,7 +34,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 CustomTile(
                   title: "Follow Request",
                   leadingIcon: AppIcons.beg,
-                  onTap: () {},
+                  onTap: () {
+                    cupertinoNavigator(screenName: const FollowRequestScreen());
+                  },
                 ),
                 CustomTile(
                   title: "Portfolio",
@@ -69,7 +73,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   )),
                 ),
                 Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
                     child: AppButton(label: "Log out", onPressed: () {}))
               ],
             ),

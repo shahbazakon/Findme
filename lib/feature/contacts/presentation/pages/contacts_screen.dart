@@ -1,5 +1,5 @@
 import 'package:find_me/core/constants/common_ui.dart';
-import 'package:find_me/core/widget/custom_list_tile.dart';
+import 'package:find_me/feature/contacts/presentation/widget/contacts_list_tile.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widget/Input Field/custom_searchbar.dart';
@@ -30,7 +30,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return CustomListTile(
+                  return ContactsListTile(
                     title: 'Mustafa Jamail',
                     subTitle: '@Mustaja',
                     leadingImage:

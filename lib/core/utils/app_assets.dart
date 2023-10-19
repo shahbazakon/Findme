@@ -23,6 +23,7 @@ class AppIcons {
   static String store = "assets/icons/store.png";
   static String upload = "assets/icons/upload.png";
   static String user = "assets/icons/user.png";
+  static String addUser = "assets/icons/add_users.png";
 }
 
 class AppImages {

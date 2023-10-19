@@ -2,8 +2,8 @@ import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
-class CustomListTile extends StatelessWidget {
-  CustomListTile(
+class ContactsListTile extends StatelessWidget {
+  ContactsListTile(
       {super.key, this.title = '', this.subTitle = '', this.leadingImage});
 
   String title;
