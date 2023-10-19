@@ -1,5 +1,7 @@
+import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/helper/navigators.dart';
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/widget/profile_picture_avatar.dart';
 
@@ -19,7 +21,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {},
       ),
       actions: [
-        IconButton(onPressed: () {}, icon: Image.asset(AppIcons.bell)),
+        IconButton(
+            onPressed: () {
+              cupertinoNavigator(screenName: const NotificationScreen());
+            },
+            icon: Image.asset(AppIcons.bell)),
         const Padding(
           padding: EdgeInsets.only(top: 10, right: 15),
           child: ProfilePictureAvatar(radius: 18),

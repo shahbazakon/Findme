@@ -1,6 +1,9 @@
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/feature/about/presentation/pages/about_screen.dart';
+import 'package:find_me/feature/help/presentation/pages/help_screen.dart';
+import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';
 import 'package:find_me/feature/settings/presentation/widget/profile_banner.dart';
 import 'package:flutter/material.dart';
 
@@ -51,17 +54,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 CustomTile(
                   title: "Notifications",
                   leadingIcon: AppIcons.bellSimple,
-                  onTap: () {},
+                  onTap: () {
+                    cupertinoNavigator(screenName: const NotificationScreen());
+                  },
                 ),
                 CustomTile(
                   title: "Help",
                   leadingIcon: AppIcons.help,
-                  onTap: () {},
+                  onTap: () {
+                    cupertinoNavigator(screenName: const HelpScreen());
+                  },
                 ),
                 CustomTile(
                   title: "About",
                   leadingIcon: AppIcons.about,
-                  onTap: () {},
+                  onTap: () {
+                    cupertinoNavigator(screenName: const AboutScreen());
+                  },
                 ),
                 Container(
                   decoration: BoxDecoration(

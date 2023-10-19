@@ -1,9 +1,11 @@
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/common_ui.dart';
 import '../../../../core/widget/Input Field/custom_searchbar.dart';
+import '../../../personalDetails/presentation/pages/personal_details_screen.dart';
 import '../widgets/home_appbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -49,7 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: "Personal",
                       image:
                           "https://c4.wallpaperflare.com/wallpaper/356/292/33/music-rock-and-roll-vinyl-album-covers-wallpaper-preview.jpg",
-                      onTap: () {});
+                      onTap: () {
+                        cupertinoNavigator(
+                            screenName: const PersonalDetailsScreen());
+                      });
                 },
               ),
             )
