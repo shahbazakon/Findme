@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/theme_contants.dart';
 import '../../../../core/utils/utils_methods.dart';
 import '../../../../core/widget/Input Field/custom_searchbar.dart';
+import '../../../businessDetails/presentation/pages/business_details_Screen.dart';
 import '../../../personalDetails/presentation/pages/personal_details_screen.dart';
 import '../widgets/home_appbar.dart';
 
@@ -66,7 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: "Business",
                         image:
                             "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                        onTap: () {}),
+                        onTap: () {
+                          cupertinoNavigator(
+                              screenName: const BusinessDetailsScreen());
+                        }),
                     customGridTile(
                         title: "Corporate",
                         image:
