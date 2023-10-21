@@ -13,18 +13,23 @@ import '../../../../core/widget/button/add_more_button.dart';
 import '../../../../core/widget/button/app_switch_button.dart';
 import '../../../../core/widget/custom_appbar.dart';
 
-class PersonalDetailsScreen extends StatefulWidget {
-  const PersonalDetailsScreen({super.key});
+class AcademicDetailsScreen extends StatefulWidget {
+  const AcademicDetailsScreen({super.key});
 
   @override
-  State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
+  State<AcademicDetailsScreen> createState() => _AcademicDetailsScreenState();
 }
 
-class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
+class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   bool emailSwitchValue = false;
   bool addressSwitchValue = false;
-  FilePickerResult? pickedImage;
+  bool phone1SwitchValue = false;
+  bool phone2SwitchValue = false;
+  FilePickerResult? pickedLetterImage;
+  FilePickerResult? pickedCoverImage;
   FilePickerResult? pickedVideo;
+  FilePickerResult? pickedResume;
+  FilePickerResult? pickedTranscript;
   DateTime? pickedDate;
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
@@ -35,7 +40,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   final TextEditingController _countryCodeController = TextEditingController();
   final TextEditingController _phoneNumber1Controller = TextEditingController();
   final TextEditingController _phoneNumber2Controller = TextEditingController();
-  final TextEditingController _imageController = TextEditingController();
+  final TextEditingController _coverImageController = TextEditingController();
+  final TextEditingController _coverLetterController = TextEditingController();
+  final TextEditingController _resumeController = TextEditingController();
+  final TextEditingController _transcriptController = TextEditingController();
   final TextEditingController _videoController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _programmingLanguageController =
@@ -47,6 +55,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     TextEditingController()
   ];
   final List<TextEditingController> _skillsController = [
+    TextEditingController()
+  ];
+  final List<TextEditingController> _certificationsController = [
     TextEditingController()
   ];
   TextFieldValidator validator = TextFieldValidator();
@@ -65,7 +76,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     _phoneNumber2Controller.dispose();
     _dobController.dispose();
     _videoController.dispose();
-    _imageController.dispose();
+    _coverImageController.dispose();
+    _coverLetterController.dispose();
+    _resumeController.dispose();
+    _transcriptController.dispose();
     _programmingLanguageController.dispose();
     for (var element in _socialMediaURLController) {
       element.dispose();
@@ -74,6 +88,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
       element.dispose();
     }
     for (var element in _skillsController) {
+      element.dispose();
+    }
+    for (var element in _certificationsController) {
       element.dispose();
     }
     super.dispose();
@@ -91,12 +108,43 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   }
 
   // Select Import Images
-  void _pickImage() async {
-    pickedImage = await pickFileFromFileManager(type: FileType.image);
+  void _pickCoverLetter() async {
+    pickedLetterImage = await pickFileFromFileManager(type: FileType.image);
     ;
-    if (pickedImage != null) {
+    if (pickedLetterImage != null) {
       setState(() {
-        _imageController.text = pickedImage!.names.toString();
+        _coverImageController.text = pickedLetterImage!.names.toString();
+      });
+    }
+  }
+
+  // Select Import Images
+  void _pickCoverImage() async {
+    pickedCoverImage = await pickFileFromFileManager(type: FileType.image);
+    ;
+    if (pickedCoverImage != null) {
+      setState(() {
+        _coverImageController.text = pickedCoverImage!.names.toString();
+      });
+    }
+  }
+
+  // Select Import Resume
+  void _pickResume() async {
+    pickedResume = await pickFileFromFileManager();
+    if (pickedResume != null) {
+      setState(() {
+        _resumeController.text = pickedResume!.names.toString();
+      });
+    }
+  }
+
+  // Select Import Resume
+  void _pickTranscript() async {
+    pickedTranscript = await pickFileFromFileManager();
+    if (pickedTranscript != null) {
+      setState(() {
+        _resumeController.text = pickedTranscript!.names.toString();
       });
     }
   }
@@ -137,7 +185,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: "Personal Details"),
+      appBar: CustomAppbar(title: "Academic Details"),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
             parent:
@@ -213,36 +261,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                   ),
                 ],
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 85,
-                    child: CustomTestField2(
-                      controller: _addressLine1Controller,
-                      label: "Address",
-                      hintText: "Address Line 1",
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    flex: 15,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: AppSwitchButton(
-                        value: addressSwitchValue,
-                        onChanged: (value) {
-                          addressSwitchValue = value;
-                          setState(
-                            () {},
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
+              CustomTestField2(
+                controller: _addressLine1Controller,
+                label: "Address",
+                hintText: "Address Line 1",
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -278,9 +300,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30),
                       child: AppSwitchButton(
-                        value: addressSwitchValue,
+                        value: phone1SwitchValue,
                         onChanged: (value) {
-                          addressSwitchValue = value;
+                          phone1SwitchValue = value;
                           setState(
                             () {},
                           );
@@ -324,9 +346,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30),
                       child: AppSwitchButton(
-                        value: addressSwitchValue,
+                        value: phone2SwitchValue,
                         onChanged: (value) {
-                          addressSwitchValue = value;
+                          phone2SwitchValue = value;
                           setState(
                             () {},
                           );
@@ -335,14 +357,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     ),
                   ),
                 ],
-              ),
-              CustomTestField2(
-                controller: _programmingLanguageController,
-                label: "Programming Language",
-                hintText: "Enter Language",
-                readOnly: true,
-                showDropdownIcon: true,
-                onTap: _selectProgrammingLanguage,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -377,6 +391,14 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     ),
                   ),
                 ],
+              ),
+              CustomTestField2(
+                controller: _programmingLanguageController,
+                label: "Programming Language",
+                hintText: "Enter Language",
+                readOnly: true,
+                showDropdownIcon: true,
+                onTap: _selectProgrammingLanguage,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -446,13 +468,71 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                   ),
                 ],
               ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 85,
+                    child: Column(
+                      children: _certificationsController
+                          .asMap()
+                          .entries
+                          .map((entry) => CustomTestField2(
+                                controller: entry.value,
+                                label: entry.key + 1 == 1
+                                    ? "Certifications"
+                                    : 'Certifications ${entry.key + 1}',
+                                hintText: "Add Certifications",
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    flex: 15,
+                    child: AddMoreButton(
+                      margin: const EdgeInsets.only(top: 35),
+                      onTap: () {
+                        _certificationsController.add(TextEditingController());
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                ],
+              ),
               CustomTestField2(
-                controller: _imageController,
-                label: "Image",
+                controller: _resumeController,
+                label: "Resume",
+                hintText: "Upload Resume",
+                showUploadIcon: true,
+                readOnly: true,
+                onTap: _pickResume,
+              ),
+              CustomTestField2(
+                controller: _transcriptController,
+                label: "Transcript",
+                hintText: "Upload Transcript",
+                showUploadIcon: true,
+                readOnly: true,
+                onTap: _pickTranscript,
+              ),
+              CustomTestField2(
+                controller: _coverLetterController,
+                label: "Cover Letter",
+                hintText: "Upload Cover Letter",
+                showUploadIcon: true,
+                readOnly: true,
+                onTap: _pickCoverLetter,
+              ),
+              CustomTestField2(
+                controller: _coverImageController,
+                label: "Cover Image",
                 hintText: "Upload Image",
                 showUploadIcon: true,
                 readOnly: true,
-                onTap: _pickImage,
+                onTap: _pickCoverImage,
               ),
               CustomTestField2(
                 controller: _videoController,
@@ -465,7 +545,11 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: AppButton(label: "Save", onPressed: () {}),
+                child: AppButton(
+                    label: "Save",
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
               )
             ],
           )),

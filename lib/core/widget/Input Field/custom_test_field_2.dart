@@ -1,16 +1,21 @@
+import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomTestField2 extends StatelessWidget {
-  const CustomTestField2(
-      {super.key,
-      this.label,
-      this.hintText,
-      required this.controller,
-      this.onTap,
-      this.readOnly = false,
-      this.showDropdownIcon = false});
+  const CustomTestField2({
+    super.key,
+    this.label,
+    this.hintText,
+    this.validator,
+    required this.controller,
+    this.onTap,
+    this.readOnly = false,
+    this.showDropdownIcon = false,
+    this.showUploadIcon = false,
+    this.showCalendarIcon = false,
+  });
 
   final String? label;
   final String? hintText;
@@ -18,6 +23,9 @@ class CustomTestField2 extends StatelessWidget {
   final bool readOnly;
   final Function()? onTap;
   final bool showDropdownIcon;
+  final bool showUploadIcon;
+  final bool showCalendarIcon;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,6 +49,7 @@ class CustomTestField2 extends StatelessWidget {
             readOnly: readOnly,
             onTap: onTap,
             style: TextHelper.h10,
+            validator: validator,
             decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
@@ -57,13 +66,29 @@ class CustomTestField2 extends StatelessWidget {
                   borderSide: BorderSide(color: AppColors.lightGrey3),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                suffixIcon: Visibility(
-                  visible: showDropdownIcon,
-                  child: const Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 30,
-                  ),
-                )),
+                suffixIcon: showDropdownIcon
+                    ? const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        size: 30,
+                      )
+                    : showUploadIcon
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Image.asset(
+                              AppIcons.upload,
+                              height: 15,
+                            ),
+                          )
+                        : showCalendarIcon
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Image.asset(
+                                  AppIcons.calendar,
+                                  height: 15,
+                                ),
+                              )
+                            : const SizedBox.shrink()),
           )
         ],
       ),

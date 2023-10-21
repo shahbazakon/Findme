@@ -5,7 +5,7 @@ import 'package:find_me/feature/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/common_ui.dart';
+import '../../../../core/constants/theme_contants.dart';
 import '../../../../core/helper/navigators.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/text_style.dart';
@@ -22,9 +22,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool isRememberMe = false;
 
   @override

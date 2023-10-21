@@ -2,7 +2,7 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/widget/success_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/common_ui.dart';
+import '../../../../core/constants/theme_contants.dart';
 import '../../../../core/utils/text_style.dart';
 import '../../../../core/utils/utils_methods.dart';
 import '../../../../core/widget/Input Field/custom_test_field.dart';

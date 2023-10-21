@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/utils_methods.dart';
-import '../../../../core/constants/common_ui.dart';
+import '../../../../core/constants/theme_contants.dart';
 import '../../../../core/helper/navigators.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
 import '../../../signUp/presentation/pages/sign_up_screen.dart';

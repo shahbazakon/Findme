@@ -8,7 +8,7 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 
-import '../../../../core/constants/common_ui.dart';
+import '../../../../core/constants/theme_contants.dart';
 import '../../../../core/utils/text_style.dart';
 import '../../../../core/widget/button/app_Button_widget.dart';
 import '../../../signIn/presentation/pages/sign_in_screen.dart';

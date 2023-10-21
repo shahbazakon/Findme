@@ -5,7 +5,7 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../constants/common_ui.dart';
+import '../constants/theme_contants.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen(

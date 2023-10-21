@@ -35,25 +35,23 @@ class _DashboardState extends State<Dashboard> {
       ),
       bottomNavigationBar: HomeNavigationBar(
           pageController: pageController, selectedIndex: selectedIndex),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: height,
-          child: PageView(
-            onPageChanged: (value) {
-              setState(() {
-                selectedIndex = value;
-              });
-            },
-            controller: pageController,
-            children: const <Widget>[
-              HomeScreen(),
-              ContactsScreen(),
-              SettingsScreen(),
-              Center(
-                child: Text("Profile"),
-              ),
-            ],
-          ),
+      body: SizedBox(
+        height: height,
+        child: PageView(
+          onPageChanged: (value) {
+            setState(() {
+              selectedIndex = value;
+            });
+          },
+          controller: pageController,
+          children: const <Widget>[
+            HomeScreen(),
+            ContactsScreen(),
+            SettingsScreen(),
+            Center(
+              child: Text("Profile"),
+            ),
+          ],
         ),
       ),
     );

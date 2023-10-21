@@ -1,4 +1,4 @@
-import 'package:find_me/core/constants/common_ui.dart';
+import '../../../../core/constants/theme_contants.dart';
 import 'package:find_me/feature/contacts/presentation/widget/contacts_list_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +27,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
             ),
             Expanded(
               child: ListView.builder(
+                physics: const ScrollPhysics(
+                    parent: BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics())),
                 shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: (context, index) {

@@ -1,4 +1,4 @@
-import 'package:find_me/core/constants/common_ui.dart';
+import '../../../../core/constants/theme_contants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/feature/signIn/presentation/pages/reset_password_screen.dart';
 import 'package:flutter/material.dart';

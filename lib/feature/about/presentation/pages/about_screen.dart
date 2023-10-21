@@ -1,6 +1,6 @@
-import 'package:find_me/core/constants/common_ui.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/theme_contants.dart';
 import '../../../../core/widget/custom_appbar.dart';
 
 class AboutScreen extends StatefulWidget {

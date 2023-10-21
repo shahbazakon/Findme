@@ -1,7 +1,17 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import '../widget/custom_snackBar.dart';
+
+///--------------------- Value Initialization
+///-----------------------------------------------------------------------------
 //navigatorKey used to get page state and context dynamic
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -13,6 +23,8 @@ double width = size.width;
 //
 GetIt locator = GetIt.instance;
 
+///-------------------- Method Initialization
+///-----------------------------------------------------------------------------
 // Dialog Box used to select item form Dialog Box List
 Future<String?> openSelectionDialog(
     {required List<String> data, String? title}) async {
@@ -43,4 +55,68 @@ Future<String?> openSelectionDialog(
       );
     },
   );
+}
+
+// get Permission based on device and sdk
+Future<bool> getPermission() async {
+  late final Map<Permission, PermissionStatus> statuses;
+  var allAccepted = true;
+
+  if (Platform.isAndroid) {
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    if (androidInfo.version.sdkInt <= 32) {
+      statuses = await [Permission.storage].request();
+    } else {
+      statuses = await [Permission.photos].request();
+    }
+  } else {
+    statuses = await [Permission.storage].request();
+  }
+
+  statuses.forEach((permission, status) {
+    if (status != PermissionStatus.granted) {
+      allAccepted = false;
+    }
+  });
+  return allAccepted;
+}
+
+// Pick Image File Manager
+Future<FilePickerResult?> pickFileFromFileManager({FileType? type}) async {
+  // Request necessary permissions for accessing storage
+  bool hasPermission = await getPermission();
+  try {
+    if (hasPermission) {
+      if (type != null) {
+        return await FilePicker.platform.pickFiles(
+          type: type,
+        );
+      } else {
+        return await FilePicker.platform.pickFiles();
+      }
+    } else {
+      showSnackBar(title: "Permission denied to access storage.");
+      // Handle permission denied
+      await [
+        Permission.photos,
+        Permission.storage,
+      ].request();
+    }
+  } catch (error) {
+    log("Error:", error: "$error");
+    showSnackBar(title: "$error");
+  }
+}
+
+// date Picker
+Future<DateTime?> appDatePicker(
+    {DateTime? firstDate, DateTime? lastDate, DateTime? initialDate}) async {
+  final DateTime? pickedDate = await showDatePicker(
+      context: navigatorKey.currentContext!,
+      initialDate: initialDate ?? DateTime.now(),
+      firstDate: firstDate ?? DateTime(1950),
+      lastDate: lastDate ?? DateTime.now());
+  if (pickedDate != null) {
+    return pickedDate;
+  }
 }

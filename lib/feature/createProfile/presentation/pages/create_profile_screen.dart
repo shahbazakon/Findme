@@ -1,4 +1,4 @@
-import 'package:find_me/core/constants/common_ui.dart';
+import '../../../../core/constants/theme_contants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
