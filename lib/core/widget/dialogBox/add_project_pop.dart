@@ -3,9 +3,9 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/theme_constants.dart';
-import '../../../../../core/utils/utils_methods.dart';
-import '../../../../../core/widget/Input Field/custom_test_field_2.dart';
+import '../../constants/theme_constants.dart';
+import '../../utils/utils_methods.dart';
+import '../Input Field/custom_test_field_2.dart';
 
 Future<Map<String, dynamic>> appProjectsPop() async {
   TextEditingController projectNameController = TextEditingController();

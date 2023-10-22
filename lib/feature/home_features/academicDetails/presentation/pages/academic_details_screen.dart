@@ -10,8 +10,8 @@ import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/button/app_switch_button.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
-import 'package:find_me/feature/home_features/academicDetails/presentation/widget/add_project_pop.dart';
-import 'package:find_me/feature/home_features/academicDetails/presentation/widget/project_tile.dart';
+import 'package:find_me/core/widget/dialogBox/add_project_pop.dart';
+import 'package:find_me/core/widget/project_tile.dart';
 import 'package:flutter/material.dart';
 
 class AcademicDetailsScreen extends StatefulWidget {

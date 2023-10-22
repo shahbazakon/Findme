@@ -2,7 +2,7 @@ import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/theme_constants.dart';
+import '../constants/theme_constants.dart';
 
 class ProjectListTile extends StatelessWidget {
   const ProjectListTile(
