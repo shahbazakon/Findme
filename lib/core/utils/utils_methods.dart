@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -32,7 +33,7 @@ Future<String?> openSelectionDialog(
     context: navigatorKey.currentContext!,
     builder: (BuildContext context) {
       return AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: appDialogBoxBorder,
         title: Text(
           title ?? 'Select',
           style: TextHelper.h8,
@@ -112,9 +113,13 @@ Future<FilePickerResult?> pickFileFromFileManager({FileType? type}) async {
 
 // date Picker
 Future<DateTime?> appDatePicker(
-    {DateTime? firstDate, DateTime? lastDate, DateTime? initialDate}) async {
+    {DateTime? firstDate,
+    DateTime? lastDate,
+    DateTime? initialDate,
+    String? helpText}) async {
   final DateTime? pickedDate = await showDatePicker(
       context: navigatorKey.currentContext!,
+      helpText: helpText,
       initialDate: initialDate ?? DateTime.now(),
       firstDate: firstDate ?? DateTime(1950),
       lastDate: lastDate ?? DateTime.now());

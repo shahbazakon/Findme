@@ -29,3 +29,7 @@ Decoration appBoxDecoration = BoxDecoration(
 
 //app Padding
 EdgeInsetsGeometry primaryPadding = const EdgeInsets.symmetric(horizontal: 15);
+
+// dialog box border radius
+ShapeBorder appDialogBoxBorder =
+    RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));

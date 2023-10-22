@@ -10,6 +10,8 @@ import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/button/app_switch_button.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
+import 'package:find_me/feature/home_features/academicDetails/presentation/widget/add_project_pop.dart';
+import 'package:find_me/feature/home_features/academicDetails/presentation/widget/project_tile.dart';
 import 'package:flutter/material.dart';
 
 class AcademicDetailsScreen extends StatefulWidget {
@@ -30,6 +32,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   FilePickerResult? pickedResume;
   FilePickerResult? pickedTranscript;
   DateTime? pickedDate;
+  List<Map<String, dynamic>> projectsList = [];
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -60,6 +63,12 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
     TextEditingController()
   ];
   TextFieldValidator validator = TextFieldValidator();
+
+  void _addProjectDetails(Map<String, dynamic> data) {
+    setState(() {
+      projectsList.add(data);
+    });
+  }
 
   // dispose Controllers
   @override
@@ -422,13 +431,32 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                     flex: 15,
                     child: AddMoreButton(
                       margin: const EdgeInsets.only(top: 35),
-                      onTap: () {
-                        _projectsController.add(TextEditingController());
-                        setState(() {});
+                      onTap: () async {
+                        // _projectsController.add(TextEditingController());
+                        // setState(() {});
+                        Map<String, dynamic> newData = await appProjectsPop();
+                        _addProjectDetails(newData);
                       },
                     ),
                   ),
                 ],
+              ),
+              ListView.builder(
+                itemCount: projectsList.length,
+                shrinkWrap: true,
+                physics:
+                    const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                itemBuilder: (context, index) {
+                  return ProjectListTile(
+                    title: projectsList[index]['name'],
+                    subTitle: projectsList[index]['role'],
+                    startDate:
+                        "${dateFormatter1.format(projectsList[index]['startDate'])}, ",
+                    endDate:
+                        "${dateFormatter1.format(projectsList[index]['endDate'])} ",
+                    description: projectsList[index]['description'],
+                  );
+                },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

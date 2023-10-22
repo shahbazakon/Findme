@@ -8,9 +8,11 @@ class CustomTestField2 extends StatelessWidget {
     super.key,
     this.label,
     this.hintText,
+    this.initialValue,
     this.validator,
-    required this.controller,
+    this.controller,
     this.onTap,
+    this.onChanged,
     this.maxLines,
     this.readOnly = false,
     this.showDropdownIcon = false,
@@ -20,10 +22,12 @@ class CustomTestField2 extends StatelessWidget {
 
   final String? label;
   final String? hintText;
-  final TextEditingController controller;
+  final String? initialValue;
+  final TextEditingController? controller;
   final bool readOnly;
   final int? maxLines;
   final Function()? onTap;
+  final Function(String)? onChanged;
   final bool showDropdownIcon;
   final bool showUploadIcon;
   final bool showCalendarIcon;
@@ -50,9 +54,11 @@ class CustomTestField2 extends StatelessWidget {
             controller: controller,
             readOnly: readOnly,
             onTap: onTap,
+            onChanged: onChanged,
             maxLines: maxLines,
             style: TextHelper.h10,
             validator: validator,
+            initialValue: initialValue,
             decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
