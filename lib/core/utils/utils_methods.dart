@@ -41,6 +41,8 @@ Future<String?> openSelectionDialog(
           width: double.maxFinite,
           child: ListView.builder(
             itemCount: data.length,
+            physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics()),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return ListTile(

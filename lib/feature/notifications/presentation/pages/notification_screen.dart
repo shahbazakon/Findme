@@ -1,6 +1,6 @@
-import '../../../../core/constants/theme_contants.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/theme_constants.dart';
 import '../../../../core/widget/custom_appbar.dart';
 
 class NotificationScreen extends StatefulWidget {

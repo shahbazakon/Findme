@@ -11,6 +11,7 @@ class CustomTestField2 extends StatelessWidget {
     this.validator,
     required this.controller,
     this.onTap,
+    this.maxLines,
     this.readOnly = false,
     this.showDropdownIcon = false,
     this.showUploadIcon = false,
@@ -21,6 +22,7 @@ class CustomTestField2 extends StatelessWidget {
   final String? hintText;
   final TextEditingController controller;
   final bool readOnly;
+  final int? maxLines;
   final Function()? onTap;
   final bool showDropdownIcon;
   final bool showUploadIcon;
@@ -48,6 +50,7 @@ class CustomTestField2 extends StatelessWidget {
             controller: controller,
             readOnly: readOnly,
             onTap: onTap,
+            maxLines: maxLines,
             style: TextHelper.h10,
             validator: validator,
             decoration: InputDecoration(

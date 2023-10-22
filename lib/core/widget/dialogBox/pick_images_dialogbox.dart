@@ -2,7 +2,7 @@ import 'package:find_me/core/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../constants/theme_contants.dart';
+import '../../constants/theme_constants.dart';
 import '../../utils/text_style.dart';
 import '../../utils/utils_methods.dart';
 

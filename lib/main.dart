@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'core/constants/theme_contants.dart';
+import 'core/constants/theme_constants.dart';
 import 'core/utils/utils_methods.dart';
 import 'feature/dashboard/presentation/pages/dashboard_Screen.dart';
 
