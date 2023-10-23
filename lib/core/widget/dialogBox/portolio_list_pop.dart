@@ -33,7 +33,7 @@ portfolioListPop(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
                 color: isTransparent
-                    ? Colors.grey.shade200.withOpacity(0.5)
+                    ? Colors.grey.shade200.withOpacity(0.7)
                     : AppColors.light,
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
@@ -53,8 +53,14 @@ portfolioListPop(
                     ),
                     Visibility(
                         visible: showCloseButton,
-                        child: CloseButton(
-                          color: AppColors.lightGrey3,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.close,
+                            color: AppColors.lightGrey3,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                         ))
                   ],
                 ),

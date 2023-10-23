@@ -5,6 +5,7 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/feature/Profile/presentation/pages/protfolio_list_screen.dart';
 import 'package:find_me/feature/Profile/presentation/pages/qr_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -29,11 +30,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ShadowOverlay(
             shadowWidth: width,
             shadowHeight: height * .3,
-            child: Image.network(
-              "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
-              width: width,
-              height: contentHeight + height * .02,
-              fit: BoxFit.cover,
+            child: Hero(
+              tag: "BackgroundImageTag",
+              child: Image.network(
+                "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
+                width: width,
+                height: contentHeight + height * .02,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SingleChildScrollView(
@@ -126,7 +130,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         AppButton(
                             label: "Portfolio",
                             buttonWidth: width * .4,
-                            onPressed: () {}),
+                            onPressed: () {
+                              cupertinoNavigator(
+                                  screenName: const PortfolioListScreen(
+                                bgImage:
+                                    "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
+                              ));
+                            }),
                       ],
                     )
                   ],
