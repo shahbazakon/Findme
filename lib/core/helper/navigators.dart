@@ -132,68 +132,82 @@ cupertinoNavigator(
   }
 }
 
-downSlideNavigator(
-    {required BuildContext context,
-    required Widget screenName,
-    required NavigatorType type}) {
+downSlideNavigator({required Widget screenName, NavigatorType? type}) {
   switch (type) {
     case NavigatorType.PUSH:
-      Navigator.push(context, DownSlideNavigation(widget: screenName));
+      Navigator.push(navigatorKey.currentContext!,
+          DownSlideNavigation(widget: screenName));
       return;
     case NavigatorType.PUSHREPLACE:
-      Navigator.pushReplacement(
-          context, DownSlideNavigation(widget: screenName));
+      Navigator.pushReplacement(navigatorKey.currentContext!,
+          DownSlideNavigation(widget: screenName));
       return;
     case NavigatorType.PUSHREMOVEUNTIL:
       Navigator.pushAndRemoveUntil(
-          context,
+          navigatorKey.currentContext!,
           DownSlideNavigation(widget: screenName),
           (Route<dynamic> route) => false);
+      return;
+    default:
+      Navigator.push(navigatorKey.currentContext!,
+          DownSlideNavigation(widget: screenName));
       return;
   }
 }
 
 fadeNavigator(
-    {required BuildContext context,
-    required Widget screenName,
-    required NavigatorType type,
+    {required Widget screenName,
+    NavigatorType? type,
     Function(dynamic)? then}) {
   switch (type) {
     case NavigatorType.PUSH:
-      Navigator.push(context, FadeNavigation(widget: screenName)).then((value) {
+      Navigator.push(
+              navigatorKey.currentContext!, FadeNavigation(widget: screenName))
+          .then((value) {
         if (then != null) {
           then(value);
         }
       });
       return;
     case NavigatorType.PUSHREPLACE:
-      Navigator.pushReplacement(context, FadeNavigation(widget: screenName));
+      Navigator.pushReplacement(
+          navigatorKey.currentContext!, FadeNavigation(widget: screenName));
       return;
     case NavigatorType.PUSHREMOVEUNTIL:
-      Navigator.pushAndRemoveUntil(context, FadeNavigation(widget: screenName),
-          (Route<dynamic> route) => false);
+      Navigator.pushAndRemoveUntil(navigatorKey.currentContext!,
+          FadeNavigation(widget: screenName), (Route<dynamic> route) => false);
+      return;
+    default:
+      Navigator.push(
+              navigatorKey.currentContext!, FadeNavigation(widget: screenName))
+          .then((value) {
+        if (then != null) {
+          then(value);
+        }
+      });
       return;
   }
 }
 
-materialNavigator(
-    {required BuildContext context,
-    required Widget screenName,
-    required NavigatorType type}) {
+materialNavigator({required Widget screenName, NavigatorType? type}) {
   switch (type) {
     case NavigatorType.PUSH:
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => screenName));
+      Navigator.push(navigatorKey.currentContext!,
+          MaterialPageRoute(builder: (context) => screenName));
       return;
     case NavigatorType.PUSHREPLACE:
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => screenName));
+      Navigator.pushReplacement(navigatorKey.currentContext!,
+          MaterialPageRoute(builder: (context) => screenName));
       return;
     case NavigatorType.PUSHREMOVEUNTIL:
       Navigator.pushAndRemoveUntil(
-          context,
+          navigatorKey.currentContext!,
           MaterialPageRoute(builder: (context) => screenName),
           (Route<dynamic> route) => false);
+      return;
+    default:
+      Navigator.push(navigatorKey.currentContext!,
+          MaterialPageRoute(builder: (context) => screenName));
       return;
   }
 }

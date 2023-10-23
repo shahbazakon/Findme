@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/constants/theme_constants.dart';
 import 'core/utils/utils_methods.dart';
-import 'feature/auth_featrues/onBoarding/presentation/pages/splash_screen.dart';
+import 'feature/dashboard/presentation/pages/dashboard_Screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: ThemeConstants.getTheme(context),
-      home: const SplashScreen(),
-      // home: Dashboard(),
+      // home: const SplashScreen(),
+      home: Dashboard(),
     );
   }
 }

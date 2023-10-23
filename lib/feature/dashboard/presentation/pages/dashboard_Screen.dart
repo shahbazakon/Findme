@@ -6,6 +6,8 @@ import 'package:find_me/feature/home_features/home/presentation/pages/home_scree
 import 'package:find_me/feature/settings_features/settings/presentation/pages/settings_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Profile/presentation/pages/profile_screen.dart';
+
 class Dashboard extends StatefulWidget {
   Dashboard({super.key});
 
@@ -47,9 +49,7 @@ class _DashboardState extends State<Dashboard> {
             HomeScreen(),
             ContactsScreen(),
             SettingsScreen(),
-            Center(
-              child: Text("Profile"),
-            ),
+            ProfileScreen()
           ],
         ),
       ),

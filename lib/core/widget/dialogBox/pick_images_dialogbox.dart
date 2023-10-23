@@ -2,7 +2,6 @@ import 'package:find_me/core/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../constants/theme_constants.dart';
 import '../../utils/text_style.dart';
 import '../../utils/utils_methods.dart';
 
@@ -32,7 +31,10 @@ class AppDialogBox {
               height: height * .5,
               margin: EdgeInsets.symmetric(horizontal: width * .1),
               padding: const EdgeInsets.all(10),
-              decoration: appBoxDecoration,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: AppColors.lightGrey1,
+                  border: Border.all(color: AppColors.lightGrey2, width: 2)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

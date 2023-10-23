@@ -9,6 +9,7 @@ import 'package:find_me/feature/settings_features/help/presentation/pages/help_s
 import 'package:find_me/feature/settings_features/settings/presentation/widget/profile_banner.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/widget/dialogBox/portolio_list_pop.dart';
 import '../../../followRequest/presentation/pages/follow_request_screen.dart';
 import '../widget/custom_list_tile.dart';
 
@@ -52,7 +53,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     CustomTile(
                       title: "Portfolio",
                       leadingIcon: AppIcons.portfolio,
-                      onTap: () {},
+                      onTap: () {
+                        portfolioListPop(showCloseButton: true);
+                      },
                     ),
                     CustomTile(
                       title: "Subscription",
