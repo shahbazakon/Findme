@@ -1,7 +1,9 @@
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -64,11 +66,16 @@ class SuccessScreen extends StatelessWidget {
               isHomeButtonVisible
                   ? Padding(
                       padding: const EdgeInsets.only(bottom: 20),
-                      child: Text(
-                        "Back to home",
-                        style: SubTitleHelper.h9.copyWith(
-                            fontWeight: FontWeight.w200,
-                            fontStyle: FontStyle.italic),
+                      child: InkWell(
+                        onTap: () {
+                          cupertinoNavigator(screenName: const SignInScreen());
+                        },
+                        child: Text(
+                          "Back to home",
+                          style: SubTitleHelper.h9.copyWith(
+                              fontWeight: FontWeight.w200,
+                              fontStyle: FontStyle.italic),
+                        ),
                       ),
                     )
                   : const SizedBox(),

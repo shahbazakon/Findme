@@ -64,25 +64,23 @@ class AppDialogBox {
     return Material(
       child: InkWell(
         onTap: onClick,
-        child: Expanded(
-          child: FittedBox(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.lightGrey2,
-                  border: Border.all(color: AppColors.lightGrey2, width: 4)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(icon, color: AppColors.primary, size: 100),
-                  Text(
-                    label,
-                    textAlign: TextAlign.center,
-                    style: TextHelper.h11,
-                  )
-                ],
-              ),
+        child: FittedBox(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: AppColors.lightGrey2,
+                border: Border.all(color: AppColors.lightGrey2, width: 4)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: AppColors.primary, size: 100),
+                Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: TextHelper.h11,
+                )
+              ],
             ),
           ),
         ),
