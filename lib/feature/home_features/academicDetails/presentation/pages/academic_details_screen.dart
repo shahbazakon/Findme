@@ -32,7 +32,6 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   FilePickerResult? pickedResume;
   FilePickerResult? pickedTranscript;
   DateTime? pickedDate;
-  List<Map<String, dynamic>> projectsList = [];
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -53,9 +52,6 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   final List<TextEditingController> _socialMediaURLController = [
     TextEditingController()
   ];
-  final List<TextEditingController> _projectsController = [
-    TextEditingController()
-  ];
   final List<TextEditingController> _skillsController = [
     TextEditingController()
   ];
@@ -63,12 +59,6 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
     TextEditingController()
   ];
   TextFieldValidator validator = TextFieldValidator();
-
-  void _addProjectDetails(Map<String, dynamic> data) {
-    setState(() {
-      projectsList.add(data);
-    });
-  }
 
   // dispose Controllers
   @override
@@ -92,9 +82,6 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
     for (var element in _socialMediaURLController) {
       element.dispose();
     }
-    for (var element in _projectsController) {
-      element.dispose();
-    }
     for (var element in _skillsController) {
       element.dispose();
     }
@@ -102,6 +89,14 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
       element.dispose();
     }
     super.dispose();
+  }
+
+  // add project
+  List<Map<String, dynamic>> projectsList = [];
+  void _addProjectDetails(Map<String, dynamic> data) {
+    setState(() {
+      projectsList.add(data);
+    });
   }
 
   // Select Prefix
@@ -409,21 +404,16 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 85,
-                    child: Column(
-                      children: _projectsController
-                          .asMap()
-                          .entries
-                          .map((entry) => CustomTestField2(
-                                controller: entry.value,
-                                label: entry.key + 1 == 1
-                                    ? "Projects"
-                                    : 'Projects ${entry.key + 1}',
-                                hintText: "Add Projects",
-                              ))
-                          .toList(),
-                    ),
-                  ),
+                      flex: 85,
+                      child: CustomTestField2(
+                        label: "Projects",
+                        hintText: "Add Projects",
+                        readOnly: true,
+                        onTap: () async {
+                          Map<String, dynamic> newData = await appProjectsPop();
+                          _addProjectDetails(newData);
+                        },
+                      )),
                   const SizedBox(
                     width: 10,
                   ),
@@ -432,8 +422,6 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                     child: AddMoreButton(
                       margin: const EdgeInsets.only(top: 35),
                       onTap: () async {
-                        // _projectsController.add(TextEditingController());
-                        // setState(() {});
                         Map<String, dynamic> newData = await appProjectsPop();
                         _addProjectDetails(newData);
                       },

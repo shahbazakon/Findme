@@ -1,11 +1,10 @@
+import 'package:find_me/core/utils/app_assets.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/feature/contacts/presentation/pages/contacts_screen.dart';
+import 'package:find_me/feature/dashboard/presentation/widget/dashboard_navigation_bar.dart';
 import 'package:find_me/feature/home_features/home/presentation/pages/home_screen.dart';
+import 'package:find_me/feature/settings_features/settings/presentation/pages/settings_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/utils_methods.dart';
-import '../../../contacts/presentation/pages/contacts_screen.dart';
-import '../../../settings/presentation/pages/settings_screen.dart';
-import '../widget/dashboard_navigation_bar.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({super.key});

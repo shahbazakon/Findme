@@ -85,13 +85,15 @@ Future<Map<String, dynamic>> appProjectsPop() async {
                 AppButton(
                     label: "Submit",
                     onPressed: () {
-                      Navigator.of(context).pop({
-                        'name': projectNameController.text,
-                        'role': projectRoleController.text,
-                        'description': descriptionController.text,
-                        'startDate': startDate,
-                        'endDate': endDate,
-                      });
+                      Navigator.of(context).pop(projectNameController.text != ""
+                          ? {
+                              'name': projectNameController.text,
+                              'role': projectRoleController.text,
+                              'description': descriptionController.text,
+                              'startDate': startDate,
+                              'endDate': endDate,
+                            }
+                          : {});
                     })
               ],
             ),

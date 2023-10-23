@@ -1,14 +1,14 @@
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_assets.dart';
+import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
-import 'package:find_me/feature/about/presentation/pages/about_screen.dart';
-import 'package:find_me/feature/help/presentation/pages/help_screen.dart';
 import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';
-import 'package:find_me/feature/settings/presentation/widget/profile_banner.dart';
+import 'package:find_me/feature/settings_features/about/presentation/pages/about_screen.dart';
+import 'package:find_me/feature/settings_features/help/presentation/pages/help_screen.dart';
+import 'package:find_me/feature/settings_features/settings/presentation/widget/profile_banner.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/app_color.dart';
 import '../../../followRequest/presentation/pages/follow_request_screen.dart';
 import '../widget/custom_list_tile.dart';
 

@@ -1,18 +1,18 @@
 import 'dart:developer';
 
+import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
+import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
+import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/feature/auth_featrues/createProfile/presentation/pages/create_profile_screen.dart';
+import 'package:find_me/feature/auth_featrues/signUp/presentation/pages/sign_up_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/theme_constants.dart';
-import '../../../../../core/utils/utils_methods.dart';
-import '../../../../../core/widget/Input Field/custom_checkbox.dart';
-import '../../../../../core/widget/Input Field/custom_test_field.dart';
-import '../../../../../core/widget/button/app_Button_widget.dart';
-import '../../../../createProfile/presentation/pages/create_profile_screen.dart';
-import '../../../signUp/presentation/pages/sign_up_screen.dart';
 import 'forget_password_screen.dart';
 
 class SignInScreen extends StatefulWidget {

@@ -1,7 +1,6 @@
+import 'package:find_me/core/utils/app_color.dart';
+import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/app_color.dart';
-import '../../../../core/utils/text_style.dart';
 
 class CustomTile extends StatelessWidget {
   const CustomTile(

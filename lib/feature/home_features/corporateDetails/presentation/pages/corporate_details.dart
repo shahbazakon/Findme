@@ -10,6 +10,8 @@ import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/button/app_switch_button.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
+import 'package:find_me/core/widget/dialogBox/add_project_pop.dart';
+import 'package:find_me/core/widget/project_tile.dart';
 import 'package:flutter/material.dart';
 
 class CorporateDetailsScreen extends StatefulWidget {
@@ -51,9 +53,6 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
   final List<TextEditingController> _socialMediaURLController = [
     TextEditingController()
   ];
-  final List<TextEditingController> _projectsController = [
-    TextEditingController()
-  ];
   final List<TextEditingController> _achievementsController = [
     TextEditingController()
   ];
@@ -80,13 +79,18 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
     for (var element in _socialMediaURLController) {
       element.dispose();
     }
-    for (var element in _projectsController) {
-      element.dispose();
-    }
     for (var element in _achievementsController) {
       element.dispose();
     }
     super.dispose();
+  }
+
+  // add project
+  List<Map<String, dynamic>> projectsList = [];
+  void _addProjectDetails(Map<String, dynamic> data) {
+    setState(() {
+      projectsList.add(data);
+    });
   }
 
   // Select Prefix
@@ -362,21 +366,16 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 85,
-                    child: Column(
-                      children: _projectsController
-                          .asMap()
-                          .entries
-                          .map((entry) => CustomTestField2(
-                                controller: entry.value,
-                                label: entry.key + 1 == 1
-                                    ? "Projects"
-                                    : 'Projects ${entry.key + 1}',
-                                hintText: "Add Projects",
-                              ))
-                          .toList(),
-                    ),
-                  ),
+                      flex: 85,
+                      child: CustomTestField2(
+                        label: "Projects",
+                        hintText: "Add Projects",
+                        readOnly: true,
+                        onTap: () async {
+                          Map<String, dynamic> newData = await appProjectsPop();
+                          _addProjectDetails(newData);
+                        },
+                      )),
                   const SizedBox(
                     width: 10,
                   ),
@@ -384,13 +383,30 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                     flex: 15,
                     child: AddMoreButton(
                       margin: const EdgeInsets.only(top: 35),
-                      onTap: () {
-                        _projectsController.add(TextEditingController());
-                        setState(() {});
+                      onTap: () async {
+                        Map<String, dynamic> newData = await appProjectsPop();
+                        _addProjectDetails(newData);
                       },
                     ),
                   ),
                 ],
+              ),
+              ListView.builder(
+                itemCount: projectsList.length,
+                shrinkWrap: true,
+                physics:
+                    const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                itemBuilder: (context, index) {
+                  return ProjectListTile(
+                    title: projectsList[index]['name'],
+                    subTitle: projectsList[index]['role'],
+                    startDate:
+                        "${dateFormatter1.format(projectsList[index]['startDate'])}, ",
+                    endDate:
+                        "${dateFormatter1.format(projectsList[index]['endDate'])} ",
+                    description: projectsList[index]['description'],
+                  );
+                },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
