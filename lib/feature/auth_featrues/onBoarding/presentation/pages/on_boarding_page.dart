@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/theme_constants.dart';
@@ -25,11 +27,34 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   // Create a Timer to handle auto-scrolling
   final int _numPages = 6;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start auto-scrolling when the widget is initialized
+    _startAutoScroll();
+  }
+
+  void _startAutoScroll() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_currentPageNotifier.value < _numPages - 1) {
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      } else {
+        // Stop the timer when it reaches the last page
+        _timer?.cancel();
+      }
+    });
+  }
 
   @override
   void dispose() {
     // Dispose of the PageController and Timer to prevent memory leaks
     _pageController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
