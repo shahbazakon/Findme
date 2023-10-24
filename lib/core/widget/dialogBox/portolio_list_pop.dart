@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
@@ -22,66 +24,79 @@ portfolioListPop(
 
   return await showDialog(
     context: navigatorKey.currentContext!,
+    barrierDismissible: false,
     barrierColor: isTransparent ? Colors.transparent : Colors.black38,
     builder: (BuildContext context) {
       return FittedBox(
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            width: width,
-            margin: const EdgeInsets.symmetric(horizontal: 25),
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-                color: isTransparent
-                    ? Colors.grey.shade200.withOpacity(0.7)
-                    : AppColors.light,
-                borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Material(
+            color: isTransparent ? Colors.transparent : Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaY: 10,
+                sigmaX: 10,
+              ),
+              child: Container(
+                width: width,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  backgroundBlendMode: BlendMode.colorDodge,
+                  color: isTransparent
+                      ? Colors.white.withOpacity(0.5)
+                      : AppColors.light,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Select Portfolio', style: TextHelper.h8),
-                          Text('you can select which portfolio to view',
-                              style: SubTitleHelper.h11),
-                        ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Select Portfolio', style: TextHelper.h8),
+                              Text('you can select which portfolio to view',
+                                  style: SubTitleHelper.h11),
+                            ],
+                          ),
+                        ),
+                        Visibility(
+                            visible: showCloseButton,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.close,
+                                color: AppColors.lightGrey3,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ))
+                      ],
+                    ),
+                    SizedBox(
+                      width: width,
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics()),
+                        itemCount: portfolioList.length,
+                        itemBuilder: (context, index) {
+                          String keys = portfolioList.keys.toList()[index];
+                          return portfolioListTile(
+                              title: keys, screenName: portfolioList[keys]);
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                              thickness: 1, color: AppFontsColors.lightGrey4);
+                        },
                       ),
                     ),
-                    Visibility(
-                        visible: showCloseButton,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.close,
-                            color: AppColors.lightGrey3,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ))
                   ],
                 ),
-                SizedBox(
-                  width: width,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    physics: const AlwaysScrollableScrollPhysics(
-                        parent: BouncingScrollPhysics()),
-                    itemCount: portfolioList.length,
-                    itemBuilder: (context, index) {
-                      String keys = portfolioList.keys.toList()[index];
-                      return portfolioListTile(
-                          title: keys, screenName: portfolioList[keys]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider(thickness: 1, color: AppColors.lightGrey3);
-                    },
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -98,8 +113,9 @@ ListTile portfolioListTile(
     trailing:
         Icon(Icons.arrow_forward_ios_outlined, color: AppColors.dark, size: 20),
     onTap: () {
-      Navigator.pop(navigatorKey.currentContext!);
-      cupertinoNavigator(screenName: screenName);
+      Navigator.of(navigatorKey.currentContext!).pop();
+      cupertinoNavigator(
+          type: NavigatorType.PUSHREPLACE, screenName: screenName);
     },
   );
 }
