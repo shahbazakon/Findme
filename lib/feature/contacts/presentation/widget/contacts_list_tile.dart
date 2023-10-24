@@ -14,7 +14,13 @@ class ContactsListTile extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: leadingImage == null
-          ? null
+          ? Image.asset(
+              AppIcons
+                  .upload, // Replace with the path to your placeholder image
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            )
           : CircleAvatar(
               radius: 40,
               backgroundImage: NetworkImage(leadingImage!),

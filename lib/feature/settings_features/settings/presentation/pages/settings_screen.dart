@@ -54,7 +54,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: "Portfolio",
                       leadingIcon: AppIcons.portfolio,
                       onTap: () {
-                        portfolioListPop(showCloseButton: true);
+                        portfolioListPop(
+                            showCloseButton: true, isTransparent: false);
                       },
                     ),
                     CustomTile(

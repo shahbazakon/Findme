@@ -2,6 +2,7 @@
 
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
+import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
@@ -33,11 +34,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Hero(
               tag: "BackgroundImageTag",
               child: Image.network(
-                "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
-                width: width,
-                height: contentHeight + height * .02,
-                fit: BoxFit.cover,
-              ),
+                  "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
+                  width: width,
+                  height: contentHeight + height * .02,
+                  fit: BoxFit.cover, errorBuilder: (BuildContext context,
+                      Object error, StackTrace? stackTrace) {
+                // Display a placeholder image when the network image fails to load
+                return Image.asset(
+                  AppIcons.placeholderImage,
+                  width: width,
+                  height: height,
+                  fit: BoxFit.cover,
+                );
+              }),
             ),
           ),
           SingleChildScrollView(
@@ -63,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Hero(
                               tag: "profileQRKey",
                               child: QrImageView(
-                                foregroundColor: Colors.purple.shade700,
+                                foregroundColor: Colors.purple.shade800,
                                 data: '1234567890',
                                 version: QrVersions.auto,
                                 size: 80.0,

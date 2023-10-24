@@ -24,6 +24,7 @@ class AppIcons {
   static String upload = "assets/icons/upload.png";
   static String user = "assets/icons/user.png";
   static String addUser = "assets/icons/add_users.png";
+  static String placeholderImage = "assets/icons/placeholder.png";
 }
 
 class AppImages {

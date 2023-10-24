@@ -1,3 +1,4 @@
+import 'package:find_me/core/utils/app_assets.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/utils_methods.dart';
@@ -11,14 +12,13 @@ class PortfolioListScreen extends StatefulWidget {
 }
 
 class _PortfolioListScreenState extends State<PortfolioListScreen> {
-  @override
-  void initState() {
-    portfolioListPop(isTransparent: true);
-    super.initState();
+  showPop() async {
+    await portfolioListPop(isTransparent: true);
   }
 
   @override
   Widget build(BuildContext context) {
+    showPop();
     return Scaffold(
         body: widget.bgImage == null
             ? const SizedBox.shrink()
@@ -29,6 +29,16 @@ class _PortfolioListScreenState extends State<PortfolioListScreen> {
                   height: height,
                   width: width,
                   fit: BoxFit.cover,
+                  errorBuilder: (BuildContext context, Object error,
+                      StackTrace? stackTrace) {
+                    return Image.asset(
+                      AppIcons
+                          .placeholderImage, // Replace with the path to your placeholder image
+                      width: width,
+                      height: height,
+                      fit: BoxFit.cover,
+                    );
+                  },
                 )));
   }
 }

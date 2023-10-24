@@ -1,5 +1,6 @@
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
+import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
@@ -123,9 +124,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: NetworkImage(image))),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: FadeInImage(
+                placeholder: AssetImage(AppIcons.placeholderImage),
+                image: NetworkImage(image),
+                fit: BoxFit.cover,
+              ),
+            ),
           )),
     );
   }

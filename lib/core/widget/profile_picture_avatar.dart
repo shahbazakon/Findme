@@ -30,32 +30,35 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(
-                  width: widget.isBorderVisible ? widget.radius * .10 : 0,
-                  color: AppColors.light),
-              boxShadow: [
-                BoxShadow(
-                    offset: widget.isShadowDown
-                        ? const Offset(1, 6)
-                        : const Offset(0, 0),
-                    blurRadius: widget.isShadowDown
-                        ? widget.radius * .1
-                        : widget.radius * .21,
-                    color: AppColors.lightGrey3)
-              ]),
-          child: CircleAvatar(
-            radius: widget.radius,
-            backgroundImage: pickedImage != null
-                ? Image.file(
-                    File(pickedImage!.path),
-                    fit: BoxFit.cover,
-                  ).image
-                : const NetworkImage(
-                    "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3569&q=80"),
-          ),
-        ),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                    width: widget.isBorderVisible ? widget.radius * .10 : 0,
+                    color: AppColors.light),
+                boxShadow: [
+                  BoxShadow(
+                      offset: widget.isShadowDown
+                          ? const Offset(1, 6)
+                          : const Offset(0, 0),
+                      blurRadius: widget.isShadowDown
+                          ? widget.radius * .1
+                          : widget.radius * .21,
+                      color: AppColors.lightGrey3)
+                ]),
+            child: CircleAvatar(
+              radius: widget.radius,
+              backgroundImage: pickedImage != null
+                  ? Image.file(
+                      File(pickedImage!.path),
+                      fit: BoxFit.cover,
+                    ).image
+                  : const FadeInImage(
+                      placeholder: AssetImage('assets/placeholder_image.png'),
+                      image: NetworkImage(
+                          "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3569&q=80"),
+                      fit: BoxFit.cover,
+                    ).image,
+            )),
         Visibility(
           visible: widget.showEditButton,
           child: Positioned(

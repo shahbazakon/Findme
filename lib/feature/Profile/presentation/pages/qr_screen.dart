@@ -24,7 +24,7 @@ class QRScreen extends StatelessWidget {
                 Hero(
                   tag: "profileQRKey",
                   child: QrImageView(
-                    foregroundColor: Colors.purple.shade700,
+                    foregroundColor: Colors.purple.shade800,
                     data: '1234567890',
                     version: QrVersions.auto,
                     size: height * .38,
