@@ -8,6 +8,7 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/feature/Profile/presentation/pages/protfolio_list_screen.dart';
 import 'package:find_me/feature/Profile/presentation/pages/qr_screen.dart';
+import 'package:find_me/feature/Profile/presentation/widget/custom_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shadow_overlay/shadow_overlay.dart';
@@ -71,11 +72,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                             child: Hero(
                               tag: "profileQRKey",
-                              child: QrImageView(
-                                foregroundColor: Colors.purple.shade800,
-                                data: '1234567890',
-                                version: QrVersions.auto,
-                                size: 80.0,
+                              child: GradientWidget(
+                                child: QrImageView(
+                                  data: '1234567890',
+                                  version: QrVersions.auto,
+                                  size: 80.0,
+                                ),
                               ),
                             ),
                           ),

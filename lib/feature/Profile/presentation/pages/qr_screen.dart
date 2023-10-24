@@ -1,6 +1,7 @@
 import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/feature/Profile/presentation/widget/custom_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -23,11 +24,12 @@ class QRScreen extends StatelessWidget {
               children: [
                 Hero(
                   tag: "profileQRKey",
-                  child: QrImageView(
-                    foregroundColor: Colors.purple.shade800,
-                    data: '1234567890',
-                    version: QrVersions.auto,
-                    size: height * .38,
+                  child: GradientWidget(
+                    child: QrImageView(
+                      data: '1234567890',
+                      version: QrVersions.auto,
+                      size: height * .38,
+                    ),
                   ),
                 ),
                 Padding(
