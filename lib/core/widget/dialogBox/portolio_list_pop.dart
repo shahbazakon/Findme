@@ -27,74 +27,79 @@ portfolioListPop(
     barrierDismissible: false,
     barrierColor: isTransparent ? Colors.transparent : Colors.black38,
     builder: (BuildContext context) {
-      return FittedBox(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Material(
-            color: isTransparent ? Colors.transparent : Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaY: 10,
-                sigmaX: 10,
-              ),
-              child: Container(
-                width: width,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  backgroundBlendMode: BlendMode.colorDodge,
-                  color: isTransparent
-                      ? Colors.white.withOpacity(0.5)
-                      : AppColors.light,
-                  borderRadius: BorderRadius.circular(20),
+      return WillPopScope(
+        onWillPop: () {
+          return Future.value(false);
+        },
+        child: FittedBox(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Material(
+              color: isTransparent ? Colors.transparent : Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaY: 10,
+                  sigmaX: 10,
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Select Portfolio', style: TextHelper.h8),
-                              Text('you can select which portfolio to view',
-                                  style: SubTitleHelper.h11),
-                            ],
+                child: Container(
+                  width: width,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    backgroundBlendMode: BlendMode.colorDodge,
+                    color: isTransparent
+                        ? Colors.white.withOpacity(0.5)
+                        : AppColors.light,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Select Portfolio', style: TextHelper.h8),
+                                Text('you can select which portfolio to view',
+                                    style: SubTitleHelper.h11),
+                              ],
+                            ),
                           ),
-                        ),
-                        Visibility(
-                            visible: showCloseButton,
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.close,
-                                color: AppColors.lightGrey3,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ))
-                      ],
-                    ),
-                    SizedBox(
-                      width: width,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        physics: const AlwaysScrollableScrollPhysics(
-                            parent: BouncingScrollPhysics()),
-                        itemCount: portfolioList.length,
-                        itemBuilder: (context, index) {
-                          String keys = portfolioList.keys.toList()[index];
-                          return portfolioListTile(
-                              title: keys, screenName: portfolioList[keys]);
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                              thickness: 1, color: AppFontsColors.lightGrey4);
-                        },
+                          Visibility(
+                              visible: showCloseButton,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.close,
+                                  color: AppColors.lightGrey3,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ))
+                        ],
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: width,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          physics: const AlwaysScrollableScrollPhysics(
+                              parent: BouncingScrollPhysics()),
+                          itemCount: portfolioList.length,
+                          itemBuilder: (context, index) {
+                            String keys = portfolioList.keys.toList()[index];
+                            return portfolioListTile(
+                                title: keys, screenName: portfolioList[keys]);
+                          },
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                                thickness: 1, color: AppFontsColors.lightGrey4);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
