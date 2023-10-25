@@ -12,13 +12,14 @@ class PortfolioListScreen extends StatefulWidget {
 }
 
 class _PortfolioListScreenState extends State<PortfolioListScreen> {
-  showPop() async {
-    await portfolioListPop(isTransparent: true);
+  @override
+  void initState() {
+    portfolioListPop(isTransparent: true);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    showPop();
     return Scaffold(
         body: widget.bgImage == null
             ? const SizedBox.shrink()

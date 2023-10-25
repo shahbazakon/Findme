@@ -110,13 +110,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: height * .02),
                     Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                       textAlign: TextAlign.center,
                       style: SubTitleHelper.h12,
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: height * .02),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -129,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         followCountTile(title: "2105", subtitle: "Following"),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: height * .01),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

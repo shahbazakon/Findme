@@ -4,7 +4,6 @@ import 'package:find_me/core/utils/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/utils/utils_methods.dart';
 import 'on_boarding_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Center(
         child: SvgPicture.asset(

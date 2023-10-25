@@ -7,7 +7,7 @@ import 'package:find_me/feature/home_features/academicDetails/presentation/pages
 import 'package:find_me/feature/home_features/businessDetails/presentation/pages/business_details_Screen.dart';
 import 'package:find_me/feature/home_features/corporateDetails/presentation/pages/corporate_details.dart';
 import 'package:find_me/feature/home_features/matrimonyDetails/presentation/pages/matrimony_details_screen.dart';
-import 'package:find_me/feature/home_features/personalDetails/presentation/pages/personal_details_screen.dart';
+import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/pages/presonal_portfolio_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/utils_methods.dart';
@@ -15,7 +15,7 @@ import '../../utils/utils_methods.dart';
 portfolioListPop(
     {bool showCloseButton = false, bool isTransparent = false}) async {
   Map portfolioList = {
-    'Personal': const PersonalDetailsScreen(),
+    'Personal': const PersonalPortfolioScreen(),
     'Academic': const AcademicDetailsScreen(),
     'Corporate': const CorporateDetailsScreen(),
     'Business': const BusinessDetailsScreen(),
@@ -27,6 +27,7 @@ portfolioListPop(
     barrierDismissible: false,
     barrierColor: isTransparent ? Colors.transparent : Colors.black38,
     builder: (BuildContext context) {
+      double blur = isTransparent ? 10 : 0;
       return WillPopScope(
         onWillPop: () {
           return Future.value(false);
@@ -39,8 +40,8 @@ portfolioListPop(
               borderRadius: BorderRadius.circular(20),
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaY: 10,
-                  sigmaX: 10,
+                  sigmaY: blur,
+                  sigmaX: blur,
                 ),
                 child: Container(
                   width: width,
