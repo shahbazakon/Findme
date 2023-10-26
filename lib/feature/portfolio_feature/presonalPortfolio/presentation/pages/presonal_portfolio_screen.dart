@@ -60,7 +60,7 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                   height: height * .05,
                 ),
                 SizedBox(
-                  height: height * .35,
+                  height: height * .38,
                   child: Stack(
                     children: [
                       Positioned(
