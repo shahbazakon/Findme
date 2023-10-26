@@ -35,13 +35,11 @@ class BlurBackground extends StatelessWidget {
                   )),
         bgImage == null
             ? const SizedBox.shrink()
-            : ClipRRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Container(
-                    color: Colors.grey.withOpacity(0.1),
-                    alignment: Alignment.center,
-                  ),
+            : BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+                child: Container(
+                  color: Colors.grey.withOpacity(0.1),
+                  alignment: Alignment.center,
                 ),
               ),
       ],

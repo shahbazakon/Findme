@@ -20,79 +20,117 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          BlurBackground(
+          const BlurBackground(
             bgImage:
                 "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
           ),
-          Container(
-            height: height * .38,
-            child: Stack(
+          SingleChildScrollView(
+            child: Column(
               children: [
-                Positioned(
-                  right: width * .55,
-                  top: 0,
-                  child: ClipperShape(
-                    size: 150,
-                    child: Image.network(
-                        fit: BoxFit.cover,
-                        "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back, color: AppColors.light)),
+                      Column(
+                        children: [
+                          Text(
+                            "Aliya Hayat",
+                            style: TextHelper.h2
+                                .copyWith(color: AppFontsColors.light),
+                          ),
+                          Text(
+                            "@theroselady",
+                            style: SubTitleHelper.h8
+                                .copyWith(color: AppFontsColors.light),
+                          ),
+                        ],
+                      ),
+                      SizedBox.shrink()
+                    ],
                   ),
                 ),
-                Positioned(
-                  right: width * .55,
-                  top: height * .133,
-                  child: ClipperShape(
-                    size: 130,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1450",
-                            style: TextHelper.h5
-                                .copyWith(color: AppFontsColors.primary)),
-                        Text("Followers",
-                            style: TextHelper.h9
-                                .copyWith(color: AppFontsColors.lightGrey3)),
-                      ],
-                    ),
-                  ),
+                SizedBox(
+                  height: height * .05,
                 ),
-                Positioned(
-                  right: width * .55,
-                  top: height * .133,
-                  child: ClipperShape(
-                    size: 100,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1450",
-                            style: TextHelper.h5
-                                .copyWith(color: AppFontsColors.primary)),
-                        Text("Followers",
-                            style: TextHelper.h9
-                                .copyWith(color: AppFontsColors.lightGrey3)),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: width * .55,
-                  top: height * .133,
-                  child: ClipperShape(
-                    size: 90,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1450",
-                            style: TextHelper.h5
-                                .copyWith(color: AppFontsColors.primary)),
-                        Text("Followers",
-                            style: TextHelper.h9
-                                .copyWith(color: AppFontsColors.lightGrey3)),
-                      ],
-                    ),
+                SizedBox(
+                  height: height * .35,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: width * .3,
+                        top: 0,
+                        child: ClipperShape(
+                          size: width * .37,
+                          child: Image.network(
+                              fit: BoxFit.cover,
+                              "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"),
+                        ),
+                      ),
+                      Positioned(
+                        left: width * .15,
+                        top: height * .129,
+                        child: ClipperShape(
+                          size: width * .3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("1450",
+                                  style: TextHelper.h5
+                                      .copyWith(color: AppFontsColors.primary)),
+                              Text("Followers",
+                                  style: TextHelper.h10.copyWith(
+                                      color: AppFontsColors.lightGrey3)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: width * .51,
+                        top: height * .143,
+                        child: ClipperShape(
+                          size: width * .26,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("28k",
+                                  style: TextHelper.h6
+                                      .copyWith(color: AppFontsColors.primary)),
+                              Text("Views",
+                                  style: TextHelper.h10.copyWith(
+                                      color: AppFontsColors.lightGrey3)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: width * .37,
+                        top: height * .22,
+                        child: ClipperShape(
+                          size: width * .22,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("720",
+                                  style: TextHelper.h7
+                                      .copyWith(color: AppFontsColors.primary)),
+                              Text("Following",
+                                  style: TextHelper.h12.copyWith(
+                                      color: AppFontsColors.lightGrey3)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
