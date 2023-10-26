@@ -47,7 +47,7 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                           ),
                           Text(
                             "@theroselady",
-                            style: SubTitleHelper.h8
+                            style: SubTitleHelper.h9
                                 .copyWith(color: AppFontsColors.light),
                           ),
                         ],
