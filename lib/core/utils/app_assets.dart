@@ -1,5 +1,6 @@
 class AppIcons {
   static String about = "assets/icons/about.png";
+  static String attachFile = "assets/icons/attach_file.png";
   static String bell = "assets/icons/bell.png";
   static String bellSimple = "assets/icons/bell_simple.png";
   static String beg = "assets/icons/beg.png";
@@ -25,6 +26,10 @@ class AppIcons {
   static String user = "assets/icons/user.png";
   static String addUser = "assets/icons/add_users.png";
   static String placeholderImage = "assets/icons/placeholder.png";
+  static String facebook = "assets/icons/facebook.png";
+  static String instagram = "assets/icons/instagram.png";
+  static String snapchat = "assets/icons/snapchat.png";
+  static String twitter = "assets/icons/twitter.png";
 }
 
 class AppImages {

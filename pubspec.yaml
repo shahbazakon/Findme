@@ -27,6 +27,7 @@ dependencies:
   shadow_overlay: ^1.0.5
   qr_flutter: ^4.1.0
   path_maker: ^0.0.2
+  appinio_video_player: ^1.2.2
 
 # dev dependencies
 dev_dependencies:
