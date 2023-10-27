@@ -1,4 +1,3 @@
-import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/utils/app_color.dart';
@@ -7,6 +6,7 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_profile_info_tile.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/cilpper_shape.dart';
+import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/attachment_list_tile.com.dart';
@@ -21,37 +21,18 @@ class PersonalPortfolioScreen extends StatefulWidget {
 }
 
 class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
-  late VideoPlayerController videoPlayerController;
-  late CustomVideoPlayerController _customVideoPlayerController;
-
   String videoUrl =
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    videoPlayer();
-    super.initState();
-  }
-
-  videoPlayer() {
-    videoPlayerController =
-        VideoPlayerController.networkUrl(Uri.parse(videoUrl))
-          ..initialize().then((value) => setState(() {}));
-    _customVideoPlayerController = CustomVideoPlayerController(
-      context: context,
-      videoPlayerController: videoPlayerController,
-    );
-  }
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  String profileImage =
+      "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          const BlurBackground(
-            bgImage:
-                "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
+          BlurBackground(
+            bgImage: profileImage,
           ),
           SingleChildScrollView(
             physics: const ScrollPhysics(
@@ -72,6 +53,9 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                           icon: Icon(Icons.arrow_back, color: AppColors.light)),
                       Column(
                         children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
                           Text(
                             "Aliya Hayat",
                             style: TextHelper.h2
@@ -160,13 +144,30 @@ Country: Saudi Arabia
                         ),
                       ),
                       sectionTitle(title: "Video"),
-                      Container(
-                        color: Colors.red,
+                      SizedBox(
                         width: width,
-                        height: 300,
-                        child: CustomVideoPlayer(
-                            customVideoPlayerController:
-                                _customVideoPlayerController),
+                        height: 200,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Hero(
+                                tag: "AttachedVideo",
+                                child: CustomVideoContainer(
+                                  thumbnail:
+                                      "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
+                                  videoUrl: videoUrl,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomVideoContainer(
+                                thumbnail:
+                                    "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
+                                videoUrl: videoUrl,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       sectionTitle(title: "Attachments"),
                       ListView.builder(
@@ -207,8 +208,9 @@ Country: Saudi Arabia
             child: ClipperShape(
               size: width * .37,
               child: Image.network(
-                  fit: BoxFit.cover,
-                  "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"),
+                profileImage,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Positioned(

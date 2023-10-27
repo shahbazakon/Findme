@@ -30,6 +30,7 @@ class AppIcons {
   static String instagram = "assets/icons/instagram.png";
   static String snapchat = "assets/icons/snapchat.png";
   static String twitter = "assets/icons/twitter.png";
+  static String play = "assets/icons/play.png";
 }
 
 class AppImages {
