@@ -2,6 +2,7 @@ import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/app_loader.dart';
 import 'package:flutter/material.dart';
 
 showVideoPop({required String videoUrl, required String thumbnail}) {
@@ -60,42 +61,46 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Material(
             color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                _customVideoPlayerController.dispose();
-                Navigator.of(context).pop();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white10,
-                    borderRadius: BorderRadius.circular(25)),
-                padding: const EdgeInsets.all(5),
-                margin: const EdgeInsets.all(10),
-                child: Icon(
-                  Icons.close,
-                  color: AppColors.light,
-                  size: 28,
+            child: Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                onTap: () {
+                  _customVideoPlayerController.dispose();
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white10,
+                      borderRadius: BorderRadius.circular(25)),
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(10),
+                  child: Icon(
+                    Icons.close,
+                    color: AppColors.light,
+                    size: 28,
+                  ),
                 ),
               ),
             )),
         Material(
           color: Colors.transparent,
-          child: Container(
-            height: height * .3,
-            width: width,
-            decoration: appBoxDecoration,
-            margin: const EdgeInsets.all(10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CustomVideoPlayer(
-                customVideoPlayerController: _customVideoPlayerController,
-              ),
-            ),
-          ),
+          child: _videoPlayerController.value.isInitialized
+              ? Container(
+                  height: height * .3,
+                  width: width,
+                  decoration: appBoxDecoration,
+                  margin: const EdgeInsets.all(10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CustomVideoPlayer(
+                      customVideoPlayerController: _customVideoPlayerController,
+                    ),
+                  ),
+                )
+              : const AppLoader(),
         ),
         Material(
             child: SizedBox(
