@@ -56,15 +56,15 @@ class CustomTestField2 extends StatelessWidget {
             onTap: onTap,
             onChanged: onChanged,
             maxLines: maxLines,
-            style: TextHelper.h10,
+            style: SubTitleHelper.h10,
             validator: validator,
             initialValue: initialValue,
             decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 hintText: hintText,
-                hintStyle:
-                    TextHelper.h10.copyWith(color: AppFontsColors.lightGrey3),
+                hintStyle: SubTitleHelper.h10
+                    .copyWith(color: AppFontsColors.lightGrey3),
                 filled: true,
                 fillColor: AppColors.lightGrey1,
                 border: OutlineInputBorder(

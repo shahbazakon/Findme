@@ -23,7 +23,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         color: AppColors.lightGrey3,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      visualDensity: const VisualDensity(horizontal: 2, vertical: -4),
+      visualDensity: const VisualDensity(horizontal: -4, vertical: 0),
       onChanged: (value) {
         setState(() {
           isRememberMe = !isRememberMe;

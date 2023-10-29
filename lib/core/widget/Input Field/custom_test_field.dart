@@ -43,7 +43,7 @@ class _CustomTestFieldState extends State<CustomTestField> {
       padding: widget.padding ?? EdgeInsets.symmetric(vertical: height * .01),
       child: TextField(
         controller: widget.controller,
-        style: TextHelper.h10,
+        style: SubTitleHelper.h10,
         obscureText: isObscure,
         readOnly: widget.readOnly,
         keyboardType: widget.keyboardType,
@@ -52,7 +52,8 @@ class _CustomTestFieldState extends State<CustomTestField> {
         decoration: InputDecoration(
             label: Visibility(
                 visible: widget.label != null, child: Text("${widget.label}")),
-            labelStyle: TextHelper.h10.copyWith(color: AppColors.lightGrey3),
+            labelStyle:
+                SubTitleHelper.h10.copyWith(color: AppColors.lightGrey3),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             border: OutlineInputBorder(

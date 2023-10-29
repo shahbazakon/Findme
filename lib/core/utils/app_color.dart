@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static Color primary = const Color.fromRGBO(98, 182, 204, 1);
   static Color red = const Color.fromRGBO(192, 46, 46, 1);
-  static Color dark = Colors.black;
+  static Color dark = const Color.fromRGBO(64, 64, 64, 1);
   static Color light = Colors.white;
   static Color lightGrey1 = const Color.fromRGBO(246, 246, 246, 1);
   static Color lightGrey2 = const Color.fromRGBO(232, 232, 232, 1);
@@ -13,7 +13,7 @@ class AppColors {
 class AppFontsColors {
   static Color primary = const Color.fromRGBO(98, 182, 204, 1);
   static Color light = Colors.white;
-  static Color dark = Colors.black;
+  static Color dark = const Color.fromRGBO(64, 64, 64, 1);
   static Color lightGrey1 = const Color.fromRGBO(246, 246, 246, 1);
   static Color lightGrey2 = const Color.fromRGBO(232, 232, 232, 1);
   static Color lightGrey3 = const Color.fromRGBO(189, 189, 189, 1);

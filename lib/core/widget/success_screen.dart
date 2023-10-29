@@ -42,9 +42,12 @@ class SuccessScreen extends StatelessWidget {
             children: [
               const SizedBox(),
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                SvgPicture.asset(
-                  AppImages.success,
-                  height: height * .36,
+                Padding(
+                  padding: EdgeInsets.only(right: width * .09),
+                  child: SvgPicture.asset(
+                    AppImages.success,
+                    height: height * .36,
+                  ),
                 ),
                 SizedBox(height: height * .05),
                 Text(
@@ -59,7 +62,7 @@ class SuccessScreen extends StatelessWidget {
                   child: Text(
                     "$subTitle",
                     textAlign: TextAlign.center,
-                    style: SubTitleHelper.h11,
+                    style: SubTitleHelper.h10,
                   ),
                 ),
               ]),

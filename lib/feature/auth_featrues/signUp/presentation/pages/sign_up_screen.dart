@@ -2,16 +2,13 @@ import 'dart:developer';
 
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../signIn/presentation/pages/sign_in_screen.dart';
 import 'otp_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -73,32 +70,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   cupertinoNavigator(screenName: const OTPScreen());
                 },
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                      text: "or\n",
-                      style: SubTitleHelper.h8
-                          .copyWith(color: AppFontsColors.lightGrey3),
-                      children: [
-                        TextSpan(
-                            text: "Already have account?",
-                            style: SubTitleHelper.h9,
-                            children: [
-                              TextSpan(
-                                text: "Sign In",
-                                style: SubTitleHelper.h9
-                                    .copyWith(color: AppColors.primary),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    cupertinoNavigator(
-                                        screenName: const SignInScreen());
-                                  },
-                              )
-                            ])
-                      ]))
             ],
           ),
         ),

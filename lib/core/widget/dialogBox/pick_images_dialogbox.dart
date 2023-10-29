@@ -24,6 +24,7 @@ class AppDialogBox {
   Future<XFile?> pickImages() {
     return showDialog(
       context: navigatorKey.currentContext!,
+      barrierDismissible: false,
       builder: (context) {
         return FittedBox(
           child: Container(
@@ -35,22 +36,34 @@ class AppDialogBox {
                   borderRadius: BorderRadius.circular(20),
                   color: AppColors.lightGrey1,
                   border: Border.all(color: AppColors.lightGrey2, width: 2)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  pickerSourceButton(
-                      label: "Pick form Gallery",
-                      icon: Icons.image_outlined,
-                      onClick: () {
-                        getImageFromGallery();
-                      }),
-                  pickerSourceButton(
-                      label: "Pick form Camera",
-                      icon: Icons.camera_alt_outlined,
-                      onClick: () {
-                        getImageFromCamera();
-                      }),
-                ],
+              child: Material(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const CloseButton(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        pickerSourceButton(
+                            label: "Pick form Gallery",
+                            icon: Icons.image_outlined,
+                            onClick: () {
+                              getImageFromGallery();
+                            }),
+                        pickerSourceButton(
+                            label: "Pick form Camera",
+                            icon: Icons.camera_alt_outlined,
+                            onClick: () {
+                              getImageFromCamera();
+                            }),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    )
+                  ],
+                ),
               )),
         );
       },
