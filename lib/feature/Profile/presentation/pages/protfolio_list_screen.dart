@@ -14,7 +14,7 @@ class PortfolioListScreen extends StatefulWidget {
 class _PortfolioListScreenState extends State<PortfolioListScreen> {
   @override
   void initState() {
-    portfolioListPop(isTransparent: true);
+    portfolioListPop(isTransparent: true, isReplacementRoute: true);
     super.initState();
   }
 

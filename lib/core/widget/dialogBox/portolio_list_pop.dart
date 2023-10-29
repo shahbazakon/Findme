@@ -3,23 +3,25 @@ import 'dart:ui';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
-import 'package:find_me/feature/home_features/academicDetails/presentation/pages/academic_details_screen.dart';
-import 'package:find_me/feature/home_features/businessDetails/presentation/pages/business_details_Screen.dart';
-import 'package:find_me/feature/home_features/corporateDetails/presentation/pages/corporate_details.dart';
-import 'package:find_me/feature/home_features/matrimonyDetails/presentation/pages/matrimony_details_screen.dart';
+import 'package:find_me/feature/portfolio_feature/AcademicPortfolio/presentation/pages/Academic_portfolio_screen.dart';
+import 'package:find_me/feature/portfolio_feature/BusinessPortfolio/presentation/pages/business_portfolio_screendart.dart';
+import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentation/pages/corporate_portfolio_screen.dart';
+import 'package:find_me/feature/portfolio_feature/matrimonyPortfolio/presentation/pages/matrimonial_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/pages/presonal_portfolio_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/utils_methods.dart';
 
 portfolioListPop(
-    {bool showCloseButton = false, bool isTransparent = false}) async {
+    {bool showCloseButton = false,
+    bool isTransparent = false,
+    isReplacementRoute = false}) async {
   Map portfolioList = {
     'Personal': const PersonalPortfolioScreen(),
-    'Academic': const AcademicDetailsScreen(),
-    'Corporate': const CorporateDetailsScreen(),
-    'Business': const BusinessDetailsScreen(),
-    'Matrimony': const MatrimonyDetailsScreen()
+    'Academic': const AcademicPortfolioScreen(),
+    'Corporate': const CorporatePortfolioScreen(),
+    'Business': const BusinessPortfolioScreen(),
+    'Matrimony': const MatrimonialPortfolioScreen()
   };
 
   return await showDialog(
@@ -91,7 +93,9 @@ portfolioListPop(
                           itemBuilder: (context, index) {
                             String keys = portfolioList.keys.toList()[index];
                             return portfolioListTile(
-                                title: keys, screenName: portfolioList[keys]);
+                                isReplacementRoute: isReplacementRoute,
+                                title: keys,
+                                screenName: portfolioList[keys]);
                           },
                           separatorBuilder: (context, index) {
                             return Divider(
@@ -112,7 +116,9 @@ portfolioListPop(
 }
 
 ListTile portfolioListTile(
-    {required String title, required Widget screenName}) {
+    {required String title,
+    required Widget screenName,
+    isReplacementRoute = false}) {
   return ListTile(
     contentPadding: EdgeInsets.zero,
     title: Text(title, style: TitleHelper.h8),
@@ -121,7 +127,10 @@ ListTile portfolioListTile(
     onTap: () {
       Navigator.of(navigatorKey.currentContext!).pop();
       cupertinoNavigator(
-          type: NavigatorType.PUSHREPLACE, screenName: screenName);
+          type: isReplacementRoute
+              ? NavigatorType.PUSHREPLACE
+              : NavigatorType.PUSH,
+          screenName: screenName);
     },
   );
 }

@@ -9,15 +9,15 @@ import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/utils/app_color.dart';
 
-class AcademicPortfolioScreen extends StatefulWidget {
-  const AcademicPortfolioScreen({super.key});
+class BusinessPortfolioScreen extends StatefulWidget {
+  const BusinessPortfolioScreen({super.key});
 
   @override
-  State<AcademicPortfolioScreen> createState() =>
-      _AcademicPortfolioScreenState();
+  State<BusinessPortfolioScreen> createState() =>
+      _BusinessPortfolioScreenState();
 }
 
-class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
+class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
   String videoUrl =
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   String profileImage =
@@ -57,6 +57,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
               title: "Aliya Hayat",
               subTitle: "Female, 27yrs",
             ),
+            SizedBox(height: height * .03),
             sectionTitle(title: "Projects", isPadding: false, isCenter: true),
             Column(
               children: [
@@ -155,7 +156,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                   physics: const ScrollPhysics(
                       parent: NeverScrollableScrollPhysics()),
                   shrinkWrap: true,
-                  itemCount: 2,
+                  itemCount: 4,
                   itemBuilder: (context, index) {
                     return AttachmentListTile(
                       title: "Resume",
@@ -187,7 +188,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
       alignment: isCenter ? Alignment.center : Alignment.topLeft,
       child: Text(
         title,
-        style: TextHelper.h7,
+        style: TextHelper.h9,
         textAlign: TextAlign.start,
       ),
     );
