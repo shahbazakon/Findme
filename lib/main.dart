@@ -1,7 +1,8 @@
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/pages/presonal_portfolio_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'feature/portfolio_feature/AcademicPortfolio/presentation/pages/Academic_portfolio_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       theme: ThemeConstants.getTheme(context),
       // home: const SplashScreen(),
-      home: const PersonalPortfolioScreen(),
+      home: const AcademicPortfolioScreen(),
     );
   }
 }

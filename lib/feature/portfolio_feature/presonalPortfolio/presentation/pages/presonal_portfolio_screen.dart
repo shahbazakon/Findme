@@ -146,7 +146,7 @@ Country: Saudi Arabia
                       sectionTitle(title: "Video"),
                       SizedBox(
                         width: width,
-                        height: 200,
+                        height: height * .2,
                         child: Row(
                           children: [
                             Expanded(
