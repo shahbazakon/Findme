@@ -1,30 +1,32 @@
+import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/formatter.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/Input%20Field/custom_test_field_2.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/theme_constants.dart';
-import '../../utils/utils_methods.dart';
-import '../Input Field/custom_test_field_2.dart';
 
 Future<Map<String, dynamic>> appProjectsPop() async {
   TextEditingController projectNameController = TextEditingController();
   TextEditingController projectRoleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
+  ValueNotifier<DateTime> startDate =
+      ValueNotifier<DateTime>(DateTime.now().subtract(const Duration(days: 1)));
+  ValueNotifier<DateTime> endDate = ValueNotifier<DateTime>(DateTime.now());
 
   DateTime? pickedStartDate =
       await appDatePicker(helpText: "Picked Start Date");
 
   if (pickedStartDate != null) {
-    startDate = pickedStartDate;
+    startDate.value = pickedStartDate;
+    startDate.notifyListeners();
   }
 
   DateTime? pickedEndDate = await appDatePicker(helpText: "Picked End Date");
 
   if (pickedEndDate != null) {
-    endDate = pickedEndDate;
+    endDate.value = pickedEndDate;
+    endDate.notifyListeners();
   }
 
   return await showDialog(
@@ -58,27 +60,42 @@ Future<Map<String, dynamic>> appProjectsPop() async {
                   hintText: "Project Description",
                   maxLines: 4,
                 ),
-                CustomTestField2(
-                  hintText: "Start Date",
-                  initialValue: dateFormatter1.format(startDate.toLocal()),
-                  readOnly: true,
-                  onTap: () async {
-                    DateTime? pickedStartDate = await appDatePicker();
-                    if (pickedStartDate != null) {
-                      startDate = pickedStartDate;
-                    }
+                ValueListenableBuilder<DateTime>(
+                  valueListenable: startDate,
+                  builder: (context, startDateValue, child) {
+                    return CustomTestField2(
+                      hintText: "Start Date",
+                      initialValue:
+                          dateFormatter1.format(startDateValue.toLocal()),
+                      readOnly: true,
+                      onTap: () async {
+                        // DateTime? pickedStartDate =
+                        //     await appDatePicker(helpText: "Picked Start Date");
+                        // if (pickedStartDate != null) {
+                        //   startDate.value = pickedStartDate;
+                        //   startDate.notifyListeners();
+                        // }
+                      },
+                    );
                   },
                 ),
-                CustomTestField2(
-                  hintText: "End Date",
-                  initialValue: dateFormatter1.format(endDate.toLocal()),
-                  readOnly: true,
-                  onTap: () async {
-                    DateTime? pickedEndDate = await appDatePicker();
-
-                    if (pickedEndDate != null) {
-                      endDate = pickedEndDate;
-                    }
+                ValueListenableBuilder<DateTime>(
+                  valueListenable: endDate,
+                  builder: (context, endDateValue, child) {
+                    return CustomTestField2(
+                      hintText: "End Date",
+                      initialValue:
+                          dateFormatter1.format(endDateValue.toLocal()),
+                      readOnly: true,
+                      onTap: () async {
+                        // DateTime? pickedEndDate =
+                        //     await appDatePicker(helpText: "Picked End Date");
+                        // if (pickedEndDate != null) {
+                        //   endDate.value = pickedEndDate;
+                        //   endDate.notifyListeners();
+                        // }
+                      },
+                    );
                   },
                 ),
                 const SizedBox(height: 10),
