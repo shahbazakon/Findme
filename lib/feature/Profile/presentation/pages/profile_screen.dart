@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: InkWell(
                             onTap: () {
                               // cupertinoNavigator(screenName: const);
-                              fadeNavigator(screenName: const QRScreen());
+                              fadeNavigator(screenName: QRScreen());
                             },
                             child: Hero(
                               tag: "profileQRKey",

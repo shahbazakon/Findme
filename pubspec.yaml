@@ -29,8 +29,11 @@ dependencies:
   path_maker: ^0.0.2
   appinio_video_player: ^1.2.2
   timeline_tile: ^2.0.0
-  google_fonts: ^6.1.0
-  flutter_highlight: ^0.7.0
+  screenshot: ^2.1.0
+  share_plus: ^7.2.1
+  image_gallery_saver: ^2.0.3
+  path_provider: ^2.1.1
+
 
 # dev dependencies
 dev_dependencies:

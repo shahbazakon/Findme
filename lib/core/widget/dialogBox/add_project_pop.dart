@@ -49,15 +49,18 @@ Future<Map<String, dynamic>> appProjectsPop() async {
               children: [
                 CustomTestField2(
                   controller: projectNameController,
-                  hintText: "Project Name",
+                  hintText: "Enter Project Name",
+                  label: "Project Name",
                 ),
                 CustomTestField2(
                   controller: projectRoleController,
-                  hintText: "Project Role",
+                  hintText: "Enter Project Role",
+                  label: "Project Role",
                 ),
                 CustomTestField2(
                   controller: descriptionController,
-                  hintText: "Project Description",
+                  hintText: "Enter Project Description",
+                  label: "Project Description",
                   maxLines: 4,
                 ),
                 ValueListenableBuilder<DateTime>(
@@ -65,6 +68,8 @@ Future<Map<String, dynamic>> appProjectsPop() async {
                   builder: (context, startDateValue, child) {
                     return CustomTestField2(
                       hintText: "Start Date",
+                      label: "Start Date",
+                      showCalendarIcon: true,
                       initialValue:
                           dateFormatter1.format(startDateValue.toLocal()),
                       readOnly: true,
@@ -84,6 +89,8 @@ Future<Map<String, dynamic>> appProjectsPop() async {
                   builder: (context, endDateValue, child) {
                     return CustomTestField2(
                       hintText: "End Date",
+                      label: "End Date",
+                      showCalendarIcon: true,
                       initialValue:
                           dateFormatter1.format(endDateValue.toLocal()),
                       readOnly: true,
