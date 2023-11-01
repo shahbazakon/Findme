@@ -31,8 +31,7 @@ class _QRScreenState extends State<QRScreen> {
       appBar: AppBar(),
       body: SizedBox(
         width: width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
           children: [
             Screenshot(
               controller: screenshotController,
@@ -83,56 +82,63 @@ class _QRScreenState extends State<QRScreen> {
                 ),
               ),
             ),
-            Container(
-              width: width,
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-              decoration: BoxDecoration(
-                  color: AppColors.light,
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(25)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: AppColors.lightGrey2,
-                        spreadRadius: 2,
-                        blurRadius: 3,
-                        offset: const Offset(1, 0))
-                  ]),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "My QR Code",
-                    style: TextHelper.h7,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                        "People can scan your QR Code to connect with you !",
-                        style: SubTitleHelper.h11
-                            .copyWith(color: AppFontsColors.lightGrey3)),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Image.asset(
-                      AppIcons.upload,
-                      scale: 4,
-                      color: AppColors.dark,
+            Positioned(
+              bottom: 0,
+              child: Container(
+                width: width,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                decoration: BoxDecoration(
+                    color: AppColors.light,
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(25)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColors.lightGrey2,
+                          spreadRadius: 2,
+                          blurRadius: 3,
+                          offset: const Offset(1, 0))
+                    ]),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "My QR Code",
+                      style: TextHelper.h7,
                     ),
-                    title: Text("Share Code", style: SubTitleHelper.h10),
-                    onTap: shareScreenShort,
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Image.asset(
-                      AppIcons.upload,
-                      scale: 4,
-                      color: AppColors.dark,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                          "People can scan your QR Code to connect with you !",
+                          style: SubTitleHelper.h11
+                              .copyWith(color: AppFontsColors.lightGrey3)),
                     ),
-                    title:
-                        Text("Save to Camera Roll", style: SubTitleHelper.h10),
-                    onTap: saveScreenShort,
-                  ),
-                ],
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Image.asset(
+                        AppIcons.upload,
+                        scale: 4,
+                        color: AppColors.dark,
+                      ),
+                      title: Text("Share Code", style: SubTitleHelper.h10),
+                      onTap: shareScreenShort,
+                    ),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Image.asset(
+                        AppIcons.upload,
+                        scale: 4,
+                        color: AppColors.dark,
+                      ),
+                      title: Text("Save to Camera Roll",
+                          style: SubTitleHelper.h10),
+                      onTap: saveScreenShort,
+                    ),
+                    SizedBox(
+                      height: height * .05,
+                    )
+                  ],
+                ),
               ),
             )
           ],
