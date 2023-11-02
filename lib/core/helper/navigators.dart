@@ -1,4 +1,8 @@
+import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/feature/auth_featrues/onBoarding/presentation/pages/on_boarding_screen.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/sign_in_screen.dart';
+import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -210,4 +214,21 @@ materialNavigator({required Widget screenName, NavigatorType? type}) {
           MaterialPageRoute(builder: (context) => screenName));
       return;
   }
+}
+// Navifations
+
+void logInNavigator() {
+  bool isOnBoardingCompleted =
+      sharedPreferences?.getBool(LocalStorageKey.isOnBoardingCompleted) ??
+          false;
+  bool isLoggedIn =
+      sharedPreferences?.getBool(LocalStorageKey.isLoggedIn) ?? false;
+
+  //Navigate to Initial Screen
+  cupertinoNavigator(
+      screenName: isLoggedIn
+          ? Dashboard()
+          : (isOnBoardingCompleted
+              ? const SignInScreen()
+              : const OnBoardingPage()));
 }

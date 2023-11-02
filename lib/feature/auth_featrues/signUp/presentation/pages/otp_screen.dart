@@ -1,5 +1,5 @@
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/success_screen.dart';
 import 'package:flutter/gestures.dart';

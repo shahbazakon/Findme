@@ -1,7 +1,7 @@
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/app_color.dart';
+import '../../constants/app_color.dart';
 import '../../utils/text_style.dart';
 
 class CustomTestField extends StatefulWidget {

@@ -1,7 +1,7 @@
+import 'package:find_me/core/constants/app_assets.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_assets.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_searchbar.dart';

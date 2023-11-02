@@ -7,7 +7,7 @@ import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-import '../../../../../core/utils/app_color.dart';
+import '../../../../../core/constants/app_color.dart';
 
 class BusinessPortfolioScreen extends StatefulWidget {
   const BusinessPortfolioScreen({super.key});

@@ -1,8 +1,8 @@
-import 'package:find_me/core/utils/app_color.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/app_assets.dart';
+import '../../constants/app_assets.dart';
 
 class CustomSearchBar extends StatelessWidget {
   CustomSearchBar({super.key, required this.searchController});

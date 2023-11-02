@@ -1,4 +1,4 @@
-import 'package:find_me/core/utils/app_assets.dart';
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/feature/contacts/presentation/pages/contacts_screen.dart';
 import 'package:find_me/feature/dashboard/presentation/widget/dashboard_navigation_bar.dart';
@@ -6,19 +6,28 @@ import 'package:find_me/feature/home_features/home/presentation/pages/home_scree
 import 'package:find_me/feature/settings_features/settings/presentation/pages/settings_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/local_storege_key.dart';
 import '../../../Profile/presentation/pages/profile_screen.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({super.key});
-
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
   int selectedIndex = 0;
-
   PageController pageController = PageController();
+
+  @override
+  void initState() {
+    setValue();
+    super.initState();
+  }
+
+  void setValue() async {
+    await sharedPreferences?.setBool(LocalStorageKey.isLoggedIn, true);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
+import 'package:find_me/core/constants/app_assets.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_assets.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';

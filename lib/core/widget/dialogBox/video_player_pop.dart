@@ -1,6 +1,6 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/app_loader.dart';
 import 'package:flutter/material.dart';

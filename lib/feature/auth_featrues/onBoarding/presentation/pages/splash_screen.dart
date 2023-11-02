@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:find_me/core/utils/app_assets.dart';
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'on_boarding_page.dart';
+import '../../../../../core/helper/navigators.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,10 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(
-        const Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const OnBoardingPage())));
+    Timer(const Duration(seconds: 3), () => logInNavigator());
   }
 
   @override

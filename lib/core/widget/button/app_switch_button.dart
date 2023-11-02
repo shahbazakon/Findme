@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../utils/app_color.dart';
+import '../../constants/app_color.dart';
 
 class AppSwitchButton extends StatefulWidget {
   AppSwitchButton({super.key, required this.value, this.onChanged});

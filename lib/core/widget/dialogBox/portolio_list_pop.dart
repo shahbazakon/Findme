@@ -1,7 +1,7 @@
 import 'dart:ui';
 
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/feature/portfolio_feature/AcademicPortfolio/presentation/pages/Academic_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/BusinessPortfolio/presentation/pages/business_portfolio_screendart.dart';

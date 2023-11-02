@@ -1,5 +1,5 @@
-import 'package:find_me/core/utils/app_assets.dart';
-import 'package:find_me/core/utils/app_color.dart';
+import 'package:find_me/core/constants/app_assets.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 

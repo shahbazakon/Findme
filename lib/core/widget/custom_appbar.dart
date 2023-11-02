@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_color.dart';
+import '../constants/app_color.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppbar({super.key, this.title});

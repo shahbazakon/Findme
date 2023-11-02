@@ -1,5 +1,5 @@
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_assets.dart';
 import 'package:find_me/core/widget/profile_picture_avatar.dart';
 import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';
 import 'package:flutter/material.dart';

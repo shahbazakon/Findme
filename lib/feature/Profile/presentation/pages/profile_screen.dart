@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:find_me/core/constants/app_assets.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_assets.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/feature/Profile/presentation/pages/protfolio_list_screen.dart';

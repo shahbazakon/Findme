@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:find_me/core/utils/app_assets.dart';
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../utils/app_color.dart';
+import '../constants/app_color.dart';
 import 'dialogBox/pick_images_dialogbox.dart';
 
 class ProfilePictureAvatar extends StatefulWidget {

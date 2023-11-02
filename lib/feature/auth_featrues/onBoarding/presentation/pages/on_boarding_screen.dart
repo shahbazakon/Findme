@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/theme_constants.dart';
 import '../../../../../core/helper/navigators.dart';
-import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/utils_methods.dart';
 import '../../../../../core/widget/button/app_Button_widget.dart';
 import '../widget/dots_indicator_widget.dart';

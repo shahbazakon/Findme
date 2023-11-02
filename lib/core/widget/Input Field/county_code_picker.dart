@@ -1,5 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:find_me/core/utils/app_color.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/text_style.dart';

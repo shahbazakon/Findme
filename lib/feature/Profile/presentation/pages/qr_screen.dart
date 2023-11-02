@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:find_me/core/constants/app_assets.dart';
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/formatter.dart';
-import 'package:find_me/core/utils/app_assets.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';

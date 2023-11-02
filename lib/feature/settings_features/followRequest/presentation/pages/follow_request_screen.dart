@@ -1,5 +1,5 @@
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_searchbar.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';

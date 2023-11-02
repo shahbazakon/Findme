@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:find_me/core/utils/app_assets.dart';
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:flutter/material.dart';
 

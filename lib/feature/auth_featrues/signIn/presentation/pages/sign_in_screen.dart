@@ -1,8 +1,8 @@
 import 'dart:developer';
 
+import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
-import 'package:find_me/core/utils/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
@@ -13,6 +13,7 @@ import 'package:find_me/feature/auth_featrues/signUp/presentation/pages/sign_up_
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/local_storege_key.dart';
 import 'forget_password_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -26,6 +27,17 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isRememberMe = false;
+
+  @override
+  void initState() {
+    setValue();
+    super.initState();
+  }
+
+  void setValue() async {
+    await sharedPreferences?.setBool(
+        LocalStorageKey.isOnBoardingCompleted, true);
+  }
 
   @override
   Widget build(BuildContext context) {
