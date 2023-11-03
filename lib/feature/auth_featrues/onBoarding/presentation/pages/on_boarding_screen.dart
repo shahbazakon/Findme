@@ -83,40 +83,34 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             },
                             children: <Widget>[
                               OnBoardingPageView(
-                                title: "Academic",
-                                subText:
-                                    "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
+                                title: translate!.academic,
+                                subText: translate!.lorem,
                                 image: AppImages.onBoarding1,
                               ),
                               OnBoardingPageView(
-                                title: "Corporate",
-                                subText:
-                                    "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
+                                title: translate!.corporate,
+                                subText: translate!.lorem,
                                 image: AppImages.onBoarding2,
                               ),
                               OnBoardingPageView(
-                                title: "Business",
-                                subText:
-                                    "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
+                                title: translate!.business,
+                                subText: translate!.lorem,
                                 image: AppImages.onBoarding3,
                               ),
                               OnBoardingPageView(
-                                title: "Matrimony",
-                                subText:
-                                    "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
+                                title: translate!.matrimony,
+                                subText: translate!.lorem,
                                 image: AppImages.onBoarding4,
                               ),
                               OnBoardingPageView(
-                                title: "Personal",
-                                subText:
-                                    "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
+                                title: translate!.personal,
+                                subText: translate!.lorem,
                                 image: AppImages.onBoarding5,
                               ),
                               OnBoardingPageView(
-                                title: "Get Started!",
-                                subTitle: "Lets Get Started!",
-                                subText:
-                                    "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
+                                title: translate!.getStarted,
+                                subTitle: translate!.letsGetStarted,
+                                subText: translate!.lorem,
                                 image: AppImages.onBoarding6,
                               ),
                             ],
@@ -138,7 +132,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               Visibility(
                                 visible: currentPageValue == 5,
                                 child: AppButton(
-                                  label: "Get Started",
+                                  label: translate!.getStarted,
                                   onPressed: () {
                                     cupertinoNavigator(
                                         type: NavigatorType.PUSHREMOVEUNTIL,

@@ -45,12 +45,10 @@ class _CreateProfileState extends State<CreateProfile> {
           padding: primaryPadding,
           child: Column(
             children: [
-              Text("Complete Your Profile", style: TitleHelper.h4),
+              Text(translate!.completeYourProfile, style: TitleHelper.h4),
               SizedBox(height: height * .02),
-              Text(
-                  "Don’t worry only you can see your personal data . No one else will be able to see it.",
-                  style: SubTitleHelper.h11,
-                  textAlign: TextAlign.center),
+              Text(translate!.doNotWorryOnlyYouCanSeeYourPersonalData,
+                  style: SubTitleHelper.h11, textAlign: TextAlign.center),
               SizedBox(height: height * .05),
               const ProfilePictureAvatar(
                 radius: 80,
@@ -59,11 +57,11 @@ class _CreateProfileState extends State<CreateProfile> {
               SizedBox(height: height * .04),
               CustomTestField(
                 controller: _nameController,
-                label: "Name",
+                label: translate!.name,
               ),
               CustomTestField(
                 controller: _emailController,
-                label: "Email",
+                label: translate!.email,
               ),
               Row(
                 children: [
@@ -83,7 +81,7 @@ class _CreateProfileState extends State<CreateProfile> {
                     flex: 85,
                     child: CustomTestField(
                       controller: _phoneNumberCodeController,
-                      label: "Phone Number",
+                      label: translate!.phoneNumber,
                     ),
                   ),
                 ],
@@ -109,10 +107,10 @@ class _CreateProfileState extends State<CreateProfile> {
               ),
               CustomTestField(
                 controller: _statusCodeController,
-                label: "Status",
+                label: translate!.status,
               ),
               AppButton(
-                label: "Complete Profile",
+                label: translate!.completeProfile,
                 onPressed: () {
                   cupertinoNavigator(
                       type: NavigatorType.PUSHREMOVEUNTIL,

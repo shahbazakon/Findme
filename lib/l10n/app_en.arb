@@ -1,0 +1,21 @@
+{
+    "lorem": "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
+    "academic": "Academic",
+    "corporate": "Corporate",
+    "business": "Business",
+    "matrimony": "Matrimony",
+    "personal": "Personal",
+
+    "getStarted": "Get Started!",
+    "letsGetStarted": "Lets Get Started!",
+
+    "completeProfile": "Complete Profile",
+    "completeYourProfile": "Complete Your Profile",
+    "doNotWorryOnlyYouCanSeeYourPersonalData": "Don’t worry only you can see your personal data . No one else will be able to see it.",
+    "status": "Status",
+
+    "name": "Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number"
+
+}

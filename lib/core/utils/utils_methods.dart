@@ -5,12 +5,12 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../widget/custom_snackBar.dart';
 
 ///--------------------- Value Initialization
 ///-----------------------------------------------------------------------------
@@ -24,6 +24,9 @@ double width = size.width;
 
 //
 GetIt locator = GetIt.instance;
+
+//app Localization
+var translate = AppLocalizations.of(navigatorKey.currentState!.context);
 
 // SharedPreferences
 SharedPreferences? sharedPreferences;
