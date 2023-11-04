@@ -33,12 +33,12 @@ class _OTPScreenState extends State<OTPScreen> {
           child: Column(
             children: [
               Text(
-                "Verify Code",
+                translate!.verifyCode,
                 style: TitleHelper.h1,
               ),
               SizedBox(height: height * .0),
               Text(
-                "Please enter the verification code we sent to your email",
+                translate!.pleaseEnterTheVerificationCodeWeSentToYourEmail,
                 style: SubTitleHelper.h12,
               ),
               SizedBox(height: height * .02),
@@ -64,14 +64,16 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
               SizedBox(height: height * .1),
               Text(
-                "Did’t receive code?",
+                translate!.didNotReceiveCode,
                 style: SubTitleHelper.h11,
               ),
               SizedBox(height: height * .02),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  //TODO:
+                },
                 child: Text(
-                  "Resend Code",
+                  translate!.resendCode,
                   style: TextHelper.h10.copyWith(
                       color: AppColors.primary,
                       decoration: TextDecoration.underline),
@@ -79,7 +81,7 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
               SizedBox(height: height * .04),
               AppButton(
-                label: "Verify",
+                label: translate!.verify,
                 onPressed: () {
                   cupertinoNavigator(
                       type: NavigatorType.PUSHREPLACE,
@@ -87,12 +89,12 @@ class _OTPScreenState extends State<OTPScreen> {
                         subTitleWidget: RichText(
                             textAlign: TextAlign.center,
                             text: TextSpan(
-                                text:
-                                    "Your sign up was verified successfully, Please ",
+                                text: translate!
+                                    .yourSignUpWasVerifiedSuccessfullyPlease,
                                 style: SubTitleHelper.h11,
                                 children: [
                                   TextSpan(
-                                    text: "sign in",
+                                    text: translate!.signIn,
                                     style: SubTitleHelper.h11.copyWith(
                                         decoration: TextDecoration.underline),
                                     recognizer: TapGestureRecognizer()
@@ -102,7 +104,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                       },
                                   ),
                                   TextSpan(
-                                      text: " to continue",
+                                      text: translate!.toContinue,
                                       style: SubTitleHelper.h11)
                                 ])),
                       ));

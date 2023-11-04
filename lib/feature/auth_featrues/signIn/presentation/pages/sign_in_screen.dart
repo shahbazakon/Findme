@@ -34,6 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
     super.initState();
   }
 
+  //save Local Value
   void setValue() async {
     await sharedPreferences?.setBool(
         LocalStorageKey.isOnBoardingCompleted, true);
@@ -52,19 +53,19 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding:
                     EdgeInsets.only(top: height * .06, bottom: height * .02),
                 child: Text(
-                  "Sign In",
+                  translate!.signIn,
                   style: TitleHelper.h1,
                 ),
               ),
               Text(
-                "Hi! Welcome back, you’ve been missed",
+                translate!.hiWelcomeBackYouWereBeenMissed,
                 style: TextHelper.h12,
               ),
               SizedBox(height: height * .04),
               CustomTestField(controller: _emailController, label: "Email"),
               CustomTestField(
                   controller: _passwordController,
-                  label: "Password",
+                  label: translate!.password,
                   isObscureButton: true),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         isRememberMe = value;
                         log(" value: $value");
                       }),
-                      const Text("Remember me"),
+                      Text(translate!.rememberMe),
                     ],
                   ),
                   InkWell(
@@ -83,12 +84,12 @@ class _SignInScreenState extends State<SignInScreen> {
                         cupertinoNavigator(
                             screenName: const ForgetPasswordScreen());
                       },
-                      child: const Text("Forgot Password?"))
+                      child: Text(translate!.forgotPassword))
                 ],
               ),
               SizedBox(height: height * .06),
               AppButton(
-                label: "Sign In",
+                label: translate!.signIn,
                 onPressed: () {
                   cupertinoNavigator(
                       type: NavigatorType.PUSHREMOVEUNTIL,
@@ -101,17 +102,17 @@ class _SignInScreenState extends State<SignInScreen> {
               RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                      text: "or\n",
+                      text: "${translate!.or}\n",
                       style: SubTitleHelper.h8
                           .copyWith(color: AppFontsColors.lightGrey3),
                       children: [
                         TextSpan(
-                            text: "Don’t have an account?",
-                            style: SubTitleHelper.h9,
+                            text: translate!.doNotHaveAnAccount,
+                            style: SubTitleHelper.h10,
                             children: [
                               TextSpan(
-                                text: "Sign Up",
-                                style: SubTitleHelper.h9
+                                text: translate!.signUp,
+                                style: SubTitleHelper.h10
                                     .copyWith(color: AppColors.primary),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {

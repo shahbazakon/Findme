@@ -34,20 +34,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             children: [
               Text(
-                "Sign Up",
+                translate!.signUp,
                 style: TitleHelper.h1,
               ),
               SizedBox(height: height * .02),
               Text(
-                "Hi! Welcome back, you’ve been missed",
+                translate!.hiWelcomeBackYouWereBeenMissed,
                 style: SubTitleHelper.h12,
               ),
               SizedBox(height: height * .06),
-              CustomTestField(controller: _nameController, label: "Name"),
-              CustomTestField(controller: _emailController, label: "Email"),
+              CustomTestField(
+                  controller: _nameController, label: translate!.name),
+              CustomTestField(
+                  controller: _emailController, label: translate!.email),
               CustomTestField(
                   controller: _passwordController,
-                  label: "Password",
+                  label: translate!.password,
                   isObscureButton: true),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -58,14 +60,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         isRememberMe = value;
                         log(" value: $value");
                       }),
-                      const Text("Remember me"),
+                      Text(translate!.rememberMe),
                     ],
                   ),
                 ],
               ),
               SizedBox(height: height * .06),
               AppButton(
-                label: "Sign Up",
+                label: translate!.signUp,
                 onPressed: () {
                   cupertinoNavigator(screenName: const OTPScreen());
                 },

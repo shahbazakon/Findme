@@ -1,12 +1,11 @@
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
+import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
+import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/success_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/text_style.dart';
-import '../../../../../core/utils/utils_methods.dart';
-import '../../../../../core/widget/Input Field/custom_test_field.dart';
-import '../../../../../core/widget/button/app_Button_widget.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -33,34 +32,34 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 padding:
                     EdgeInsets.only(top: height * .05, bottom: height * .02),
                 child: Text(
-                  "Reset Password",
+                  translate!.resetPassword,
                   style: TitleHelper.h1,
                 ),
               ),
               Text(
-                "Your new password should be different from older passwords",
+                translate!.yourNewPasswordShouldBeDifferentFromOlderPasswords,
                 style: SubTitleHelper.h12,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: height * .06),
               CustomTestField(
                 controller: _passwordController,
-                label: "Password",
+                label: translate!.password,
                 isObscureButton: true,
               ),
               CustomTestField(
                 controller: _confirmPasswordController,
-                label: "Confirm Password",
+                label: translate!.confirmPassword,
                 isObscureButton: true,
               ),
               SizedBox(height: height * .06),
               AppButton(
-                label: "Reset",
+                label: translate!.reset,
                 onPressed: () {
                   cupertinoNavigator(
                       type: NavigatorType.PUSHREMOVEUNTIL,
-                      screenName: const SuccessScreen(
-                        subTitle: "Your Password reset is successful!",
+                      screenName: SuccessScreen(
+                        subTitle: translate!.yourPasswordResetIsSuccessful,
                         isHomeButtonVisible: true,
                       ));
                 },

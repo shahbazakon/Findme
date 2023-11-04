@@ -1,6 +1,7 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:flutter/material.dart';
 
 class HomeNavigationBar extends StatefulWidget {
@@ -48,22 +49,22 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
             BottomNavigationBarItem(
               icon: Image.asset(AppIcons.store,
                   height: itemSize, color: itemColor(index: 0)),
-              label: 'Home',
+              label: translate!.home,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(AppIcons.phoneBook,
                   color: itemColor(index: 1), height: itemSize),
-              label: 'Contact',
+              label: translate!.contact,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(AppIcons.settings,
                   color: itemColor(index: 2), height: itemSize),
-              label: 'Settings',
+              label: translate!.settings,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(AppIcons.user,
                   color: itemColor(index: 3), height: itemSize),
-              label: 'Profile',
+              label: translate!.profile,
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/feature/contacts/presentation/widget/contacts_list_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: "Contacts"),
+      appBar: CustomAppbar(title: translate!.contacts),
       body: Padding(
         padding: primaryPadding,
         child: Column(

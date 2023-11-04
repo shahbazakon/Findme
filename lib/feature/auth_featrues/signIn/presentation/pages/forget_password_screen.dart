@@ -1,11 +1,11 @@
+import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
+import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
+import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/theme_constants.dart';
-import '../../../../../core/utils/text_style.dart';
-import '../../../../../core/utils/utils_methods.dart';
-import '../../../../../core/widget/Input Field/custom_test_field.dart';
-import '../../../../../core/widget/button/app_Button_widget.dart';
 import 'reset_password_screen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -31,12 +31,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 padding:
                     EdgeInsets.only(top: height * .05, bottom: height * .02),
                 child: Text(
-                  "Forgot Password",
+                  translate!.forgotPassword,
                   style: TitleHelper.h1,
                 ),
               ),
               Text(
-                "Enter your email address to change your password",
+                translate!.enterYourEmailAddressToChangeYourPassword,
                 style: SubTitleHelper.h12,
                 textAlign: TextAlign.center,
               ),
@@ -44,7 +44,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               CustomTestField(controller: _emailController, label: "Email"),
               SizedBox(height: height * .04),
               AppButton(
-                label: "Send",
+                label: translate!.send,
                 onPressed: () {
                   cupertinoNavigator(
                       type: NavigatorType.PUSHREPLACE,

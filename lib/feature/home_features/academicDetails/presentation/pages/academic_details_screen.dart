@@ -102,7 +102,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   // Select Prefix
   void _selectPrefix() async {
     String? selectedPrefix = await openSelectionDialog(
-        data: namePrefixList, title: 'Select Name Prefix');
+        data: namePrefixList, title: translate!.selectNamePrefix);
     if (selectedPrefix != null) {
       setState(() {
         _prefixController.text = selectedPrefix;
@@ -177,7 +177,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   // Select Prefix
   void _selectProgrammingLanguage() async {
     String? selectedLanguage = await openSelectionDialog(
-        data: programmingLanguageList, title: 'Select Programming Language');
+        data: programmingLanguageList,
+        title: translate!.selectProgrammingLanguage);
     if (selectedLanguage != null) {
       setState(() {
         _programmingLanguageController.text = selectedLanguage;
@@ -188,7 +189,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: "Academic Details"),
+      appBar: CustomAppbar(title: translate!.academic + translate!.details),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
             parent:
@@ -201,30 +202,30 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
             children: [
               CustomTestField2(
                 controller: _prefixController,
-                label: "Prefix",
-                hintText: "Enter Prefix",
+                label: translate!.prefix,
+                hintText: translate!.enter + translate!.prefix,
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectPrefix,
               ),
               CustomTestField2(
                 controller: _firstNameController,
-                label: "First Name",
-                hintText: "Enter First Name",
+                label: translate!.firstName,
+                hintText: "${translate!.enter} ${translate!.firstName}",
               ),
               CustomTestField2(
                 controller: _middleNameController,
-                label: "Middle Name",
-                hintText: "Enter Middle Name",
+                label: translate!.middleName,
+                hintText: "${translate!.enter} ${translate!.middleName}",
               ),
               CustomTestField2(
                 controller: _lastNameController,
-                label: "Last Name",
-                hintText: "Enter Last Name",
+                label: translate!.lastName,
+                hintText: "${translate!.enter} ${translate!.lastName}",
               ),
               CustomTestField2(
                 controller: _dobController,
-                label: "Date Of Birth",
+                label: translate!.dateOfBirth,
                 hintText: "DD/MM/YYYY",
                 showCalendarIcon: true,
                 readOnly: true,
@@ -237,8 +238,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                     flex: 85,
                     child: CustomTestField2(
                       controller: _emailController,
-                      label: "Email",
-                      hintText: "Enter Email",
+                      label: translate!.email,
+                      hintText: "${translate!.enter} ${translate!.email}",
                     ),
                   ),
                   const SizedBox(
@@ -263,8 +264,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _addressLine1Controller,
-                label: "Address",
-                hintText: "Address Line 1",
+                label: translate!.address,
+                hintText: "${translate!.addressLine} 1",
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -288,8 +289,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                     flex: 68,
                     child: CustomTestField2(
                       controller: _phoneNumber1Controller,
-                      label: "Phone Number",
-                      hintText: "Phone Number",
+                      label: translate!.phoneNumber,
+                      hintText: translate!.phoneNumber,
                     ),
                   ),
                   const SizedBox(
@@ -334,8 +335,9 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                     flex: 68,
                     child: CustomTestField2(
                       controller: _phoneNumber2Controller,
-                      label: "Phone Number(additional)",
-                      hintText: "Phone Number",
+                      label:
+                          "${translate!.phoneNumber}(${translate!.additional})",
+                      hintText: translate!.phoneNumber,
                     ),
                   ),
                   const SizedBox(
@@ -370,9 +372,9 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Social Media"
-                                    : 'Social Media ${entry.key + 1}',
-                                hintText: "Add Profile URL",
+                                    ? translate!.socialMedia
+                                    : '${translate!.socialMedia} ${entry.key + 1}',
+                                hintText: translate!.addProfileURL,
                               ))
                           .toList(),
                     ),
@@ -394,8 +396,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _programmingLanguageController,
-                label: "Programming Language",
-                hintText: "Enter Language",
+                label: translate!.programmingLanguage,
+                hintText: "${translate!.enter} ${translate!.language}",
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectProgrammingLanguage,
@@ -406,8 +408,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                   Expanded(
                       flex: 85,
                       child: CustomTestField2(
-                        label: "Projects",
-                        hintText: "Add Projects",
+                        label: translate!.projects,
+                        hintText: "${translate!.add} ${translate!.projects}",
                         readOnly: true,
                         onTap: () async {
                           Map<String, dynamic> newData = await appProjectsPop();
@@ -458,9 +460,10 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Skills"
-                                    : 'Skills ${entry.key + 1}',
-                                hintText: "Add Skills",
+                                    ? translate!.skills
+                                    : '${translate!.skills} ${entry.key + 1}',
+                                hintText:
+                                    "${translate!.add} ${translate!.skills}",
                               ))
                           .toList(),
                     ),
@@ -492,9 +495,10 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Certifications"
-                                    : 'Certifications ${entry.key + 1}',
-                                hintText: "Add Certifications",
+                                    ? translate!.certifications
+                                    : '${translate!.certifications} ${entry.key + 1}',
+                                hintText:
+                                    "${translate!.add} ${translate!.certifications}",
                               ))
                           .toList(),
                     ),
@@ -516,41 +520,41 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _resumeController,
-                label: "Resume",
-                hintText: "Upload Resume",
+                label: translate!.resume,
+                hintText: "${translate!.upload} ${translate!.resume}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickResume,
               ),
               CustomTestField2(
                 controller: _transcriptController,
-                label: "Transcript",
-                hintText: "Upload Transcript",
+                label: translate!.transcript,
+                hintText: "${translate!.upload} ${translate!.transcript}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickTranscript,
               ),
               CustomTestField2(
                 controller: _coverLetterController,
-                label: "Cover Letter",
-                hintText: "Upload Cover Letter",
+                label: translate!.coverLetter,
+                hintText: "${translate!.upload} ${translate!.coverLetter}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickCoverLetter,
               ),
               CustomTestField2(
                 controller: _coverImageController,
-                label: "Cover Image",
-                hintText: "Upload Image",
+                label: translate!.coverImage,
+                hintText: "${translate!.upload} ${translate!.coverImage}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickCoverImage,
               ),
               CustomTestField2(
                 controller: _videoController,
-                label: "Video",
+                label: translate!.video,
                 validator: (value) => validator.videoValidator(value),
-                hintText: "Upload Video",
+                hintText: "${translate!.upload} ${translate!.video}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickVideo,
@@ -558,7 +562,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: AppButton(
-                    label: "Save",
+                    label: translate!.save,
                     onPressed: () {
                       Navigator.pop(context);
                     }),
