@@ -75,7 +75,12 @@
     "enter": "Enter",
     "about": "About",
     "office": "Office",
-    "achievements": "Achievements"
-
+    "achievements": "Achievements",
+     "followRequest": "Follow Request",
+     "portfolio": "Portfolio",
+    "subscription": "Subscription",
+    "notifications":"Notifications",
+    "help": "Help",
+    "logOut": "Log out"
 
 }

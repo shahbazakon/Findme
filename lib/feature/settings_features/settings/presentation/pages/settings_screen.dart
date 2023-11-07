@@ -43,7 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   shrinkWrap: true,
                   children: [
                     CustomTile(
-                      title: "Follow Request",
+                      title: translate!.followRequest,
                       leadingIcon: AppIcons.beg,
                       onTap: () {
                         cupertinoNavigator(
@@ -51,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     ),
                     CustomTile(
-                      title: "Portfolio",
+                      title: translate!.portfolio,
                       leadingIcon: AppIcons.portfolio,
                       onTap: () {
                         portfolioListPop(
@@ -59,12 +59,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     ),
                     CustomTile(
-                      title: "Subscription",
+                      title: translate!.subscription,
                       leadingIcon: AppIcons.creditCard,
                       onTap: () {},
                     ),
                     CustomTile(
-                      title: "Notifications",
+                      title: translate!.notifications,
                       leadingIcon: AppIcons.bellSimple,
                       onTap: () {
                         cupertinoNavigator(
@@ -72,14 +72,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     ),
                     CustomTile(
-                      title: "Help",
+                      title: translate!.help,
                       leadingIcon: AppIcons.help,
                       onTap: () {
                         cupertinoNavigator(screenName: const HelpScreen());
                       },
                     ),
                     CustomTile(
-                      title: "About",
+                      title: translate!.about,
                       leadingIcon: AppIcons.about,
                       onTap: () {
                         cupertinoNavigator(screenName: const AboutScreen());
@@ -98,7 +98,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 15),
-                        child: AppButton(label: "Log out", onPressed: () {}))
+                        child: AppButton(
+                            label: translate!.logOut, onPressed: () {}))
                   ],
                 ),
               ),
