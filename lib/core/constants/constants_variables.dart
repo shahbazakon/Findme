@@ -69,9 +69,9 @@ List<String> prayerList = [
 ];
 
 Map<String, String> supportedLanguageList = {
-  "English": "en",
-  "हिंदी": "hi",
-  "اَلْعَرَبِيَّةُ": "ar"
+  "🇺🇸 English": "en",
+  "🇮🇳 हिंदी": "hi",
+  "🇸🇦 اَلْعَرَبِيَّةُ": "ar"
 };
 
 List<String> numberList = List.generate(21, (index) => index.toString());
