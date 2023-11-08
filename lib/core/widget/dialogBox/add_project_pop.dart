@@ -114,8 +114,8 @@ Future<Map<String, dynamic>> appProjectsPop() async {
                               'name': projectNameController.text,
                               'role': projectRoleController.text,
                               'description': descriptionController.text,
-                              'startDate': startDate,
-                              'endDate': endDate,
+                              'startDate': startDate.value,
+                              'endDate': endDate.value,
                             }
                           : {});
                     })

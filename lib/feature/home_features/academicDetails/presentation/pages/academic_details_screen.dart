@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:find_me/core/constants/constants_variables.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
@@ -98,6 +100,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
     setState(() {
       projectsList.add(data);
     });
+    log("projectsList: ${projectsList[0]['startDate'].runtimeType}");
   }
 
   // Select Prefix
@@ -115,7 +118,6 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   // Select Import Images
   void _pickCoverLetter() async {
     pickedLetterImage = await pickFileFromFileManager(type: FileType.image);
-    ;
     if (pickedLetterImage != null) {
       setState(() {
         _coverImageController.text = pickedLetterImage!.names.toString();
