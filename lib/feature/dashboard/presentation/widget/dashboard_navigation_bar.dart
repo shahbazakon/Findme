@@ -1,8 +1,8 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
-import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeNavigationBar extends StatefulWidget {
   HomeNavigationBar(
@@ -26,6 +26,7 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 6.0,

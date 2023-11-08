@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/feature/auth_featrues/onBoarding/presentation/pages/splash_screen.dart';
@@ -13,25 +15,50 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Find me',
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      supportedLocales: L10n.supportedLanguages,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      theme: ThemeConstants.getTheme(context),
-      home: const SplashScreen(),
+  State<MyApp> createState() => _MyAppState();
 
-      // Constants.Prefs
+  static void setLocale(BuildContext context, Locale selectedLocale) {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state?.setLocale(selectedLocale);
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  ValueNotifier<Locale> locale = ValueNotifier<Locale>(const Locale('en', ''));
+
+  setLocale(Locale lacale) {
+    locale.value = lacale;
+    locale.notifyListeners();
+    log("_locale: ${locale.value}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<Locale>(
+      valueListenable: locale,
+      builder: (BuildContext context, localValue, Widget? child) {
+        return MaterialApp(
+          title: 'Find me',
+          debugShowCheckedModeBanner: false,
+          navigatorKey: navigatorKey,
+          locale: localValue,
+          supportedLocales: L10n.supportedLanguages,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+          theme: ThemeConstants.getTheme(context),
+          home: const SplashScreen(),
+
+          // Constants.Prefs
+        );
+      },
     );
   }
 }

@@ -13,6 +13,7 @@ import 'package:find_me/core/widget/custom_appbar.dart';
 import 'package:find_me/core/widget/dialogBox/add_project_pop.dart';
 import 'package:find_me/core/widget/project_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BusinessDetailsScreen extends StatefulWidget {
   const BusinessDetailsScreen({super.key});
@@ -95,6 +96,7 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
 
   // Select Prefix
   void _selectPrefix() async {
+    var translate = AppLocalizations.of(context);
     String? selectedPrefix = await openSelectionDialog(
         data: namePrefixList, title: translate!.selectNamePrefix);
     if (selectedPrefix != null) {
@@ -139,6 +141,7 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return Scaffold(
       appBar:
           CustomAppbar(title: "${translate!.business} ${translate!.details}"),

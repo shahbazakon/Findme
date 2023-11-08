@@ -1,17 +1,21 @@
+import 'dart:developer';
+
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
+import 'package:find_me/core/constants/constants_variables.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/core/widget/dialogBox/portolio_list_pop.dart';
 import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';
 import 'package:find_me/feature/settings_features/about/presentation/pages/about_screen.dart';
+import 'package:find_me/feature/settings_features/followRequest/presentation/pages/follow_request_screen.dart';
 import 'package:find_me/feature/settings_features/help/presentation/pages/help_screen.dart';
+import 'package:find_me/feature/settings_features/settings/presentation/widget/custom_list_tile.dart';
 import 'package:find_me/feature/settings_features/settings/presentation/widget/profile_banner.dart';
+import 'package:find_me/main.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/widget/dialogBox/portolio_list_pop.dart';
-import '../../../followRequest/presentation/pages/follow_request_screen.dart';
-import '../widget/custom_list_tile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -21,8 +25,20 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  // Select language
+  void _selectLanguage() async {
+    var translate = AppLocalizations.of(context);
+    String? selectedPrefix = await openSelectionDialog(
+        data: supportedLanguageList, title: translate!.selectLanguage);
+    if (selectedPrefix != null) {
+      log('selectedPrefix: $selectedPrefix');
+      MyApp.setLocale(context, Locale(selectedPrefix, ''));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
@@ -64,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onTap: () {},
                     ),
                     CustomTile(
-                      title: translate!.notifications,
+                      title: AppLocalizations.of(context)!.notifications,
                       leadingIcon: AppIcons.bellSimple,
                       onTap: () {
                         cupertinoNavigator(
@@ -83,6 +99,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       leadingIcon: AppIcons.about,
                       onTap: () {
                         cupertinoNavigator(screenName: const AboutScreen());
+                      },
+                    ),
+                    CustomTile(
+                      title: translate!.language,
+                      leadingIcon: AppIcons.language,
+                      onTap: () {
+                        _selectLanguage();
                       },
                     ),
                     Container(

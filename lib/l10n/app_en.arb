@@ -1,4 +1,5 @@
 {
+    "@@locale": "en",
     "lorem": "Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua.",
     "home": "Home",
     "contact": "Contact",
@@ -81,6 +82,14 @@
     "subscription": "Subscription",
     "notifications":"Notifications",
     "help": "Help",
-    "logOut": "Log out"
+    "logOut": "Log out",
+
+
+
+
+
+
+
+    "selectLanguage": "Select Language"
 
 }

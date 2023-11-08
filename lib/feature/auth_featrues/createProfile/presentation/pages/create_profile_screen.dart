@@ -8,6 +8,7 @@ import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/profile_picture_avatar.dart';
 import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateProfile extends StatefulWidget {
   const CreateProfile({super.key});
@@ -38,6 +39,7 @@ class _CreateProfileState extends State<CreateProfile> {
 
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

@@ -12,6 +12,7 @@ import 'package:find_me/feature/auth_featrues/createProfile/presentation/pages/c
 import 'package:find_me/feature/auth_featrues/signUp/presentation/pages/sign_up_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/local_storege_key.dart';
 import 'forget_password_screen.dart';
@@ -42,6 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

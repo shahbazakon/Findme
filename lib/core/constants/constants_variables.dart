@@ -68,4 +68,6 @@ List<String> prayerList = [
   "Other Prayers",
 ];
 
+List<String> supportedLanguageList = ['en', 'hi', 'ar'];
+
 List<String> numberList = List.generate(21, (index) => index.toString());
