@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 
 class CustomTile extends StatelessWidget {
   const CustomTile(
-      {super.key, required this.title, required this.leadingIcon, this.onTap});
+      {super.key,
+      required this.title,
+      required this.leadingIcon,
+      this.onTap,
+      this.showArrow = true});
 
   final String title;
+  final bool showArrow;
   final String leadingIcon;
   final Function()? onTap;
   @override
@@ -30,10 +35,13 @@ class CustomTile extends StatelessWidget {
                 style:
                     SubTitleHelper.h10.copyWith(fontWeight: FontWeight.w400)),
             const Spacer(),
-            Icon(
-              Icons.arrow_forward_ios,
-              size: 18,
-              color: AppColors.dark,
+            Visibility(
+              visible: showArrow,
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
+                color: AppColors.dark,
+              ),
             )
           ],
         ),

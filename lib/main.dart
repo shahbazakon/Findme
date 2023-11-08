@@ -9,6 +9,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/constants/local_storege_key.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
@@ -28,7 +30,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ValueNotifier<Locale> locale = ValueNotifier<Locale>(const Locale('en', ''));
+  ValueNotifier<Locale> locale = ValueNotifier<Locale>(Locale(
+      sharedPreferences!.getString(LocalStorageKey.appLanguage) ?? 'en'));
 
   setLocale(Locale lacale) {
     locale.value = lacale;

@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/constants_variables.dart';
+import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
@@ -28,11 +27,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   // Select language
   void _selectLanguage() async {
     var translate = AppLocalizations.of(context);
-    String? selectedPrefix = await openSelectionDialog(
-        data: supportedLanguageList, title: translate!.selectLanguage);
-    if (selectedPrefix != null) {
-      log('selectedPrefix: $selectedPrefix');
-      MyApp.setLocale(context, Locale(selectedPrefix, ''));
+    String? selectedLanguage = await openSelectionDialog(
+        data: supportedLanguageList.keys.toList(),
+        title: translate!.selectLanguage);
+    if (selectedLanguage != null) {
+      MyApp.setLocale(
+          context, Locale(supportedLanguageList[selectedLanguage]!, ''));
+      await sharedPreferences!.setString(LocalStorageKey.appLanguage,
+          supportedLanguageList[selectedLanguage]!);
     }
   }
 
@@ -104,6 +106,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     CustomTile(
                       title: translate!.language,
                       leadingIcon: AppIcons.language,
+                      showArrow: false,
                       onTap: () {
                         _selectLanguage();
                       },

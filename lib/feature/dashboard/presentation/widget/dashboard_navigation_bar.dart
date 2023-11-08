@@ -32,13 +32,13 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
       notchMargin: 6.0,
       clipBehavior: Clip.antiAlias,
       child: SizedBox(
-        height: kBottomNavigationBarHeight,
+        height: kBottomNavigationBarHeight + 4,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: widget.selectedIndex,
           unselectedItemColor: Colors.black,
           selectedItemColor: AppColors.primary,
-          selectedLabelStyle: TitleHelper.h12,
+          selectedLabelStyle: SubTitleHelper.h12,
           unselectedLabelStyle: SubTitleHelper.h12,
           onTap: (index) {
             setState(() {
