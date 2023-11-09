@@ -15,10 +15,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        icon: Image.asset(AppIcons.menu, height: 25),
-        onPressed: () {},
-      ),
+      ///Manu option not have functionality
+      // leading: IconButton(
+      //   icon: Image.asset(AppIcons.menu, height: 25),
+      //   onPressed: () {},
+      // ),
       actions: [
         IconButton(
             onPressed: () {

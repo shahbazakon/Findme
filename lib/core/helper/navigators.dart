@@ -226,6 +226,7 @@ void logInNavigator() {
 
   //Navigate to Initial Screen
   cupertinoNavigator(
+      type: NavigatorType.PUSHREMOVEUNTIL,
       screenName: isLoggedIn
           ? Dashboard()
           : (isOnBoardingCompleted

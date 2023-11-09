@@ -6,6 +6,7 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/dialogBox/portolio_list_pop.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';
 import 'package:find_me/feature/settings_features/about/presentation/pages/about_screen.dart';
 import 'package:find_me/feature/settings_features/followRequest/presentation/pages/follow_request_screen.dart';
@@ -36,6 +37,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await sharedPreferences!.setString(LocalStorageKey.appLanguage,
           supportedLanguageList[selectedLanguage]!);
     }
+  }
+
+  void onLogOut() async {
+    await sharedPreferences?.setBool(LocalStorageKey.isLoggedIn, false);
+    cupertinoNavigator(
+        type: NavigatorType.PUSHREMOVEUNTIL, screenName: const SignInScreen());
   }
 
   @override
@@ -76,11 +83,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             showCloseButton: true, isTransparent: false);
                       },
                     ),
-                    CustomTile(
-                      title: translate!.subscription,
-                      leadingIcon: AppIcons.creditCard,
-                      onTap: () {},
-                    ),
+                    // CustomTile(
+                    //   title: translate!.subscription,
+                    //   leadingIcon: AppIcons.creditCard,
+                    //   onTap: () {},
+                    // ),
                     CustomTile(
                       title: AppLocalizations.of(context)!.notifications,
                       leadingIcon: AppIcons.bellSimple,
@@ -125,7 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 15),
                         child: AppButton(
-                            label: translate!.logOut, onPressed: () {}))
+                            label: translate.logOut, onPressed: onLogOut))
                   ],
                 ),
               ),
