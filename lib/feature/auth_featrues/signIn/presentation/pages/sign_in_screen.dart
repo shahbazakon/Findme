@@ -9,9 +9,12 @@ import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/feature/auth_featrues/createProfile/presentation/pages/create_profile_screen.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/sig_in_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signUp/presentation/pages/sign_up_screen.dart';
+import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/local_storege_key.dart';
@@ -90,12 +93,30 @@ class _SignInScreenState extends State<SignInScreen> {
                 ],
               ),
               SizedBox(height: height * .06),
-              AppButton(
-                label: translate!.signIn,
-                onPressed: () {
-                  cupertinoNavigator(
-                      type: NavigatorType.PUSHREMOVEUNTIL,
-                      screenName: const CreateProfile());
+              BlocConsumer<SignInCubit, SignInState>(
+                listener: (context, state) {
+                  if (state is SignInLoaded) {
+                    bool isProfileCompleted =
+                        state.signInModel.result?.admin?.isCompeletProfile ??
+                            false;
+                    cupertinoNavigator(
+                        type: NavigatorType.PUSHREMOVEUNTIL,
+                        screenName: isProfileCompleted
+                            ? Dashboard()
+                            : const CreateProfile());
+                  }
+                },
+                builder: (context, state) {
+                  return AppButton(
+                    label: translate!.signIn,
+                    isLoading: state is SignInLoading,
+                    onPressed: () async {
+                      context.read<SignInCubit>().getSignInData();
+                      // cupertinoNavigator(
+                      //     type: NavigatorType.PUSHREMOVEUNTIL,
+                      //     screenName: const CreateProfile());
+                    },
+                  );
                 },
               ),
               const SizedBox(
