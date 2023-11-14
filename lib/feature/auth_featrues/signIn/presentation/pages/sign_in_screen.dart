@@ -8,8 +8,10 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/auth_featrues/createProfile/presentation/pages/create_profile_screen.dart';
-import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/sig_in_cubit.dart';
+import 'package:find_me/feature/auth_featrues/signIn/data/models/signIn_model.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/sign_in_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signUp/presentation/pages/sign_up_screen.dart';
 import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.dart';
 import 'package:flutter/gestures.dart';
@@ -38,15 +40,45 @@ class _SignInScreenState extends State<SignInScreen> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   //save Local Value
   void setValue() async {
     await sharedPreferences?.setBool(
-        LocalStorageKey.isOnBoardingCompleted, true);
+        LocaleStorageKey.isOnBoardingCompleted, true);
+  }
+
+  Future<void> onSignInSuccess({required SignInModel signInModel}) async {
+    //Store value if user check isRememberMe
+    if (isRememberMe) {
+      await sharedPreferences!.setBool(LocaleStorageKey.isRememberMe, true);
+      await sharedPreferences!
+          .setString(LocaleStorageKey.userEmail, _emailController.text);
+      await sharedPreferences!
+          .setString(LocaleStorageKey.userPassword, _passwordController.text);
+    } else {
+      await sharedPreferences!.remove(LocaleStorageKey.isRememberMe);
+      await sharedPreferences!.remove(LocaleStorageKey.userEmail);
+      await sharedPreferences!.remove(LocaleStorageKey.userPassword);
+    }
+
+    bool isProfileCompleted =
+        signInModel.result?.admin?.isCompeletProfile ?? false;
+    cupertinoNavigator(
+        type: NavigatorType.PUSHREMOVEUNTIL,
+        screenName: isProfileCompleted ? Dashboard() : const CreateProfile());
   }
 
   @override
   Widget build(BuildContext context) {
     var translate = AppLocalizations.of(context);
+    isRememberMe =
+        sharedPreferences?.getBool(LocaleStorageKey.isRememberMe) ?? false;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -67,9 +99,17 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: TextHelper.h12,
               ),
               SizedBox(height: height * .04),
-              CustomTestField(controller: _emailController, label: "Email"),
               CustomTestField(
-                  controller: _passwordController,
+                  controller: _emailController
+                    ..text = sharedPreferences!
+                            .getString(LocaleStorageKey.userEmail) ??
+                        "",
+                  label: "Email"),
+              CustomTestField(
+                  controller: _passwordController
+                    ..text = sharedPreferences!
+                            .getString(LocaleStorageKey.userPassword) ??
+                        "",
                   label: translate!.password,
                   isObscureButton: true),
               Row(
@@ -77,10 +117,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 children: [
                   Row(
                     children: [
-                      CustomCheckBox(onChanged: (value) {
-                        isRememberMe = value;
-                        log(" value: $value");
-                      }),
+                      CustomCheckBox(
+                          initValue: sharedPreferences
+                              ?.getBool(LocaleStorageKey.isRememberMe),
+                          onChanged: (value) {
+                            isRememberMe = value;
+                            log(" value: $value");
+                          }),
                       Text(translate!.rememberMe),
                     ],
                   ),
@@ -96,14 +139,9 @@ class _SignInScreenState extends State<SignInScreen> {
               BlocConsumer<SignInCubit, SignInState>(
                 listener: (context, state) {
                   if (state is SignInLoaded) {
-                    bool isProfileCompleted =
-                        state.signInModel.result?.admin?.isCompeletProfile ??
-                            false;
-                    cupertinoNavigator(
-                        type: NavigatorType.PUSHREMOVEUNTIL,
-                        screenName: isProfileCompleted
-                            ? Dashboard()
-                            : const CreateProfile());
+                    onSignInSuccess(signInModel: state.signInModel);
+                  } else if (state is SignInError) {
+                    showSnackBar(title: state.errorMsg);
                   }
                 },
                 builder: (context, state) {
@@ -111,10 +149,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     label: translate!.signIn,
                     isLoading: state is SignInLoading,
                     onPressed: () async {
-                      context.read<SignInCubit>().getSignInData();
-                      // cupertinoNavigator(
-                      //     type: NavigatorType.PUSHREMOVEUNTIL,
-                      //     screenName: const CreateProfile());
+                      context.read<SignInCubit>().getSignInData(
+                          email: _emailController.text,
+                          password: _passwordController.text);
                     },
                   );
                 },

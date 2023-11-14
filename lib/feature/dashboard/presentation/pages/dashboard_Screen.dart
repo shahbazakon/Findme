@@ -26,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void setValue() async {
-    await sharedPreferences?.setBool(LocalStorageKey.isLoggedIn, true);
+    await sharedPreferences?.setBool(LocaleStorageKey.isLoggedIn, true);
   }
 
   @override

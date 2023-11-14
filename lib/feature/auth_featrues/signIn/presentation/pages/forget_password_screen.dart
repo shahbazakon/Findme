@@ -4,7 +4,10 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_password_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'reset_password_screen.dart';
@@ -45,12 +48,34 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               SizedBox(height: height * .04),
               CustomTestField(controller: _emailController, label: "Email"),
               SizedBox(height: height * .04),
-              AppButton(
-                label: translate!.send,
-                onPressed: () {
-                  cupertinoNavigator(
-                      type: NavigatorType.PUSHREPLACE,
-                      screenName: const ResetPasswordScreen());
+              BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
+                listener: (context, state) {
+                  if (state is ForgotPasswordLoaded) {
+                    if (state.forgotPasswordModel.success ?? false) {
+                      showSnackBar(
+                          title: state.forgotPasswordModel.message ?? '');
+                      cupertinoNavigator(
+                        type: NavigatorType.PUSHREPLACE,
+                        screenName: const ResetPasswordScreen(),
+                      );
+                    } else {
+                      showSnackBar(
+                          title: state.forgotPasswordModel.message ?? '');
+                    }
+                  } else if (state is ForgotPasswordError) {
+                    showSnackBar(title: state.errorMsg);
+                  }
+                },
+                builder: (context, state) {
+                  return AppButton(
+                    label: translate!.send,
+                    isLoading: state is ForgotPasswordLoading,
+                    onPressed: () {
+                      context
+                          .read<ForgotPasswordCubit>()
+                          .getForgotPasswordData(email: _emailController.text);
+                    },
+                  );
                 },
               ),
               const SizedBox(

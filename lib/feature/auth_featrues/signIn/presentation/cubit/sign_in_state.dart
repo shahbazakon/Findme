@@ -1,4 +1,4 @@
-part of 'sig_in_cubit.dart';
+part of 'sign_in_cubit.dart';
 
 @immutable
 abstract class SignInState {}

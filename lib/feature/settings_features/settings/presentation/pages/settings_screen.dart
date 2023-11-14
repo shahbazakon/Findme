@@ -34,13 +34,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (selectedLanguage != null) {
       MyApp.setLocale(
           context, Locale(supportedLanguageList[selectedLanguage]!, ''));
-      await sharedPreferences!.setString(LocalStorageKey.appLanguage,
+      await sharedPreferences!.setString(LocaleStorageKey.appLanguage,
           supportedLanguageList[selectedLanguage]!);
     }
   }
 
   void onLogOut() async {
-    await sharedPreferences?.setBool(LocalStorageKey.isLoggedIn, false);
+    await sharedPreferences?.setBool(LocaleStorageKey.isLoggedIn, false);
     cupertinoNavigator(
         type: NavigatorType.PUSHREMOVEUNTIL, screenName: const SignInScreen());
   }

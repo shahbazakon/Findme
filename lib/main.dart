@@ -35,7 +35,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ValueNotifier<Locale> locale = ValueNotifier<Locale>(Locale(
-      sharedPreferences!.getString(LocalStorageKey.appLanguage) ?? 'en'));
+      sharedPreferences!.getString(LocaleStorageKey.appLanguage) ?? 'en'));
 
   setLocale(Locale lacale) {
     locale.value = lacale;

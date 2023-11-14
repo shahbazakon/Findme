@@ -219,10 +219,10 @@ materialNavigator({required Widget screenName, NavigatorType? type}) {
 
 void logInNavigator() {
   bool isOnBoardingCompleted =
-      sharedPreferences?.getBool(LocalStorageKey.isOnBoardingCompleted) ??
+      sharedPreferences?.getBool(LocaleStorageKey.isOnBoardingCompleted) ??
           false;
   bool isLoggedIn =
-      sharedPreferences?.getBool(LocalStorageKey.isLoggedIn) ?? false;
+      sharedPreferences?.getBool(LocaleStorageKey.isLoggedIn) ?? false;
 
   //Navigate to Initial Screen
   cupertinoNavigator(
