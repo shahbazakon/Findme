@@ -10,6 +10,7 @@ import 'package:find_me/feature/Profile/presentation/pages/protfolio_list_screen
 import 'package:find_me/feature/Profile/presentation/pages/qr_screen.dart';
 import 'package:find_me/feature/Profile/presentation/widget/custom_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shadow_overlay/shadow_overlay.dart';
 
@@ -24,6 +25,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   double contentHeight = height * .58;
+  AppLocalizations? translate;
+
+  @override
+  void initState() {
+    translate = AppLocalizations.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Material(
                                 color: Colors.transparent,
                                 child: Text(
-                                  "Aliya Hayat",
+                                  translate!.englishWord("Aliya Hayat"),
                                   style: TextHelper.h1
                                       .copyWith(fontWeight: FontWeight.w500),
                                 ),
@@ -101,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Material(
                                 color: Colors.transparent,
                                 child: Text(
-                                  "@theroselady",
+                                  translate!.englishWord("@theroselady"),
                                   style: SubTitleHelper.h10,
                                 ),
                               ),
@@ -112,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     SizedBox(height: height * .02),
                     Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                      translate!.lorem,
                       textAlign: TextAlign.center,
                       style: SubTitleHelper.h12,
                     ),
@@ -120,13 +129,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        followCountTile(title: "1321", subtitle: "Followers"),
+                        followCountTile(
+                            title: "1321", subtitle: translate!.followers),
                         Container(
                           width: 1,
                           height: 40,
                           color: AppColors.dark,
                         ),
-                        followCountTile(title: "2105", subtitle: "Following"),
+                        followCountTile(
+                            title: "2105", subtitle: translate!.following),
                       ],
                     ),
                     SizedBox(height: height * .01),
@@ -134,12 +145,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         AppButton(
-                          label: "Follow",
+                          label: translate!.follow,
                           buttonWidth: width * .4,
                           onPressed: () {},
                         ),
                         AppButton(
-                            label: "Portfolio",
+                            label: translate!.portfolio,
                             buttonWidth: width * .4,
                             onPressed: () {
                               cupertinoNavigator(

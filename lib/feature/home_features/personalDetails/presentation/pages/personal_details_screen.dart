@@ -11,6 +11,7 @@ import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/button/app_switch_button.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
   const PersonalDetailsScreen({super.key});
@@ -27,6 +28,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   FilePickerResult? pickedImage;
   FilePickerResult? pickedVideo;
   DateTime? pickedDate;
+  AppLocalizations? translate;
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -43,6 +45,12 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     TextEditingController()
   ];
   TextFieldValidator validator = TextFieldValidator();
+
+  @override
+  void initState() {
+    translate = AppLocalizations.of(context);
+    super.initState();
+  }
 
   // dispose Controllers
   @override
@@ -68,7 +76,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   // Select Prefix
   void _selectPrefix() async {
     String? selectedPrefix = await openSelectionDialog(
-        data: namePrefixList, title: 'Select Name Prefix');
+        data: namePrefixList,
+        title: '${translate!.select} ${translate!.name} ${translate!.prefix} ');
     if (selectedPrefix != null) {
       setState(() {
         _prefixController.text = selectedPrefix;
@@ -111,8 +120,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
-      appBar: CustomAppbar(title: "Personal Details"),
+      appBar:
+          CustomAppbar(title: "${translate!.personal} ${translate.details} "),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
             parent:
@@ -128,30 +139,30 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _prefixController,
-                label: "Prefix",
-                hintText: "Enter Prefix",
+                label: translate.prefix,
+                hintText: "${translate.select} ${translate!.prefix} ",
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectPrefix,
               ),
               CustomTestField2(
                 controller: _firstNameController,
-                label: "First Name",
-                hintText: "Enter First Name",
+                label: translate.firstName,
+                hintText: "${translate.enter} ${translate.firstName}",
               ),
               CustomTestField2(
                 controller: _middleNameController,
-                label: "Middle Name",
-                hintText: "Enter Middle Name",
+                label: translate.middleName,
+                hintText: "${translate.select} ${translate.middleName}",
               ),
               CustomTestField2(
                 controller: _lastNameController,
-                label: "Last Name",
-                hintText: "Enter Last Name",
+                label: translate.lastName,
+                hintText: "${translate.enter} ${translate.lastName}",
               ),
               CustomTestField2(
                 controller: _dobController,
-                label: "Date Of Birth",
+                label: translate.dateOfBirth,
                 hintText: "DD/MM/YYYY",
                 showCalendarIcon: true,
                 readOnly: true,
@@ -164,8 +175,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     flex: 85,
                     child: CustomTestField2(
                       controller: _emailController,
-                      label: "Email",
-                      hintText: "Enter Email",
+                      label: translate!.email,
+                      hintText: "${translate.enter} ${translate.email}",
                     ),
                   ),
                   const SizedBox(
@@ -195,8 +206,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     flex: 85,
                     child: CustomTestField2(
                       controller: _addressLine1Controller,
-                      label: "Address",
-                      hintText: "Address Line 1",
+                      label: translate.address,
+                      hintText: "${translate.addressLine} 1",
                     ),
                   ),
                   const SizedBox(
@@ -241,8 +252,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     flex: 68,
                     child: CustomTestField2(
                       controller: _phoneNumber1Controller,
-                      label: "Phone Number",
-                      hintText: "Phone Number",
+                      label: translate.phoneNumber,
+                      hintText: translate.phoneNumber,
                     ),
                   ),
                   const SizedBox(
@@ -287,8 +298,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     flex: 82,
                     child: CustomTestField2(
                       controller: _phoneNumber2Controller,
-                      label: "Phone Number(additional)",
-                      hintText: "Phone Number",
+                      label:
+                          "${translate.phoneNumber}(${translate.additional})",
+                      hintText: translate.phoneNumber,
                     ),
                   ),
                 ],
@@ -305,9 +317,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Social Media"
-                                    : 'Social Media ${entry.key + 1}',
-                                hintText: "Add Profile URL",
+                                    ? translate.socialMedia
+                                    : '${translate.socialMedia} ${entry.key + 1}',
+                                hintText:
+                                    "${translate.add} ${translate.prefix} ${translate.url}",
                               ))
                           .toList(),
                     ),
@@ -329,24 +342,24 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _imageController,
-                label: "Image",
-                hintText: "Upload Image",
+                label: translate.image,
+                hintText: "${translate.upload} ${translate.image}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickImage,
               ),
               CustomTestField2(
                 controller: _videoController,
-                label: "Video",
+                label: translate.video,
                 validator: (value) => validator.videoValidator(value),
-                hintText: "Upload Video",
+                hintText: "${translate.upload} ${translate.video}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickVideo,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: AppButton(label: "Save", onPressed: () {}),
+                child: AppButton(label: translate.save, onPressed: () {}),
               )
             ],
           )),

@@ -9,6 +9,7 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/Profile/presentation/widget/custom_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -24,6 +25,12 @@ class QRScreen extends StatefulWidget {
 
 class _QRScreenState extends State<QRScreen> {
   ScreenshotController screenshotController = ScreenshotController();
+  AppLocalizations? translate;
+
+  void initState() {
+    translate = AppLocalizations.of(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +68,7 @@ class _QRScreenState extends State<QRScreen> {
                         child: Material(
                           color: Colors.transparent,
                           child: Text(
-                            "Aliya Hayat",
+                            translate!.englishWord("Aliya Hayat"),
                             style: TextHelper.h1
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -73,7 +80,7 @@ class _QRScreenState extends State<QRScreen> {
                       child: Material(
                         color: Colors.transparent,
                         child: Text(
-                          "@theroselady",
+                          translate!.englishWord("@theroselady"),
                           style: SubTitleHelper.h10,
                         ),
                       ),
@@ -103,13 +110,13 @@ class _QRScreenState extends State<QRScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "My QR Code",
+                      translate!.myQRCode,
                       style: TextHelper.h7,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
-                          "People can scan your QR Code to connect with you !",
+                          translate!.peopleCanScanYourQRCodeToConnectWithYou,
                           style: SubTitleHelper.h11
                               .copyWith(color: AppFontsColors.lightGrey3)),
                     ),
@@ -120,7 +127,8 @@ class _QRScreenState extends State<QRScreen> {
                         scale: 4,
                         color: AppColors.dark,
                       ),
-                      title: Text("Share Code", style: SubTitleHelper.h10),
+                      title:
+                          Text(translate!.shareCode, style: SubTitleHelper.h10),
                       onTap: shareScreenShort,
                     ),
                     ListTile(
@@ -130,7 +138,7 @@ class _QRScreenState extends State<QRScreen> {
                         scale: 4,
                         color: AppColors.dark,
                       ),
-                      title: Text("Save to Camera Roll",
+                      title: Text(translate!.saveToCameraRoll,
                           style: SubTitleHelper.h10),
                       onTap: saveScreenShort,
                     ),
@@ -154,10 +162,7 @@ class _QRScreenState extends State<QRScreen> {
       final image =
           await ImageGallerySaver.saveImage(capturedImage!, name: fileName);
 
-      log("Image: $image");
-      log("Image Type: ${image.runtimeType}");
-
-      showSnackBar(title: "QR Download Success");
+      showSnackBar(title: translate!.qrDownloadSuccess);
     }).catchError((onError) {
       showSnackBar(title: onError);
     });
@@ -171,7 +176,7 @@ class _QRScreenState extends State<QRScreen> {
           File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.png');
       await tempFile.writeAsBytes(capturedImage!);
 
-      Share.shareXFiles([XFile(tempFile.path)], subject: "FindMeQ");
+      Share.shareXFiles([XFile(tempFile.path)], subject: "FindMe");
     }).catchError((onError) {
       log("qr_scanner.dart",
           name: "shareScreenShort", error: onError.toString());

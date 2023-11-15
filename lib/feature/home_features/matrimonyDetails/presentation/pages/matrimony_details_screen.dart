@@ -28,6 +28,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   FilePickerResult? pickedResume;
   FilePickerResult? pickedTranscript;
   DateTime? pickedDate;
+  AppLocalizations? translate;
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -68,6 +69,12 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
     TextEditingController()
   ];
   TextFieldValidator validator = TextFieldValidator();
+
+  @override
+  void initState() {
+    translate = AppLocalizations.of(context);
+    super.initState();
+  }
 
   // dispose Controllers
   @override
@@ -112,7 +119,8 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   // Select Prefix
   void _selectPrefix() async {
     String? selectedPrefix = await openSelectionDialog(
-        data: namePrefixList, title: 'Select Name Prefix');
+        data: namePrefixList,
+        title: '${translate!.select} ${translate!.name} ${translate!.prefix}');
     if (selectedPrefix != null) {
       setState(() {
         _prefixController.text = selectedPrefix;
@@ -123,7 +131,9 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   // Select Education Level
   void _selectEducationLevel() async {
     String? selectedEducationLevel = await openSelectionDialog(
-        data: educationLevelList, title: 'Select Education Level');
+        data: educationLevelList,
+        title:
+            '${translate!.select} ${translate!.education} ${translate!.level}');
     if (selectedEducationLevel != null) {
       setState(() {
         _educationLevelController.text = selectedEducationLevel;
@@ -134,7 +144,8 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   // Select Marital Status
   void _selectMaritalStatus() async {
     String? selectedMaritalStatus = await openSelectionDialog(
-        data: maritalStatusList, title: 'Select Marital Status');
+        data: maritalStatusList,
+        title: '${translate!.select} ${translate!.maritalStatus}');
     if (selectedMaritalStatus != null) {
       setState(() {
         _maritalStatusController.text = selectedMaritalStatus;
@@ -145,7 +156,9 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   void _selectChildren() async {
     //Children
     String? selectedMaritalStatus = await openSelectionDialog(
-        data: numberList, title: 'Select Children(if any)');
+        data: numberList,
+        title:
+            '${translate!.select} ${translate!.children}(${translate!.ifAny})');
     if (selectedMaritalStatus != null) {
       setState(() {
         _childrenController.text = selectedMaritalStatus;
@@ -156,8 +169,9 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   // Select Religion
   void _selectReligion() async {
     //Children
-    String? selectedReligion =
-        await openSelectionDialog(data: religionList, title: 'Select Religion');
+    String? selectedReligion = await openSelectionDialog(
+        data: religionList,
+        title: '${translate!.select} ${translate!.religion}');
     if (selectedReligion != null) {
       setState(() {
         _religionController.text = selectedReligion;
@@ -167,8 +181,8 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   void _selectPrayers() async {
     //Children
-    String? selectedPrayers =
-        await openSelectionDialog(data: prayerList, title: 'Select Religion');
+    String? selectedPrayers = await openSelectionDialog(
+        data: prayerList, title: '${translate!.select} ${translate!.religion}');
     if (selectedPrayers != null) {
       setState(() {
         _prayersController.text = selectedPrayers;
@@ -211,9 +225,9 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
     return Scaffold(
-      appBar: CustomAppbar(title: "Matrimony Details"),
+      appBar:
+          CustomAppbar(title: "${translate!..matrimony} ${translate!.details}"),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
             parent:
@@ -226,70 +240,71 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
             children: [
               CustomTestField2(
                 controller: _prefixController,
-                label: "Prefix",
-                hintText: "Enter Prefix",
+                label: translate!.prefix,
+                hintText: "${translate!.enter} ${translate!.prefix}",
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectPrefix,
               ),
               CustomTestField2(
                 controller: _firstNameController,
-                label: "First Name",
-                hintText: "Enter First Name",
+                label: translate!.firstName,
+                hintText: "${translate!.enter} ${translate!.firstName}",
               ),
               CustomTestField2(
                 controller: _middleNameController,
-                label: "Middle Name",
-                hintText: "Enter Middle Name",
+                label: translate!.middleName,
+                hintText: "${translate!.enter} ${translate!.middleName}",
               ),
               CustomTestField2(
                 controller: _lastNameController,
-                label: "Last Name",
-                hintText: "Enter Last Name",
+                label: translate!.lastName,
+                hintText: "${translate!.enter} ${translate!.lastName}",
               ),
               CustomTestField2(
                 controller: _occupationController,
-                label: "Occupation",
-                hintText: "Enter Occupation",
+                label: translate!.occupation,
+                hintText: "${translate!.enter} ${translate!.occupation}",
               ),
               CustomTestField2(
                 controller: _aboutController,
-                label: "About Yourself",
+                label: "${translate!.about} ${translate!.yourself}",
                 hintText: "Let others know a little bit about you!",
                 maxLines: 4,
               ),
               CustomTestField2(
                 controller: _parentsOccupationController,
-                label: "Parents Occupation",
-                hintText: "Enter Parents Occupation",
+                label: "${translate!.parents} ${translate!.occupation}",
+                hintText:
+                    "${translate!.enter} ${translate!.parents} ${translate!.occupation}",
               ),
               CustomTestField2(
                 controller: _educationLevelController,
-                label: "Education Level",
-                hintText: "Select Education",
+                label: "${translate!.education} ${translate!.level}",
+                hintText: "${translate!.select} ${translate!.education}",
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectEducationLevel,
               ),
               CustomTestField2(
                 controller: _maritalStatusController,
-                label: "Marital Status",
-                hintText: "Select Status",
+                label: translate!.maritalStatus,
+                hintText: "${translate!.select} ${translate!.status}",
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectMaritalStatus,
               ),
               CustomTestField2(
                 controller: _childrenController,
-                label: "Children(If Any)",
-                hintText: "Select",
+                label: "${translate!.children}(${translate!.ifAny})",
+                hintText: translate!.select,
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectChildren,
               ),
               CustomTestField2(
                 controller: _dobController,
-                label: "Date Of Birth",
+                label: translate!.dateOfBirth,
                 hintText: "DD/MM/YYYY",
                 showCalendarIcon: true,
                 readOnly: true,
@@ -301,8 +316,8 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                     flex: 5,
                     child: CustomTestField2(
                       controller: _heightController,
-                      label: "Height",
-                      hintText: "In feet",
+                      label: translate!.height,
+                      hintText: translate!.inFeet,
                     ),
                   ),
                   const SizedBox(
@@ -312,29 +327,29 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                     flex: 5,
                     child: CustomTestField2(
                       controller: _weightController,
-                      label: "Weight",
-                      hintText: "In Kg",
+                      label: translate!.weight,
+                      hintText: translate!.inKg,
                     ),
                   ),
                 ],
               ),
               CustomTestField2(
                 controller: _religionController,
-                label: "Religion",
-                hintText: "Select",
+                label: translate!.religion,
+                hintText: translate!.select,
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectReligion,
               ),
               CustomTestField2(
                 controller: _casteController,
-                label: "Caste(If Any)",
-                hintText: "Enter Caste",
+                label: "${translate!.caste}(${translate!.ifAny})",
+                hintText: "${translate!.enter} ${translate!.caste}",
               ),
               CustomTestField2(
                 controller: _prayersController,
-                label: "Prayers(Optional)",
-                hintText: "Select",
+                label: "${translate!.prayers}(${translate!.optional})",
+                hintText: translate!.select,
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectPrayers,
@@ -351,9 +366,10 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Things I like to do?"
+                                    ? translate!.thingsILikeToDo
                                     : null,
-                                hintText: "Add Likes",
+                                hintText:
+                                    "${translate!.add} ${translate!.likes}",
                               ))
                           .toList(),
                     ),
@@ -385,9 +401,10 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Things I do not like to do?"
+                                    ? translate!.thingsIDoNotLikeToDo
                                     : null,
-                                hintText: "Add Dislikes",
+                                hintText:
+                                    "${translate!.add} ${translate!.dislikes}",
                               ))
                           .toList(),
                     ),
@@ -409,26 +426,26 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _descriptionController,
-                label: "Ideal Match(Describe)",
-                hintText: "EDescribe your preferences",
+                label: "${translate!.idealMatch}(${translate!.describe})",
+                hintText: translate!.describeYourPreferences,
                 maxLines: 4,
               ),
               CustomTestField2(
                 controller: _emailController,
-                label: "Email",
-                hintText: "Enter Email",
+                label: translate!.email,
+                hintText: "${translate!.enter} ${translate!.email}",
               ),
               CustomTestField2(
                 controller: _addressLine1Controller,
-                label: "Office Address",
-                hintText: "Address Line 1",
+                label: "${translate!.office} ${translate!.address}",
+                hintText: "${translate!.addressLine} 1",
               ),
               const SizedBox(
                 height: 10,
               ),
               CustomTestField2(
                 controller: _addressLine2Controller,
-                hintText: "Address Line 2",
+                hintText: "${translate!.addressLine} 2",
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -452,8 +469,8 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                     flex: 82,
                     child: CustomTestField2(
                       controller: _selfPhoneNumber1Controller,
-                      label: "Phone Number(Self)",
-                      hintText: "Phone Number",
+                      label: "${translate!.phoneNumber}(${translate!.self})",
+                      hintText: translate!.phoneNumber,
                     ),
                   ),
                 ],
@@ -480,8 +497,8 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                     flex: 82,
                     child: CustomTestField2(
                       controller: _officePhoneNumber2Controller,
-                      label: "Phone Number(Parents)",
-                      hintText: "Phone Number",
+                      label: "${translate!.phoneNumber}(${translate!.parents})",
+                      hintText: translate!.phoneNumber,
                     ),
                   ),
                 ],
@@ -498,9 +515,10 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Social Media"
-                                    : 'Social Media ${entry.key + 1}',
-                                hintText: "Add Profile URL",
+                                    ? translate!.socialMedia
+                                    : '"${translate!.socialMedia}" ${entry.key + 1}',
+                                hintText:
+                                    "${translate!.add} ${translate!.profile} ${translate!.url}",
                               ))
                           .toList(),
                     ),
@@ -522,17 +540,17 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _coverImageController,
-                label: "Cover Image",
-                hintText: "Upload Image",
+                label: translate!.coverImage,
+                hintText: "${translate!.upload} ${translate!.image}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickCoverImage,
               ),
               CustomTestField2(
                 controller: _videoController,
-                label: "Video",
+                label: translate!.video,
                 validator: (value) => validator.videoValidator(value),
-                hintText: "Upload Video",
+                hintText: "${translate!.upload} ${translate!.video}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickVideo,
@@ -540,7 +558,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: AppButton(
-                    label: "Save",
+                    label: translate!.save,
                     onPressed: () {
                       Navigator.pop(context);
                     }),
