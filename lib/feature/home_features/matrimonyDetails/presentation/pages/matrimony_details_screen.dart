@@ -10,6 +10,7 @@ import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MatrimonyDetailsScreen extends StatefulWidget {
   const MatrimonyDetailsScreen({super.key});
@@ -210,6 +211,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppbar(title: "Matrimony Details"),
       body: SingleChildScrollView(

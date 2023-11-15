@@ -13,6 +13,7 @@ import 'package:find_me/core/widget/custom_appbar.dart';
 import 'package:find_me/core/widget/dialogBox/add_project_pop.dart';
 import 'package:find_me/core/widget/project_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CorporateDetailsScreen extends StatefulWidget {
   const CorporateDetailsScreen({super.key});
@@ -139,6 +140,7 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppbar(title: "Corporate Details"),
       body: SingleChildScrollView(
@@ -153,41 +155,42 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
             children: [
               CustomTestField2(
                 controller: _businessNameController,
-                label: "Business Name",
-                hintText: "Enter Business Name",
+                label: "${translate!.business} ${translate!.name}",
+                hintText:
+                    "${translate!.enter} ${translate!.business} ${translate!.name}",
               ),
               CustomTestField2(
                 controller: _aboutBusinessController,
-                label: "About Business",
-                hintText: "About",
+                label: "${translate.about} ${translate.business}",
+                hintText: translate.about,
                 maxLines: 4,
               ),
               CustomTestField2(
                 controller: _prefixController,
-                label: "Prefix",
-                hintText: "Enter Prefix",
+                label: translate.prefix,
+                hintText: "${translate.enter} ${translate.prefix}",
                 readOnly: true,
                 showDropdownIcon: true,
                 onTap: _selectPrefix,
               ),
               CustomTestField2(
                 controller: _firstNameController,
-                label: "First Name",
-                hintText: "Enter First Name",
+                label: translate.firstName,
+                hintText: "${translate.enter} ${translate.firstName}",
               ),
               CustomTestField2(
                 controller: _middleNameController,
-                label: "Middle Name",
-                hintText: "Enter Middle Name",
+                label: translate.middleName,
+                hintText: "${translate.enter} ${translate.middleName}",
               ),
               CustomTestField2(
                 controller: _lastNameController,
-                label: "Last Name",
-                hintText: "Enter Last Name",
+                label: translate.lastName,
+                hintText: "${translate.enter} ${translate.lastName}",
               ),
               CustomTestField2(
                 controller: _dobController,
-                label: "Date Of Birth",
+                label: translate.dateOfBirth,
                 hintText: "DD/MM/YYYY",
                 showCalendarIcon: true,
                 readOnly: true,
@@ -200,8 +203,8 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                     flex: 85,
                     child: CustomTestField2(
                       controller: _emailController,
-                      label: "Email",
-                      hintText: "Enter Email",
+                      label: translate.email,
+                      hintText: "${translate.enter} ${translate.email}",
                     ),
                   ),
                   const SizedBox(
@@ -226,15 +229,15 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _addressLine1Controller,
-                label: "Office Address",
-                hintText: "Address Line 1",
+                label: "${translate.office} ${translate.address}",
+                hintText: "${translate.addressLine} 1",
               ),
               const SizedBox(
                 height: 10,
               ),
               CustomTestField2(
                 controller: _addressLine2Controller,
-                hintText: "Address Line 2",
+                hintText: "${translate.addressLine} 2",
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -258,8 +261,8 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                     flex: 68,
                     child: CustomTestField2(
                       controller: _officePhoneNumber1Controller,
-                      label: "Office Phone Number",
-                      hintText: "Phone Number",
+                      label: "${translate.office} ${translate.phoneNumber}",
+                      hintText: translate.phoneNumber,
                     ),
                   ),
                   const SizedBox(
@@ -304,8 +307,9 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                     flex: 68,
                     child: CustomTestField2(
                       controller: _officePhoneNumber2Controller,
-                      label: "Phone Number(additional)",
-                      hintText: "Phone Number",
+                      label:
+                          "${translate.phoneNumber}(${translate.additional}})",
+                      hintText: translate.phoneNumber,
                     ),
                   ),
                   const SizedBox(
@@ -340,9 +344,10 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Social Media"
-                                    : 'Social Media ${entry.key + 1}',
-                                hintText: "Add Profile URL",
+                                    ? translate.socialMedia
+                                    : '${translate.socialMedia} ${entry.key + 1}',
+                                hintText:
+                                    "${translate.add} ${translate.profile} ${translate.url}",
                               ))
                           .toList(),
                     ),
@@ -368,8 +373,8 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                   Expanded(
                       flex: 85,
                       child: CustomTestField2(
-                        label: "Projects",
-                        hintText: "Add Projects",
+                        label: translate.projects,
+                        hintText: "${translate.add} ${translate.projects}",
                         readOnly: true,
                         onTap: () async {
                           Map<String, dynamic> newData = await appProjectsPop();
@@ -420,9 +425,10 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
                           .map((entry) => CustomTestField2(
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
-                                    ? "Achievements"
-                                    : 'Achievements ${entry.key + 1}',
-                                hintText: "Add Achievements",
+                                    ? translate.achievements
+                                    : '${translate.achievements} ${entry.key + 1}',
+                                hintText:
+                                    "${translate.add} ${translate.achievements}",
                               ))
                           .toList(),
                     ),
@@ -444,17 +450,17 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
               ),
               CustomTestField2(
                 controller: _coverImageController,
-                label: "Cover Image",
-                hintText: "Upload Image",
+                label: translate.coverImage,
+                hintText: "${translate.upload} ${translate.image}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickCoverImage,
               ),
               CustomTestField2(
                 controller: _videoController,
-                label: "Video",
+                label: translate.video,
                 validator: (value) => validator.videoValidator(value),
-                hintText: "Upload Video",
+                hintText: "${translate.upload} ${translate.video}",
                 showUploadIcon: true,
                 readOnly: true,
                 onTap: _pickVideo,
@@ -462,7 +468,7 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: AppButton(
-                    label: "Save",
+                    label: translate.save,
                     onPressed: () {
                       Navigator.pop(context);
                     }),

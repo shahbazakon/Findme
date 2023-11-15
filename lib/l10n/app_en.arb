@@ -90,6 +90,9 @@
 
 
 
-    "selectLanguage": "Select Language"
+    "selectLanguage": "Select Language",
+    "url": "URL",
+    "image": "Image",
+    "hiThere": "Hi There! \n{username}",
 
 }

@@ -7,6 +7,7 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_searchbar.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/pages/academic_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../businessDetails/presentation/pages/business_details_Screen.dart';
 import '../../../corporateDetails/presentation/pages/corporate_details.dart';
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: const HomeAppBar(),
       body: SingleChildScrollView(
@@ -40,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Hi There!\n Aliya",
+                  translate!.hiThere("Aliya"),
                   textAlign: TextAlign.left,
                   style: SubTitleHelper.h3,
                 ),
@@ -59,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                   children: [
                     customGridTile(
-                        title: "Personal",
+                        title: translate.personal,
                         image:
                             "https://c4.wallpaperflare.com/wallpaper/356/292/33/music-rock-and-roll-vinyl-album-covers-wallpaper-preview.jpg",
                         onTap: () {
@@ -67,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const PersonalDetailsScreen());
                         }),
                     customGridTile(
-                        title: "Business",
+                        title: translate.business,
                         image:
                             "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
                         onTap: () {
@@ -75,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const BusinessDetailsScreen());
                         }),
                     customGridTile(
-                        title: "Corporate",
+                        title: translate.corporate,
                         image:
                             "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
                         onTap: () {
@@ -83,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const CorporateDetailsScreen());
                         }),
                     customGridTile(
-                        title: "Academic",
+                        title: translate.academic,
                         image:
                             "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=3628&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                         onTap: () {
@@ -91,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const AcademicDetailsScreen());
                         }),
                     customGridTile(
-                        title: "Matrimony",
+                        title: translate.matrimony,
                         image:
                             "https://parade.com/.image/t_share/MTkwNTgxMjEzNTc5MTI1ODg1/wedding-wishes-2-jpg.jpg",
                         onTap: () {
