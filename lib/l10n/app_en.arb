@@ -133,6 +133,22 @@
     "connect": "Connect",
     "privacy": "Privacy",
     "attachments": "Attachments",
-    "download": "Download"
+    "download": "Download",
+
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "countryCallingCode": "Country calling code",
+    "country": "Country",
+    "female": "Female",
+    "socialProfile": "Social Profile",
+    "linkFacebookAccount": "Link Facebook Account",
+    "linkInstagramAccount": "Link instagram Account",
+    "linkTwitterAccount": "Link twitter Account",
+    "linkSnapchatAccount": "Link snapchat Account",
+
+    "matrimonialDetails": "Matrimonial Details",
+    "views": "Views"
+
 
 }
