@@ -99,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Material(
                                 color: Colors.transparent,
                                 child: Text(
-                                  translate!.englishWord("Aliya Hayat"),
+                                  translate!.translate("Aliya Hayat"),
                                   style: TextHelper.h1
                                       .copyWith(fontWeight: FontWeight.w500),
                                 ),
@@ -110,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Material(
                                 color: Colors.transparent,
                                 child: Text(
-                                  translate!.englishWord("@theroselady"),
+                                  translate!.translate("@theroselady"),
                                   style: SubTitleHelper.h10,
                                 ),
                               ),

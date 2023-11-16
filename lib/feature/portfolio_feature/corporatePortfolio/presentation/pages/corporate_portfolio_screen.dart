@@ -10,6 +10,7 @@ import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/cilpper_shape.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CorporatePortfolioScreen extends StatefulWidget {
   const CorporatePortfolioScreen({super.key});
@@ -24,6 +25,14 @@ class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   String profileImage =
       "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
+
+  AppLocalizations? translate;
+
+  @override
+  void initState() {
+    translate = AppLocalizations.of(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

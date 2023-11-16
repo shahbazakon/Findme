@@ -119,7 +119,7 @@
     "describe": "Describe",
     "describeYourPreferences": "Describe your preferences",
     "self": "Self",
-    "englishWord": "{englishWord}",
+    "translate": "{text}",
     "followers": "Followers",
     "following": "Following",
     "follow": "Follow",
@@ -128,6 +128,11 @@
     "peopleCanScanYourQRCodeToConnectWithYou": "People can scan your QR Code to connect with you !",
     "shareCode": "Share Code",
     "saveToCameraRoll": "Save to Camera Roll",
-    "qrDownloadSuccess": "QR Download Success"
+    "qrDownloadSuccess": "QR Download Success",
+    "sent": "Sent",
+    "connect": "Connect",
+    "privacy": "Privacy",
+    "attachments": "Attachments",
+    "download": "Download"
 
 }

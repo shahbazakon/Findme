@@ -4,6 +4,7 @@ import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FollowRequestListTile extends StatelessWidget {
   FollowRequestListTile(
@@ -21,6 +22,7 @@ class FollowRequestListTile extends StatelessWidget {
   bool isSent;
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Padding(
       padding: primaryPadding,
       child: ListTile(
@@ -63,7 +65,7 @@ class FollowRequestListTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Text(
-                      isSent ? "Sent" : "Connect",
+                      isSent ? translate!.sent : translate!.connect,
                       style:
                           SubTitleHelper.h11.copyWith(color: AppColors.light),
                     ),

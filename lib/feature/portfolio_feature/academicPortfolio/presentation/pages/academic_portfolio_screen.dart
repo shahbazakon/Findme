@@ -5,6 +5,7 @@ import 'package:find_me/core/widget/profile_stack_banner.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/attachment_list_tile.com.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -18,6 +19,14 @@ class AcademicPortfolioScreen extends StatefulWidget {
 }
 
 class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
+  AppLocalizations? translate;
+
+  @override
+  void initState() {
+    translate = AppLocalizations.of(context);
+    super.initState();
+  }
+
   String videoUrl =
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   String profileImage =
@@ -65,23 +74,25 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const ProfileStackBanner(
+            ProfileStackBanner(
               backgroundImage:
                   "https://fs.npstatic.com/userfiles/7687254/image/MIUI_Super_Wallpapers-w810h462.jpg",
-              title: "Aliya Hayat",
-              subTitle: "Female, 27yrs",
+              title: translate!.translate("Aliya Hayat"),
+              subTitle: translate!.translate("Female, 27yrs"),
             ),
             Column(
               children: [
                 customTimeline(
-                    title: 'Projects',
+                    title: translate!.projects,
                     timelineData: projectList,
                     isDataTypeList: false),
                 customTimeline(
-                    title: 'Achievements', timelineData: achievementsList),
+                    title: translate!.achievements,
+                    timelineData: achievementsList),
                 customTimeline(
-                    title: 'Certifications', timelineData: certificationsList),
-                sectionTitle(title: "Video"),
+                    title: translate!.certifications,
+                    timelineData: certificationsList),
+                sectionTitle(title: translate!.video),
                 SizedBox(
                   width: width,
                   height: height * .2,
@@ -107,7 +118,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                     ],
                   ),
                 ),
-                sectionTitle(title: "Attachments"),
+                sectionTitle(title: translate!.attachments),
                 ListView.builder(
                   padding: EdgeInsets.zero,
                   physics: const ScrollPhysics(
@@ -116,10 +127,10 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                   itemCount: 4,
                   itemBuilder: (context, index) {
                     return AttachmentListTile(
-                      title: "Resume",
+                      title: translate!.resume,
                       onDownloadClick: () {
                         //TODO: Add Download Functionality
-                        showSnackBar(title: "Download");
+                        showSnackBar(title: translate!.download);
                       },
                     );
                   },

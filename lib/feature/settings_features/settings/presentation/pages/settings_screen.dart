@@ -25,6 +25,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  AppLocalizations? translate;
+
+  @override
+  void initState() {
+    translate = AppLocalizations.of(context);
+    super.initState();
+  }
+
   // Select language
   void _selectLanguage() async {
     var translate = AppLocalizations.of(context);
@@ -47,7 +55,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
@@ -58,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             children: [
               ProfileBanner(
-                title: 'Aliya Hayat',
+                title: translate!.translate('Aliya Hayat'),
                 subTitle: 'Aliya.hayat97@email.com',
               ),
               Expanded(
@@ -132,7 +139,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 15),
                         child: AppButton(
-                            label: translate.logOut, onPressed: onLogOut))
+                            label: translate!.logOut, onPressed: onLogOut))
                   ],
                 ),
               ),
