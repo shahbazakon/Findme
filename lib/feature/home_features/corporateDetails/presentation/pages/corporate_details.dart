@@ -101,8 +101,10 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
 
   // Select Prefix
   void _selectPrefix() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedPrefix = await openSelectionDialog(
-        data: namePrefixList, title: 'Select Name Prefix');
+        data: namePrefixList,
+        title: '${translate!.select} ${translate!.name} ${translate!.prefix}');
     if (selectedPrefix != null) {
       setState(() {
         _prefixController.text = selectedPrefix;
@@ -147,7 +149,8 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
-      appBar: CustomAppbar(title: "Corporate Details"),
+      appBar:
+          CustomAppbar(title: "${translate!.corporate} ${translate!.details}"),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
             parent:
@@ -160,13 +163,13 @@ class _CorporateDetailsScreenState extends State<CorporateDetailsScreen> {
             children: [
               CustomTestField2(
                 controller: _businessNameController,
-                label: "${translate!..business} ${translate!..name}",
+                label: "${translate!.business} ${translate!.name}",
                 hintText:
-                    "${translate!..enter} ${translate!..business} ${translate!..name}",
+                    "${translate!.enter} ${translate!.business} ${translate!.name}",
               ),
               CustomTestField2(
                 controller: _aboutBusinessController,
-                label: "${translate!..about} ${translate!.business}",
+                label: "${translate!.about} ${translate!.business}",
                 hintText: translate!.about,
                 maxLines: 4,
               ),

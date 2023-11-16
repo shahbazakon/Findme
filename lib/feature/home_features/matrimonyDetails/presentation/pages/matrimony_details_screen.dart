@@ -233,7 +233,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
     AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar:
-          CustomAppbar(title: "${translate!..matrimony} ${translate!.details}"),
+          CustomAppbar(title: "${translate!.matrimony} ${translate!.details}"),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(
             parent:

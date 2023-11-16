@@ -5,8 +5,11 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field_2.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<Map<String, dynamic>> appProjectsPop() async {
+  AppLocalizations? translate =
+      AppLocalizations.of(navigatorKey.currentContext!);
   TextEditingController projectNameController = TextEditingController();
   TextEditingController projectRoleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
