@@ -19,11 +19,8 @@ class BusinessPortfolioScreen extends StatefulWidget {
 }
 
 class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
-  AppLocalizations? translate;
-
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
@@ -56,6 +53,7 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

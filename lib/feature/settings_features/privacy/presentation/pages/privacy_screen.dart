@@ -13,7 +13,7 @@ class PrivacyScreen extends StatefulWidget {
 class _PrivacyScreenState extends State<PrivacyScreen> {
   @override
   Widget build(BuildContext context) {
-    AppLocalizations? translate = AppLocalizations.of(context);
+    AppLocalizations? 
     return Scaffold(
       appBar: CustomAppbar(title: translate!.privacy),
       body: Padding(

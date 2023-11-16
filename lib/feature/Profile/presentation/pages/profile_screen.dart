@@ -25,16 +25,15 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   double contentHeight = height * .58;
-  AppLocalizations? translate;
 
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       body: Stack(
         children: [

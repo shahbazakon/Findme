@@ -19,11 +19,8 @@ class AcademicPortfolioScreen extends StatefulWidget {
 }
 
 class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
-  AppLocalizations? translate;
-
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
@@ -70,6 +67,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

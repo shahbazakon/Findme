@@ -1,6 +1,5 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/utils_methods.dart';
 import '../../../../core/widget/dialogBox/portolio_list_pop.dart';
@@ -13,10 +12,8 @@ class PortfolioListScreen extends StatefulWidget {
 }
 
 class _PortfolioListScreenState extends State<PortfolioListScreen> {
-  AppLocalizations? translate;
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     portfolioListPop(isTransparent: true, isReplacementRoute: true);
     super.initState();
   }

@@ -63,6 +63,11 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   ];
   TextFieldValidator validator = TextFieldValidator();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   // dispose Controllers
   @override
   void dispose() {
@@ -105,7 +110,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
 
   // Select Prefix
   void _selectPrefix() async {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedPrefix = await openSelectionDialog(
         data: namePrefixList, title: translate!.selectNamePrefix);
     if (selectedPrefix != null) {
@@ -180,7 +185,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
 
   // Select Prefix
   void _selectProgrammingLanguage() async {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedLanguage = await openSelectionDialog(
         data: programmingLanguageList,
         title: translate!.selectProgrammingLanguage);
@@ -193,7 +198,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppbar(title: translate!.academic + translate!.details),
       body: SingleChildScrollView(

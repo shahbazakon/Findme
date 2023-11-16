@@ -23,8 +23,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -46,7 +51,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: height * .04),
-              CustomTestField(controller: _emailController, label: "Email"),
+              CustomTestField(
+                  controller: _emailController, label: translate!.email),
               SizedBox(height: height * .04),
               BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
                 listener: (context, state) {

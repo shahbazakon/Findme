@@ -16,7 +16,7 @@ class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
 
   @override
-  _OnBoardingPageState createState() => _OnBoardingPageState();
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
@@ -61,7 +61,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(),

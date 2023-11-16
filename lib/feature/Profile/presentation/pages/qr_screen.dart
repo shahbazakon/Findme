@@ -25,15 +25,14 @@ class QRScreen extends StatefulWidget {
 
 class _QRScreenState extends State<QRScreen> {
   ScreenshotController screenshotController = ScreenshotController();
-  AppLocalizations? translate;
 
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SizedBox(
@@ -157,6 +156,7 @@ class _QRScreenState extends State<QRScreen> {
 
   // Save ScreenShort
   Future<void> saveScreenShort() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     screenshotController.capture().then((capturedImage) async {
       String fileName = "FindMe_QR_${dateFormatter5.format(DateTime.now())}";
       final image =

@@ -28,7 +28,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   FilePickerResult? pickedImage;
   FilePickerResult? pickedVideo;
   DateTime? pickedDate;
-  AppLocalizations? translate;
+
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -48,7 +48,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
 
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
@@ -75,6 +74,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
 
   // Select Prefix
   void _selectPrefix() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedPrefix = await openSelectionDialog(
         data: namePrefixList,
         title: '${translate!.select} ${translate!.name} ${translate!.prefix} ');

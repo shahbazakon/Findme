@@ -39,7 +39,7 @@ class _CreateProfileState extends State<CreateProfile> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

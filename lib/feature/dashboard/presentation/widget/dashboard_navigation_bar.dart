@@ -25,8 +25,13 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
   double itemSize = 25;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 6.0,

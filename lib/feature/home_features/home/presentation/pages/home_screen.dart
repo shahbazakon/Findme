@@ -26,8 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: const HomeAppBar(),
       body: SingleChildScrollView(
@@ -61,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                   children: [
                     customGridTile(
-                        title: translate.personal,
+                        title: translate!.personal,
                         image:
                             "https://c4.wallpaperflare.com/wallpaper/356/292/33/music-rock-and-roll-vinyl-album-covers-wallpaper-preview.jpg",
                         onTap: () {
@@ -69,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const PersonalDetailsScreen());
                         }),
                     customGridTile(
-                        title: translate.business,
+                        title: translate!.business,
                         image:
                             "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
                         onTap: () {
@@ -77,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const BusinessDetailsScreen());
                         }),
                     customGridTile(
-                        title: translate.corporate,
+                        title: translate!.corporate,
                         image:
                             "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
                         onTap: () {
@@ -85,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const CorporateDetailsScreen());
                         }),
                     customGridTile(
-                        title: translate.academic,
+                        title: translate!.academic,
                         image:
                             "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=3628&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                         onTap: () {
@@ -93,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               screenName: const AcademicDetailsScreen());
                         }),
                     customGridTile(
-                        title: translate.matrimony,
+                        title: translate!.matrimony,
                         image:
                             "https://parade.com/.image/t_share/MTkwNTgxMjEzNTc5MTI1ODg1/wedding-wishes-2-jpg.jpg",
                         onTap: () {

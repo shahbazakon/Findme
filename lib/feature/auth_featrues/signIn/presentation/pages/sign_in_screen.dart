@@ -76,9 +76,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
     isRememberMe =
         sharedPreferences?.getBool(LocaleStorageKey.isRememberMe) ?? false;
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -104,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ..text = sharedPreferences!
                             .getString(LocaleStorageKey.userEmail) ??
                         "",
-                  label: "Email"),
+                  label: translate!.email),
               CustomTestField(
                   controller: _passwordController
                     ..text = sharedPreferences!

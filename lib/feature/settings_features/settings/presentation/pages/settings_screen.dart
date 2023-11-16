@@ -25,17 +25,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  AppLocalizations? translate;
-
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
   // Select language
   void _selectLanguage() async {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedLanguage = await openSelectionDialog(
         data: supportedLanguageList.keys.toList(),
         title: translate!.selectLanguage);
@@ -55,6 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const ScrollPhysics(

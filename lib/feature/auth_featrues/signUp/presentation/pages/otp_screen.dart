@@ -25,8 +25,13 @@ class _OTPScreenState extends State<OTPScreen> {
   final OtpFieldController _otpController = OtpFieldController();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

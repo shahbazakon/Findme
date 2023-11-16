@@ -11,16 +11,14 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-  AppLocalizations? translate;
-
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppbar(title: translate!.about),
       body: Padding(

@@ -59,6 +59,11 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
   ];
   TextFieldValidator validator = TextFieldValidator();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   // dispose Controllers
   @override
   void dispose() {
@@ -96,7 +101,7 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
 
   // Select Prefix
   void _selectPrefix() async {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedPrefix = await openSelectionDialog(
         data: namePrefixList, title: translate!.selectNamePrefix);
     if (selectedPrefix != null) {
@@ -141,7 +146,7 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar:
           CustomAppbar(title: "${translate!.business} ${translate!.details}"),

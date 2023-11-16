@@ -16,16 +16,15 @@ class FollowRequestScreen extends StatefulWidget {
 
 class _FollowRequestScreenState extends State<FollowRequestScreen> {
   TextEditingController searchController = TextEditingController();
-  AppLocalizations? translate;
 
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppbar(title: translate!.followRequest),
       body: Column(

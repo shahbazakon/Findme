@@ -28,7 +28,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   FilePickerResult? pickedResume;
   FilePickerResult? pickedTranscript;
   DateTime? pickedDate;
-  AppLocalizations? translate;
+
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -72,7 +72,6 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
@@ -118,6 +117,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   // Select Prefix
   void _selectPrefix() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedPrefix = await openSelectionDialog(
         data: namePrefixList,
         title: '${translate!.select} ${translate!.name} ${translate!.prefix}');
@@ -130,6 +130,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   // Select Education Level
   void _selectEducationLevel() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedEducationLevel = await openSelectionDialog(
         data: educationLevelList,
         title:
@@ -143,6 +144,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   // Select Marital Status
   void _selectMaritalStatus() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     String? selectedMaritalStatus = await openSelectionDialog(
         data: maritalStatusList,
         title: '${translate!.select} ${translate!.maritalStatus}');
@@ -154,6 +156,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   } // Select Marital Status
 
   void _selectChildren() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     //Children
     String? selectedMaritalStatus = await openSelectionDialog(
         data: numberList,
@@ -168,6 +171,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   // Select Religion
   void _selectReligion() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     //Children
     String? selectedReligion = await openSelectionDialog(
         data: religionList,
@@ -180,6 +184,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   }
 
   void _selectPrayers() async {
+    AppLocalizations? translate = AppLocalizations.of(context);
     //Children
     String? selectedPrayers = await openSelectionDialog(
         data: prayerList, title: '${translate!.select} ${translate!.religion}');
@@ -225,6 +230,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar:
           CustomAppbar(title: "${translate!..matrimony} ${translate!.details}"),

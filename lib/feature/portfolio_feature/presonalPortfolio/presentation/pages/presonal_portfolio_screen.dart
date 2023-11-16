@@ -8,6 +8,7 @@ import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/cilpper_shape.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widget/attachment_list_tile.com.dart';
 import '../widget/blur_background.dart';
@@ -27,7 +28,13 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
       "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -57,12 +64,12 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                             height: 10,
                           ),
                           Text(
-                            "Aliya Hayat",
+                            translate!.translate("Aliya Hayat"),
                             style: TextHelper.h2
                                 .copyWith(color: AppFontsColors.light),
                           ),
                           Text(
-                            "@theroselady",
+                            translate!.translate("@theroselady"),
                             style: SubTitleHelper.h9
                                 .copyWith(color: AppFontsColors.light),
                           ),
@@ -82,11 +89,10 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      sectionTitle(title: "Personal Details"),
+                      sectionTitle(title: translate!.personalDetails),
                       CustomProfileInfoTile(
                         leadingImage: AppIcons.beg,
-                        title:
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+                        title: translate!.lorem,
                       ),
                       CustomProfileInfoTile(
                         leadingImage: AppIcons.beg,
@@ -99,23 +105,23 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                       CustomProfileInfoTile(
                         leadingImage: AppIcons.creditCard,
                         title: '''
-Street: Deerah Dist.,
-City: Riyadh Deerah Dist.
-State: Riyadh
-Phone number: 00966 1 4132260
-Country calling code: +966
-Country: Saudi Arabia
+${translate!.street}: ${translate!.translate("Deerah Dist.")},
+${translate!.city}: ${translate!.translate("Riyadh Deerah Dist.")}
+${translate!.street}: ${translate!.translate("Riyadh")}
+${translate!.phoneNumber}: ${translate!.translate("00966 1 4132260")}
+${translate!.countryCallingCode}: ${translate!.translate("+966")}
+${translate!.country}: ${translate!.translate("Saudi Arabia")}
                         ''',
                       ),
                       CustomProfileInfoTile(
                         leadingImage: AppIcons.promoCode,
-                        title: "Female",
+                        title: translate!.female,
                       ),
                       CustomProfileInfoTile(
                         leadingImage: AppIcons.promoCode,
                         title: "+678-9876543456",
                       ),
-                      sectionTitle(title: "Social Profile"),
+                      sectionTitle(title: translate!.socialProfile),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -123,22 +129,26 @@ Country: Saudi Arabia
                             socialAccountsButton(
                                 iconImage: AppIcons.facebook,
                                 onTap: () {
-                                  showSnackBar(title: "Link facebook Account");
+                                  showSnackBar(
+                                      title: translate!.linkFacebookAccount);
                                 }),
                             socialAccountsButton(
                                 iconImage: AppIcons.instagram,
                                 onTap: () {
-                                  showSnackBar(title: "Link instagram Account");
+                                  showSnackBar(
+                                      title: translate!.linkInstagramAccount);
                                 }),
                             socialAccountsButton(
                                 iconImage: AppIcons.twitter,
                                 onTap: () {
-                                  showSnackBar(title: "Link twitter Account");
+                                  showSnackBar(
+                                      title: translate!.linkTwitterAccount);
                                 }),
                             socialAccountsButton(
                                 iconImage: AppIcons.snapchat,
                                 onTap: () {
-                                  showSnackBar(title: "Link snapchat Account");
+                                  showSnackBar(
+                                      title: translate!.linkSnapchatAccount);
                                 }),
                           ],
                         ),
@@ -169,7 +179,7 @@ Country: Saudi Arabia
                           ],
                         ),
                       ),
-                      sectionTitle(title: "Attachments"),
+                      sectionTitle(title: translate!.attachments),
                       ListView.builder(
                         physics: const ScrollPhysics(
                             parent: NeverScrollableScrollPhysics()),
@@ -177,10 +187,10 @@ Country: Saudi Arabia
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           return AttachmentListTile(
-                            title: "Resume",
+                            title: translate!.resume,
                             onDownloadClick: () {
                               //TODO: Add Download Functionality
-                              showSnackBar(title: "Download");
+                              showSnackBar(title: translate!.download);
                             },
                           );
                         },
@@ -198,6 +208,7 @@ Country: Saudi Arabia
 
   // Profile banner
   Widget profileBanner() {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return SizedBox(
       height: height * .38,
       child: Stack(
@@ -222,10 +233,10 @@ Country: Saudi Arabia
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("1450",
+                  Text(translate!.translate("1450"),
                       style: TextHelper.h5
                           .copyWith(color: AppFontsColors.primary)),
-                  Text("Followers",
+                  Text(translate!.followers,
                       style: TextHelper.h10
                           .copyWith(color: AppFontsColors.lightGrey3)),
                 ],
@@ -241,10 +252,10 @@ Country: Saudi Arabia
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("28k",
+                  Text(translate!.translate("28k"),
                       style: TextHelper.h6
                           .copyWith(color: AppFontsColors.primary)),
-                  Text("Views",
+                  Text(translate!.views,
                       style: TextHelper.h10
                           .copyWith(color: AppFontsColors.lightGrey3)),
                 ],
@@ -260,10 +271,10 @@ Country: Saudi Arabia
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("720",
+                  Text(translate!.translate("720"),
                       style: TextHelper.h7
                           .copyWith(color: AppFontsColors.primary)),
-                  Text("Following",
+                  Text(translate!.following,
                       style: TextHelper.h12
                           .copyWith(color: AppFontsColors.lightGrey3)),
                 ],

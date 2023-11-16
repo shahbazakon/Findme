@@ -13,6 +13,11 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(

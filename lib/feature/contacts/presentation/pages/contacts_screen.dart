@@ -17,7 +17,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var translate = AppLocalizations.of(context);
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppbar(title: translate!.contacts),
       body: Padding(
@@ -36,8 +36,8 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return ContactsListTile(
-                    title: 'Mustafa Jamail',
-                    subTitle: '@Mustaja',
+                    title: translate.translate('Mustafa Jamail'),
+                    subTitle: translate.translate('@Mustaja'),
                     leadingImage:
                         "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3569&q=80",
                   );

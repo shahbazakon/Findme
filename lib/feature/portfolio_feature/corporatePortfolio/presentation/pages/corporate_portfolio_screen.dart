@@ -26,16 +26,14 @@ class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
   String profileImage =
       "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
 
-  AppLocalizations? translate;
-
   @override
   void initState() {
-    translate = AppLocalizations.of(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -221,6 +219,7 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
 
   // Profile banner
   Widget profileBanner() {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return SizedBox(
       height: height * .38,
       child: Stack(
