@@ -7,7 +7,10 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'otp_screen.dart';
@@ -73,10 +76,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ],
               ),
               SizedBox(height: height * .06),
-              AppButton(
-                label: translate!.signUp,
-                onPressed: () {
-                  cupertinoNavigator(screenName: const OTPScreen());
+              BlocConsumer<SignUpCubit, SignUpState>(
+                listener: (context, state) {
+                  if (state is SignUpLoaded) {
+                    showSnackBar(title: state.signUpModel.message.toString());
+                    cupertinoNavigator(screenName: const OTPScreen());
+                  } else if (state is SignUpError) {
+                    showSnackBar(title: state.errorMsg);
+                  }
+                },
+                builder: (context, state) {
+                  return AppButton(
+                    label: translate!.signUp,
+                    isLoading: state is SignUpLoading,
+                    onPressed: () {
+                      context
+                          .read<SignUpCubit>()
+                          .getSignUpData(requestBody: {});
+                    },
+                  );
                 },
               ),
             ],
