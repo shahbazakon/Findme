@@ -5,12 +5,11 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/feature/auth_featrues/otpVerify/presentation/pages/otp_screen.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_password_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'reset_password_screen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -62,7 +61,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           title: state.forgotPasswordModel.message ?? '');
                       cupertinoNavigator(
                         type: NavigatorType.PUSHREPLACE,
-                        screenName: const ResetPasswordScreen(),
+                        screenName: OTPScreen(
+                          userEmail: _emailController.text,
+                        ),
                       );
                     } else {
                       showSnackBar(

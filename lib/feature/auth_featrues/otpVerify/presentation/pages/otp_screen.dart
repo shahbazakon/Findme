@@ -4,7 +4,8 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/customCountDown.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/success_screen.dart';
-import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/resend_otp_cubit.dart';
+import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/resend_otp_cubit.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_password_cubit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,10 +20,9 @@ import '../../../../../core/widget/button/app_Button_widget.dart';
 import '../../../signIn/presentation/pages/sign_in_screen.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key, this.userEmail, required this.requestBody});
+  const OTPScreen({super.key, required this.userEmail});
 
-  final String? userEmail;
-  final Map requestBody;
+  final String userEmail;
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -86,8 +86,8 @@ class _OTPScreenState extends State<OTPScreen> {
               InkWell(
                 onTap: () {
                   context
-                      .read<ResendOtpCubit>()
-                      .getReSandOTPData(requestBody: widget.requestBody);
+                      .read<ForgotPasswordCubit>()
+                      .getForgotPasswordData(email: widget.userEmail);
                   setState(() {
                     startCountdown = true;
                   });
