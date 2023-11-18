@@ -1,9 +1,12 @@
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/core/widget/success_screen.dart';
+import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/sign_up_cubit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
@@ -15,7 +18,10 @@ import '../../../../../core/widget/button/app_Button_widget.dart';
 import '../../../signIn/presentation/pages/sign_in_screen.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key});
+  const OTPScreen({super.key, this.userEmail, required this.requestBody});
+
+  final String? userEmail;
+  final Map requestBody;
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -50,7 +56,7 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
               SizedBox(height: height * .02),
               Text(
-                "Example@email.com",
+                widget.userEmail ?? "",
                 style: SubTitleHelper.h12
                     .copyWith(color: AppFontsColors.lightGrey3),
               ),
@@ -77,13 +83,22 @@ class _OTPScreenState extends State<OTPScreen> {
               SizedBox(height: height * .02),
               InkWell(
                 onTap: () {
-                  //TODO:
+                  context
+                      .read<SignUpCubit>()
+                      .getSignUpData(requestBody: widget.requestBody);
                 },
-                child: Text(
-                  translate!.resendCode,
-                  style: TextHelper.h10.copyWith(
-                      color: AppColors.primary,
-                      decoration: TextDecoration.underline),
+                child: BlocConsumer<SignUpCubit, SignUpState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return (state is SignUpLoading)
+                        ? Loading()
+                        : Text(
+                            translate!.resendCode,
+                            style: TextHelper.h10.copyWith(
+                                color: AppColors.primary,
+                                decoration: TextDecoration.underline),
+                          );
+                  },
                 ),
               ),
               SizedBox(height: height * .04),

@@ -26,11 +26,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool isRememberMe = false;
+  Map? requestBody;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  void apiCall() {
+    requestBody = {
+      "name": _nameController.text,
+      "email": _emailController.text,
+      "password": _passwordController.text,
+      "cf_password": _confirmPasswordController.text,
+      "ipDetail": {
+        "country_code": "PK",
+        "country_name": "Pakistan",
+        "city": null,
+        "postal": null,
+        "latitude": 30,
+        "longitude": 70,
+        "IPv4": "39.63.50.22",
+        "state": null
+      }
+    };
+    context.read<SignUpCubit>().getSignUpData(requestBody: requestBody!);
   }
 
   @override
@@ -61,6 +84,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: _passwordController,
                   label: translate!.password,
                   isObscureButton: true),
+              CustomTestField(
+                  controller: _confirmPasswordController,
+                  label: translate!.confirmPassword,
+                  isObscureButton: true),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -80,7 +107,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 listener: (context, state) {
                   if (state is SignUpLoaded) {
                     showSnackBar(title: state.signUpModel.message.toString());
-                    cupertinoNavigator(screenName: const OTPScreen());
+                    cupertinoNavigator(
+                        screenName: OTPScreen(
+                      userEmail: _emailController.text,
+                      requestBody: requestBody!,
+                    ));
                   } else if (state is SignUpError) {
                     showSnackBar(title: state.errorMsg);
                   }
@@ -89,11 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return AppButton(
                     label: translate!.signUp,
                     isLoading: state is SignUpLoading,
-                    onPressed: () {
-                      context
-                          .read<SignUpCubit>()
-                          .getSignUpData(requestBody: {});
-                    },
+                    onPressed: apiCall,
                   );
                 },
               ),

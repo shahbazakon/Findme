@@ -1,5 +1,6 @@
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/widget/loading.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/utils_methods.dart';
@@ -33,16 +34,7 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
           width: buttonWidth ?? width,
           child: isLoading
-              ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: FittedBox(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 6,
-                      color: AppColors.light,
-                    ),
-                  ),
-                )
+              ? const Loading()
               : Text(
                   label,
                   style: TitleHelper.h9.copyWith(color: AppFontsColors.light),

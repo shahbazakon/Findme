@@ -20,7 +20,19 @@ class Unauthorized extends Failure {
   String? get apiMsg => message;
   @override
   displayErrorMessage() {
-    return "Invalid Passcode";
+    return "Bad Request";
+  }
+}
+
+//Unauthorized
+class WrongUser extends Failure {
+  final String? message;
+  const WrongUser({this.message}) : super(message);
+  @override
+  String? get apiMsg => message;
+  @override
+  displayErrorMessage() {
+    return "Bad Request";
   }
 }
 
@@ -70,11 +82,12 @@ class ServerStatus {
 Future<ServerStatus> hanldeStatusCode(Response<dynamic> result) async {
   if (result.statusCode == 201 || result.statusCode == 200) {
     return ServerStatus(status: true, failure: null);
-  } else if (result.statusCode == 401) {
+  } else if (result.statusCode == 400) {
     return ServerStatus(
         status: false,
-        failure: Unauthorized(
-            message: result.data['message'] ?? "User is not authenticated"));
+        failure: WrongUser(
+            message: result.data['message'] ??
+                "An account with this email already exists."));
   } else if (result.statusCode == 401) {
     return ServerStatus(
         status: false,

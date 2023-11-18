@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:dio/dio.dart';
 import 'package:find_me/feature/auth_featrues/signUp/data/dataSource/signup_remote_datasoure.dart';
 import 'package:find_me/feature/auth_featrues/signUp/data/models/signup_model.dart';
 import 'package:meta/meta.dart';
@@ -15,8 +15,8 @@ class SignUpCubit extends Cubit<SignUpState> {
       SignUpModel data =
           await SignUpDataSource().fetchSignUp(requestBody: requestBody);
       emit(SignUpLoaded(data));
-    } catch (error) {
-      showSnackBar(title: error.toString());
+    } on DioException catch (error) {
+      // showSnackBar(title: "${error.response!.data["message"]}");
       emit(SignUpError(error.toString()));
     }
   }
