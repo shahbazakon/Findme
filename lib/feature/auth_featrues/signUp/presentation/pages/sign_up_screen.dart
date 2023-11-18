@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
@@ -8,12 +9,11 @@ import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'otp_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -54,6 +54,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
     };
     context.read<SignUpCubit>().getSignUpData(requestBody: requestBody!);
+  }
+
+  // call on Signup
+  Future<void> onSignUpSuccess() async {
+    if (isRememberMe) {
+      await sharedPreferences!
+          .setString(LocaleStorageKey.userEmail, _emailController.text);
+      await sharedPreferences!
+          .setString(LocaleStorageKey.userPassword, _passwordController.text);
+    }
+    cupertinoNavigator(
+        type: NavigatorType.PUSHREMOVEUNTIL, screenName: const SignInScreen());
   }
 
   @override
@@ -107,11 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 listener: (context, state) {
                   if (state is SignUpLoaded) {
                     showSnackBar(title: state.signUpModel.message.toString());
-                    cupertinoNavigator(
-                        screenName: OTPScreen(
-                      userEmail: _emailController.text,
-                      requestBody: requestBody!,
-                    ));
+                    onSignUpSuccess();
                   } else if (state is SignUpError) {
                     showSnackBar(title: state.errorMsg);
                   }
