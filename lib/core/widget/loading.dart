@@ -2,9 +2,9 @@ import 'package:find_me/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 class Loading extends StatelessWidget {
-  const Loading({
-    super.key,
-  });
+  const Loading({super.key, this.isColorsWhite = false});
+
+  final bool isColorsWhite;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class Loading extends StatelessWidget {
       child: FittedBox(
         child: CircularProgressIndicator(
           strokeWidth: 6,
-          color: AppColors.light,
+          color: isColorsWhite ? AppColors.light : AppColors.primary,
         ),
       ),
     );

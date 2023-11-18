@@ -1,9 +1,10 @@
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
-import 'package:find_me/core/widget/loading.dart';
+import 'package:find_me/core/widget/customCountDown.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/success_screen.dart';
-import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/sign_up_cubit.dart';
+import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/resend_otp_cubit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   final OtpFieldController _otpController = OtpFieldController();
+  bool startCountdown = true;
 
   @override
   void initState() {
@@ -84,14 +86,29 @@ class _OTPScreenState extends State<OTPScreen> {
               InkWell(
                 onTap: () {
                   context
-                      .read<SignUpCubit>()
-                      .getSignUpData(requestBody: widget.requestBody);
+                      .read<ResendOtpCubit>()
+                      .getReSandOTPData(requestBody: widget.requestBody);
+                  setState(() {
+                    startCountdown = true;
+                  });
                 },
-                child: BlocConsumer<SignUpCubit, SignUpState>(
-                  listener: (context, state) {},
+                child: BlocConsumer<ResendOtpCubit, ResendOtpState>(
+                  listener: (context, state) {
+                    if (state is ResendOtpLoaded) {
+                      showSnackBar(title: state.signUpModel.message.toString());
+                    } else if (state is ResendOtpError) {
+                      showSnackBar(title: state.errorMsg);
+                    }
+                  },
                   builder: (context, state) {
-                    return (state is SignUpLoading)
-                        ? Loading()
+                    return startCountdown
+                        ? CountdownTimer(
+                            onEnd: () {
+                              setState(() {
+                                startCountdown = false;
+                              });
+                            },
+                          )
                         : Text(
                             translate!.resendCode,
                             style: TextHelper.h10.copyWith(

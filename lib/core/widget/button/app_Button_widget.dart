@@ -34,7 +34,7 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
           width: buttonWidth ?? width,
           child: isLoading
-              ? const Loading()
+              ? const Loading(isColorsWhite: true)
               : Text(
                   label,
                   style: TitleHelper.h9.copyWith(color: AppFontsColors.light),
