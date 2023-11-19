@@ -63,6 +63,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         type: NavigatorType.PUSHREPLACE,
                         screenName: OTPScreen(
                           userEmail: _emailController.text,
+                          id: state.forgotPasswordModel.result!.id!,
                         ),
                       );
                     } else {

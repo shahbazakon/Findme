@@ -9,10 +9,10 @@ class ResendOtpLoading extends ResendOtpState {}
 
 class ResendOtpLoaded extends ResendOtpState {
   final SignUpModel signUpModel;
-  ResendOtpLoaded(this.signUpModel);
+  ResendOtpLoaded({required this.signUpModel});
 }
 
 class ResendOtpError extends ResendOtpState {
   final String errorMsg;
-  ResendOtpError(this.errorMsg);
+  ResendOtpError({required this.errorMsg});
 }

@@ -3,10 +3,10 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/customCountDown.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
-import 'package:find_me/core/widget/success_screen.dart';
+import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/otp_verify_cubit.dart';
 import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/resend_otp_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_password_cubit.dart';
-import 'package:flutter/gestures.dart';
+import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,20 +17,21 @@ import 'package:otp_text_field/style.dart';
 import '../../../../../core/constants/theme_constants.dart';
 import '../../../../../core/utils/text_style.dart';
 import '../../../../../core/widget/button/app_Button_widget.dart';
-import '../../../signIn/presentation/pages/sign_in_screen.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key, required this.userEmail});
+  const OTPScreen({super.key, required this.userEmail, required this.id});
 
   final String userEmail;
+  final String id;
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  final OtpFieldController _otpController = OtpFieldController();
   bool startCountdown = true;
+  int? otpPin;
+  int otpLength = 4;
 
   @override
   void initState() {
@@ -64,18 +65,20 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
               SizedBox(height: height * .06),
               OTPTextField(
-                length: 4,
+                length: otpLength,
                 width: width * .6,
                 fieldWidth: 50,
                 style: TitleHelper.h8,
                 fieldStyle: FieldStyle.box,
                 keyboardType: TextInputType.number,
-                controller: _otpController,
                 otpFieldStyle: OtpFieldStyle(
                   enabledBorderColor: AppColors.lightGrey2,
                   backgroundColor: AppColors.lightGrey1,
                 ),
-                onCompleted: (pin) {},
+                onChanged: (pin) {},
+                onCompleted: (pin) {
+                  otpPin = int.parse(pin);
+                },
               ),
               SizedBox(height: height * .1),
               Text(
@@ -119,34 +122,56 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
               ),
               SizedBox(height: height * .04),
-              AppButton(
-                label: translate!.verify,
-                onPressed: () {
-                  cupertinoNavigator(
-                      type: NavigatorType.PUSHREPLACE,
-                      screenName: SuccessScreen(
-                        subTitleWidget: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                                text: translate!
-                                    .yourSignUpWasVerifiedSuccessfullyPlease,
-                                style: SubTitleHelper.h11,
-                                children: [
-                                  TextSpan(
-                                    text: translate!.signIn,
-                                    style: SubTitleHelper.h11.copyWith(
-                                        decoration: TextDecoration.underline),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        cupertinoNavigator(
-                                            screenName: const SignInScreen());
-                                      },
-                                  ),
-                                  TextSpan(
-                                      text: translate!.toContinue,
-                                      style: SubTitleHelper.h11)
-                                ])),
-                      ));
+              BlocConsumer<OtpVerifyCubit, OtpVerifyState>(
+                listener: (context, state) {
+                  if (state is OtpVerifyLoaded) {
+                    showSnackBar(
+                        title: state.otpVerifyModel.message.toString());
+                    cupertinoNavigator(
+                        type: NavigatorType.PUSHREPLACE,
+                        screenName: const ResetPasswordScreen());
+                  } else if (state is OtpVerifyError) {
+                    showSnackBar(title: state.errorMsg);
+                  }
+                },
+                builder: (context, state) {
+                  return AppButton(
+                    label: translate!.verify,
+                    isLoading: state is OtpVerifyLoading,
+                    onPressed: () {
+                      if (otpPin.toString().length == otpLength) {
+                        context
+                            .read<OtpVerifyCubit>()
+                            .verifyOtp(otp: otpPin!, id: widget.id);
+                      }
+
+                      // cupertinoNavigator(
+                      //     type: NavigatorType.PUSHREPLACE,
+                      //     screenName: SuccessScreen(
+                      //       subTitleWidget: RichText(
+                      //           textAlign: TextAlign.center,
+                      //           text: TextSpan(
+                      //               text: translate!
+                      //                   .yourSignUpWasVerifiedSuccessfullyPlease,
+                      //               style: SubTitleHelper.h11,
+                      //               children: [
+                      //                 TextSpan(
+                      //                   text: translate!.signIn,
+                      //                   style: SubTitleHelper.h11.copyWith(
+                      //                       decoration: TextDecoration.underline),
+                      //                   recognizer: TapGestureRecognizer()
+                      //                     ..onTap = () {
+                      //                       cupertinoNavigator(
+                      //                           screenName: const SignInScreen());
+                      //                     },
+                      //                 ),
+                      //                 TextSpan(
+                      //                     text: translate!.toContinue,
+                      //                     style: SubTitleHelper.h11)
+                      //               ])),
+                      //     ));
+                    },
+                  );
                 },
               ),
             ],

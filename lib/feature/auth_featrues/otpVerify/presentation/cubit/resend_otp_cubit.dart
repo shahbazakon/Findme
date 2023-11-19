@@ -14,10 +14,9 @@ class ResendOtpCubit extends Cubit<ResendOtpState> {
       emit(ResendOtpLoading());
       SignUpModel data =
           await SignUpDataSource().fetchSignUp(requestBody: requestBody);
-      emit(ResendOtpLoaded(data));
+      emit(ResendOtpLoaded(signUpModel: data));
     } on DioException catch (error) {
-      // showSnackBar(title: "${error.response!.data["message"]}");
-      emit(ResendOtpError(error.toString()));
+      emit(ResendOtpError(errorMsg: error.response!.data["message"]));
     }
   }
 }
