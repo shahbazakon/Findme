@@ -5,8 +5,8 @@ import 'package:find_me/core/widget/customCountDown.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/otp_verify_cubit.dart';
 import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/resend_otp_cubit.dart';
+import 'package:find_me/feature/auth_featrues/reset_password/presentation/pages/reset_password_screen.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_password_cubit.dart';
-import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -129,7 +129,9 @@ class _OTPScreenState extends State<OTPScreen> {
                         title: state.otpVerifyModel.message.toString());
                     cupertinoNavigator(
                         type: NavigatorType.PUSHREPLACE,
-                        screenName: const ResetPasswordScreen());
+                        screenName: ResetPasswordScreen(
+                          id: widget.id,
+                        ));
                   } else if (state is OtpVerifyError) {
                     showSnackBar(title: state.errorMsg);
                   }

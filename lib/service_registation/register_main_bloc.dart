@@ -1,6 +1,7 @@
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/otp_verify_cubit.dart';
 import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/resend_otp_cubit.dart';
+import 'package:find_me/feature/auth_featrues/reset_password/presentation/cubit/reset_password_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_password_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/sign_in_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/sign_up_cubit.dart';
@@ -22,5 +23,8 @@ List<BlocProvider> providers = [
   ),
   BlocProvider<OtpVerifyCubit>(
     create: (BuildContext context) => locator<OtpVerifyCubit>(),
+  ),
+  BlocProvider<ResetPasswordCubit>(
+    create: (BuildContext context) => locator<ResetPasswordCubit>(),
   ),
 ];
