@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:find_me/feature/auth_featrues/signIn/data/dataSource/signin_remote_datasource.dart';
 import 'package:find_me/feature/auth_featrues/signIn/data/models/signIn_model.dart';
 import 'package:meta/meta.dart';
@@ -14,8 +15,8 @@ class SignInCubit extends Cubit<SignInState> {
       SignInModel data = await SignInDataSource()
           .fetchSignIn(requestBody: {"email": email, "password": password});
       emit(SignInLoaded(data));
-    } catch (error) {
-      emit(SignInError(error.toString()));
+    } on DioException catch (error) {
+      emit(SignInError(error.response!.data["message"]));
     }
   }
 }

@@ -16,8 +16,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           await SignUpDataSource().fetchSignUp(requestBody: requestBody);
       emit(SignUpLoaded(data));
     } on DioException catch (error) {
-      // showSnackBar(title: "${error.response!.data["message"]}");
-      emit(SignUpError(error.toString()));
+      emit(SignUpError(error.response!.data["message"]));
     }
   }
 }

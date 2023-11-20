@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:find_me/feature/auth_featrues/signIn/data/dataSource/signin_remote_datasource.dart';
 import 'package:find_me/feature/auth_featrues/signIn/data/models/forgot_password_model.dart';
 import 'package:meta/meta.dart';
@@ -15,8 +16,8 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
           .forgotPassword(requestBody: {"email": email});
 
       emit(ForgotPasswordLoaded(data));
-    } catch (error) {
-      emit(ForgotPasswordError(error.toString()));
+    } on DioException catch (error) {
+      emit(ForgotPasswordError(error.response!.data["message"]));
     }
   }
 }
