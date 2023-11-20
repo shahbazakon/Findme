@@ -26,6 +26,7 @@ class FollowRequestListTile extends StatelessWidget {
     return Padding(
       padding: primaryPadding,
       child: ListTile(
+        splashColor: AppColors.primary,
         contentPadding: EdgeInsets.zero,
         leading: leadingImage == null
             ? Image.asset(
@@ -36,11 +37,12 @@ class FollowRequestListTile extends StatelessWidget {
                 fit: BoxFit.cover,
               )
             : CircleAvatar(
-                radius: 40,
+                radius: 35,
                 backgroundImage: NetworkImage(leadingImage!),
               ),
-        title: Text(title),
-        subtitle: Text(subTitle),
+        title: Text(title, style: SubTitleHelper.h11),
+        subtitle: Text(subTitle,
+            style: SubTitleHelper.h12.copyWith(color: AppColors.lightGrey3)),
         trailing: Visibility(
           visible: isShowButton,
           child: GestureDetector(
@@ -51,26 +53,28 @@ class FollowRequestListTile extends StatelessWidget {
               decoration: BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(20)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  isSent
-                      ? Icon(
-                          Icons.check,
-                          size: 18,
-                          color: AppColors.light,
-                        )
-                      : Image.asset(AppIcons.addUser, height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      isSent ? translate!.sent : translate!.connect,
-                      style:
-                          SubTitleHelper.h11.copyWith(color: AppColors.light),
-                    ),
-                  )
-                ],
+              child: FittedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    isSent
+                        ? Icon(
+                            Icons.check,
+                            size: 16,
+                            color: AppColors.light,
+                          )
+                        : Image.asset(AppIcons.addUser, height: 12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        isSent ? translate!.sent : translate!.connect,
+                        style:
+                            SubTitleHelper.h12.copyWith(color: AppColors.light),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
