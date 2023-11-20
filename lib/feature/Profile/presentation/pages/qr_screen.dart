@@ -37,54 +37,57 @@ class _QRScreenState extends State<QRScreen> {
       appBar: AppBar(),
       body: SizedBox(
         width: width,
+        height: height,
         child: Stack(
           children: [
-            Screenshot(
-              controller: screenshotController,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.light),
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Hero(
-                      tag: "profileQRKey",
-                      child: GradientWidget(
-                        child: QrImageView(
-                          data: '1234567890',
-                          version: QrVersions.auto,
-                          size: height * .38,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Hero(
-                        tag: "profileNameKey",
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Text(
-                            translate!.translate("Aliya Hayat"),
-                            style: TextHelper.h1
-                                .copyWith(fontWeight: FontWeight.w500),
+            FittedBox(
+              child: Screenshot(
+                controller: screenshotController,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppColors.light),
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Hero(
+                        tag: "profileQRKey",
+                        child: GradientWidget(
+                          child: QrImageView(
+                            data: '1234567890',
+                            version: QrVersions.auto,
+                            size: height * .38,
                           ),
                         ),
                       ),
-                    ),
-                    Hero(
-                      tag: "profileUsernameKey",
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Text(
-                          translate!.translate("@theroselady"),
-                          style: SubTitleHelper.h10,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Hero(
+                          tag: "profileNameKey",
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              translate!.translate("Aliya Hayat"),
+                              style: TextHelper.h1
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ),
                       ),
-                    )
-                  ],
+                      Hero(
+                        tag: "profileUsernameKey",
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Text(
+                            translate!.translate("@theroselady"),
+                            style: SubTitleHelper.h10,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

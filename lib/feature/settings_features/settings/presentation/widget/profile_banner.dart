@@ -1,9 +1,11 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/profile_picture_avatar.dart';
+import 'package:find_me/feature/auth_featrues/createProfile/presentation/pages/create_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileBanner extends StatelessWidget {
@@ -40,7 +42,7 @@ class ProfileBanner extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      //TODO: Add Edit Button Functionality
+                      cupertinoNavigator(screenName: const CreateProfile());
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
