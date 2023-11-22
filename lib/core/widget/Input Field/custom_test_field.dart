@@ -13,6 +13,7 @@ class CustomTestField extends StatefulWidget {
       this.keyboardType,
       this.onChanged,
       this.onTap,
+      this.validator,
       this.readOnly = false,
       this.isObscureButton = false});
 
@@ -21,6 +22,7 @@ class CustomTestField extends StatefulWidget {
   final bool isObscureButton;
   final EdgeInsets? padding;
   final bool readOnly;
+  final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
   final Function()? onTap;
@@ -41,7 +43,7 @@ class _CustomTestFieldState extends State<CustomTestField> {
   Widget build(BuildContext context) {
     return Container(
       padding: widget.padding ?? EdgeInsets.symmetric(vertical: height * .01),
-      child: TextField(
+      child: TextFormField(
         controller: widget.controller,
         style: SubTitleHelper.h10,
         obscureText: isObscure,
@@ -49,6 +51,7 @@ class _CustomTestFieldState extends State<CustomTestField> {
         keyboardType: widget.keyboardType,
         onChanged: widget.onChanged,
         onTap: widget.onTap,
+        validator: widget.validator,
         decoration: InputDecoration(
             label: Visibility(
                 visible: widget.label != null, child: Text("${widget.label}")),

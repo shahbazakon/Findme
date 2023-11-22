@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
+import 'package:find_me/core/helper/textfeild_validator.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_checkbox.dart';
@@ -37,23 +38,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void apiCall() {
-    requestBody = {
-      "name": _nameController.text,
-      "email": _emailController.text,
-      "password": _passwordController.text,
-      "cf_password": _confirmPasswordController.text,
-      "ipDetail": {
-        "country_code": "PK",
-        "country_name": "Pakistan",
-        "city": null,
-        "postal": null,
-        "latitude": 30,
-        "longitude": 70,
-        "IPv4": "39.63.50.22",
-        "state": null
-      }
-    };
-    context.read<SignUpCubit>().getSignUpData(requestBody: requestBody!);
+    AppLocalizations? translate = AppLocalizations.of(context);
+    if (_passwordController.text != _confirmPasswordController.text) {
+      showSnackBar(title: translate!.passwordAndConfirmPasswordNotMatched);
+    } else {
+      requestBody = {
+        "name": _nameController.text,
+        "email": _emailController.text,
+        "password": _passwordController.text,
+        "cf_password": _confirmPasswordController.text,
+        "ipDetail": {
+          "country_code": "PK",
+          "country_name": "Pakistan",
+          "city": null,
+          "postal": null,
+          "latitude": 30,
+          "longitude": 70,
+          "IPv4": "39.63.50.22",
+          "state": null
+        }
+      };
+      context.read<SignUpCubit>().getSignUpData(requestBody: requestBody!);
+    }
   }
 
   // call on Signup
@@ -89,17 +95,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               SizedBox(height: height * .06),
               CustomTestField(
-                  controller: _nameController, label: translate!.name),
+                controller: _nameController,
+                label: translate!.name,
+                validator: (value) => TextFieldValidator()
+                    .validateNullField(value, translate.name),
+              ),
               CustomTestField(
-                  controller: _emailController, label: translate!.email),
+                controller: _emailController,
+                label: translate!.email,
+                validator: (value) => TextFieldValidator().validateEmail(value),
+              ),
               CustomTestField(
-                  controller: _passwordController,
-                  label: translate!.password,
-                  isObscureButton: true),
+                controller: _passwordController,
+                label: translate!.password,
+                isObscureButton: true,
+                validator: (value) =>
+                    TextFieldValidator().validateStrongPassword(value),
+              ),
               CustomTestField(
-                  controller: _confirmPasswordController,
-                  label: translate!.confirmPassword,
-                  isObscureButton: true),
+                controller: _confirmPasswordController,
+                label: translate!.confirmPassword,
+                isObscureButton: true,
+                validator: (value) =>
+                    TextFieldValidator().validateStrongPassword(value),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

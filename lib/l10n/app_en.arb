@@ -169,6 +169,14 @@
     "youCanSelectWhichPortfolioToView": "you can select which portfolio to view",
     "role": "Role",
     "successful": "Successful",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "passwordAndConfirmPasswordNotMatched": "Password and Confirm Password not Matched",
+
+    "isRequired": "is required.",
+    "pleaseEnterAValidEmailId": "Please enter a valid email-id",
+    "strongPasswordMsg":"The password must be at least 8 characters long also contain minimum 1 numeric,special character, uppercase and lowercase letter.",
+    "invalidDateFormat": "Invalid date format",
+    "pleaseEnterPhoneNumber":"Please enter phone number",
+    "pleaseEnterValidPhoneNumber": "Please enter valid phone number"
 
 }
