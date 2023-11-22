@@ -5,6 +5,7 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../constants/theme_constants.dart';
@@ -23,6 +24,7 @@ class SuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: AppColors.light,
       body: Container(
@@ -51,7 +53,7 @@ class SuccessScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * .05),
                 Text(
-                  title ?? "Successful",
+                  title ?? translate!.successful,
                   textAlign: TextAlign.center,
                   style: TitleHelper.h7,
                 ),
@@ -74,7 +76,7 @@ class SuccessScreen extends StatelessWidget {
                           cupertinoNavigator(screenName: const SignInScreen());
                         },
                         child: Text(
-                          "Back to home",
+                          translate!.backToHome,
                           style: SubTitleHelper.h9.copyWith(
                               fontWeight: FontWeight.w200,
                               fontStyle: FontStyle.italic),

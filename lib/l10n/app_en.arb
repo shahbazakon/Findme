@@ -149,5 +149,26 @@
 
     "matrimonialDetails": "Matrimonial Details",
     "views": "Views",
-    "personalDetails": "Personal Details"
+    "personalDetails": "Personal Details",
+
+    "pickedStartDate": "Picked Start Date",
+    "pickedEndDate": "Picked End Date",
+    "addProjects": "Add Projects",
+    "enterProjectName": "Enter Project Name",
+    "projectName": "Project Name",
+    "enterProjectRole": "Enter Project Role",
+    "projectRole": "Project Role",
+    "enterProjectDescription": "Enter Project Description",
+    "projectDescription": "Project Description",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "submit": "Submit",
+    "pickFormGallery": "Pick form Gallery",
+    "pickFormCamera": "Pick form Camera",
+    "selectPortfolio": "Select Portfolio",
+    "youCanSelectWhichPortfolioToView": "you can select which portfolio to view",
+    "role": "Role",
+    "successful": "Successful",
+    "backToHome": "Back to home"
+
 }

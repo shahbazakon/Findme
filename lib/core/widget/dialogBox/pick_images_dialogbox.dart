@@ -1,5 +1,6 @@
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../utils/text_style.dart';
@@ -22,6 +23,8 @@ class AppDialogBox {
 
   @override
   Future<XFile?> pickImages() {
+    AppLocalizations? translate =
+        AppLocalizations.of(navigatorKey.currentContext!);
     return showDialog(
       context: navigatorKey.currentContext!,
       barrierDismissible: false,
@@ -46,13 +49,13 @@ class AppDialogBox {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         pickerSourceButton(
-                            label: "Pick form Gallery",
+                            label: translate!.pickFormGallery,
                             icon: Icons.image_outlined,
                             onClick: () {
                               getImageFromGallery();
                             }),
                         pickerSourceButton(
-                            label: "Pick form Camera",
+                            label: translate.pickFormCamera,
                             icon: Icons.camera_alt_outlined,
                             onClick: () {
                               getImageFromCamera();

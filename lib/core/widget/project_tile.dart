@@ -1,6 +1,8 @@
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants/theme_constants.dart';
 
@@ -20,6 +22,8 @@ class ProjectListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations? translate =
+        AppLocalizations.of(navigatorKey.currentContext!);
     return Container(
       decoration: appBoxDecoration,
       padding: const EdgeInsets.all(10),
@@ -34,7 +38,7 @@ class ProjectListTile extends StatelessWidget {
           RichText(
             text: subTitle != null
                 ? TextSpan(
-                    text: "Role: ",
+                    text: "${translate!.role}: ",
                     style: SubTitleHelper.h11
                         .copyWith(color: AppFontsColors.lightGrey4),
                     children: [
@@ -50,7 +54,7 @@ class ProjectListTile extends StatelessWidget {
             child: RichText(
                 text: TextSpan(children: [
               TextSpan(
-                  text: "Start Date: ",
+                  text: "${translate!.startDate}: ",
                   style: SubTitleHelper.h12
                       .copyWith(color: AppFontsColors.lightGrey4),
                   children: [
@@ -61,7 +65,7 @@ class ProjectListTile extends StatelessWidget {
                   ]),
               endDate != null
                   ? TextSpan(
-                      text: "End Date: ",
+                      text: "${translate!.endDate}: ",
                       style: SubTitleHelper.h12
                           .copyWith(color: AppFontsColors.lightGrey4),
                       children: [

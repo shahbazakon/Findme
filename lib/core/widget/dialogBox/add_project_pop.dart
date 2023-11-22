@@ -18,14 +18,15 @@ Future<Map<String, dynamic>> appProjectsPop() async {
   ValueNotifier<DateTime> endDate = ValueNotifier<DateTime>(DateTime.now());
 
   DateTime? pickedStartDate =
-      await appDatePicker(helpText: "Picked Start Date");
+      await appDatePicker(helpText: translate!.pickedStartDate);
 
   if (pickedStartDate != null) {
     startDate.value = pickedStartDate;
     startDate.notifyListeners();
   }
 
-  DateTime? pickedEndDate = await appDatePicker(helpText: "Picked End Date");
+  DateTime? pickedEndDate =
+      await appDatePicker(helpText: translate!.pickedEndDate);
 
   if (pickedEndDate != null) {
     endDate.value = pickedEndDate;
@@ -44,7 +45,7 @@ Future<Map<String, dynamic>> appProjectsPop() async {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Add Projects', style: TextHelper.h8),
+                Text(translate!.addProjects, style: TextHelper.h8),
                 const CloseButton()
               ],
             ),
@@ -52,26 +53,26 @@ Future<Map<String, dynamic>> appProjectsPop() async {
               children: [
                 CustomTestField2(
                   controller: projectNameController,
-                  hintText: "Enter Project Name",
-                  label: "Project Name",
+                  hintText: translate.enterProjectName,
+                  label: translate.projectName,
                 ),
                 CustomTestField2(
                   controller: projectRoleController,
-                  hintText: "Enter Project Role",
-                  label: "Project Role",
+                  hintText: translate.enterProjectRole,
+                  label: translate.projectRole,
                 ),
                 CustomTestField2(
                   controller: descriptionController,
-                  hintText: "Enter Project Description",
-                  label: "Project Description",
+                  hintText: translate!.enterProjectDescription,
+                  label: translate!.projectDescription,
                   maxLines: 4,
                 ),
                 ValueListenableBuilder<DateTime>(
                   valueListenable: startDate,
                   builder: (context, startDateValue, child) {
                     return CustomTestField2(
-                      hintText: "Start Date",
-                      label: "Start Date",
+                      hintText: translate!.startDate,
+                      label: translate.startDate,
                       showCalendarIcon: true,
                       initialValue:
                           dateFormatter1.format(startDateValue.toLocal()),
@@ -91,8 +92,8 @@ Future<Map<String, dynamic>> appProjectsPop() async {
                   valueListenable: endDate,
                   builder: (context, endDateValue, child) {
                     return CustomTestField2(
-                      hintText: "End Date",
-                      label: "End Date",
+                      hintText: translate.endDate,
+                      label: translate.endDate,
                       showCalendarIcon: true,
                       initialValue:
                           dateFormatter1.format(endDateValue.toLocal()),
@@ -110,7 +111,7 @@ Future<Map<String, dynamic>> appProjectsPop() async {
                 ),
                 const SizedBox(height: 10),
                 AppButton(
-                    label: "Submit",
+                    label: translate.submit,
                     onPressed: () {
                       Navigator.of(context).pop(projectNameController.text != ""
                           ? {

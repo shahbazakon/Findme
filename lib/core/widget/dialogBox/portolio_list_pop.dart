@@ -9,6 +9,7 @@ import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentatio
 import 'package:find_me/feature/portfolio_feature/matrimonyPortfolio/presentation/pages/matrimonial_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/pages/presonal_portfolio_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../utils/utils_methods.dart';
 
@@ -23,7 +24,8 @@ portfolioListPop(
     'Business': const BusinessPortfolioScreen(),
     'Matrimony': const MatrimonialPortfolioScreen()
   };
-
+  AppLocalizations? translate =
+      AppLocalizations.of(navigatorKey.currentContext!);
   return await showDialog(
     context: navigatorKey.currentContext!,
     barrierDismissible: false,
@@ -64,8 +66,9 @@ portfolioListPop(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Select Portfolio', style: TextHelper.h8),
-                                Text('you can select which portfolio to view',
+                                Text(translate!.selectPortfolio,
+                                    style: TextHelper.h8),
+                                Text(translate.youCanSelectWhichPortfolioToView,
                                     style: SubTitleHelper.h11),
                               ],
                             ),
