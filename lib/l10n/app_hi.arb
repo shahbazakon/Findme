@@ -139,5 +139,37 @@
 
   "matrimonialDetails": "विवाह विवरण",
   "views": "राय",
-  "personalDetails": "व्यक्तिगत विवरण"
+  "personalDetails": "व्यक्तिगत विवरण",
+
+  "pickedStartDate": "चयनित प्रारंभ तिथि",
+  "pickedEndDate": "चयनित समाप्ति तिथि",
+  "addProjects": "परियोजनाएँ जोड़ें",
+  "enterProjectName": "परियोजना का नाम दर्ज करें",
+  "projectName": "परियोजना का नाम",
+  "enterProjectRole": "परियोजना की भूमिका दर्ज करें",
+  "projectRole": "परियोजना की भूमिका",
+  "enterProjectDescription": "परियोजना का विवरण दर्ज करें",
+  "projectDescription": "परियोजना का विवरण",
+  "startDate": "प्रारंभ तिथि",
+  "endDate": "समाप्ति तिथि",
+  "submit": "प्रस्तुत करें",
+  "pickFormGallery": "गैलरी से चयन करें",
+  "pickFormCamera": "कैमरा से चयन करें",
+  "selectPortfolio": "पोर्टफोलियो का चयन करें",
+  "youCanSelectWhichPortfolioToView": "आप किस पोर्टफोलियो को देखना चाहते हैं उसे चयन कर सकते हैं",
+  "role": "भूमिका",
+  "successful": "सफल",
+  "backToHome": "घर वापस",
+  "passwordAndConfirmPasswordNotMatched": "पासवर्ड और पासवर्ड की पुष्टि मेल नहीं खाते",
+
+  "isRequired": "आवश्यक है।",
+  "pleaseEnterAValidEmailId": "कृपया एक वैध ईमेल आईडी दर्ज करें",
+  "strongPasswordMsg": "पासवर्ड कम से कम 8 वर्णों का होना चाहिए और इसमें कम से कम 1 संख्यात्मक, विशेष वर्ण, बड़े अक्षर और छोटे अक्षर होना चाहिए।",
+  "invalidDateFormat": "अवैध तिथि प्रारूप",
+  "pleaseEnterPhoneNumber": "कृपया फ़ोन नंबर दर्ज करें",
+  "pleaseEnterValidPhoneNumber": "कृपया वैध फ़ोन नंबर दर्ज करें"
+
+
+
+
 }

@@ -143,5 +143,34 @@
 
   "matrimonialDetails": "تفاصيل الزواج",
   "views": "الآراء",
-  "personalDetails": "تفاصيل شخصية"
+  "personalDetails": "تفاصيل شخصية",
+
+  "pickedStartDate": "تاريخ البدء المحدد",
+  "pickedEndDate": "تاريخ الانتهاء المحدد",
+  "addProjects": "إضافة مشاريع",
+  "enterProjectName": "أدخل اسم المشروع",
+  "projectName": "اسم المشروع",
+  "enterProjectRole": "أدخل دور المشروع",
+  "projectRole": "دور المشروع",
+  "enterProjectDescription": "أدخل وصف المشروع",
+  "projectDescription": "وصف المشروع",
+  "startDate": "تاريخ البدء",
+  "endDate": "تاريخ الانتهاء",
+  "submit": "إرسال",
+  "pickFormGallery": "اختيار من المعرض",
+  "pickFormCamera": "اختيار من الكاميرا",
+  "selectPortfolio": "اختيار المحفظة",
+  "youCanSelectWhichPortfolioToView": "يمكنك اختيار أي محفظة ترغب في عرضها",
+  "role": "الدور",
+  "successful": "ناجح",
+  "backToHome": "العودة إلى الصفحة الرئيسية",
+  "passwordAndConfirmPasswordNotMatched": "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
+
+  "isRequired": "مطلوب.",
+  "pleaseEnterAValidEmailId": "الرجاء إدخال عنوان بريد إلكتروني صحيح",
+  "strongPasswordMsg": "يجب أن تحتوي كلمة المرور على الأقل على 8 أحرف وتحتوي على رقم وحرف كبير وحرف صغير وحرف خاص على الأقل.",
+  "invalidDateFormat": "تنسيق تاريخ غير صالح",
+  "pleaseEnterPhoneNumber": "الرجاء إدخال رقم الهاتف",
+  "pleaseEnterValidPhoneNumber": "الرجاء إدخال رقم هاتف صحيح"
+
 }
