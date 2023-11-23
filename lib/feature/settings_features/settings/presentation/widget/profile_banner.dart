@@ -1,5 +1,6 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
+import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
@@ -42,7 +43,12 @@ class ProfileBanner extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      cupertinoNavigator(screenName: const CreateProfile());
+                      String userID = sharedPreferences!
+                          .getString(LocaleStorageKey.userEmail)!;
+                      cupertinoNavigator(
+                          screenName: CreateProfile(
+                        id: userID,
+                      ));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),

@@ -8,4 +8,6 @@ class LocaleStorageKey {
   static String appLanguage = "appLanguage";
   static String userEmail = "userEmail";
   static String userPassword = "userPassword";
+  static String userID = "userID";
+  static String xAuthToken = "x-auth-token";
 }

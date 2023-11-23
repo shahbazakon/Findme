@@ -67,11 +67,19 @@ class _SignInScreenState extends State<SignInScreen> {
       await sharedPreferences!.remove(LocaleStorageKey.userPassword);
     }
 
+    log("signInModel.result!.admin!.id!: ${signInModel.result!.admin!.id!}");
+    await sharedPreferences!
+        .setString(LocaleStorageKey.userID, signInModel.result!.admin!.id!);
+    await sharedPreferences!
+        .setString(LocaleStorageKey.xAuthToken, signInModel.result!.token!);
     bool isProfileCompleted =
         signInModel.result?.admin?.isCompeletProfile ?? false;
+
     cupertinoNavigator(
         type: NavigatorType.PUSHREMOVEUNTIL,
-        screenName: isProfileCompleted ? Dashboard() : const CreateProfile());
+        screenName: isProfileCompleted
+            ? Dashboard()
+            : CreateProfile(id: signInModel.result!.admin!.id!));
   }
 
   @override
