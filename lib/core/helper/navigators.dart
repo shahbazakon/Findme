@@ -23,7 +23,7 @@ class BouncingNavigation extends PageRouteBuilder {
               );
             },
             pageBuilder: (BuildContext context, Animation<double> animation,
-                Animation<double> secanimation) {
+                Animation<double> secAnimation) {
               return widget;
             });
 }
@@ -96,7 +96,7 @@ class FadeNavigation extends PageRouteBuilder {
               );
             },
             pageBuilder: (BuildContext context, Animation<double> animation,
-                Animation<double> secanimation) {
+                Animation<double> secAnimation) {
               return widget;
             });
 }
@@ -215,8 +215,8 @@ materialNavigator({required Widget screenName, NavigatorType? type}) {
       return;
   }
 }
-// Navifations
 
+// Navigation
 void logInNavigator() {
   bool isOnBoardingCompleted =
       sharedPreferences?.getBool(LocaleStorageKey.isOnBoardingCompleted) ??

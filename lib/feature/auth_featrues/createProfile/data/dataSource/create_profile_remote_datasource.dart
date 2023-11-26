@@ -53,7 +53,7 @@ class CreateProfileRemoteDataSource {
             sharedPreferences!.getString(LocaleStorageKey.xAuthToken),
       };
       final Response response = await api.sendRequest.patch(
-        "/admin/update/64e486f81204ed8005072b91",
+        "/admin/update/$id",
         data: data,
         options: Options(headers: headers),
       );

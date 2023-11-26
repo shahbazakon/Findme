@@ -1,12 +1,14 @@
 import 'package:find_me/core/constants/theme_constants.dart';
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/profile_picture_avatar.dart';
-import 'package:find_me/feature/auth_featrues/createProfile/data/dataSource/create_profile_remote_data_spurce.dart';
+import 'package:find_me/feature/auth_featrues/createProfile/data/dataSource/create_profile_remote_datasource.dart';
 import 'package:find_me/feature/auth_featrues/createProfile/data/models/complete_profile_model.dart';
+import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -124,9 +126,9 @@ class _CreateProfileState extends State<CreateProfile> {
                       country: _countryController.text,
                       countryCode: _statusCodeController.text,
                       statue: _statusCodeController.text);
-                  // cupertinoNavigator(
-                  //     type: NavigatorType.PUSHREMOVEUNTIL,
-                  //     screenName: Dashboard());
+                  cupertinoNavigator(
+                      type: NavigatorType.PUSHREMOVEUNTIL,
+                      screenName: Dashboard());
                 },
               ),
             ],

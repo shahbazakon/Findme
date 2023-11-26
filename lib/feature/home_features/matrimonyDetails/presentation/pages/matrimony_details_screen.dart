@@ -9,6 +9,8 @@ import 'package:find_me/core/widget/Input%20Field/custom_test_field_2.dart';
 import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
+import 'package:find_me/feature/home_features/matrimonyDetails/data/datasSource/matrimonial_remote_datasource.dart';
+import 'package:find_me/feature/home_features/matrimonyDetails/data/models/matrimonial_%20Model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -54,7 +56,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   final TextEditingController _countryCodeController = TextEditingController();
   final TextEditingController _selfPhoneNumber1Controller =
       TextEditingController();
-  final TextEditingController _officePhoneNumber2Controller =
+  final TextEditingController _parentsPhoneNumber2Controller =
       TextEditingController();
   final TextEditingController _coverImageController = TextEditingController();
   final TextEditingController _videoController = TextEditingController();
@@ -99,7 +101,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
     _addressLine2Controller.dispose();
     _countryCodeController.dispose();
     _selfPhoneNumber1Controller.dispose();
-    _officePhoneNumber2Controller.dispose();
+    _parentsPhoneNumber2Controller.dispose();
     _dobController.dispose();
     _videoController.dispose();
     _coverImageController.dispose();
@@ -502,7 +504,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                   Expanded(
                     flex: 82,
                     child: CustomTestField2(
-                      controller: _officePhoneNumber2Controller,
+                      controller: _parentsPhoneNumber2Controller,
                       label: "${translate!.phoneNumber}(${translate!.parents})",
                       hintText: translate!.phoneNumber,
                     ),
@@ -566,7 +568,38 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                 child: AppButton(
                     label: translate!.save,
                     onPressed: () {
-                      Navigator.pop(context);
+                      MatrimonialRemoteDataSource().createPortfolio(
+                          data: MatrimonialModel(
+                              result: Result(
+                        cardTitle: "Matrimonial",
+                        suffix: _prefixController.text,
+                        firstName: _firstNameController.text,
+                        middleName: _middleNameController.text,
+                        lastName: _lastNameController.text,
+                        occupation: _occupationController.text,
+                        educationLevel: _educationLevelController.text,
+                        maritalStatus: _maritalStatusController.text,
+                        numberOfChildren: _childrenController.text,
+                        // dob: _dobController.text.isNotEmpty
+                        //     ? DateTime.parse(_dobController.text)
+                        //     : null,
+                        height: _heightController.text,
+                        weight: _weightController.text,
+                        religion: _religionController.text,
+                        caste: _casteController.text,
+                        prayers: _prayersController.text,
+                        thingsLikeToDo:
+                            _likesController.map((e) => e.text).toList(),
+                        badHabbit:
+                            _dislikesController.map((e) => e.text).toList(),
+                        primaryAddress: _addressLine1Controller.text,
+                        secondaryAddress: _addressLine2Controller.text,
+                        primaryEmail: _emailController.text,
+                        parentPhoneNumber: _parentsPhoneNumber2Controller.text,
+                        social: _socialMediaURLController.map((e) {
+                          return Social(label: e.text);
+                        }).toList(),
+                      )));
                     }),
               )
             ],
