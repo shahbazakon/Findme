@@ -1,10 +1,14 @@
 import 'dart:convert';
 
-import 'package:find_me/feature/home_features/academicDetails/data/Models/protfolio_model.dart';
+import 'package:find_me/core/models/certification_link_model.dart';
+import 'package:find_me/core/models/logo_model.dart';
+import 'package:find_me/core/models/mobile_model.dart';
+import 'package:find_me/core/models/social_model.dart';
+import 'package:find_me/core/models/video_link_model.dart';
 
 class MatrimonialModel {
   final bool? success;
-  final Result? result;
+  final MatrimonialResult? result;
   final String? message;
 
   MatrimonialModel({
@@ -15,7 +19,7 @@ class MatrimonialModel {
 
   MatrimonialModel copyWith({
     bool? success,
-    Result? result,
+    MatrimonialResult? result,
     String? message,
   }) =>
       MatrimonialModel(
@@ -32,7 +36,9 @@ class MatrimonialModel {
   factory MatrimonialModel.fromJson(Map<String, dynamic> json) =>
       MatrimonialModel(
         success: json["success"],
-        result: json["result"] == null ? null : Result.fromJson(json["result"]),
+        result: json["result"] == null
+            ? null
+            : MatrimonialResult.fromJson(json["result"]),
         message: json["message"],
       );
 
@@ -43,7 +49,7 @@ class MatrimonialModel {
       };
 }
 
-class Result {
+class MatrimonialResult {
   final List<dynamic>? officeDays;
   final List<dynamic>? skills;
   final List<dynamic>? degreeLevel;
@@ -110,7 +116,7 @@ class Result {
   final int? id;
   final int? v;
 
-  Result({
+  MatrimonialResult({
     this.officeDays,
     this.skills,
     this.degreeLevel,
@@ -178,7 +184,7 @@ class Result {
     this.v,
   });
 
-  Result copyWith({
+  MatrimonialResult copyWith({
     List<dynamic>? officeDays,
     List<dynamic>? skills,
     List<dynamic>? degreeLevel,
@@ -245,7 +251,7 @@ class Result {
     int? id,
     int? v,
   }) =>
-      Result(
+      MatrimonialResult(
         officeDays: officeDays ?? this.officeDays,
         skills: skills ?? this.skills,
         degreeLevel: degreeLevel ?? this.degreeLevel,
@@ -313,11 +319,13 @@ class Result {
         v: v ?? this.v,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory MatrimonialResult.fromRawJson(String str) =>
+      MatrimonialResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory MatrimonialResult.fromJson(Map<String, dynamic> json) =>
+      MatrimonialResult(
         officeDays: json["officeDays"] == null
             ? []
             : List<dynamic>.from(json["officeDays"]!.map((x) => x)),
@@ -542,107 +550,5 @@ class Result {
         "updatedAt": updatedAt?.toIso8601String(),
         "Id": id,
         "__v": v,
-      };
-}
-
-class Logo {
-  final String? id;
-  final String? url;
-  final String? thumbUrl;
-  final String? uid;
-  final String? name;
-  final String? status;
-  final String? type;
-
-  Logo({
-    this.id,
-    this.url,
-    this.thumbUrl,
-    this.uid,
-    this.name,
-    this.status,
-    this.type,
-  });
-
-  Logo copyWith({
-    String? id,
-    String? url,
-    String? thumbUrl,
-    String? uid,
-    String? name,
-    String? status,
-    String? type,
-  }) =>
-      Logo(
-        id: id ?? this.id,
-        url: url ?? this.url,
-        thumbUrl: thumbUrl ?? this.thumbUrl,
-        uid: uid ?? this.uid,
-        name: name ?? this.name,
-        status: status ?? this.status,
-        type: type ?? this.type,
-      );
-
-  factory Logo.fromRawJson(String str) => Logo.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Logo.fromJson(Map<String, dynamic> json) => Logo(
-        id: json["_id"],
-        url: json["url"],
-        thumbUrl: json["thumbUrl"],
-        uid: json["uid"],
-        name: json["name"],
-        status: json["status"],
-        type: json["type"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "url": url,
-        "thumbUrl": thumbUrl,
-        "uid": uid,
-        "name": name,
-        "status": status,
-        "type": type,
-      };
-}
-
-class Social {
-  final String? id;
-  final String? title;
-  final String? label;
-
-  Social({
-    this.id,
-    this.title,
-    this.label,
-  });
-
-  Social copyWith({
-    String? id,
-    String? title,
-    String? label,
-  }) =>
-      Social(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        label: label ?? this.label,
-      );
-
-  factory Social.fromRawJson(String str) => Social.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Social.fromJson(Map<String, dynamic> json) => Social(
-        id: json["_id"],
-        title: json["title"],
-        label: json["label"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "title": title,
-        "label": label,
       };
 }

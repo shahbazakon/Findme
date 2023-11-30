@@ -9,10 +9,10 @@ class MatrimonialPortfolioLoading extends MatrimonialPortfolioState {}
 
 class MatrimonialPortfolioLoaded extends MatrimonialPortfolioState {
   final MatrimonialModel matrimonialModel;
-  MatrimonialPortfolioLoaded(this.matrimonialModel);
+  MatrimonialPortfolioLoaded({required this.matrimonialModel});
 }
 
 class MatrimonialPortfolioError extends MatrimonialPortfolioState {
   final String errorMsg;
-  MatrimonialPortfolioError(this.errorMsg);
+  MatrimonialPortfolioError({required this.errorMsg});
 }

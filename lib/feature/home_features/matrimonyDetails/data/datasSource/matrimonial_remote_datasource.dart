@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:find_me/core/api%20/api.dart';
 import 'package:find_me/core/constants/local_storege_key.dart';
@@ -9,6 +11,7 @@ class MatrimonialRemoteDataSource {
   API api = API();
   Future<MatrimonialModel> createPortfolio(
       {required MatrimonialModel data}) async {
+    log("data: ${data.toJson()}");
     try {
       // Replace this with your actual headers
       Map<String, dynamic> headers = {

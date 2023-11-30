@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/navigators.dart';
@@ -10,7 +12,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../constants/theme_constants.dart';
 
-class SuccessScreen extends StatelessWidget {
+class SuccessScreen extends StatefulWidget {
   const SuccessScreen(
       {super.key,
       this.subTitle,
@@ -21,6 +23,20 @@ class SuccessScreen extends StatelessWidget {
   final String? subTitle;
   final Widget? subTitleWidget;
   final bool isHomeButtonVisible;
+
+  @override
+  State<SuccessScreen> createState() => _SuccessScreenState();
+}
+
+class _SuccessScreenState extends State<SuccessScreen> {
+  @override
+  void initState() {
+    Timer(const Duration(seconds: 5), () {
+      Navigator.pop(context);
+      Navigator.pop(context);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,22 +69,22 @@ class SuccessScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * .05),
                 Text(
-                  title ?? translate!.successful,
+                  widget.title ?? translate!.successful,
                   textAlign: TextAlign.center,
                   style: TitleHelper.h7,
                 ),
                 SizedBox(height: height * .02),
-                subTitleWidget ?? const SizedBox.shrink(),
+                widget.subTitleWidget ?? const SizedBox.shrink(),
                 Visibility(
-                  visible: subTitle != null,
+                  visible: widget.subTitle != null,
                   child: Text(
-                    "$subTitle",
+                    "${widget.subTitle}",
                     textAlign: TextAlign.center,
                     style: SubTitleHelper.h10,
                   ),
                 ),
               ]),
-              isHomeButtonVisible
+              widget.isHomeButtonVisible
                   ? Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: InkWell(

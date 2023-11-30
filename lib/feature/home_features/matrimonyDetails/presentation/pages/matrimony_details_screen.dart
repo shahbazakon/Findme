@@ -2,16 +2,22 @@ import 'package:file_picker/file_picker.dart';
 import 'package:find_me/core/constants/constants_variables.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/formatter.dart';
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/helper/validator.dart';
+import 'package:find_me/core/models/mobile_model.dart';
+import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field_2.dart';
 import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
-import 'package:find_me/feature/home_features/matrimonyDetails/data/datasSource/matrimonial_remote_datasource.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/core/widget/success_screen.dart';
 import 'package:find_me/feature/home_features/matrimonyDetails/data/models/matrimonial_%20Model.dart';
+import 'package:find_me/feature/home_features/matrimonyDetails/presentation/cubit/matrimonial_portfolio_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MatrimonyDetailsScreen extends StatefulWidget {
@@ -53,7 +59,8 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _addressLine1Controller = TextEditingController();
   final TextEditingController _addressLine2Controller = TextEditingController();
-  final TextEditingController _countryCodeController = TextEditingController();
+  final TextEditingController _countryCode1Controller = TextEditingController();
+  final TextEditingController _countryCode2Controller = TextEditingController();
   final TextEditingController _selfPhoneNumber1Controller =
       TextEditingController();
   final TextEditingController _parentsPhoneNumber2Controller =
@@ -99,7 +106,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
     _emailController.dispose();
     _addressLine1Controller.dispose();
     _addressLine2Controller.dispose();
-    _countryCodeController.dispose();
+    _countryCode1Controller.dispose();
     _selfPhoneNumber1Controller.dispose();
     _parentsPhoneNumber2Controller.dispose();
     _dobController.dispose();
@@ -465,7 +472,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                       margin: const EdgeInsets.only(top: 30),
                       child: CustomCountryCodePicker(
                         onChanged: (value) {
-                          _countryCodeController.text = value.code!;
+                          _countryCode1Controller.text = value.code!;
                         },
                       ),
                     ),
@@ -493,7 +500,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                       margin: const EdgeInsets.only(top: 30),
                       child: CustomCountryCodePicker(
                         onChanged: (value) {
-                          _countryCodeController.text = value.code!;
+                          _countryCode2Controller.text = value.code!;
                         },
                       ),
                     ),
@@ -524,7 +531,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                                 controller: entry.value,
                                 label: entry.key + 1 == 1
                                     ? translate!.socialMedia
-                                    : '"${translate!.socialMedia}" ${entry.key + 1}',
+                                    : '${translate!.socialMedia} ${entry.key + 1}',
                                 hintText:
                                     "${translate!.add} ${translate!.profile} ${translate!.url}",
                               ))
@@ -565,42 +572,69 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: AppButton(
-                    label: translate!.save,
-                    onPressed: () {
-                      MatrimonialRemoteDataSource().createPortfolio(
-                          data: MatrimonialModel(
-                              result: Result(
-                        cardTitle: "Matrimonial",
-                        suffix: _prefixController.text,
-                        firstName: _firstNameController.text,
-                        middleName: _middleNameController.text,
-                        lastName: _lastNameController.text,
-                        occupation: _occupationController.text,
-                        educationLevel: _educationLevelController.text,
-                        maritalStatus: _maritalStatusController.text,
-                        numberOfChildren: _childrenController.text,
-                        // dob: _dobController.text.isNotEmpty
-                        //     ? DateTime.parse(_dobController.text)
-                        //     : null,
-                        height: _heightController.text,
-                        weight: _weightController.text,
-                        religion: _religionController.text,
-                        caste: _casteController.text,
-                        prayers: _prayersController.text,
-                        thingsLikeToDo:
-                            _likesController.map((e) => e.text).toList(),
-                        badHabbit:
-                            _dislikesController.map((e) => e.text).toList(),
-                        primaryAddress: _addressLine1Controller.text,
-                        secondaryAddress: _addressLine2Controller.text,
-                        primaryEmail: _emailController.text,
-                        parentPhoneNumber: _parentsPhoneNumber2Controller.text,
-                        social: _socialMediaURLController.map((e) {
-                          return Social(label: e.text);
-                        }).toList(),
-                      )));
-                    }),
+                child: BlocConsumer<MatrimonialPortfolioCubit,
+                    MatrimonialPortfolioState>(
+                  listener: (context, state) {
+                    if (state is MatrimonialPortfolioLoaded) {
+                      cupertinoNavigator(
+                          screenName: const SuccessScreen(
+                        subTitle: "Matrimonial Details Added Successfully ",
+                        isHomeButtonVisible: false,
+                      ));
+                    } else if (state is MatrimonialPortfolioError) {
+                      showSnackBar(title: state.errorMsg);
+                    }
+                  },
+                  builder: (context, state) {
+                    return AppButton(
+                        label: translate!.save,
+                        isLoading: state is MatrimonialPortfolioLoading,
+                        onPressed: () {
+                          //TODO: @shahbaz Add upload image and video
+                          context
+                              .read<MatrimonialPortfolioCubit>()
+                              .createMatrimonialPortfolio(
+                                  data: MatrimonialModel(
+                                      result: MatrimonialResult(
+                                cardTitle: "Matrimonial",
+                                suffix: _prefixController.text,
+                                firstName: _firstNameController.text,
+                                middleName: _middleNameController.text,
+                                lastName: _lastNameController.text,
+                                occupation: _occupationController.text,
+                                educationLevel: _educationLevelController.text,
+                                maritalStatus: _maritalStatusController.text,
+                                numberOfChildren: _childrenController.text,
+                                dob: pickedDate,
+                                height: _heightController.text,
+                                weight: _weightController.text,
+                                religion: _religionController.text,
+                                caste: _casteController.text,
+                                prayers: _prayersController.text,
+                                thingsLikeToDo: _likesController
+                                    .map((e) => e.text)
+                                    .toList(),
+                                badHabbit: _dislikesController
+                                    .map((e) => e.text)
+                                    .toList(),
+                                primaryAddress: _addressLine1Controller.text,
+                                secondaryAddress: _addressLine2Controller.text,
+                                primaryEmail: _emailController.text,
+                                mobile: [
+                                  Mobile(
+                                      label: "PhoneNumber Self",
+                                      number: _selfPhoneNumber1Controller.text)
+                                ],
+                                parentPhoneNumber:
+                                    _countryCode1Controller.text +
+                                        _parentsPhoneNumber2Controller.text,
+                                social: _socialMediaURLController.map((e) {
+                                  return Social(label: e.text);
+                                }).toList(),
+                              )));
+                        });
+                  },
+                ),
               )
             ],
           )),

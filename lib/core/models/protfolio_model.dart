@@ -9,7 +9,7 @@ import 'package:find_me/core/models/video_link_model.dart';
 
 class PortfolioModel {
   final bool? success;
-  final Result? result;
+  final PortfolioResult? result;
   final String? message;
 
   PortfolioModel({
@@ -20,7 +20,7 @@ class PortfolioModel {
 
   PortfolioModel copyWith({
     bool? success,
-    Result? result,
+    PortfolioResult? result,
     String? message,
   }) =>
       PortfolioModel(
@@ -36,7 +36,9 @@ class PortfolioModel {
 
   factory PortfolioModel.fromJson(Map<String, dynamic> json) => PortfolioModel(
         success: json["success"],
-        result: json["result"] == null ? null : Result.fromJson(json["result"]),
+        result: json["result"] == null
+            ? null
+            : PortfolioResult.fromJson(json["result"]),
         message: json["message"],
       );
 
@@ -47,7 +49,7 @@ class PortfolioModel {
       };
 }
 
-class Result {
+class PortfolioResult {
   final List<dynamic>? officeDays;
   final List<String>? skills;
   final List<dynamic>? degreeLevel;
@@ -96,7 +98,7 @@ class Result {
   final int? id;
   final int? v;
 
-  Result({
+  PortfolioResult({
     this.officeDays,
     this.skills,
     this.degreeLevel,
@@ -146,7 +148,7 @@ class Result {
     this.v,
   });
 
-  Result copyWith({
+  PortfolioResult copyWith({
     List<dynamic>? officeDays,
     List<String>? skills,
     List<dynamic>? degreeLevel,
@@ -195,7 +197,7 @@ class Result {
     int? id,
     int? v,
   }) =>
-      Result(
+      PortfolioResult(
         officeDays: officeDays ?? this.officeDays,
         skills: skills ?? this.skills,
         degreeLevel: degreeLevel ?? this.degreeLevel,
@@ -245,11 +247,13 @@ class Result {
         v: v ?? this.v,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory PortfolioResult.fromRawJson(String str) =>
+      PortfolioResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory PortfolioResult.fromJson(Map<String, dynamic> json) =>
+      PortfolioResult(
         officeDays: json["officeDays"] == null
             ? []
             : List<dynamic>.from(json["officeDays"]!.map((x) => x)),
