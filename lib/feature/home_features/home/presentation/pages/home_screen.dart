@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     customGridTile(
                         title: translate!.academic,
                         image:
-                            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=3628&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
                         onTap: () {
                           cupertinoNavigator(
                               screenName: const AcademicDetailsScreen());

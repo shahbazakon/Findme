@@ -619,7 +619,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                                     .toList(),
                                 primaryAddress: _addressLine1Controller.text,
                                 secondaryAddress: _addressLine2Controller.text,
-                                primaryEmail: _emailController.text,
+                                primaryEmail: _emailController.text.trim(),
                                 mobile: [
                                   Mobile(
                                       label: "PhoneNumber Self",

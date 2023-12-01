@@ -5,6 +5,7 @@ import 'package:find_me/core/models/certification_link_model.dart';
 import 'package:find_me/core/models/college_detail_model.dart';
 import 'package:find_me/core/models/cover_letter_model.dart';
 import 'package:find_me/core/models/mobile_model.dart';
+import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/models/video_link_model.dart';
 
 class PortfolioModel {
@@ -81,7 +82,7 @@ class PortfolioResult {
   final List<Achievement>? achievements;
   final List<Achievement>? certification;
   final List<Mobile>? mobile;
-  final List<Achievement>? social;
+  final List<Social>? social;
   final List<VideoLink>? videoLink;
   final List<CertificationLink>? certificationLink;
   final String? websiteLink;
@@ -180,7 +181,7 @@ class PortfolioResult {
     List<Achievement>? achievements,
     List<Achievement>? certification,
     List<Mobile>? mobile,
-    List<Achievement>? social,
+    List<Social>? social,
     List<VideoLink>? videoLink,
     List<CertificationLink>? certificationLink,
     String? websiteLink,
@@ -315,8 +316,7 @@ class PortfolioResult {
             : List<Mobile>.from(json["mobile"]!.map((x) => Mobile.fromJson(x))),
         social: json["social"] == null
             ? []
-            : List<Achievement>.from(
-                json["social"]!.map((x) => Achievement.fromJson(x))),
+            : List<Social>.from(json["social"]!.map((x) => Social.fromJson(x))),
         videoLink: json["videoLink"] == null
             ? []
             : List<VideoLink>.from(

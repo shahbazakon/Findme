@@ -4,7 +4,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:find_me/core/constants/constants_variables.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/formatter.dart';
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/helper/validator.dart';
+import 'package:find_me/core/models/archievement_model.dart';
+import 'package:find_me/core/models/mobile_model.dart';
+import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field_2.dart';
@@ -12,9 +17,13 @@ import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/button/app_switch_button.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/dialogBox/add_project_pop.dart';
 import 'package:find_me/core/widget/project_tile.dart';
+import 'package:find_me/core/widget/success_screen.dart';
+import 'package:find_me/feature/home_features/academicDetails/presentation/cubit/academic_details_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AcademicDetailsScreen extends StatefulWidget {
@@ -41,7 +50,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   final TextEditingController _prefixController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _addressLine1Controller = TextEditingController();
-  final TextEditingController _countryCodeController = TextEditingController();
+  final TextEditingController _countryCode1Controller = TextEditingController();
+  final TextEditingController _countryCode2Controller = TextEditingController();
   final TextEditingController _phoneNumber1Controller = TextEditingController();
   final TextEditingController _phoneNumber2Controller = TextEditingController();
   final TextEditingController _coverImageController = TextEditingController();
@@ -77,7 +87,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
     _prefixController.dispose();
     _emailController.dispose();
     _addressLine1Controller.dispose();
-    _countryCodeController.dispose();
+    _countryCode1Controller.dispose();
     _phoneNumber1Controller.dispose();
     _phoneNumber2Controller.dispose();
     _dobController.dispose();
@@ -288,7 +298,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                       margin: const EdgeInsets.only(top: 30),
                       child: CustomCountryCodePicker(
                         onChanged: (value) {
-                          _countryCodeController.text = value.code!;
+                          _countryCode1Controller.text = value.code!;
                         },
                       ),
                     ),
@@ -334,7 +344,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                       margin: const EdgeInsets.only(top: 30),
                       child: CustomCountryCodePicker(
                         onChanged: (value) {
-                          _countryCodeController.text = value.code!;
+                          _countryCode2Controller.text = value.code!;
                         },
                       ),
                     ),
@@ -572,11 +582,64 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: AppButton(
-                    label: translate!.save,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
+                child: BlocConsumer<AcademicDetailsCubit, AcademicDetailsState>(
+                  listener: (context, state) {
+                    if (state is AcademicDetailsLoaded) {
+                      cupertinoNavigator(
+                          screenName: const SuccessScreen(
+                        subTitle: "Matrimonial Details Added Successfully ",
+                        isHomeButtonVisible: false,
+                      ));
+                    } else if (state is AcademicDetailsError) {
+                      showSnackBar(title: state.errorMsg);
+                    }
+                  },
+                  builder: (context, state) {
+                    return AppButton(
+                        label: translate!.save,
+                        isLoading: state is AcademicDetailsLoading,
+                        onPressed: () {
+                          context
+                              .read<AcademicDetailsCubit>()
+                              .createAcademicDetails(
+                                  data: PortfolioModel(
+                                      result: PortfolioResult(
+                                suffix: _prefixController.text,
+                                firstName: _firstNameController.text,
+                                middleName: _middleNameController.text,
+                                lastName: _lastNameController.text,
+                                dob: pickedDate,
+                                primaryEmail: _emailController.text.trim(),
+                                primaryAddress: _addressLine1Controller.text,
+                                mobile: [
+                                  Mobile(
+                                      label: translate.phoneNumber,
+                                      number: _phoneNumber1Controller.text,
+                                      phoneCode: _phoneNumber1Controller.text),
+                                  Mobile(
+                                      label:
+                                          "${translate.phoneNumber}(${translate.additional})",
+                                      number: _phoneNumber2Controller.text,
+                                      phoneCode: _phoneNumber2Controller.text)
+                                ],
+                                social: _socialMediaURLController.map((e) {
+                                  return Social(label: e.text);
+                                }).toList(),
+                                programmingLanguage: [
+                                  _programmingLanguageController.text
+                                ],
+                                //TODO: @shahbaz add project request body,
+                                skills: _skillsController
+                                    .map((e) => e.text)
+                                    .toList(),
+                                certification: _certificationsController
+                                    .map((e) => Achievement(title: e.text))
+                                    .toList(),
+                                //TODO: add document upload body
+                              )));
+                        });
+                  },
+                ),
               )
             ],
           )),
