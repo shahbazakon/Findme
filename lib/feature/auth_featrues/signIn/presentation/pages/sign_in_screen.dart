@@ -70,8 +70,8 @@ class _SignInScreenState extends State<SignInScreen> {
     log("signInModel.result!.admin!.id!: ${signInModel.result!.admin!.id!}");
     await sharedPreferences!
         .setString(LocaleStorageKey.userID, signInModel.result!.admin!.id!);
-    await sharedPreferences!
-        .setString(LocaleStorageKey.xAuthToken, signInModel.result!.token!);
+    await sharedPreferences!.setString(
+        LocaleStorageKey.xAuthToken, signInModel.result?.token ?? "");
     bool isProfileCompleted =
         signInModel.result?.admin?.isCompeletProfile ?? false;
 

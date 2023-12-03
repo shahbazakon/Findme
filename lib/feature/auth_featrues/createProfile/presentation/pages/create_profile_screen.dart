@@ -5,15 +5,18 @@ import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/profile_picture_avatar.dart';
-import 'package:find_me/feature/auth_featrues/createProfile/data/dataSource/create_profile_remote_datasource.dart';
 import 'package:find_me/feature/auth_featrues/createProfile/data/models/complete_profile_model.dart';
+import 'package:find_me/feature/auth_featrues/createProfile/presentation/cubit/create_profile_cubit.dart';
 import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateProfile extends StatefulWidget {
   final String id;
+
   const CreateProfile({super.key, required this.id});
 
   @override
@@ -29,7 +32,7 @@ class _CreateProfileState extends State<CreateProfile> {
   final TextEditingController _phoneNumberCodeController =
       TextEditingController();
 
-  CompleteProfileModel? profileModel;
+  ProfileModel? profileModel;
 
   @override
   void dispose() {
@@ -40,6 +43,24 @@ class _CreateProfileState extends State<CreateProfile> {
     _countryController.dispose();
     _statusCodeController.dispose();
     super.dispose();
+  }
+
+  // Submit Form
+  void submitForm() {
+    context.read<CreateProfileCubit>().createProfile(
+            data: ProfileModel(
+          result: ProfileResult(
+            resultId: widget.id,
+            name: _nameController.text,
+            email: _emailController.text,
+            country: _countryController.text,
+            phoneCode: _statusCodeController.text,
+            ipDetail: IpDetail(
+                countryCode: _countryController.text,
+                state: _statusCodeController.text),
+            isLoggedIn: true,
+          ),
+        ));
   }
 
   @override
@@ -116,19 +137,22 @@ class _CreateProfileState extends State<CreateProfile> {
                 controller: _statusCodeController,
                 label: translate!.status,
               ),
-              AppButton(
-                label: translate!.completeProfile,
-                onPressed: () {
-                  CreateProfileRemoteDataSource().createProfile(
-                      id: widget.id,
-                      name: _nameController.text,
-                      email: _emailController.text,
-                      country: _countryController.text,
-                      countryCode: _statusCodeController.text,
-                      statue: _statusCodeController.text);
-                  cupertinoNavigator(
-                      type: NavigatorType.PUSHREMOVEUNTIL,
-                      screenName: Dashboard());
+              BlocConsumer<CreateProfileCubit, CreateProfileState>(
+                listener: (context, state) {
+                  if (state is CreateProfileLoaded) {
+                    cupertinoNavigator(
+                        type: NavigatorType.PUSHREMOVEUNTIL,
+                        screenName: Dashboard());
+                  } else if (state is CreateProfileError) {
+                    showSnackBar(title: state.errorMsg);
+                  }
+                },
+                builder: (context, state) {
+                  return AppButton(
+                    label: translate.completeProfile,
+                    isLoading: state is CreateProfileLoading,
+                    onPressed: submitForm,
+                  );
                 },
               ),
             ],

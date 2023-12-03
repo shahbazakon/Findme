@@ -1,36 +1,37 @@
 import 'dart:convert';
 
-class CompleteProfileModel {
+class ProfileModel {
   final bool? success;
-  final Result? result;
+  final ProfileResult? result;
   final String? message;
 
-  CompleteProfileModel({
+  ProfileModel({
     this.success,
     this.result,
     this.message,
   });
 
-  CompleteProfileModel copyWith({
+  ProfileModel copyWith({
     bool? success,
-    Result? result,
+    ProfileResult? result,
     String? message,
   }) =>
-      CompleteProfileModel(
+      ProfileModel(
         success: success ?? this.success,
         result: result ?? this.result,
         message: message ?? this.message,
       );
 
-  factory CompleteProfileModel.fromRawJson(String str) =>
-      CompleteProfileModel.fromJson(json.decode(str));
+  factory ProfileModel.fromRawJson(String str) =>
+      ProfileModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory CompleteProfileModel.fromJson(Map<String, dynamic> json) =>
-      CompleteProfileModel(
+  factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         success: json["success"],
-        result: json["result"] == null ? null : Result.fromJson(json["result"]),
+        result: json["result"] == null
+            ? null
+            : ProfileResult.fromJson(json["result"]),
         message: json["message"],
       );
 
@@ -41,7 +42,7 @@ class CompleteProfileModel {
       };
 }
 
-class Result {
+class ProfileResult {
   final IpDetail? ipDetail;
   final bool? removed;
   final bool? enabled;
@@ -73,7 +74,7 @@ class Result {
   final int? otp;
   final String? tag;
 
-  Result({
+  ProfileResult({
     this.ipDetail,
     this.removed,
     this.enabled,
@@ -106,7 +107,7 @@ class Result {
     this.tag,
   });
 
-  Result copyWith({
+  ProfileResult copyWith({
     IpDetail? ipDetail,
     bool? removed,
     bool? enabled,
@@ -138,7 +139,7 @@ class Result {
     int? otp,
     String? tag,
   }) =>
-      Result(
+      ProfileResult(
         ipDetail: ipDetail ?? this.ipDetail,
         removed: removed ?? this.removed,
         enabled: enabled ?? this.enabled,
@@ -171,11 +172,12 @@ class Result {
         tag: tag ?? this.tag,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory ProfileResult.fromRawJson(String str) =>
+      ProfileResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory ProfileResult.fromJson(Map<String, dynamic> json) => ProfileResult(
         ipDetail: json["ipDetail"] == null
             ? null
             : IpDetail.fromJson(json["ipDetail"]),
