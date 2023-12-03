@@ -206,6 +206,43 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
     }
   }
 
+  //submit Form
+  void submitForm() {
+    AppLocalizations? translate = AppLocalizations.of(context);
+    context.read<AcademicDetailsCubit>().createAcademicDetails(
+            data: PortfolioModel(
+                result: PortfolioResult(
+          cardTitle: "Academic",
+          suffix: _prefixController.text,
+          firstName: _firstNameController.text,
+          middleName: _middleNameController.text,
+          lastName: _lastNameController.text,
+          dob: pickedDate,
+          primaryEmail: _emailController.text.trim(),
+          primaryAddress: _addressLine1Controller.text,
+          mobile: [
+            Mobile(
+                label: translate!.phoneNumber,
+                number: _phoneNumber1Controller.text,
+                phoneCode: _phoneNumber1Controller.text),
+            Mobile(
+                label: "${translate.phoneNumber}(${translate.additional})",
+                number: _phoneNumber2Controller.text,
+                phoneCode: _phoneNumber2Controller.text)
+          ],
+          social: _socialMediaURLController.map((e) {
+            return Social(title: e.text);
+          }).toList(),
+          programmingLanguage: [_programmingLanguageController.text],
+          //TODO: @shahbaz add project request body,
+          skills: _skillsController.map((e) => e.text).toList(),
+          certification: _certificationsController
+              .map((e) => Achievement(title: e.text))
+              .toList(),
+          //TODO: add document upload body
+        )));
+  }
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
@@ -587,7 +624,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                     if (state is AcademicDetailsLoaded) {
                       cupertinoNavigator(
                           screenName: const SuccessScreen(
-                        subTitle: "Matrimonial Details Added Successfully ",
+                        subTitle: "Academic Details Added Successfully ",
                         isHomeButtonVisible: false,
                       ));
                     } else if (state is AcademicDetailsError) {
@@ -598,46 +635,7 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
                     return AppButton(
                         label: translate!.save,
                         isLoading: state is AcademicDetailsLoading,
-                        onPressed: () {
-                          context
-                              .read<AcademicDetailsCubit>()
-                              .createAcademicDetails(
-                                  data: PortfolioModel(
-                                      result: PortfolioResult(
-                                suffix: _prefixController.text,
-                                firstName: _firstNameController.text,
-                                middleName: _middleNameController.text,
-                                lastName: _lastNameController.text,
-                                dob: pickedDate,
-                                primaryEmail: _emailController.text.trim(),
-                                primaryAddress: _addressLine1Controller.text,
-                                mobile: [
-                                  Mobile(
-                                      label: translate.phoneNumber,
-                                      number: _phoneNumber1Controller.text,
-                                      phoneCode: _phoneNumber1Controller.text),
-                                  Mobile(
-                                      label:
-                                          "${translate.phoneNumber}(${translate.additional})",
-                                      number: _phoneNumber2Controller.text,
-                                      phoneCode: _phoneNumber2Controller.text)
-                                ],
-                                social: _socialMediaURLController.map((e) {
-                                  return Social(label: e.text);
-                                }).toList(),
-                                programmingLanguage: [
-                                  _programmingLanguageController.text
-                                ],
-                                //TODO: @shahbaz add project request body,
-                                skills: _skillsController
-                                    .map((e) => e.text)
-                                    .toList(),
-                                certification: _certificationsController
-                                    .map((e) => Achievement(title: e.text))
-                                    .toList(),
-                                //TODO: add document upload body
-                              )));
-                        });
+                        onPressed: submitForm);
                   },
                 ),
               )

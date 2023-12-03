@@ -237,6 +237,45 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
     }
   }
 
+  //API call
+  void apiCall() {
+    //TODO: @shahbaz Add upload image and video
+    context.read<MatrimonialPortfolioCubit>().createMatrimonialPortfolio(
+            data: MatrimonialModel(
+                result: MatrimonialResult(
+          cardTitle: "Matrimonial",
+          suffix: _prefixController.text,
+          firstName: _firstNameController.text,
+          middleName: _middleNameController.text,
+          lastName: _lastNameController.text,
+          occupation: _occupationController.text,
+          educationLevel: _educationLevelController.text,
+          maritalStatus: _maritalStatusController.text,
+          numberOfChildren: _childrenController.text,
+          dob: pickedDate,
+          height: _heightController.text,
+          weight: _weightController.text,
+          religion: _religionController.text,
+          caste: _casteController.text,
+          prayers: _prayersController.text,
+          thingsLikeToDo: _likesController.map((e) => e.text).toList(),
+          badHabbit: _dislikesController.map((e) => e.text).toList(),
+          primaryAddress: _addressLine1Controller.text,
+          secondaryAddress: _addressLine2Controller.text,
+          primaryEmail: _emailController.text.trim(),
+          mobile: [
+            Mobile(
+                label: "PhoneNumber Self",
+                number: _selfPhoneNumber1Controller.text)
+          ],
+          parentPhoneNumber: _countryCode1Controller.text +
+              _parentsPhoneNumber2Controller.text,
+          social: _socialMediaURLController.map((e) {
+            return Social(title: e.text);
+          }).toList(),
+        )));
+  }
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
@@ -589,50 +628,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
                     return AppButton(
                         label: translate!.save,
                         isLoading: state is MatrimonialPortfolioLoading,
-                        onPressed: () {
-                          //TODO: @shahbaz Add upload image and video
-                          context
-                              .read<MatrimonialPortfolioCubit>()
-                              .createMatrimonialPortfolio(
-                                  data: MatrimonialModel(
-                                      result: MatrimonialResult(
-                                cardTitle: "Matrimonial",
-                                suffix: _prefixController.text,
-                                firstName: _firstNameController.text,
-                                middleName: _middleNameController.text,
-                                lastName: _lastNameController.text,
-                                occupation: _occupationController.text,
-                                educationLevel: _educationLevelController.text,
-                                maritalStatus: _maritalStatusController.text,
-                                numberOfChildren: _childrenController.text,
-                                dob: pickedDate,
-                                height: _heightController.text,
-                                weight: _weightController.text,
-                                religion: _religionController.text,
-                                caste: _casteController.text,
-                                prayers: _prayersController.text,
-                                thingsLikeToDo: _likesController
-                                    .map((e) => e.text)
-                                    .toList(),
-                                badHabbit: _dislikesController
-                                    .map((e) => e.text)
-                                    .toList(),
-                                primaryAddress: _addressLine1Controller.text,
-                                secondaryAddress: _addressLine2Controller.text,
-                                primaryEmail: _emailController.text.trim(),
-                                mobile: [
-                                  Mobile(
-                                      label: "PhoneNumber Self",
-                                      number: _selfPhoneNumber1Controller.text)
-                                ],
-                                parentPhoneNumber:
-                                    _countryCode1Controller.text +
-                                        _parentsPhoneNumber2Controller.text,
-                                social: _socialMediaURLController.map((e) {
-                                  return Social(label: e.text);
-                                }).toList(),
-                              )));
-                        });
+                        onPressed: apiCall);
                   },
                 ),
               )

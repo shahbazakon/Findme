@@ -2,7 +2,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:find_me/core/constants/constants_variables.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/formatter.dart';
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/helper/validator.dart';
+import 'package:find_me/core/models/mobile_model.dart';
+import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_test_field_2.dart';
@@ -10,7 +14,12 @@ import 'package:find_me/core/widget/button/add_more_button.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
 import 'package:find_me/core/widget/button/app_switch_button.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/core/widget/success_screen.dart';
+import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_cubit.dart';
+import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
@@ -35,7 +44,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   final TextEditingController _prefixController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _addressLine1Controller = TextEditingController();
-  final TextEditingController _countryCodeController = TextEditingController();
+  final TextEditingController _countryCode1Controller = TextEditingController();
+  final TextEditingController _countryCode2Controller = TextEditingController();
   final TextEditingController _phoneNumber1Controller = TextEditingController();
   final TextEditingController _phoneNumber2Controller = TextEditingController();
   final TextEditingController _imageController = TextEditingController();
@@ -46,11 +56,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   ];
   TextFieldValidator validator = TextFieldValidator();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   // dispose Controllers
   @override
   void dispose() {
@@ -60,7 +65,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     _prefixController.dispose();
     _emailController.dispose();
     _addressLine1Controller.dispose();
-    _countryCodeController.dispose();
+    _countryCode1Controller.dispose();
     _phoneNumber1Controller.dispose();
     _phoneNumber2Controller.dispose();
     _dobController.dispose();
@@ -116,6 +121,37 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         _dobController.text = dateFormatter1.format(pickedDate!);
       });
     }
+  }
+
+  void submitForm() {
+    AppLocalizations? translate = AppLocalizations.of(context);
+    context.read<PersonalDetailsCubit>().createPersonalDetails(
+            data: PortfolioModel(
+                result: PortfolioResult(
+          cardTitle: "Personal",
+          suffix: _prefixController.text,
+          firstName: _firstNameController.text,
+          middleName: _middleNameController.text,
+          lastName: _lastNameController.text,
+          dob: pickedDate,
+          primaryEmail: _emailController.text,
+          primaryAddress: _addressLine1Controller.text,
+          mobile: [
+            Mobile(
+                phoneCode: _countryCode1Controller.text,
+                number: _phoneNumber1Controller.text,
+                label: translate!.phoneNumber),
+            Mobile(
+                phoneCode: _countryCode2Controller.text,
+                number: _phoneNumber2Controller.text,
+                label: "${translate!.phoneNumber}(${translate.additional})"),
+          ],
+          social: _socialMediaURLController.map((e) {
+            return Social(title: e.text);
+          }).toList(),
+          //TODO: upload image
+          //TODO: Upload Video
+        )));
   }
 
   @override
@@ -240,7 +276,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                       margin: const EdgeInsets.only(top: 30),
                       child: CustomCountryCodePicker(
                         onChanged: (value) {
-                          _countryCodeController.text = value.code!;
+                          _countryCode1Controller.text = value.code!;
                         },
                       ),
                     ),
@@ -286,7 +322,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                       margin: const EdgeInsets.only(top: 30),
                       child: CustomCountryCodePicker(
                         onChanged: (value) {
-                          _countryCodeController.text = value.code!;
+                          _countryCode2Controller.text = value.code!;
                         },
                       ),
                     ),
@@ -359,7 +395,23 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: AppButton(label: translate.save, onPressed: () {}),
+                child: BlocConsumer<PersonalDetailsCubit, PersonalDetailsState>(
+                  listener: (context, state) {
+                    if (state is PersonalDetailsLoaded) {
+                      cupertinoNavigator(
+                          screenName: const SuccessScreen(
+                        subTitle: "Personal Details Added Successfully ",
+                        isHomeButtonVisible: false,
+                      ));
+                    } else if (state is PersonalDetailsError) {
+                      showSnackBar(title: state.errorMsg);
+                    }
+                  },
+                  builder: (context, state) {
+                    return AppButton(
+                        label: translate.save, onPressed: submitForm);
+                  },
+                ),
               )
             ],
           )),
