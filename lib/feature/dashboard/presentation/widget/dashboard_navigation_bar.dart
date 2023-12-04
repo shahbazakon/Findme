@@ -25,11 +25,6 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
   double itemSize = 25;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
     return BottomAppBar(
@@ -40,6 +35,8 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
         height: kBottomNavigationBarHeight + 4,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
           currentIndex: widget.selectedIndex,
           unselectedItemColor: Colors.black,
           selectedItemColor: AppColors.primary,

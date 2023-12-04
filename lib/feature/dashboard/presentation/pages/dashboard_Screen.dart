@@ -10,7 +10,7 @@ import '../../../../core/constants/local_storege_key.dart';
 import '../../../Profile/presentation/pages/profile_screen.dart';
 
 class Dashboard extends StatefulWidget {
-  Dashboard({super.key});
+  const Dashboard({super.key});
   @override
   State<Dashboard> createState() => _DashboardState();
 }
@@ -36,11 +36,13 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButton: Visibility(
         visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
         child: FloatingActionButton(
+          
           child: Image.asset(
             AppIcons.camera,
             height: 30,
           ),
           onPressed: () {},
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         ),
       ),
       bottomNavigationBar: HomeNavigationBar(

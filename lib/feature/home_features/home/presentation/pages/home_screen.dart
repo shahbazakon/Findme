@@ -26,11 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
