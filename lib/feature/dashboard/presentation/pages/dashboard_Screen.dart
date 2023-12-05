@@ -36,13 +36,13 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButton: Visibility(
         visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
         child: FloatingActionButton(
-          
+          onPressed: () {},
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           child: Image.asset(
             AppIcons.camera,
             height: 30,
           ),
-          onPressed: () {},
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         ),
       ),
       bottomNavigationBar: HomeNavigationBar(
