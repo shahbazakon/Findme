@@ -49,28 +49,28 @@ class Result {
   final List<String>? skills;
   final List<dynamic>? degreeLevel;
   final List<String>? sharedWith;
-  final Modifier? modifier;
+  final String? modifier;
   final List<String>? thingsLikeToDo;
   final List<String>? badHabbit;
   final List<String>? programmingLanguage;
   final String? resultId;
   final String? cardTitle;
-  final Suffix? suffix;
+  final String? suffix;
   final String? firstName;
-  final MiddleName? middleName;
-  final LastName? lastName;
-  final Gender? gender;
+  final String? middleName;
+  final String? lastName;
+  final String? gender;
   final DateTime? dob;
   final String? intro;
-  final Country? country;
-  final State? state;
+  final String? country;
+  final String? state;
   final String? city;
   final String? zipCode;
-  final PrimaryEmail? primaryEmail;
-  final SecondaryEmail? secondaryEmail;
-  final PrimaryAddress? primaryAddress;
-  final SecondaryAddress? secondaryAddress;
-  final CreatedBy? createdBy;
+  final String? primaryEmail;
+  final String? secondaryEmail;
+  final String? primaryAddress;
+  final String? secondaryAddress;
+  final String? createdBy;
   final List<ContactShareWith>? mobile;
   final List<Achievement>? social;
   final List<VideoLink>? videoLink;
@@ -117,7 +117,7 @@ class Result {
   final String? parentName;
   final String? parentEmail;
   final String? parentPhoneNumber;
-  final PhoneCode? parentPhoneCode;
+  final String? parentPhoneCode;
   final String? specified;
   final String? specifiedBad;
 
@@ -204,28 +204,28 @@ class Result {
     List<String>? skills,
     List<dynamic>? degreeLevel,
     List<String>? sharedWith,
-    Modifier? modifier,
+    String? modifier,
     List<String>? thingsLikeToDo,
     List<String>? badHabbit,
     List<String>? programmingLanguage,
     String? resultId,
     String? cardTitle,
-    Suffix? suffix,
+    String? suffix,
     String? firstName,
-    MiddleName? middleName,
-    LastName? lastName,
-    Gender? gender,
+    String? middleName,
+    String? lastName,
+    String? gender,
     DateTime? dob,
     String? intro,
-    Country? country,
-    State? state,
+    String? country,
+    String? state,
     String? city,
     String? zipCode,
-    PrimaryEmail? primaryEmail,
-    SecondaryEmail? secondaryEmail,
-    PrimaryAddress? primaryAddress,
-    SecondaryAddress? secondaryAddress,
-    CreatedBy? createdBy,
+    String? primaryEmail,
+    String? secondaryEmail,
+    String? primaryAddress,
+    String? secondaryAddress,
+    String? createdBy,
     List<ContactShareWith>? mobile,
     List<Achievement>? social,
     List<VideoLink>? videoLink,
@@ -272,7 +272,7 @@ class Result {
     String? parentName,
     String? parentEmail,
     String? parentPhoneNumber,
-    PhoneCode? parentPhoneCode,
+    String? parentPhoneCode,
     String? specified,
     String? specifiedBad,
   }) =>
@@ -371,7 +371,7 @@ class Result {
         sharedWith: json["sharedWith"] == null
             ? []
             : List<String>.from(json["sharedWith"]!.map((x) => x)),
-        modifier: modifierValues.map[json["modifier"]]!,
+        modifier: json["modifier"],
         thingsLikeToDo: json["thingsLikeToDo"] == null
             ? []
             : List<String>.from(json["thingsLikeToDo"]!.map((x) => x)),
@@ -383,22 +383,22 @@ class Result {
             : List<String>.from(json["programmingLanguage"]!.map((x) => x)),
         resultId: json["_id"],
         cardTitle: json["cardTitle"],
-        suffix: suffixValues.map[json["suffix"]]!,
+        suffix: json["suffix"],
         firstName: json["firstName"],
-        middleName: middleNameValues.map[json["middleName"]]!,
-        lastName: lastNameValues.map[json["lastName"]]!,
-        gender: genderValues.map[json["gender"]]!,
+        middleName: json["middleName"],
+        lastName: json["lastName"],
+        gender: json["gender"],
         dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
         intro: json["intro"],
-        country: countryValues.map[json["country"]]!,
-        state: stateValues.map[json["state"]]!,
+        country: json["country"],
+        state: json["state"],
         city: json["city"],
         zipCode: json["zipCode"],
-        primaryEmail: primaryEmailValues.map[json["primaryEmail"]]!,
-        secondaryEmail: secondaryEmailValues.map[json["secondaryEmail"]]!,
-        primaryAddress: primaryAddressValues.map[json["primaryAddress"]]!,
-        secondaryAddress: secondaryAddressValues.map[json["secondaryAddress"]]!,
-        createdBy: createdByValues.map[json["createdBy"]]!,
+        primaryEmail: json["primaryEmail"],
+        secondaryEmail: json["secondaryEmail"],
+        primaryAddress: json["primaryAddress"],
+        secondaryAddress: json["secondaryAddress"],
+        createdBy: json["createdBy"],
         mobile: json["mobile"] == null
             ? []
             : List<ContactShareWith>.from(
@@ -498,7 +498,7 @@ class Result {
         parentName: json["parentName"],
         parentEmail: json["parentEmail"],
         parentPhoneNumber: json["parentPhoneNumber"],
-        parentPhoneCode: phoneCodeValues.map[json["parentPhoneCode"]]!,
+        parentPhoneCode: json["parentPhoneCode"],
         specified: json["specified"],
         specifiedBad: json["specifiedBad"],
       );
@@ -515,7 +515,7 @@ class Result {
         "sharedWith": sharedWith == null
             ? []
             : List<dynamic>.from(sharedWith!.map((x) => x)),
-        "modifier": modifierValues.reverse[modifier],
+        "modifier": modifier,
         "thingsLikeToDo": thingsLikeToDo == null
             ? []
             : List<dynamic>.from(thingsLikeToDo!.map((x) => x)),
@@ -527,22 +527,22 @@ class Result {
             : List<dynamic>.from(programmingLanguage!.map((x) => x)),
         "_id": resultId,
         "cardTitle": cardTitle,
-        "suffix": suffixValues.reverse[suffix],
+        "suffix": suffix,
         "firstName": firstName,
-        "middleName": middleNameValues.reverse[middleName],
-        "lastName": lastNameValues.reverse[lastName],
-        "gender": genderValues.reverse[gender],
+        "middleName": middleName,
+        "lastName": lastName,
+        "gender": gender,
         "dob": dob?.toIso8601String(),
         "intro": intro,
-        "country": countryValues.reverse[country],
-        "state": stateValues.reverse[state],
+        "country": country,
+        "state": state,
         "city": city,
         "zipCode": zipCode,
-        "primaryEmail": primaryEmailValues.reverse[primaryEmail],
-        "secondaryEmail": secondaryEmailValues.reverse[secondaryEmail],
-        "primaryAddress": primaryAddressValues.reverse[primaryAddress],
-        "secondaryAddress": secondaryAddressValues.reverse[secondaryAddress],
-        "createdBy": createdByValues.reverse[createdBy],
+        "primaryEmail": primaryEmail,
+        "secondaryEmail": secondaryEmail,
+        "primaryAddress": primaryAddress,
+        "secondaryAddress": secondaryAddress,
+        "createdBy": createdBy,
         "mobile": mobile == null
             ? []
             : List<dynamic>.from(mobile!.map((x) => x.toJson())),
@@ -619,7 +619,7 @@ class Result {
         "parentName": parentName,
         "parentEmail": parentEmail,
         "parentPhoneNumber": parentPhoneNumber,
-        "parentPhoneCode": phoneCodeValues.reverse[parentPhoneCode],
+        "parentPhoneCode": parentPhoneCode,
         "specified": specified,
         "specifiedBad": specifiedBad,
       };
@@ -627,9 +627,9 @@ class Result {
 
 class Achievement {
   final String? id;
-  final AchievementTitle? title;
+  final String? title;
   final String? label;
-  final Detail? detail;
+  final String? detail;
 
   Achievement({
     this.id,
@@ -640,9 +640,9 @@ class Achievement {
 
   Achievement copyWith({
     String? id,
-    AchievementTitle? title,
+    String? title,
     String? label,
-    Detail? detail,
+    String? detail,
   }) =>
       Achievement(
         id: id ?? this.id,
@@ -658,49 +658,22 @@ class Achievement {
 
   factory Achievement.fromJson(Map<String, dynamic> json) => Achievement(
         id: json["_id"],
-        title: achievementTitleValues.map[json["title"]]!,
+        title: json["title"],
         label: json["label"],
-        detail: detailValues.map[json["detail"]]!,
+        detail: json["detail"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "title": achievementTitleValues.reverse[title],
+        "title": title,
         "label": label,
-        "detail": detailValues.reverse[detail],
+        "detail": detail,
       };
 }
 
-enum Detail {
-  CERTIFICATION_DETAILS,
-  MERN_STACK_DEVELOPER_DETAILS,
-  PROJECT_DETAILS_TEXTS
-}
-
-final detailValues = EnumValues({
-  "certification details ": Detail.CERTIFICATION_DETAILS,
-  "mern stack developer details": Detail.MERN_STACK_DEVELOPER_DETAILS,
-  "project details texts": Detail.PROJECT_DETAILS_TEXTS
-});
-
-enum AchievementTitle {
-  FACEBOOK,
-  FINDME,
-  MERN_STACK_DEVELOPER,
-  MERN_STACK_DEVELOPER_CERTIFICAITON
-}
-
-final achievementTitleValues = EnumValues({
-  "Facebook": AchievementTitle.FACEBOOK,
-  "findme": AchievementTitle.FINDME,
-  "Mern stack developer": AchievementTitle.MERN_STACK_DEVELOPER,
-  "Mern stack developer certificaiton":
-      AchievementTitle.MERN_STACK_DEVELOPER_CERTIFICAITON
-});
-
 class CertificationLink {
   final String? id;
-  final CertificationLinkTitle? title;
+  final String? title;
 
   CertificationLink({
     this.id,
@@ -709,7 +682,7 @@ class CertificationLink {
 
   CertificationLink copyWith({
     String? id,
-    CertificationLinkTitle? title,
+    String? title,
   }) =>
       CertificationLink(
         id: id ?? this.id,
@@ -724,26 +697,14 @@ class CertificationLink {
   factory CertificationLink.fromJson(Map<String, dynamic> json) =>
       CertificationLink(
         id: json["_id"],
-        title: certificationLinkTitleValues.map[json["title"]]!,
+        title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "title": certificationLinkTitleValues.reverse[title],
+        "title": title,
       };
 }
-
-enum CertificationLinkTitle {
-  MERN_STACK,
-  MERN_STACK_DEVELOPER,
-  TITLE_MERN_STACK_DEVELOPER
-}
-
-final certificationLinkTitleValues = EnumValues({
-  "Mern stack ": CertificationLinkTitle.MERN_STACK,
-  "Mern stack developer ": CertificationLinkTitle.MERN_STACK_DEVELOPER,
-  "MERN STACK DEVELOPER": CertificationLinkTitle.TITLE_MERN_STACK_DEVELOPER
-});
 
 class CollegeDetail {
   final String? id;
@@ -815,9 +776,9 @@ class CollegeDetail {
 
 class ContactShareWith {
   final String? id;
-  final Label? label;
+  final String? label;
   final String? number;
-  final PhoneCode? phoneCode;
+  final String? phoneCode;
 
   ContactShareWith({
     this.id,
@@ -828,9 +789,9 @@ class ContactShareWith {
 
   ContactShareWith copyWith({
     String? id,
-    Label? label,
+    String? label,
     String? number,
-    PhoneCode? phoneCode,
+    String? phoneCode,
   }) =>
       ContactShareWith(
         id: id ?? this.id,
@@ -847,35 +808,18 @@ class ContactShareWith {
   factory ContactShareWith.fromJson(Map<String, dynamic> json) =>
       ContactShareWith(
         id: json["_id"],
-        label: labelValues.map[json["label"]]!,
+        label: json["label"],
         number: json["number"],
-        phoneCode: phoneCodeValues.map[json["phoneCode"]]!,
+        phoneCode: json["phoneCode"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "label": labelValues.reverse[label],
+        "label": label,
         "number": number,
-        "phoneCode": phoneCodeValues.reverse[phoneCode],
+        "phoneCode": phoneCode,
       };
 }
-
-enum Label { MOBILE }
-
-final labelValues = EnumValues({"Mobile": Label.MOBILE});
-
-enum PhoneCode { PHONE_CODE_PK_92, PK_92 }
-
-final phoneCodeValues = EnumValues(
-    {"PK(+92)": PhoneCode.PHONE_CODE_PK_92, "PK +92": PhoneCode.PK_92});
-
-enum Country { PAKISTAN, UNITED_KINGDOM, UNITED_STATES }
-
-final countryValues = EnumValues({
-  "Pakistan": Country.PAKISTAN,
-  "United Kingdom": Country.UNITED_KINGDOM,
-  "United States": Country.UNITED_STATES
-});
 
 class CoverLetter {
   final String? id;
@@ -883,8 +827,8 @@ class CoverLetter {
   final String? thumbUrl;
   final String? uid;
   final String? name;
-  final Status? status;
-  final Type? type;
+  final String? status;
+  final String? type;
 
   CoverLetter({
     this.id,
@@ -902,8 +846,8 @@ class CoverLetter {
     String? thumbUrl,
     String? uid,
     String? name,
-    Status? status,
-    Type? type,
+    String? status,
+    String? type,
   }) =>
       CoverLetter(
         id: id ?? this.id,
@@ -926,8 +870,8 @@ class CoverLetter {
         thumbUrl: json["thumbUrl"],
         uid: json["uid"],
         name: json["name"],
-        status: statusValues.map[json["status"]]!,
-        type: typeValues.map[json["type"]]!,
+        status: json["status"],
+        type: json["type"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -936,92 +880,15 @@ class CoverLetter {
         "thumbUrl": thumbUrl,
         "uid": uid,
         "name": name,
-        "status": statusValues.reverse[status],
-        "type": typeValues.reverse[type],
+        "status": status,
+        "type": type,
       };
 }
-
-enum Status { DONE }
-
-final statusValues = EnumValues({"done": Status.DONE});
-
-enum Type { APPLICATION_PDF, IMAGE_JPEG, IMAGE_PNG, VIDEO_MP4 }
-
-final typeValues = EnumValues({
-  "application/pdf": Type.APPLICATION_PDF,
-  "image/jpeg": Type.IMAGE_JPEG,
-  "image/png": Type.IMAGE_PNG,
-  "video/mp4": Type.VIDEO_MP4
-});
-
-enum CreatedBy { THE_64_E486_F81204_ED8005072_B91 }
-
-final createdByValues = EnumValues(
-    {"64e486f81204ed8005072b91": CreatedBy.THE_64_E486_F81204_ED8005072_B91});
-
-enum Gender { FEMALE, MALE }
-
-final genderValues = EnumValues({"Female": Gender.FEMALE, "Male": Gender.MALE});
-
-enum LastName { ARIF, EMPTY, JOSAPH }
-
-final lastNameValues = EnumValues(
-    {"Arif": LastName.ARIF, "": LastName.EMPTY, "josaph": LastName.JOSAPH});
-
-enum MiddleName { EMPTY, RANA, SMITH }
-
-final middleNameValues = EnumValues(
-    {"": MiddleName.EMPTY, "Rana": MiddleName.RANA, "smith": MiddleName.SMITH});
-
-enum Modifier { PRIVATE, PUBLIC }
-
-final modifierValues =
-    EnumValues({"private": Modifier.PRIVATE, "public": Modifier.PUBLIC});
-
-enum PrimaryAddress { ABC_XYZ_ADDRESS, ABC_XYZ_LAHORE, EMPTY }
-
-final primaryAddressValues = EnumValues({
-  "abc xyz address": PrimaryAddress.ABC_XYZ_ADDRESS,
-  "Abc xyz Lahore ": PrimaryAddress.ABC_XYZ_LAHORE,
-  "": PrimaryAddress.EMPTY
-});
-
-enum PrimaryEmail { ABCXYZ_GMAIL_COM, HARISMKT11_GMAIL_COM, XYZ_GMAIL_COM }
-
-final primaryEmailValues = EnumValues({
-  "abcxyz@gmail.com": PrimaryEmail.ABCXYZ_GMAIL_COM,
-  "harismkt11@gmail.com": PrimaryEmail.HARISMKT11_GMAIL_COM,
-  "xyz@gmail.com": PrimaryEmail.XYZ_GMAIL_COM
-});
-
-enum SecondaryAddress { ABC_XYZ_ADDRESS_2, ABC_XYZ_SECONDARY_ADDRESS, EMPTY }
-
-final secondaryAddressValues = EnumValues({
-  "abc xyz address 2": SecondaryAddress.ABC_XYZ_ADDRESS_2,
-  "abc xyz secondary address": SecondaryAddress.ABC_XYZ_SECONDARY_ADDRESS,
-  "": SecondaryAddress.EMPTY
-});
-
-enum SecondaryEmail { ABCXYZ_GMAIL_COM, EMPTY }
-
-final secondaryEmailValues = EnumValues({
-  "abcxyz@gmail.com": SecondaryEmail.ABCXYZ_GMAIL_COM,
-  "": SecondaryEmail.EMPTY
-});
-
-enum State { ABC, EMPTY, PUNJAB }
-
-final stateValues =
-    EnumValues({"abc": State.ABC, "": State.EMPTY, "Punjab": State.PUNJAB});
-
-enum Suffix { MR, MRS }
-
-final suffixValues = EnumValues({"Mr.": Suffix.MR, "Mrs.": Suffix.MRS});
 
 class VideoLink {
   final String? id;
   final String? link;
-  final VideoLinkTitle? title;
+  final String? title;
 
   VideoLink({
     this.id,
@@ -1032,7 +899,7 @@ class VideoLink {
   VideoLink copyWith({
     String? id,
     String? link,
-    VideoLinkTitle? title,
+    String? title,
   }) =>
       VideoLink(
         id: id ?? this.id,
@@ -1048,31 +915,12 @@ class VideoLink {
   factory VideoLink.fromJson(Map<String, dynamic> json) => VideoLink(
         id: json["_id"],
         link: json["link"],
-        title: videoLinkTitleValues.map[json["title"]]!,
+        title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
         "link": link,
-        "title": videoLinkTitleValues.reverse[title],
+        "title": title,
       };
-}
-
-enum VideoLinkTitle { DUMMY_VIDEO_TITLE, YOU_TUBE_VIDEO }
-
-final videoLinkTitleValues = EnumValues({
-  "Dummy Video title": VideoLinkTitle.DUMMY_VIDEO_TITLE,
-  "YouTube Video ": VideoLinkTitle.YOU_TUBE_VIDEO
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

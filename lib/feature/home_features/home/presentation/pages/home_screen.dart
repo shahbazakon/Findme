@@ -5,7 +5,10 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_searchbar.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/pages/academic_details_screen.dart';
+import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
 import 'package:find_me/feature/home_features/home/presentation/cubit/home__cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    // TODO: implement initState
     context.read<HomeCubit>().fetchHomeData(id: "64e486f81204ed8005072b91");
     super.initState();
   }
@@ -42,77 +46,106 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: const ScrollPhysics(
             parent:
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())),
-        child: Container(
-          padding: primaryPadding,
-          height: height,
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  translate!.hiThere("Aliya"),
-                  textAlign: TextAlign.left,
-                  style: SubTitleHelper.h3,
-                ),
-              ),
-              CustomSearchBar(searchController: searchController),
-              Expanded(
-                child: GridView(
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(
-                      parent: NeverScrollableScrollPhysics()),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // number of items in each row
-                      mainAxisSpacing: 10.0, // spacing between rows
-                      crossAxisSpacing: 10.0,
-                      childAspectRatio: 1.1 // spacing between columns
-                      ),
+        child: BlocConsumer<HomeCubit, HomeState>(
+          listener: (context, state) {
+            if (state is HomeError) {
+              showSnackBar(title: state.errorMsg);
+            }
+          },
+          builder: (context, state) {
+            if (state is HomeLoading) {
+              return SizedBox(
+                  height: height,
+                  child: const Loading(
+                    size: 40,
+                    strokeWidth: 4.5,
+                  ));
+            } else if (state is HomeError) {
+              return const Center(
+                child: Text("Oops, Somthing went Worng"),
+              );
+            } else if (state is HomeLoaded) {
+              HomeModel data = state.homeModel;
+              return Container(
+                padding: primaryPadding,
+                height: height,
+                child: Column(
                   children: [
-                    customGridTile(
-                        title: translate!.personal,
-                        image:
-                            "https://c4.wallpaperflare.com/wallpaper/356/292/33/music-rock-and-roll-vinyl-album-covers-wallpaper-preview.jpg",
-                        onTap: () {
-                          cupertinoNavigator(
-                              screenName: const PersonalDetailsScreen());
-                        }),
-                    customGridTile(
-                        title: translate!.business,
-                        image:
-                            "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                        onTap: () {
-                          cupertinoNavigator(
-                              screenName: const BusinessDetailsScreen());
-                        }),
-                    customGridTile(
-                        title: translate!.corporate,
-                        image:
-                            "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
-                        onTap: () {
-                          cupertinoNavigator(
-                              screenName: const CorporateDetailsScreen());
-                        }),
-                    customGridTile(
-                        title: translate!.academic,
-                        image:
-                            "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
-                        onTap: () {
-                          cupertinoNavigator(
-                              screenName: const AcademicDetailsScreen());
-                        }),
-                    customGridTile(
-                        title: translate!.matrimony,
-                        image:
-                            "https://parade.com/.image/t_share/MTkwNTgxMjEzNTc5MTI1ODg1/wedding-wishes-2-jpg.jpg",
-                        onTap: () {
-                          cupertinoNavigator(
-                              screenName: const MatrimonyDetailsScreen());
-                        }),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        translate!.hiThere(
+                            data.result![0].firstName.toString() +
+                                data.result![0].lastName.toString()),
+                        textAlign: TextAlign.left,
+                        style: SubTitleHelper.h3,
+                      ),
+                    ),
+                    CustomSearchBar(searchController: searchController),
+                    Expanded(
+                      child: GridView(
+                        shrinkWrap: true,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount:
+                                    2, // number of items in each row
+                                mainAxisSpacing: 10.0, // spacing between rows
+                                crossAxisSpacing: 10.0,
+                                childAspectRatio: 1.1 // spacing between columns
+                                ),
+                        children: [
+                          customGridTile(
+                              title: translate!.personal,
+                              image:
+                                  "https://c4.wallpaperflare.com/wallpaper/356/292/33/music-rock-and-roll-vinyl-album-covers-wallpaper-preview.jpg",
+                              onTap: () {
+                                cupertinoNavigator(
+                                    screenName: const PersonalDetailsScreen());
+                              }),
+                          customGridTile(
+                              title: translate!.business,
+                              image:
+                                  "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                              onTap: () {
+                                cupertinoNavigator(
+                                    screenName: const BusinessDetailsScreen());
+                              }),
+                          customGridTile(
+                              title: translate!.corporate,
+                              image:
+                                  "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
+                              onTap: () {
+                                cupertinoNavigator(
+                                    screenName: const CorporateDetailsScreen());
+                              }),
+                          customGridTile(
+                              title: translate!.academic,
+                              image:
+                                  "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
+                              onTap: () {
+                                cupertinoNavigator(
+                                    screenName: const AcademicDetailsScreen());
+                              }),
+                          customGridTile(
+                              title: translate!.matrimony,
+                              image:
+                                  "https://parade.com/.image/t_share/MTkwNTgxMjEzNTc5MTI1ODg1/wedding-wishes-2-jpg.jpg",
+                              onTap: () {
+                                cupertinoNavigator(
+                                    screenName: const MatrimonyDetailsScreen());
+                              }),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
+              );
+            } else {
+              return const Center(child: Text("Error"));
+            }
+          },
         ),
       ),
     );
