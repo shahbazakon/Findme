@@ -6,8 +6,9 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_searchbar.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/pages/academic_details_screen.dart';
-import 'package:find_me/feature/home_features/home/data/datasource/home_remote_data_source.dart';
+import 'package:find_me/feature/home_features/home/presentation/cubit/home__cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../businessDetails/presentation/pages/business_details_Screen.dart';
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    HomeRemoteDataSource().fetchHomeData(id: "64e486f81204ed8005072b91");
+    context.read<HomeCubit>().fetchHomeData(id: "64e486f81204ed8005072b91");
     super.initState();
   }
 
