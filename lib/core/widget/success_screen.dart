@@ -48,7 +48,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
         decoration: BoxDecoration(
             color: AppColors.light,
             image: DecorationImage(
-              image: AssetImage(AppIcons.bgWhite),
+              image: AssetImage(AppImages.bgWhite),
               fit: BoxFit.cover,
             )),
         child: SizedBox(
@@ -63,7 +63,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 Padding(
                   padding: EdgeInsets.only(right: width * .09),
                   child: SvgPicture.asset(
-                    AppImages.success,
+                    AppSvg.success,
                     height: height * .36,
                   ),
                 ),

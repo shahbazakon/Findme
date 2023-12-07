@@ -4,7 +4,6 @@ import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
-import 'package:find_me/core/widget/Input%20Field/custom_searchbar.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/pages/academic_details_screen.dart';
@@ -81,7 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: SubTitleHelper.h3,
                       ),
                     ),
-                    CustomSearchBar(searchController: searchController),
+                    // CustomSearchBar(searchController: searchController),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Expanded(
                       child: GridView(
                         shrinkWrap: true,
@@ -98,40 +100,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           customGridTile(
                               title: translate!.personal,
-                              image:
-                                  "https://c4.wallpaperflare.com/wallpaper/356/292/33/music-rock-and-roll-vinyl-album-covers-wallpaper-preview.jpg",
+                              image: AppImages.personal,
                               onTap: () {
                                 cupertinoNavigator(
                                     screenName: const PersonalDetailsScreen());
                               }),
                           customGridTile(
                               title: translate!.business,
-                              image:
-                                  "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                              image: AppImages.business,
                               onTap: () {
                                 cupertinoNavigator(
                                     screenName: const BusinessDetailsScreen());
                               }),
                           customGridTile(
                               title: translate!.corporate,
-                              image:
-                                  "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
+                              image: AppImages.corporate,
                               onTap: () {
                                 cupertinoNavigator(
                                     screenName: const CorporateDetailsScreen());
                               }),
                           customGridTile(
                               title: translate!.academic,
-                              image:
-                                  "https://img1.wallspic.com/previews/7/6/5/4/2/124567/124567-formal_wear-costume-gentleman-management-tasogare-x750.jpg",
+                              image: AppImages.academic,
                               onTap: () {
                                 cupertinoNavigator(
                                     screenName: const AcademicDetailsScreen());
                               }),
                           customGridTile(
                               title: translate!.matrimony,
-                              image:
-                                  "https://parade.com/.image/t_share/MTkwNTgxMjEzNTc5MTI1ODg1/wedding-wishes-2-jpg.jpg",
+                              image: AppImages.matrimony,
                               onTap: () {
                                 cupertinoNavigator(
                                     screenName: const MatrimonyDetailsScreen());
@@ -170,13 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(15),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: FadeInImage(
-                placeholder: AssetImage(AppIcons.placeholderImage),
-                image: NetworkImage(image),
-                fit: BoxFit.cover,
-              ),
-            ),
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(image, fit: BoxFit.cover)),
           )),
     );
   }

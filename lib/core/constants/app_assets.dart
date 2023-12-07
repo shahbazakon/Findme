@@ -4,7 +4,6 @@ class AppIcons {
   static String bell = "assets/icons/bell.png";
   static String bellSimple = "assets/icons/bell_simple.png";
   static String beg = "assets/icons/beg.png";
-  static String bgWhite = "assets/images/bg_white.png";
   static String calendar = "assets/icons/calendar.png";
   static String calender = "assets/icons/calendar.png";
   static String camera = "assets/icons/camera.png";
@@ -35,8 +34,17 @@ class AppIcons {
 }
 
 class AppImages {
-  static String logo = "assets/images/find_me_logo.svg";
-  static String success = "assets/images/success.svg";
+  static String bgWhite = "assets/images/bg_white.png";
+  static String academic = "assets/images/academic.png";
+  static String business = "assets/images/business.png";
+  static String corporate = "assets/images/corporate.png";
+  static String matrimony = "assets/images/matrimony.png";
+  static String personal = "assets/images/personal.png";
+}
+
+class AppSvg {
+  static String logo = "assets/svg/find_me_logo.svg";
+  static String success = "assets/svg/success.svg";
   static String onBoarding1 = "assets/onBoardingAssets/onBoarding_1.svg";
   static String onBoarding2 = "assets/onBoardingAssets/onBoarding_2.svg";
   static String onBoarding3 = "assets/onBoardingAssets/onBoarding_3.svg";
