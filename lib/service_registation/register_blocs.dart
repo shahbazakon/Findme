@@ -6,6 +6,7 @@ import 'package:find_me/feature/auth_featrues/reset_password/presentation/cubit/
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_password_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/sign_in_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/sign_up_cubit.dart';
+import 'package:find_me/feature/contacts/presentation/cubit/contacts_cubit.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/cubit/academic_details_cubit.dart';
 import 'package:find_me/feature/home_features/businessDetails/presentation/cubit/business_details_cubit.dart';
 import 'package:find_me/feature/home_features/corporateDetails/presentation/cubit/corporate_details_cubit.dart';
@@ -28,5 +29,6 @@ class RegisterBlocs {
     locator.registerFactory(() => PersonalDetailsCubit());
     locator.registerFactory(() => CreateProfileCubit());
     locator.registerFactory(() => HomeCubit());
+    locator.registerFactory(() => ContactsCubit());
   }
 }

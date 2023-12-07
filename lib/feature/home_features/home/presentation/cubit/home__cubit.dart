@@ -12,7 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
   fetchHomeData({required String id}) async {
     try {
       emit(HomeLoading());
-      HomeModel result = await HomeRemoteDataSource().fetchHomeData(id: id);
+      HomeModel result = await HomeRemoteDataSource().fetchHomeData(userID: id);
       emit(HomeLoaded(homeModel: result));
     } on DioException catch (error) {
       emit(HomeError(errorMsg: error.response?.data["message"]));

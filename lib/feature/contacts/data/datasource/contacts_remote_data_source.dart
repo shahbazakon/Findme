@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:find_me/core/api/api.dart';
 import 'package:find_me/core/error/faliures.dart';
-import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
+import 'package:find_me/feature/contacts/data/model/contacts_model.dart';
 
-class HomeRemoteDataSource {
+class ContactsRemoteDataSource {
   API api = API();
-  Future<HomeModel> fetchHomeData({required String userID}) async {
+
+  Future<ContactModel> fetchContactsData({required String userID}) async {
     try {
-      // Replace this with your actual headers
       final Response response = await api.sendRequest.get(
-        "/card/listbyuser/$userID",
+        "/follow/read/following/$userID",
       );
       final status = await hanldeStatusCode(response);
       if (status.status) {
-        HomeModel data = HomeModel.fromJson(response.data);
+        ContactModel data = ContactModel.fromJson(response.data);
         return data;
       } else {
         throw status.failure!;

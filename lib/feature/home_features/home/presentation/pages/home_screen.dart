@@ -1,5 +1,6 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
+import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
@@ -31,8 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    context.read<HomeCubit>().fetchHomeData(id: "64e486f81204ed8005072b91");
+    String? userId = sharedPreferences!.getString(LocaleStorageKey.userID);
+    context.read<HomeCubit>().fetchHomeData(id: userId!);
     super.initState();
   }
 
@@ -61,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ));
             } else if (state is HomeError) {
               return const Center(
-                child: Text("Oops, Somthing went Worng"),
+                child: Text("Oops, Something went Wrong"),
               );
             } else if (state is HomeLoaded) {
               HomeModel data = state.homeModel;
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     // CustomSearchBar(searchController: searchController),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Expanded(

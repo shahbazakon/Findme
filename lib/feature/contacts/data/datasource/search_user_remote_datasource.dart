@@ -1,19 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:find_me/core/api/api.dart';
 import 'package:find_me/core/error/faliures.dart';
-import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
+import 'package:find_me/feature/contacts/data/model/search_user_model.dart';
 
-class HomeRemoteDataSource {
+class SearchUserRemoteDataSource {
   API api = API();
-  Future<HomeModel> fetchHomeData({required String userID}) async {
+  Future<SearchUserModel> fetchSearchedUserData({required String query}) async {
     try {
-      // Replace this with your actual headers
       final Response response = await api.sendRequest.get(
-        "/card/listbyuser/$userID",
+        "/user/search?q=$query&fields=userName",
       );
       final status = await hanldeStatusCode(response);
       if (status.status) {
-        HomeModel data = HomeModel.fromJson(response.data);
+        SearchUserModel data = SearchUserModel.fromJson(response.data);
         return data;
       } else {
         throw status.failure!;

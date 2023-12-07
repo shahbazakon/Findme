@@ -78,7 +78,7 @@ class _SignInScreenState extends State<SignInScreen> {
     cupertinoNavigator(
         type: NavigatorType.PUSHREMOVEUNTIL,
         screenName: isProfileCompleted
-            ? Dashboard()
+            ? const Dashboard()
             : CreateProfile(id: signInModel.result!.admin!.id!));
   }
 

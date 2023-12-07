@@ -1,5 +1,9 @@
+import 'package:find_me/core/constants/local_storege_key.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/feature/contacts/presentation/cubit/contacts_cubit.dart';
 import 'package:find_me/feature/contacts/presentation/widget/contacts_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/constants/theme_constants.dart';
@@ -14,6 +18,14 @@ class ContactsScreen extends StatefulWidget {
 
 class _ContactsScreenState extends State<ContactsScreen> {
   TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    String? userId = sharedPreferences!.getString(LocaleStorageKey.userID);
+    context.read<ContactsCubit>().fetchContactList(userID: userId!);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
