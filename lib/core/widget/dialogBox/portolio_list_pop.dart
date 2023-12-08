@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
@@ -13,10 +14,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../utils/utils_methods.dart';
 
-portfolioListPop(
-    {bool showCloseButton = false,
-    bool isTransparent = false,
-    isReplacementRoute = false}) async {
+portfolioListPop({
+  bool showCloseButton = false,
+  bool isTransparent = false,
+  isReplacementRoute = false,
+  final String? bgImage,
+}) async {
   Map portfolioList = {
     'Personal': const PersonalPortfolioScreen(),
     'Academic': const AcademicPortfolioScreen(),
@@ -32,87 +35,112 @@ portfolioListPop(
     barrierColor: isTransparent ? Colors.transparent : Colors.black38,
     builder: (BuildContext context) {
       double blur = isTransparent ? 10 : 0;
-      return WillPopScope(
-        onWillPop: () {
-          return Future.value(false);
-        },
-        child: FittedBox(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Material(
-              color: isTransparent ? Colors.transparent : Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaY: blur,
-                  sigmaX: blur,
-                ),
-                child: Container(
-                  width: width,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    backgroundBlendMode: BlendMode.colorDodge,
-                    color: isTransparent
-                        ? Colors.white.withOpacity(0.5)
-                        : AppColors.light,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      return Stack(
+        children: [
+          bgImage == null
+              ? const SizedBox.shrink()
+              : Hero(
+                  tag: "BackgroundImageTag",
+                  child: Image.network(
+                    bgImage,
+                    height: height,
+                    width: width,
+                    fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.asset(
+                        AppIcons
+                            .placeholderImage, // Replace with the path to your placeholder image
+                        width: width,
+                        height: height,
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  )),
+          Center(
+            child: FittedBox(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Material(
+                  color: isTransparent ? Colors.transparent : Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaY: blur,
+                      sigmaX: blur,
+                    ),
+                    child: Container(
+                      width: width,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        backgroundBlendMode: BlendMode.colorDodge,
+                        color: isTransparent
+                            ? Colors.white.withOpacity(0.5)
+                            : AppColors.light,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(translate!.selectPortfolio,
-                                    style: TextHelper.h8),
-                                Text(translate.youCanSelectWhichPortfolioToView,
-                                    style: SubTitleHelper.h11),
-                              ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(translate!.selectPortfolio,
+                                        style: TextHelper.h8),
+                                    Text(
+                                        translate
+                                            .youCanSelectWhichPortfolioToView,
+                                        style: SubTitleHelper.h11),
+                                  ],
+                                ),
+                              ),
+                              Visibility(
+                                  visible: showCloseButton,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.close,
+                                      color: AppColors.lightGrey3,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ))
+                            ],
+                          ),
+                          SizedBox(
+                            width: width,
+                            child: ListView.separated(
+                              shrinkWrap: true,
+                              physics: const AlwaysScrollableScrollPhysics(
+                                  parent: BouncingScrollPhysics()),
+                              itemCount: portfolioList.length,
+                              itemBuilder: (context, index) {
+                                String keys =
+                                    portfolioList.keys.toList()[index];
+                                return portfolioListTile(
+                                    isReplacementRoute: isReplacementRoute,
+                                    title: keys,
+                                    screenName: portfolioList[keys]);
+                              },
+                              separatorBuilder: (context, index) {
+                                return Divider(
+                                    thickness: 1,
+                                    color: AppFontsColors.lightGrey4);
+                              },
                             ),
                           ),
-                          Visibility(
-                              visible: showCloseButton,
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.close,
-                                  color: AppColors.lightGrey3,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ))
                         ],
                       ),
-                      SizedBox(
-                        width: width,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          physics: const AlwaysScrollableScrollPhysics(
-                              parent: BouncingScrollPhysics()),
-                          itemCount: portfolioList.length,
-                          itemBuilder: (context, index) {
-                            String keys = portfolioList.keys.toList()[index];
-                            return portfolioListTile(
-                                isReplacementRoute: isReplacementRoute,
-                                title: keys,
-                                screenName: portfolioList[keys]);
-                          },
-                          separatorBuilder: (context, index) {
-                            return Divider(
-                                thickness: 1, color: AppFontsColors.lightGrey4);
-                          },
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
+        ],
       );
     },
   );
