@@ -1,5 +1,7 @@
+import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/contacts/presentation/pages/contacts_screen.dart';
 import 'package:find_me/feature/dashboard/presentation/widget/dashboard_navigation_bar.dart';
 import 'package:find_me/feature/home_features/home/presentation/pages/home_screen.dart';
@@ -18,6 +20,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int selectedIndex = 0;
   PageController pageController = PageController();
+  String barcode = 'Tap  to scan';
 
   @override
   void initState() {
@@ -25,8 +28,38 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   void setValue() async {
     await sharedPreferences?.setBool(LocaleStorageKey.isLoggedIn, true);
+  }
+
+  Future<void> qrScanner() async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => AiBarcodeScanner(
+            // validator: (value) {
+            //   return value.startsWith('https://');
+            // },
+            canPop: true,
+            onScan: (String value) {
+              debugPrint(value);
+              setState(() {
+                barcode = value;
+              });
+              showSnackBar(title: barcode);
+            },
+            onDetect: (p0) {},
+            onDispose: () {
+              debugPrint("Barcode scanner disposed!");
+            },
+            controller: MobileScannerController(
+                detectionSpeed: DetectionSpeed.noDuplicates)),
+      ),
+    );
   }
 
   @override
@@ -36,7 +69,7 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButton: Visibility(
         visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: qrScanner,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           child: Image.asset(

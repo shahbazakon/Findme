@@ -34,6 +34,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
+    String profileImage =
+        "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
     return Scaffold(
       body: Stack(
         children: [
@@ -42,8 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             shadowHeight: height * .3,
             child: Hero(
               tag: "BackgroundImageTag",
-              child: Image.network(
-                  "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
+              child: Image.network(profileImage,
                   width: width,
                   height: contentHeight + height * .02,
                   fit: BoxFit.cover, errorBuilder: (BuildContext context,
@@ -153,18 +154,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             buttonWidth: width * .4,
                             onPressed: () {
                               portfolioListPop(
-                                bgImage:
-                                    "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
+                                bgImage: profileImage,
                                 isTransparent: true,
                                 isReplacementRoute: false,
                                 showCloseButton: true,
                               );
-
-                              // cupertinoNavigator(
-                              //     screenName: const PortfolioListScreen(
-                              //   bgImage:
-                              //       "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
-                              // ));
                             }),
                       ],
                     )
