@@ -13,6 +13,7 @@ import 'package:find_me/feature/home_features/corporateDetails/presentation/cubi
 import 'package:find_me/feature/home_features/home/presentation/cubit/home__cubit.dart';
 import 'package:find_me/feature/home_features/matrimonyDetails/presentation/cubit/matrimonial_portfolio_cubit.dart';
 import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
 
 class RegisterBlocs {
   RegisterBlocs() {
@@ -30,5 +31,6 @@ class RegisterBlocs {
     locator.registerFactory(() => CreateProfileCubit());
     locator.registerFactory(() => HomeCubit());
     locator.registerFactory(() => ContactsCubit());
+    locator.registerFactory(() => AcademicPortfolioCubit());
   }
 }

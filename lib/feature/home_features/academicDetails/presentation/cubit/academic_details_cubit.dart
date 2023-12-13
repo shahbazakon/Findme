@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:find_me/core/datasource/portfolio_details_datasource.dart';
+import 'package:find_me/core/datasource/portfolio_remote_datasource.dart';
 import 'package:find_me/core/models/protfolio_model.dart';
 import 'package:meta/meta.dart';
 

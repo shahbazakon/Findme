@@ -1,10 +1,15 @@
+import 'package:find_me/core/constants/local_storege_key.dart';
+import 'package:find_me/core/models/protfolio_details_model.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/core/widget/profile_stack_banner.dart';
+import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/attachment_list_tile.com.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
@@ -21,7 +26,18 @@ class AcademicPortfolioScreen extends StatefulWidget {
 class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
   @override
   void initState() {
+    apiCall();
     super.initState();
+  }
+
+  // fetch Academic Portfolio Data
+  void apiCall() {
+    String userID = sharedPreferences!.getString(LocaleStorageKey.userID) ?? "";
+    if (userID.isNotEmpty) {
+      context
+          .read<AcademicPortfolioCubit>()
+          .fetchAcademicPortfolioDetails(userID: userID);
+    }
   }
 
   String videoUrl =
@@ -70,72 +86,92 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
     AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ProfileStackBanner(
-              backgroundImage:
-                  "https://fs.npstatic.com/userfiles/7687254/image/MIUI_Super_Wallpapers-w810h462.jpg",
-              title: translate!.translate("Aliya Hayat"),
-              subTitle: translate!.translate("Female, 27yrs"),
-            ),
-            Column(
-              children: [
-                customTimeline(
-                    title: translate!.projects,
-                    timelineData: projectList,
-                    isDataTypeList: false),
-                customTimeline(
-                    title: translate!.achievements,
-                    timelineData: achievementsList),
-                customTimeline(
-                    title: translate!.certifications,
-                    timelineData: certificationsList),
-                sectionTitle(title: translate!.video),
-                SizedBox(
-                  width: width,
-                  height: height * .2,
-                  child: Row(
+        child: BlocConsumer<AcademicPortfolioCubit, AcademicPortfolioState>(
+          listener: (context, state) {
+            if (state is AcademicPortfolioError) {
+              showSnackBar(title: state.errorMsg);
+            }
+          },
+          builder: (context, state) {
+            if (state is AcademicPortfolioLoading) {
+              return const Loading(
+                size: 40,
+                strokeWidth: 4.5,
+              );
+            } else if (state is AcademicPortfolioLoaded) {
+              PortfolioResult? data = state.portfolioDetailsModel.result;
+              return Column(
+                children: [
+                  ProfileStackBanner(
+                    backgroundImage: data?.picture?.first.url,
+                    title: translate!.translate(data?.userName ?? ""),
+                    subTitle: translate!.translate("Female, 27yrs"),
+                  ),
+                  Column(
                     children: [
-                      Expanded(
-                        child: Hero(
-                          tag: "AttachedVideo",
-                          child: CustomVideoContainer(
-                            thumbnail:
-                                "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                            videoUrl: videoUrl,
-                          ),
+                      customTimeline(
+                          title: translate!.projects,
+                          timelineData: projectList,
+                          isDataTypeList: false),
+                      customTimeline(
+                          title: translate!.achievements,
+                          timelineData: achievementsList),
+                      customTimeline(
+                          title: translate!.certifications,
+                          timelineData: certificationsList),
+                      sectionTitle(title: translate!.video),
+                      SizedBox(
+                        width: width,
+                        height: height * .2,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Hero(
+                                tag: "AttachedVideo",
+                                child: CustomVideoContainer(
+                                  thumbnail:
+                                      "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
+                                  videoUrl: videoUrl,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomVideoContainer(
+                                thumbnail:
+                                    "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
+                                videoUrl: videoUrl,
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      Expanded(
-                        child: CustomVideoContainer(
-                          thumbnail:
-                              "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                          videoUrl: videoUrl,
-                        ),
+                      sectionTitle(title: translate!.attachments),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        shrinkWrap: true,
+                        itemCount: 4,
+                        itemBuilder: (context, index) {
+                          return AttachmentListTile(
+                            title: translate!.resume,
+                            onDownloadClick: () {
+                              //TODO: Add Download Functionality
+                              showSnackBar(title: translate!.download);
+                            },
+                          );
+                        },
                       )
                     ],
-                  ),
-                ),
-                sectionTitle(title: translate!.attachments),
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  physics: const ScrollPhysics(
-                      parent: NeverScrollableScrollPhysics()),
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return AttachmentListTile(
-                      title: translate!.resume,
-                      onDownloadClick: () {
-                        //TODO: Add Download Functionality
-                        showSnackBar(title: translate!.download);
-                      },
-                    );
-                  },
-                )
-              ],
-            )
-          ],
+                  )
+                ],
+              );
+            } else {
+              return const Center(
+                child: Text("OOps, Something Went Wrong"),
+              );
+            }
+          },
         ),
       ),
     );
