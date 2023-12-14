@@ -14,7 +14,9 @@ import 'package:find_me/feature/home_features/corporateDetails/presentation/cubi
 import 'package:find_me/feature/home_features/home/presentation/cubit/home__cubit.dart';
 import 'package:find_me/feature/home_features/matrimonyDetails/presentation/cubit/matrimonial_portfolio_cubit.dart';
 import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_cubit.dart';
+import 'package:find_me/feature/notifications/presentation/cubit/notification_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,5 +68,11 @@ List<BlocProvider> providers = [
   ),
   BlocProvider<ProfileDetailsCubit>(
     create: (BuildContext context) => locator<ProfileDetailsCubit>(),
+  ),
+  BlocProvider<NotificationCubit>(
+    create: (BuildContext context) => locator<NotificationCubit>(),
+  ),
+  BlocProvider<PersonalPortfolioCubit>(
+    create: (BuildContext context) => locator<PersonalPortfolioCubit>(),
   ),
 ];
