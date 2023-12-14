@@ -8,8 +8,8 @@ class AcademicPortfolioInitial extends AcademicPortfolioState {}
 class AcademicPortfolioLoading extends AcademicPortfolioState {}
 
 class AcademicPortfolioLoaded extends AcademicPortfolioState {
-  final PortfolioDetailsModel portfolioDetailsModel;
-  AcademicPortfolioLoaded({required this.portfolioDetailsModel});
+  final PortfolioGetModel portfolioModel;
+  AcademicPortfolioLoaded({required this.portfolioModel});
 }
 
 class AcademicPortfolioError extends AcademicPortfolioState {
