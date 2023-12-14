@@ -1,4 +1,4 @@
-import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/portfolio_set_model.dart';
 import 'package:flutter/widgets.dart';
 
 @immutable
@@ -9,7 +9,7 @@ class PersonalDetailsInitial extends PersonalDetailsState {}
 class PersonalDetailsLoading extends PersonalDetailsState {}
 
 class PersonalDetailsLoaded extends PersonalDetailsState {
-  final PortfolioModel portfolioModel;
+  final PortfolioSetModel portfolioModel;
   PersonalDetailsLoaded({required this.portfolioModel});
 }
 

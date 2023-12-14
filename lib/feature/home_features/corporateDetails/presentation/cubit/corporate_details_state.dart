@@ -1,4 +1,4 @@
-import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/portfolio_set_model.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -9,7 +9,7 @@ class CorporateDetailsInitial extends CorporateDetailsState {}
 class CorporateDetailsLoading extends CorporateDetailsState {}
 
 class CorporateDetailsLoaded extends CorporateDetailsState {
-  final PortfolioModel portfolioModel;
+  final PortfolioSetModel portfolioModel;
   CorporateDetailsLoaded({required this.portfolioModel});
 }
 

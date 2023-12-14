@@ -5,7 +5,7 @@ import 'package:find_me/core/helper/formatter.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/helper/validator.dart';
 import 'package:find_me/core/models/mobile_model.dart';
-import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/portfolio_set_model.dart';
 import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
@@ -126,8 +126,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   void submitForm() {
     AppLocalizations? translate = AppLocalizations.of(context);
     context.read<PersonalDetailsCubit>().createPersonalDetails(
-            data: PortfolioModel(
-                result: PortfolioResult(
+            data: PortfolioSetModel(
+                result: PortfolioSetResult(
           cardTitle: "Personal",
           suffix: _prefixController.text,
           firstName: _firstNameController.text,

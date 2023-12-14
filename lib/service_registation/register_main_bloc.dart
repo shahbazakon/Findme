@@ -1,4 +1,5 @@
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/feature/Profile/presentation/cubit/profile_details_cubit.dart';
 import 'package:find_me/feature/auth_featrues/createProfile/presentation/cubit/create_profile_cubit.dart';
 import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/otp_verify_cubit.dart';
 import 'package:find_me/feature/auth_featrues/otpVerify/presentation/cubit/resend_otp_cubit.dart';
@@ -62,5 +63,8 @@ List<BlocProvider> providers = [
   ),
   BlocProvider<AcademicPortfolioCubit>(
     create: (BuildContext context) => locator<AcademicPortfolioCubit>(),
+  ),
+  BlocProvider<ProfileDetailsCubit>(
+    create: (BuildContext context) => locator<ProfileDetailsCubit>(),
   ),
 ];

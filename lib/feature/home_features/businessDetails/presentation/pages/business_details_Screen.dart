@@ -6,7 +6,7 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/helper/validator.dart';
 import 'package:find_me/core/models/archievement_model.dart';
 import 'package:find_me/core/models/mobile_model.dart';
-import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/portfolio_set_model.dart';
 import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
@@ -154,8 +154,8 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
   void submitForm() {
     AppLocalizations? translate = AppLocalizations.of(context);
     context.read<BusinessDetailsCubit>().createBusinessDetails(
-            data: PortfolioModel(
-                result: PortfolioResult(
+            data: PortfolioSetModel(
+                result: PortfolioSetResult(
           // TODO:Business fame Field missing
           // TODO:about Business fame Field missing
           cardTitle: "Business",

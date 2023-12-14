@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:find_me/core/datasource/portfolio_remote_datasource.dart';
-import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/portfolio_set_model.dart';
 import 'package:meta/meta.dart';
 
 part 'academic_details_state.dart';
@@ -9,10 +9,10 @@ part 'academic_details_state.dart';
 class AcademicDetailsCubit extends Cubit<AcademicDetailsState> {
   AcademicDetailsCubit() : super(AcademicDetailsInitial());
 
-  createAcademicDetails({required PortfolioModel data}) async {
+  createAcademicDetails({required PortfolioSetModel data}) async {
     try {
       emit(AcademicDetailsLoading());
-      PortfolioModel result =
+      PortfolioSetModel result =
           await PortfolioRemoteDataSource().createPortfolio(data: data);
       emit(AcademicDetailsLoaded(portfolioModel: result));
     } on DioException catch (error) {

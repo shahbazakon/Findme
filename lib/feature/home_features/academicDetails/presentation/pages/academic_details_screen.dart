@@ -8,7 +8,7 @@ import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/helper/validator.dart';
 import 'package:find_me/core/models/archievement_model.dart';
 import 'package:find_me/core/models/mobile_model.dart';
-import 'package:find_me/core/models/protfolio_model.dart';
+import 'package:find_me/core/models/portfolio_set_model.dart';
 import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
@@ -210,8 +210,8 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   void submitForm() {
     AppLocalizations? translate = AppLocalizations.of(context);
     context.read<AcademicDetailsCubit>().createAcademicDetails(
-            data: PortfolioModel(
-                result: PortfolioResult(
+            data: PortfolioSetModel(
+                result: PortfolioSetResult(
           cardTitle: "Academic",
           suffix: _prefixController.text,
           firstName: _firstNameController.text,

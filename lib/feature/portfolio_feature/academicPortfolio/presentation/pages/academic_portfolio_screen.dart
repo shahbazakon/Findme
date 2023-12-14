@@ -1,5 +1,5 @@
 import 'package:find_me/core/constants/local_storege_key.dart';
-import 'package:find_me/core/models/protfolio_details_model.dart';
+import 'package:find_me/core/models/portfolio_get_model.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
@@ -99,7 +99,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                 strokeWidth: 4.5,
               );
             } else if (state is AcademicPortfolioLoaded) {
-              PortfolioResult? data = state.portfolioDetailsModel.result;
+              PortfolioResult? data = state.portfolioModel.result;
               return Column(
                 children: [
                   ProfileStackBanner(

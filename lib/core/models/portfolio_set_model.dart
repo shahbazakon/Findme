@@ -8,38 +8,39 @@ import 'package:find_me/core/models/mobile_model.dart';
 import 'package:find_me/core/models/social_model.dart';
 import 'package:find_me/core/models/video_link_model.dart';
 
-class PortfolioModel {
+class PortfolioSetModel {
   final bool? success;
-  final PortfolioResult? result;
+  final PortfolioSetResult? result;
   final String? message;
 
-  PortfolioModel({
+  PortfolioSetModel({
     this.success,
     this.result,
     this.message,
   });
 
-  PortfolioModel copyWith({
+  PortfolioSetModel copyWith({
     bool? success,
-    PortfolioResult? result,
+    PortfolioSetResult? result,
     String? message,
   }) =>
-      PortfolioModel(
+      PortfolioSetModel(
         success: success ?? this.success,
         result: result ?? this.result,
         message: message ?? this.message,
       );
 
-  factory PortfolioModel.fromRawJson(String str) =>
-      PortfolioModel.fromJson(json.decode(str));
+  factory PortfolioSetModel.fromRawJson(String str) =>
+      PortfolioSetModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory PortfolioModel.fromJson(Map<String, dynamic> json) => PortfolioModel(
+  factory PortfolioSetModel.fromJson(Map<String, dynamic> json) =>
+      PortfolioSetModel(
         success: json["success"],
         result: json["result"] == null
             ? null
-            : PortfolioResult.fromJson(json["result"]),
+            : PortfolioSetResult.fromJson(json["result"]),
         message: json["message"],
       );
 
@@ -50,7 +51,7 @@ class PortfolioModel {
       };
 }
 
-class PortfolioResult {
+class PortfolioSetResult {
   final List<dynamic>? officeDays;
   final List<String>? skills;
   final List<dynamic>? degreeLevel;
@@ -99,7 +100,7 @@ class PortfolioResult {
   final int? id;
   final int? v;
 
-  PortfolioResult({
+  PortfolioSetResult({
     this.officeDays,
     this.skills,
     this.degreeLevel,
@@ -149,7 +150,7 @@ class PortfolioResult {
     this.v,
   });
 
-  PortfolioResult copyWith({
+  PortfolioSetResult copyWith({
     List<dynamic>? officeDays,
     List<String>? skills,
     List<dynamic>? degreeLevel,
@@ -198,7 +199,7 @@ class PortfolioResult {
     int? id,
     int? v,
   }) =>
-      PortfolioResult(
+      PortfolioSetResult(
         officeDays: officeDays ?? this.officeDays,
         skills: skills ?? this.skills,
         degreeLevel: degreeLevel ?? this.degreeLevel,
@@ -248,13 +249,13 @@ class PortfolioResult {
         v: v ?? this.v,
       );
 
-  factory PortfolioResult.fromRawJson(String str) =>
-      PortfolioResult.fromJson(json.decode(str));
+  factory PortfolioSetResult.fromRawJson(String str) =>
+      PortfolioSetResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory PortfolioResult.fromJson(Map<String, dynamic> json) =>
-      PortfolioResult(
+  factory PortfolioSetResult.fromJson(Map<String, dynamic> json) =>
+      PortfolioSetResult(
         officeDays: json["officeDays"] == null
             ? []
             : List<dynamic>.from(json["officeDays"]!.map((x) => x)),

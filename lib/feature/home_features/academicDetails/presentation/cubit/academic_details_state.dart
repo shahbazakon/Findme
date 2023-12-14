@@ -8,7 +8,7 @@ class AcademicDetailsInitial extends AcademicDetailsState {}
 class AcademicDetailsLoading extends AcademicDetailsState {}
 
 class AcademicDetailsLoaded extends AcademicDetailsState {
-  final PortfolioModel portfolioModel;
+  final PortfolioSetModel portfolioModel;
   AcademicDetailsLoaded({required this.portfolioModel});
 }
 

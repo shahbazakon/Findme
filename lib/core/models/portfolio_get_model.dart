@@ -1,34 +1,34 @@
 import 'dart:convert';
 
-class PortfolioDetailsModel {
+class PortfolioGetModel {
   final bool? success;
   final PortfolioResult? result;
   final String? message;
 
-  PortfolioDetailsModel({
+  PortfolioGetModel({
     this.success,
     this.result,
     this.message,
   });
 
-  PortfolioDetailsModel copyWith({
+  PortfolioGetModel copyWith({
     bool? success,
     PortfolioResult? result,
     String? message,
   }) =>
-      PortfolioDetailsModel(
+      PortfolioGetModel(
         success: success ?? this.success,
         result: result ?? this.result,
         message: message ?? this.message,
       );
 
-  factory PortfolioDetailsModel.fromRawJson(String str) =>
-      PortfolioDetailsModel.fromJson(json.decode(str));
+  factory PortfolioGetModel.fromRawJson(String str) =>
+      PortfolioGetModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory PortfolioDetailsModel.fromJson(Map<String, dynamic> json) =>
-      PortfolioDetailsModel(
+  factory PortfolioGetModel.fromJson(Map<String, dynamic> json) =>
+      PortfolioGetModel(
         success: json["success"],
         result: json["result"] == null
             ? null
