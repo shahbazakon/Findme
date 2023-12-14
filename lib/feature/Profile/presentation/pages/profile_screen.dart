@@ -48,8 +48,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
-    String profileImage =
-        "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
     return Scaffold(
       body: BlocConsumer<ProfileDetailsCubit, ProfileDetailsState>(
         listener: (context, state) {
@@ -112,14 +110,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: InkWell(
                                   onTap: () {
                                     // cupertinoNavigator(screenName: const);
-                                    fadeNavigator(screenName: QRScreen());
+                                    fadeNavigator(
+                                        screenName: QRScreen(
+                                            rqText:
+                                                "$userDetailsBaseURL/${sharedPreferences?.getString(LocaleStorageKey.userID)}",
+                                            title: "${data?.name}",
+                                            subTitle: translate!.translate(
+                                              "@${data?.userName}",
+                                            )));
                                   },
                                   child: Hero(
                                     tag: "profileQRKey",
                                     child: GradientWidget(
                                       child: QrImageView(
-                                        data: data?.userName ??
-                                            "", //TODO: set QR Code value
+                                        data:
+                                            "$userDetailsBaseURL/${sharedPreferences?.getString(LocaleStorageKey.userID)}",
                                         version: QrVersions.auto,
                                         size: 80.0,
                                       ),
@@ -158,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           SizedBox(height: height * .02),
                           Text(
-                            translate!.lorem,
+                            data?.tag ?? "",
                             textAlign: TextAlign.center,
                             style: SubTitleHelper.h12,
                           ),
@@ -167,7 +172,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               followCountTile(
-                                  title: "1321",
+                                  title:
+                                      data?.follower?.length.toString() ?? "0",
                                   subtitle: translate!.followers),
                               Container(
                                 width: 1,
@@ -175,30 +181,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: AppColors.dark,
                               ),
                               followCountTile(
-                                  title: "2105",
+                                  title:
+                                      data?.following?.length.toString() ?? "0",
                                   subtitle: translate!.following),
                             ],
                           ),
-                          SizedBox(height: height * .01),
+                          SizedBox(height: height * .015),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              AppButton(
+                              /*   AppButton(
                                 label: translate!.follow,
                                 buttonWidth: width * .4,
                                 onPressed: () {},
+                              ),*/
+                              Expanded(
+                                child: AppButton(
+                                    label: translate!.portfolio,
+                                    buttonWidth: width * .4,
+                                    onPressed: () {
+                                      portfolioListPop(
+                                        bgImage: data?.picture?.first.url,
+                                        isTransparent: true,
+                                        isReplacementRoute: false,
+                                        showCloseButton: true,
+                                      );
+                                    }),
                               ),
-                              AppButton(
-                                  label: translate!.portfolio,
-                                  buttonWidth: width * .4,
-                                  onPressed: () {
-                                    portfolioListPop(
-                                      bgImage: data?.picture?.first.url,
-                                      isTransparent: true,
-                                      isReplacementRoute: false,
-                                      showCloseButton: true,
-                                    );
-                                  }),
                             ],
                           )
                         ],

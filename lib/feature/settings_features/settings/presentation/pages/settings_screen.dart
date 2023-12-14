@@ -3,9 +3,13 @@ import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/constants_variables.dart';
 import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/helper/navigators.dart';
+import 'package:find_me/core/models/portfolio_get_model.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/button/app_Button_widget.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/dialogBox/portolio_list_pop.dart';
+import 'package:find_me/core/widget/loading.dart';
+import 'package:find_me/feature/Profile/presentation/cubit/profile_details_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signIn/presentation/pages/sign_in_screen.dart';
 import 'package:find_me/feature/notifications/presentation/pages/notification_screen.dart';
 import 'package:find_me/feature/settings_features/about/presentation/pages/about_screen.dart';
@@ -15,6 +19,7 @@ import 'package:find_me/feature/settings_features/settings/presentation/widget/c
 import 'package:find_me/feature/settings_features/settings/presentation/widget/profile_banner.dart';
 import 'package:find_me/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -62,9 +67,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
           height: height,
           child: Column(
             children: [
-              ProfileBanner(
-                title: translate!.translate('Aliya Hayat'),
-                subTitle: 'Aliya.hayat97@email.com',
+              BlocConsumer<ProfileDetailsCubit, ProfileDetailsState>(
+                listener: (context, state) {
+                  if (state is ProfileDetailsError) {
+                    showSnackBar(title: state.errorMsg);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is ProfileDetailsLoading) {
+                    return Loading(isSmall: false);
+                  } else if (state is ProfileDetailsLoaded) {
+                    PortfolioResult? data = state.portfolioGetModel.result;
+                    return ProfileBanner(
+                      title: translate!.translate(data?.name ?? ""),
+                      subTitle: data?.email ?? "",
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                },
               ),
               Expanded(
                 child: ListView(

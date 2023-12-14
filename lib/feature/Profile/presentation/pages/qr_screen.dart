@@ -17,8 +17,14 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
 class QRScreen extends StatefulWidget {
-  QRScreen({super.key});
-
+  QRScreen(
+      {super.key,
+      required this.rqText,
+      required this.subTitle,
+      required this.title});
+  String title;
+  String subTitle;
+  String rqText;
   @override
   State<QRScreen> createState() => _QRScreenState();
 }
@@ -56,7 +62,7 @@ class _QRScreenState extends State<QRScreen> {
                         tag: "profileQRKey",
                         child: GradientWidget(
                           child: QrImageView(
-                            data: '1234567890',
+                            data: widget.rqText,
                             version: QrVersions.auto,
                             size: height * .38,
                           ),
@@ -69,7 +75,7 @@ class _QRScreenState extends State<QRScreen> {
                           child: Material(
                             color: Colors.transparent,
                             child: Text(
-                              translate!.translate("Aliya Hayat"),
+                              translate!.translate(widget.title),
                               style: TextHelper.h1
                                   .copyWith(fontWeight: FontWeight.w500),
                             ),
@@ -81,7 +87,7 @@ class _QRScreenState extends State<QRScreen> {
                         child: Material(
                           color: Colors.transparent,
                           child: Text(
-                            translate!.translate("@theroselady"),
+                            translate!.translate(widget.subTitle),
                             style: SubTitleHelper.h10,
                           ),
                         ),

@@ -27,6 +27,9 @@ GetIt locator = GetIt.instance;
 // SharedPreferences
 SharedPreferences? sharedPreferences;
 
+// Base URL
+String userDetailsBaseURL = "https://fyndme.net/detail";
+
 ///-------------------- Method Initialization
 ///-----------------------------------------------------------------------------
 
