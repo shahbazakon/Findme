@@ -51,8 +51,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
               builder: (context, state) {
                 if (state is ContactsLoading) {
                   return const Loading(
-                    size: 40,
-                    strokeWidth: 4.5,
+                    isSmall: false,
                   );
                 } else if (state is ContactLoaded) {
                   return Expanded(

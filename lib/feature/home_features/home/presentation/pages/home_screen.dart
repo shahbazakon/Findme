@@ -57,8 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return SizedBox(
                   height: height,
                   child: const Loading(
-                    size: 40,
-                    strokeWidth: 4.5,
+                    isSmall: false,
                   ));
             } else if (state is HomeError) {
               return const Center(

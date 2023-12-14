@@ -95,8 +95,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
           builder: (context, state) {
             if (state is AcademicPortfolioLoading) {
               return const Loading(
-                size: 40,
-                strokeWidth: 4.5,
+                isSmall: false,
               );
             } else if (state is AcademicPortfolioLoaded) {
               PortfolioResult? data = state.portfolioModel.result;
@@ -105,21 +104,21 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                   ProfileStackBanner(
                     backgroundImage: data?.picture?.first.url,
                     title: translate!.translate(data?.userName ?? ""),
-                    subTitle: translate!.translate("Female, 27yrs"),
+                    subTitle: translate.translate("Female, 27yrs"),
                   ),
                   Column(
                     children: [
                       customTimeline(
-                          title: translate!.projects,
+                          title: translate.projects,
                           timelineData: projectList,
                           isDataTypeList: false),
                       customTimeline(
-                          title: translate!.achievements,
+                          title: translate.achievements,
                           timelineData: achievementsList),
                       customTimeline(
-                          title: translate!.certifications,
+                          title: translate.certifications,
                           timelineData: certificationsList),
-                      sectionTitle(title: translate!.video),
+                      sectionTitle(title: translate.video),
                       SizedBox(
                         width: width,
                         height: height * .2,
@@ -145,7 +144,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                           ],
                         ),
                       ),
-                      sectionTitle(title: translate!.attachments),
+                      sectionTitle(title: translate.attachments),
                       ListView.builder(
                         padding: EdgeInsets.zero,
                         physics: const ScrollPhysics(
@@ -154,10 +153,10 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                         itemCount: 4,
                         itemBuilder: (context, index) {
                           return AttachmentListTile(
-                            title: translate!.resume,
+                            title: translate.resume,
                             onDownloadClick: () {
                               //TODO: Add Download Functionality
-                              showSnackBar(title: translate!.download);
+                              showSnackBar(title: translate.download);
                             },
                           );
                         },
