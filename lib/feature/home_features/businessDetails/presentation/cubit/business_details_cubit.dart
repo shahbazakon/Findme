@@ -14,7 +14,8 @@ class BusinessDetailsCubit extends Cubit<BusinessDetailsState> {
           await PortfolioRemoteDataSource().createPortfolio(data: data);
       emit(BusinessDetailsLoaded(portfolioModel: result));
     } on DioException catch (error) {
-      emit(BusinessDetailsError(errorMsg: error.response!.data["message"]));
+      emit(BusinessDetailsError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

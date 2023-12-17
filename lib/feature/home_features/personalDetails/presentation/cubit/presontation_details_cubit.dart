@@ -14,7 +14,8 @@ class PersonalDetailsCubit extends Cubit<PersonalDetailsState> {
           await PortfolioRemoteDataSource().createPortfolio(data: data);
       emit(PersonalDetailsLoaded(portfolioModel: result));
     } on DioException catch (error) {
-      emit(PersonalDetailsError(errorMsg: error.response!.data["message"]));
+      emit(PersonalDetailsError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

@@ -2,11 +2,13 @@ import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/loading.dart';
+import 'package:find_me/feature/contacts/data/model/contacts_model.dart';
 import 'package:find_me/feature/contacts/presentation/cubit/contacts_cubit.dart';
 import 'package:find_me/feature/contacts/presentation/widget/contacts_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/constants/theme_constants.dart';
 import '../../../../core/widget/Input Field/custom_searchbar.dart';
@@ -54,26 +56,32 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     isSmall: false,
                   );
                 } else if (state is ContactLoaded) {
+                  List<ContactResult>? data = state.contactModel.result;
                   return Expanded(
                     child: ListView.builder(
                       physics: const ScrollPhysics(
                           parent: BouncingScrollPhysics(
                               parent: AlwaysScrollableScrollPhysics())),
                       shrinkWrap: true,
-                      itemCount: 10,
+                      itemCount: data?.length ?? 0,
                       itemBuilder: (context, index) {
+                        Follow? contactData = data?[index].follower;
                         return ContactsListTile(
-                          title: translate.translate('Mustafa Jamail'),
-                          subTitle: translate.translate('@Mustaja'),
-                          leadingImage:
-                              "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3569&q=80",
+                          title: translate.translate(contactData?.name ?? ""),
+                          subTitle:
+                              translate.translate("${contactData?.purpleId}"),
+                          leadingImage: contactData?.picture?.first.url,
+                          onShareClick: () {
+                            Share.share(
+                                "$userDetailsBaseURL/${contactData?.followId}");
+                          },
                         );
                       },
                     ),
                   );
                 } else if (state is ContactsError) {
                   return Center(
-                    child: Text("${state.errorMsg}"),
+                    child: Text(state.errorMsg),
                   );
                 } else {
                   return const Center(

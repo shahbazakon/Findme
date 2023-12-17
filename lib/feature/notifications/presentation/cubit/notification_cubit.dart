@@ -15,7 +15,8 @@ class NotificationCubit extends Cubit<NotificationState> {
           .fetchNotification(userID: userID);
       emit(NotificationLoaded(notificationModel: result));
     } on DioException catch (error) {
-      emit(NotificationError(errorMsg: error.response!.data["message"]));
+      emit(NotificationError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

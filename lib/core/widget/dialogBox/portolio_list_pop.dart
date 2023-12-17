@@ -19,13 +19,19 @@ portfolioListPop({
   bool isTransparent = false,
   isReplacementRoute = false,
   final String? bgImage,
+  required String personalCardID,
+  required String academicCardID,
+  required String corporateCardID,
+  required String businessCardID,
+  required String matrimonialCardID,
 }) async {
   Map portfolioList = {
-    'Personal': const PersonalPortfolioScreen(),
-    'Academic': const AcademicPortfolioScreen(),
-    'Corporate': const CorporatePortfolioScreen(),
-    'Business': const BusinessPortfolioScreen(),
-    'Matrimony': const MatrimonialPortfolioScreen()
+    'Personal': PersonalPortfolioScreen(personalCardID: personalCardID),
+    'Academic': AcademicPortfolioScreen(academicCardID : academicCardID),
+    'Corporate': CorporatePortfolioScreen(corporateCardID: corporateCardID),
+    'Business': BusinessPortfolioScreen(businessCardID: businessCardID),
+    'Matrimony':
+        MatrimonialPortfolioScreen(matrimonialCardID: matrimonialCardID)
   };
   AppLocalizations? translate =
       AppLocalizations.of(navigatorKey.currentContext!);

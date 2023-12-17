@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class ContactModel {
   final bool? success;
-  final List<Result>? result;
+  final List<ContactResult>? result;
   final String? message;
 
   ContactModel({
@@ -13,7 +13,7 @@ class ContactModel {
 
   ContactModel copyWith({
     bool? success,
-    List<Result>? result,
+    List<ContactResult>? result,
     String? message,
   }) =>
       ContactModel(
@@ -31,7 +31,8 @@ class ContactModel {
         success: json["success"],
         result: json["result"] == null
             ? []
-            : List<Result>.from(json["result"]!.map((x) => Result.fromJson(x))),
+            : List<ContactResult>.from(
+                json["result"]!.map((x) => ContactResult.fromJson(x))),
         message: json["message"],
       );
 
@@ -44,7 +45,7 @@ class ContactModel {
       };
 }
 
-class Result {
+class ContactResult {
   final bool? status;
   final String? resultId;
   final Follow? follower;
@@ -54,7 +55,7 @@ class Result {
   final int? id;
   final int? v;
 
-  Result({
+  ContactResult({
     this.status,
     this.resultId,
     this.follower,
@@ -65,7 +66,7 @@ class Result {
     this.v,
   });
 
-  Result copyWith({
+  ContactResult copyWith({
     bool? status,
     String? resultId,
     Follow? follower,
@@ -75,7 +76,7 @@ class Result {
     int? id,
     int? v,
   }) =>
-      Result(
+      ContactResult(
         status: status ?? this.status,
         resultId: resultId ?? this.resultId,
         follower: follower ?? this.follower,
@@ -86,11 +87,12 @@ class Result {
         v: v ?? this.v,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory ContactResult.fromRawJson(String str) =>
+      ContactResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory ContactResult.fromJson(Map<String, dynamic> json) => ContactResult(
         status: json["status"],
         resultId: json["_id"],
         follower:
@@ -146,6 +148,9 @@ class Follow {
   final String? phoneCode;
   final String? userName;
   final String? address;
+  final List<dynamic>? following;
+  final List<dynamic>? follower;
+  final String? status;
   final int? otp;
   final String? tag;
 
@@ -178,6 +183,9 @@ class Follow {
     this.phoneCode,
     this.userName,
     this.address,
+    this.following,
+    this.follower,
+    this.status,
     this.otp,
     this.tag,
   });
@@ -211,6 +219,9 @@ class Follow {
     String? phoneCode,
     String? userName,
     String? address,
+    List<dynamic>? following,
+    List<dynamic>? follower,
+    String? status,
     int? otp,
     String? tag,
   }) =>
@@ -243,6 +254,9 @@ class Follow {
         phoneCode: phoneCode ?? this.phoneCode,
         userName: userName ?? this.userName,
         address: address ?? this.address,
+        following: following ?? this.following,
+        follower: follower ?? this.follower,
+        status: status ?? this.status,
         otp: otp ?? this.otp,
         tag: tag ?? this.tag,
       );
@@ -294,6 +308,13 @@ class Follow {
         phoneCode: json["phoneCode"],
         userName: json["userName"],
         address: json["address"],
+        following: json["following"] == null
+            ? []
+            : List<dynamic>.from(json["following"]!.map((x) => x)),
+        follower: json["follower"] == null
+            ? []
+            : List<dynamic>.from(json["follower"]!.map((x) => x)),
+        status: json["status"],
         otp: json["otp"],
         tag: json["tag"],
       );
@@ -334,6 +355,12 @@ class Follow {
         "phoneCode": phoneCode,
         "userName": userName,
         "address": address,
+        "following": following == null
+            ? []
+            : List<dynamic>.from(following!.map((x) => x)),
+        "follower":
+            follower == null ? [] : List<dynamic>.from(follower!.map((x) => x)),
+        "status": status,
         "otp": otp,
         "tag": tag,
       };

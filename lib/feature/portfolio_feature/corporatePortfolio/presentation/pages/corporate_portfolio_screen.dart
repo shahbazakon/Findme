@@ -13,7 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CorporatePortfolioScreen extends StatefulWidget {
-  const CorporatePortfolioScreen({super.key});
+  final String corporateCardID;
+  const CorporatePortfolioScreen({super.key, required this.corporateCardID});
 
   @override
   State<CorporatePortfolioScreen> createState() =>

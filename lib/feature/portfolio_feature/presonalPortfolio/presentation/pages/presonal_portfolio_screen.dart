@@ -18,7 +18,8 @@ import '../widget/attachment_list_tile.com.dart';
 import '../widget/blur_background.dart';
 
 class PersonalPortfolioScreen extends StatefulWidget {
-  const PersonalPortfolioScreen({super.key});
+  final String personalCardID;
+  const PersonalPortfolioScreen({super.key, required this.personalCardID});
 
   @override
   State<PersonalPortfolioScreen> createState() =>

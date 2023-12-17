@@ -16,7 +16,8 @@ class OtpVerifyCubit extends Cubit<OtpVerifyState> {
           await OTPVerifyDataSource().verifyOTP(otp: otp, id: id);
       emit(OtpVerifyLoaded(otpVerifyModel: result));
     } on DioException catch (error) {
-      emit(OtpVerifyError(errorMsg: error.response!.data["message"]));
+      emit(OtpVerifyError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

@@ -20,7 +20,8 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
               password: password, confirmPassword: confirmPassword, id: id));
       emit(ResetPasswordLoaded(resetPasswordModel: result));
     } on DioException catch (error) {
-      emit(ResetPasswordError(errorMsg: error.response!.data["message"]));
+      emit(ResetPasswordError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

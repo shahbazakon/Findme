@@ -134,3 +134,24 @@ Future<DateTime?> appDatePicker(
     return pickedDate;
   }
 }
+
+//Age Calculator
+int? calculateAge({required String dobString}) {
+  try {
+    DateTime dob = DateTime.parse(dobString);
+    DateTime currentDate = DateTime.now();
+
+    int age = currentDate.year - dob.year;
+
+    // Check if the birthday has occurred this year
+    if (currentDate.month < dob.month ||
+        (currentDate.month == dob.month && currentDate.day < dob.day)) {
+      age--;
+    }
+
+    return age;
+  } catch (e) {
+    showSnackBar(title: 'Error calculating age: $e');
+    return null;
+  }
+}

@@ -13,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MatrimonialPortfolioScreen extends StatefulWidget {
-  const MatrimonialPortfolioScreen({super.key});
+  final String matrimonialCardID;
+  const MatrimonialPortfolioScreen(
+      {super.key, required this.matrimonialCardID});
 
   @override
   State<MatrimonialPortfolioScreen> createState() =>

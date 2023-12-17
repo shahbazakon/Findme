@@ -16,7 +16,8 @@ class SearchUserCubit extends Cubit<SearchUserState> {
           .fetchSearchedUserData(query: query);
       emit(SearchUserLoaded(searchUserModel: result));
     } on DioException catch (error) {
-      emit(SearchUserError(errorMsg: error.response!.data["message"]));
+      emit(SearchUserError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

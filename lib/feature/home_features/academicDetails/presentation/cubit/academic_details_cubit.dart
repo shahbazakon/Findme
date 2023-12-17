@@ -16,7 +16,8 @@ class AcademicDetailsCubit extends Cubit<AcademicDetailsState> {
           await PortfolioRemoteDataSource().createPortfolio(data: data);
       emit(AcademicDetailsLoaded(portfolioModel: result));
     } on DioException catch (error) {
-      emit(AcademicDetailsError(errorMsg: error.response!.data["message"]));
+      emit(AcademicDetailsError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

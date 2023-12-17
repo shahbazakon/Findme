@@ -15,7 +15,8 @@ class ContactsCubit extends Cubit<ContactsState> {
           await ContactsRemoteDataSource().fetchContactsData(userID: userID);
       emit(ContactLoaded(contactModel: result));
     } on DioException catch (error) {
-      emit(ContactsError(errorMsg: error.response!.data["message"]));
+      emit(
+          ContactsError(errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

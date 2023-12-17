@@ -1,7 +1,12 @@
 import 'dart:io';
 
 import 'package:find_me/core/constants/app_assets.dart';
+import 'package:find_me/core/constants/local_storege_key.dart';
+import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/loading.dart';
+import 'package:find_me/feature/Profile/presentation/cubit/profile_details_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../constants/app_color.dart';
@@ -25,6 +30,12 @@ class ProfilePictureAvatar extends StatefulWidget {
 class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
   AppDialogBox dialogBox = AppDialogBox();
   XFile? pickedImage;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -45,19 +56,31 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
                           : widget.radius * .21,
                       color: AppColors.lightGrey3)
                 ]),
-            child: CircleAvatar(
-              radius: widget.radius,
-              backgroundImage: pickedImage != null
-                  ? Image.file(
-                      File(pickedImage!.path),
-                      fit: BoxFit.cover,
-                    ).image
-                  : const FadeInImage(
-                      placeholder: AssetImage('assets/placeholder_image.png'),
-                      image: NetworkImage(
-                          "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3569&q=80"),
-                      fit: BoxFit.cover,
-                    ).image,
+            child: BlocBuilder<ProfileDetailsCubit, ProfileDetailsState>(
+              builder: (context, state) {
+                if (state is ProfileDetailsLoading) {
+                  return const Loading();
+                } else if (state is ProfileDetailsLoaded) {
+                  String profileImage = sharedPreferences
+                          ?.getString(LocaleStorageKey.userProfileImage) ??
+                      "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png";
+                  return CircleAvatar(
+                    radius: widget.radius,
+                    backgroundImage: pickedImage != null
+                        ? Image.file(
+                            File(pickedImage!.path),
+                            fit: BoxFit.cover,
+                          ).image
+                        : FadeInImage(
+                            placeholder: AssetImage(AppIcons.placeholderImage),
+                            image: NetworkImage(profileImage),
+                            fit: BoxFit.cover,
+                          ).image,
+                  );
+                } else {
+                  return Center(child: Icon(Icons.error, color: AppColors.red));
+                }
+              },
             )),
         Visibility(
           visible: widget.showEditButton,

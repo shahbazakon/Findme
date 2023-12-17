@@ -16,8 +16,8 @@ class MatrimonialPortfolioCubit extends Cubit<MatrimonialPortfolioState> {
           await MatrimonialRemoteDataSource().createPortfolio(data: data);
       emit(MatrimonialPortfolioLoaded(matrimonialModel: result));
     } on DioException catch (error) {
-      emit(
-          MatrimonialPortfolioError(errorMsg: error.response!.data["message"]));
+      emit(MatrimonialPortfolioError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

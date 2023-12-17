@@ -4,11 +4,18 @@ import 'package:flutter/material.dart';
 
 class ContactsListTile extends StatelessWidget {
   ContactsListTile(
-      {super.key, this.title = '', this.subTitle = '', this.leadingImage});
+      {super.key,
+      this.title = '',
+      this.subTitle = '',
+      this.leadingImage,
+      this.OnMenuClick,
+      this.onShareClick});
 
   String title;
   String subTitle;
   String? leadingImage;
+  Function()? onShareClick;
+  Function()? OnMenuClick;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -32,9 +39,7 @@ class ContactsListTile extends StatelessWidget {
         child: Row(
           children: [
             InkWell(
-              onTap: () {
-                // TODO: Add share Button Functionality
-              },
+              onTap: onShareClick,
               child: CircleAvatar(
                 backgroundColor: AppColors.primary,
                 radius: 17,
@@ -46,9 +51,7 @@ class ContactsListTile extends StatelessWidget {
             ),
             const Spacer(),
             InkWell(
-              onTap: () {
-                // TODO: Add menu Button Functionality
-              },
+              onTap: OnMenuClick,
               child: CircleAvatar(
                 backgroundColor: AppColors.primary,
                 radius: 17,

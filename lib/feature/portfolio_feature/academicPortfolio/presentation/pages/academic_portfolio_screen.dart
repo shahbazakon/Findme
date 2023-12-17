@@ -1,10 +1,10 @@
 import 'package:find_me/core/constants/local_storege_key.dart';
-import 'package:find_me/core/models/portfolio_get_model.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/core/widget/profile_stack_banner.dart';
+import 'package:find_me/feature/portfolio_feature/academicPortfolio/data/models/academic_details_model.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/attachment_list_tile.com.dart';
 import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
@@ -16,8 +16,8 @@ import 'package:timeline_tile/timeline_tile.dart';
 import '../../../../../core/constants/app_color.dart';
 
 class AcademicPortfolioScreen extends StatefulWidget {
-  const AcademicPortfolioScreen({super.key});
-
+  const AcademicPortfolioScreen({super.key, required this.academicCardID});
+  final String academicCardID;
   @override
   State<AcademicPortfolioScreen> createState() =>
       _AcademicPortfolioScreenState();
@@ -98,13 +98,19 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                 isSmall: false,
               );
             } else if (state is AcademicPortfolioLoaded) {
-              PortfolioResult? data = state.portfolioModel.result;
+              AcademicResult? data = state.academicDetailsModel.result;
+              var age = calculateAge(
+                  dobString:
+                      data?.dob?.toString() ?? DateTime.now().toString());
               return Column(
                 children: [
                   ProfileStackBanner(
                     backgroundImage: data?.picture?.first.url,
-                    title: translate!.translate(data?.userName ?? ""),
-                    subTitle: translate.translate("Female, 27yrs"),
+                    title: translate!.translate(
+                        "${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName}??"
+                        " "),
+                    subTitle:
+                        translate.translate("${data?.gender ?? ''}, $age"),
                   ),
                   Column(
                     children: [

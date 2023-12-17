@@ -15,7 +15,8 @@ class PersonalPortfolioCubit extends Cubit<PersonalPortfolioState> {
           .fetchPortfolioDetails(userID: userID);
       emit(PersonalPortfolioLoaded(portfolioModel: result));
     } on DioException catch (error) {
-      emit(PersonalPortfolioError(errorMsg: error.response!.data["message"]));
+      emit(PersonalPortfolioError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

@@ -32,7 +32,15 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
+    apiCall();
     super.initState();
+  }
+
+  void apiCall() {
+    String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
+    if (userID != null) {
+      context.read<ProfileDetailsCubit>().fetchProfileDetails(userID: userID);
+    }
   }
 
   // Select language
@@ -75,7 +83,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
                 builder: (context, state) {
                   if (state is ProfileDetailsLoading) {
-                    return Loading(isSmall: false);
+                    return Container(
+                        margin: EdgeInsets.only(top: height * .08),
+                        height: height * .1,
+                        child: const Loading(isSmall: false));
                   } else if (state is ProfileDetailsLoaded) {
                     PortfolioResult? data = state.portfolioGetModel.result;
                     return ProfileBanner(
@@ -83,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       subTitle: data?.email ?? "",
                     );
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 },
               ),
@@ -106,7 +117,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       leadingIcon: AppIcons.portfolio,
                       onTap: () {
                         portfolioListPop(
-                            showCloseButton: true, isTransparent: false);
+                            academicCardID: "",
+                            businessCardID: "",
+                            corporateCardID: "",
+                            matrimonialCardID: "",
+                            personalCardID: "",
+                            showCloseButton: true,
+                            isTransparent: false);
                       },
                     ),
                     // CustomTile(

@@ -11,7 +11,8 @@ import 'package:timeline_tile/timeline_tile.dart';
 import '../../../../../core/constants/app_color.dart';
 
 class BusinessPortfolioScreen extends StatefulWidget {
-  const BusinessPortfolioScreen({super.key});
+  final String businessCardID;
+  const BusinessPortfolioScreen({super.key, required this.businessCardID});
 
   @override
   State<BusinessPortfolioScreen> createState() =>

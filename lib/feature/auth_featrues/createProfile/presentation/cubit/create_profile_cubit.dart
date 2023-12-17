@@ -16,7 +16,8 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
           await CreateProfileRemoteDataSource().createProfile(data: data);
       emit(CreateProfileLoaded(profileModel: result));
     } on DioException catch (error) {
-      emit(CreateProfileError(errorMsg: error.response!.data["message"]));
+      emit(CreateProfileError(
+          errorMsg: error.response?.data["message"] ?? "$error"));
     }
   }
 }

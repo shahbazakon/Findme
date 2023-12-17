@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    apiCall();
+    // apiCall();
     super.initState();
   }
 
@@ -62,6 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           } else if (state is ProfileDetailsLoaded) {
             PortfolioResult? data = state.portfolioGetModel.result;
+
             return Stack(
               children: [
                 ShadowOverlay(
@@ -116,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 "$userDetailsBaseURL/${sharedPreferences?.getString(LocaleStorageKey.userID)}",
                                             title: "${data?.name}",
                                             subTitle: translate!.translate(
-                                              "@${data?.userName}",
+                                              "${data?.purpleId}",
                                             )));
                                   },
                                   child: Hero(
@@ -152,7 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       color: Colors.transparent,
                                       child: Text(
                                         translate!
-                                            .translate("@${data?.userName}"),
+                                            .translate("${data?.purpleId}"),
                                         style: SubTitleHelper.h10,
                                       ),
                                     ),
@@ -205,6 +206,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         isTransparent: true,
                                         isReplacementRoute: false,
                                         showCloseButton: true,
+                                        academicCardID: "",
+                                        businessCardID: "",
+                                        corporateCardID: "",
+                                        matrimonialCardID: "",
+                                        personalCardID: "",
                                       );
                                     }),
                               ),
