@@ -1,11 +1,12 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/app_loader.dart';
 import 'package:flutter/material.dart';
 
-showVideoPop({required String videoUrl, required String thumbnail}) {
+showVideoPop({required String videoUrl, String? thumbnail}) {
   showDialog(
     context: navigatorKey.currentContext!,
     barrierDismissible: false,
@@ -19,11 +20,10 @@ showVideoPop({required String videoUrl, required String thumbnail}) {
 }
 
 class VideoPlayerWidget extends StatefulWidget {
-  const VideoPlayerWidget(
-      {super.key, required this.videoUrl, required this.thumbnail});
+  const VideoPlayerWidget({super.key, required this.videoUrl, this.thumbnail});
 
   final String videoUrl;
-  final String thumbnail;
+  final String? thumbnail;
   @override
   State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
 }
@@ -42,11 +42,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     _customVideoPlayerSettings = CustomVideoPlayerSettings(
         showSeekButtons: true,
         showPlayButton: true,
-        thumbnailWidget: Image.network(
-          widget.thumbnail,
-          width: width,
-          fit: BoxFit.cover,
-        ));
+        thumbnailWidget: widget.thumbnail != null
+            ? Image.network(
+                widget.thumbnail!,
+                width: width,
+                fit: BoxFit.cover,
+              )
+            : Image.asset(AppIcons.videoThumbnailPlaceholder));
 
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,

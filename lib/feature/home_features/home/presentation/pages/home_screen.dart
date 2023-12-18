@@ -29,6 +29,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
+  HomeModel? data;
 
   @override
   void initState() {
@@ -64,7 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text("Oops, Something went Wrong"),
               );
             } else if (state is HomeLoaded) {
-              HomeModel data = state.homeModel;
+              data = state.homeModel;
+              sharedPreferences?.setString(
+                  LocaleStorageKey.userProfileImage,
+                  state.homeModel.result?.first.picture?.first.url ??
+                      "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png");
               return Container(
                 padding: primaryPadding,
                 height: height,
@@ -74,8 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         translate!.hiThere(
-                            data.result![0].firstName.toString() +
-                                data.result![0].lastName.toString()),
+                            "${data?.result?.first.firstName ?? ""} ${data?.result?.first.lastName ?? ""}"),
                         textAlign: TextAlign.left,
                         style: SubTitleHelper.h3,
                       ),

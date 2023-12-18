@@ -6,10 +6,10 @@ class CustomVideoContainer extends StatelessWidget {
   const CustomVideoContainer({
     super.key,
     required this.videoUrl,
-    required this.thumbnail,
+    this.thumbnail,
   });
   final String videoUrl;
-  final String thumbnail;
+  final String? thumbnail;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -20,11 +20,12 @@ class CustomVideoContainer extends StatelessWidget {
         margin: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-              image: NetworkImage(
-                thumbnail,
-              ),
-              fit: BoxFit.cover),
+          image: thumbnail != null
+              ? DecorationImage(
+                  image: NetworkImage(thumbnail!), fit: BoxFit.cover)
+              : DecorationImage(
+                  image: AssetImage(AppIcons.videoThumbnailPlaceholder),
+                  fit: BoxFit.cover),
         ),
         child: Image.asset(AppIcons.play, scale: 2.5),
       ),

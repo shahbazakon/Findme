@@ -7,14 +7,16 @@ import 'package:find_me/core/error/faliures.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/feature/home_features/matrimonyDetails/data/models/matrimonial_%20Model.dart';
 
-class MatrimonialRemoteDataSource {
+class MatrimonialDetailsRemoteDataSource {
   API api = API();
-  Future<MatrimonialModel> createPortfolio({required MatrimonialModel data}) async {
+  Future<MatrimonialModel> createPortfolio(
+      {required MatrimonialModel data}) async {
     log("data: ${data.toJson()}");
     try {
       // Replace this with your actual headers
       Map<String, dynamic> headers = {
-        "x-auth-token": sharedPreferences!.getString(LocaleStorageKey.xAuthToken),
+        "x-auth-token":
+            sharedPreferences!.getString(LocaleStorageKey.xAuthToken),
       };
       final Response response = await api.sendRequest.post(
         "/card/create",

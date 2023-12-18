@@ -16,7 +16,7 @@ import 'package:find_me/feature/home_features/matrimonyDetails/presentation/cubi
 import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_cubit.dart';
 import 'package:find_me/feature/notifications/presentation/cubit/notification_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
 
 class RegisterBlocs {
   RegisterBlocs() {

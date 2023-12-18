@@ -8,8 +8,8 @@ class PersonalPortfolioInitial extends PersonalPortfolioState {}
 class PersonalPortfolioLoading extends PersonalPortfolioState {}
 
 class PersonalPortfolioLoaded extends PersonalPortfolioState {
-  final PortfolioGetModel portfolioModel;
-  PersonalPortfolioLoaded({required this.portfolioModel});
+  final PersonalDetailsModel personalDetailsModel;
+  PersonalPortfolioLoaded({required this.personalDetailsModel});
 }
 
 class PersonalPortfolioError extends PersonalPortfolioState {

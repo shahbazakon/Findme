@@ -31,6 +31,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   double contentHeight = height * .58;
+  PortfolioResult? data;
 
   @override
   void initState() {
@@ -38,11 +39,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
   }
 
+  // API Calling
   void apiCall() {
     String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
     if (userID != null) {
       context.read<ProfileDetailsCubit>().fetchProfileDetails(userID: userID);
     }
+  }
+
+  //On Portfolio Button Click
+  onPortfolioClick() async {
+    portfolioListPop(
+      bgImage: data?.picture?.first.url,
+      isTransparent: true,
+      isReplacementRoute: false,
+      showCloseButton: true,
+    );
   }
 
   @override
@@ -61,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               isSmall: false,
             );
           } else if (state is ProfileDetailsLoaded) {
-            PortfolioResult? data = state.portfolioGetModel.result;
+            data = state.portfolioGetModel.result;
 
             return Stack(
               children: [
@@ -200,19 +212,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: AppButton(
                                     label: translate!.portfolio,
                                     buttonWidth: width * .4,
-                                    onPressed: () {
-                                      portfolioListPop(
-                                        bgImage: data?.picture?.first.url,
-                                        isTransparent: true,
-                                        isReplacementRoute: false,
-                                        showCloseButton: true,
-                                        academicCardID: "",
-                                        businessCardID: "",
-                                        corporateCardID: "",
-                                        matrimonialCardID: "",
-                                        personalCardID: "",
-                                      );
-                                    }),
+                                    onPressed: onPortfolioClick),
                               ),
                             ],
                           )

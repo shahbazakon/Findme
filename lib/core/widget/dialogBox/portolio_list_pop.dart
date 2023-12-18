@@ -2,13 +2,17 @@ import 'dart:ui';
 
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
+import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/feature/home_features/home/data/datasource/home_remote_data_source.dart';
+import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
 import 'package:find_me/feature/portfolio_feature/AcademicPortfolio/presentation/pages/Academic_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/BusinessPortfolio/presentation/pages/business_portfolio_screendart.dart';
 import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentation/pages/corporate_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/matrimonyPortfolio/presentation/pages/matrimonial_portfolio_screen.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/pages/presonal_portfolio_screen.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/pages/presonal_portfolio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -19,19 +23,36 @@ portfolioListPop({
   bool isTransparent = false,
   isReplacementRoute = false,
   final String? bgImage,
-  required String personalCardID,
-  required String academicCardID,
-  required String corporateCardID,
-  required String businessCardID,
-  required String matrimonialCardID,
 }) async {
+  Future<String> getCardID({required String cardName}) async {
+    try {
+      String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
+      HomeModel response =
+          await HomeRemoteDataSource().fetchHomeData(userID: userID!);
+
+      for (var element in response.result ?? []) {
+        if (cardName.toLowerCase() == element.cardTitle?.toLowerCase()) {
+          return element.resultId;
+        }
+      }
+      return ""; // or return ""; depending on your requirement
+    } catch (error) {
+      showSnackBar(title: error.toString());
+      return ""; // or return ""; depending on your requirement
+    }
+  }
+
   Map portfolioList = {
-    'Personal': PersonalPortfolioScreen(personalCardID: personalCardID),
-    'Academic': AcademicPortfolioScreen(academicCardID : academicCardID),
-    'Corporate': CorporatePortfolioScreen(corporateCardID: corporateCardID),
-    'Business': BusinessPortfolioScreen(businessCardID: businessCardID),
-    'Matrimony':
-        MatrimonialPortfolioScreen(matrimonialCardID: matrimonialCardID)
+    'Personal': PersonalPortfolioScreen(
+        personalCardID: await getCardID(cardName: 'Personal')),
+    'Academic': AcademicPortfolioScreen(
+        academicCardID: await getCardID(cardName: 'Academic')),
+    'Corporate': CorporatePortfolioScreen(
+        corporateCardID: await getCardID(cardName: 'Corporate')),
+    'Business': BusinessPortfolioScreen(
+        businessCardID: await getCardID(cardName: 'Business')),
+    'Matrimony': MatrimonialPortfolioScreen(
+        matrimonialCardID: await getCardID(cardName: 'Matrimony'))
   };
   AppLocalizations? translate =
       AppLocalizations.of(navigatorKey.currentContext!);

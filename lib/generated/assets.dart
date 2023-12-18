@@ -33,12 +33,14 @@ class Assets {
   static const String iconsTwitter = 'assets/icons/twitter.png';
   static const String iconsUpload = 'assets/icons/upload.png';
   static const String iconsUser = 'assets/icons/user.png';
-  static const String imageAcademic = 'assets/image/academic.png';
-  static const String imageBgWhite = 'assets/image/bg_white.png';
-  static const String imageBusiness = 'assets/image/business.png';
-  static const String imageCorporate = 'assets/image/corporate.png';
-  static const String imageMatrimony = 'assets/image/matrimony.png';
-  static const String imagePersonal = 'assets/image/personal.png';
+  static const String iconsVideoThumbnailPlaceholder =
+      'assets/icons/video_thumbnail_placeholder.png';
+  static const String imagesAcademic = 'assets/images/academic.png';
+  static const String imagesBgWhite = 'assets/images/bg_white.png';
+  static const String imagesBusiness = 'assets/images/business.png';
+  static const String imagesCorporate = 'assets/images/corporate.png';
+  static const String imagesMatrimony = 'assets/images/matrimony.png';
+  static const String imagesPersonal = 'assets/images/personal.png';
   static const String jsonSquareClipShape = 'assets/json/squareClipShape.json';
   static const String onBoardingAssetsOnBoarding1 =
       'assets/onBoardingAssets/onBoarding_1.svg';

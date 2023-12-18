@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/local_storege_key.dart';
@@ -43,9 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 LocaleStorageKey.userProfileImage,
                 state.portfolioGetModel.result?.picture?.first.url ??
                     "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png");
-            log("${buildContext.widget.runtimeType}");
-            log("${SplashScreen().runtimeType}");
-            if (buildContext.widget.runtimeType == SplashScreen().runtimeType) {
+            // route Space screen after saving userProfile Image
+            if (buildContext.widget.runtimeType ==
+                const SplashScreen().runtimeType) {
               Timer(const Duration(seconds: 3), () => logInNavigator());
             }
           }

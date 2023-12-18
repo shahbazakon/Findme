@@ -5,10 +5,10 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_profile_info_tile.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/attachment_list_tile.com.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/blur_background.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/cilpper_shape.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/attachment_list_tile.com.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/blur_background.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/cilpper_shape.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

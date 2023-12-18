@@ -1,4 +1,3 @@
-import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
@@ -6,8 +5,7 @@ import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/core/widget/profile_stack_banner.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/data/models/academic_details_model.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/attachment_list_tile.com.dart';
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/video_container.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,12 +30,9 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
 
   // fetch Academic Portfolio Data
   void apiCall() {
-    String userID = sharedPreferences!.getString(LocaleStorageKey.userID) ?? "";
-    if (userID.isNotEmpty) {
-      context
-          .read<AcademicPortfolioCubit>()
-          .fetchAcademicPortfolioDetails(userID: userID);
-    }
+    context
+        .read<AcademicPortfolioCubit>()
+        .fetchAcademicPortfolioDetails(userID: widget.academicCardID);
   }
 
   String videoUrl =
@@ -85,99 +80,72 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: BlocConsumer<AcademicPortfolioCubit, AcademicPortfolioState>(
-          listener: (context, state) {
-            if (state is AcademicPortfolioError) {
-              showSnackBar(title: state.errorMsg);
-            }
-          },
-          builder: (context, state) {
-            if (state is AcademicPortfolioLoading) {
-              return const Loading(
-                isSmall: false,
-              );
-            } else if (state is AcademicPortfolioLoaded) {
-              AcademicResult? data = state.academicDetailsModel.result;
-              var age = calculateAge(
-                  dobString:
-                      data?.dob?.toString() ?? DateTime.now().toString());
-              return Column(
+      body: BlocConsumer<AcademicPortfolioCubit, AcademicPortfolioState>(
+        listener: (context, state) {
+          if (state is AcademicPortfolioError) {
+            showSnackBar(title: state.errorMsg);
+          }
+        },
+        builder: (context, state) {
+          if (state is AcademicPortfolioLoading) {
+            return const Loading(
+              isSmall: false,
+            );
+          } else if (state is AcademicPortfolioLoaded) {
+            AcademicResult? data = state.academicDetailsModel.result;
+            var age = calculateAge(
+                dobString: data?.dob?.toString() ?? DateTime.now().toString());
+            return SingleChildScrollView(
+              child: Column(
                 children: [
                   ProfileStackBanner(
                     backgroundImage: data?.picture?.first.url,
                     title: translate!.translate(
-                        "${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName}??"
-                        " "),
-                    subTitle:
-                        translate.translate("${data?.gender ?? ''}, $age"),
+                        "${data?.suffix ?? ""} ${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName ?? ""}" ??
+                            " "),
+                    subTitle: translate.translate(
+                        "${data?.gender != null ? "${data?.gender}," : ""} ${age != 0 ? "" : ""}"),
                   ),
                   Column(
                     children: [
                       customTimeline(
                           title: translate.projects,
-                          timelineData: projectList,
+                          timelineData: data?.projects ?? [],
                           isDataTypeList: false),
                       customTimeline(
                           title: translate.achievements,
-                          timelineData: achievementsList),
+                          timelineData: data?.achievements ?? []),
                       customTimeline(
                           title: translate.certifications,
-                          timelineData: certificationsList),
+                          timelineData: data?.certification ?? []),
                       sectionTitle(title: translate.video),
-                      SizedBox(
-                        width: width,
-                        height: height * .2,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Hero(
-                                tag: "AttachedVideo",
-                                child: CustomVideoContainer(
-                                  thumbnail:
-                                      "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                                  videoUrl: videoUrl,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomVideoContainer(
-                                thumbnail:
-                                    "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                                videoUrl: videoUrl,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      sectionTitle(title: translate.attachments),
-                      ListView.builder(
-                        padding: EdgeInsets.zero,
-                        physics: const ScrollPhysics(
-                            parent: NeverScrollableScrollPhysics()),
+                      GridView.count(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 5.0,
+                        mainAxisSpacing: 5.0,
+                        childAspectRatio: 15 / 11,
                         shrinkWrap: true,
-                        itemCount: 4,
-                        itemBuilder: (context, index) {
-                          return AttachmentListTile(
-                            title: translate.resume,
-                            onDownloadClick: () {
-                              //TODO: Add Download Functionality
-                              showSnackBar(title: translate.download);
-                            },
+                        children: List.generate(data?.videoLink?.length ?? 0,
+                            (index) {
+                          return Hero(
+                            tag: "AttachedVideo",
+                            child: CustomVideoContainer(
+                              videoUrl: data!.videoLink![index].link.toString(),
+                            ),
                           );
-                        },
+                        }),
                       )
                     ],
                   )
                 ],
-              );
-            } else {
-              return const Center(
-                child: Text("OOps, Something Went Wrong"),
-              );
-            }
-          },
-        ),
+              ),
+            );
+          } else {
+            return const Center(
+              child: Text("OOps, Something Went Wrong"),
+            );
+          }
+        },
       ),
     );
   }
@@ -239,7 +207,7 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
   //Custom Timeline
   ListView customTimeline({
     required String title,
-    required dynamic timelineData,
+    required List<Achievement> timelineData,
     bool isDataTypeList = true,
   }) {
     return ListView.builder(
@@ -248,14 +216,15 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
+        Achievement dataIndex = timelineData[index];
         List<Widget> data = isDataTypeList
             ? [
-                Text(timelineData[index]),
+                Text(dataIndex.title.toString()),
               ]
             : [
-                Text(timelineData[index]["project_name"]),
-                Text(timelineData[index]["description"]),
-                Text(timelineData[index]["role"]),
+                Text(dataIndex.title.toString()),
+                Text(dataIndex.detail.toString()),
+                Text(dataIndex.label.toString()),
               ];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),

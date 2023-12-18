@@ -1,4 +1,4 @@
-import 'package:find_me/feature/portfolio_feature/presonalPortfolio/presentation/widget/custom_clipper_widget.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/custom_clipper_widget.dart';
 import 'package:flutter/material.dart';
 
 class ClipperShape extends StatelessWidget {

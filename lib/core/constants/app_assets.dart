@@ -25,6 +25,8 @@ class AppIcons {
   static String user = "assets/icons/user.png";
   static String addUser = "assets/icons/add_users.png";
   static String placeholderImage = "assets/icons/placeholder.png";
+  static String videoThumbnailPlaceholder =
+      "assets/icons/video_thumbnail_placeholder.png";
   static String facebook = "assets/icons/facebook.png";
   static String instagram = "assets/icons/instagram.png";
   static String snapchat = "assets/icons/snapchat.png";

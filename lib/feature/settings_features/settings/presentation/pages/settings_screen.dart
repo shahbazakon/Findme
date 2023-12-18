@@ -117,13 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       leadingIcon: AppIcons.portfolio,
                       onTap: () {
                         portfolioListPop(
-                            academicCardID: "",
-                            businessCardID: "",
-                            corporateCardID: "",
-                            matrimonialCardID: "",
-                            personalCardID: "",
-                            showCloseButton: true,
-                            isTransparent: false);
+                            showCloseButton: true, isTransparent: false);
                       },
                     ),
                     // CustomTile(
