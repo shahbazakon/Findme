@@ -6,8 +6,9 @@ import 'package:meta/meta.dart';
 
 part 'matrimonial_portfolio_state.dart';
 
-class MatrimonialPortfolioCubit extends Cubit<MatrimonialPortfolioState> {
-  MatrimonialPortfolioCubit() : super(MatrimonialPortfolioInitial());
+class MatrimonialDetailsPortfolioCubit
+    extends Cubit<MatrimonialPortfolioState> {
+  MatrimonialDetailsPortfolioCubit() : super(MatrimonialPortfolioInitial());
 
   createMatrimonialPortfolio({required MatrimonialModel data}) async {
     try {

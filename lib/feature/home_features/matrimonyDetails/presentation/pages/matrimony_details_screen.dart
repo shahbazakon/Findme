@@ -240,7 +240,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
   //API call
   void apiCall() {
     //TODO: @shahbaz Add upload image and video
-    context.read<MatrimonialPortfolioCubit>().createMatrimonialPortfolio(
+    context.read<MatrimonialDetailsPortfolioCubit>().createMatrimonialPortfolio(
             data: MatrimonialModel(
                 result: MatrimonialResult(
           cardTitle: "Matrimonial",
@@ -611,7 +611,7 @@ class _MatrimonyDetailsScreenState extends State<MatrimonyDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: BlocConsumer<MatrimonialPortfolioCubit,
+                child: BlocConsumer<MatrimonialDetailsPortfolioCubit,
                     MatrimonialPortfolioState>(
                   listener: (context, state) {
                     if (state is MatrimonialPortfolioLoaded) {

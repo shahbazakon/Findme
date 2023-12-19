@@ -42,6 +42,8 @@ class TextHelper {
   static var h4 = TextStyle(
     fontSize: fontSizeH4,
     color: Colors.black,
+    fontWeight: FontWeight.w600,
+    fontFamily: AppFonts.montserrat,
   );
   static var h5 = TextStyle(
     fontSize: fontSizeH5,

@@ -16,6 +16,9 @@ import 'package:find_me/feature/home_features/matrimonyDetails/presentation/cubi
 import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_cubit.dart';
 import 'package:find_me/feature/notifications/presentation/cubit/notification_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/businessPortfolio/presentation/cubit/business_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentation/cubit/corporate_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/matrimonyPortfolio/presentation/cubit/matrimonial_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +42,9 @@ List<BlocProvider> providers = [
   BlocProvider<ResetPasswordCubit>(
     create: (BuildContext context) => locator<ResetPasswordCubit>(),
   ),
-  BlocProvider<MatrimonialPortfolioCubit>(
-    create: (BuildContext context) => locator<MatrimonialPortfolioCubit>(),
+  BlocProvider<MatrimonialDetailsPortfolioCubit>(
+    create: (BuildContext context) =>
+        locator<MatrimonialDetailsPortfolioCubit>(),
   ),
   BlocProvider<AcademicDetailsCubit>(
     create: (BuildContext context) => locator<AcademicDetailsCubit>(),
@@ -74,5 +78,18 @@ List<BlocProvider> providers = [
   ),
   BlocProvider<PersonalPortfolioCubit>(
     create: (BuildContext context) => locator<PersonalPortfolioCubit>(),
+  ),
+  BlocProvider<BusinessPortfolioCubit>(
+    create: (BuildContext context) => locator<BusinessPortfolioCubit>(),
+  ),
+  BlocProvider<CorporatePortfolioCubit>(
+    create: (BuildContext context) => locator<CorporatePortfolioCubit>(),
+  ),
+  BlocProvider<MatrimonialDetailsPortfolioCubit>(
+    create: (BuildContext context) =>
+        locator<MatrimonialDetailsPortfolioCubit>(),
+  ),
+  BlocProvider<MatrimonialPortfolioCubit>(
+    create: (BuildContext context) => locator<MatrimonialPortfolioCubit>(),
   ),
 ];

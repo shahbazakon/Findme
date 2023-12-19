@@ -16,7 +16,11 @@ import 'package:find_me/feature/home_features/matrimonyDetails/presentation/cubi
 import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_cubit.dart';
 import 'package:find_me/feature/notifications/presentation/cubit/notification_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/businessPortfolio/presentation/cubit/business_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentation/cubit/corporate_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
+
+import '../feature/portfolio_feature/matrimonyPortfolio/presentation/cubit/matrimonial_portfolio_cubit.dart';
 
 class RegisterBlocs {
   RegisterBlocs() {
@@ -26,7 +30,7 @@ class RegisterBlocs {
     locator.registerFactory(() => ResendOtpCubit());
     locator.registerFactory(() => OtpVerifyCubit());
     locator.registerFactory(() => ResetPasswordCubit());
-    locator.registerFactory(() => MatrimonialPortfolioCubit());
+    locator.registerFactory(() => MatrimonialDetailsPortfolioCubit());
     locator.registerFactory(() => AcademicDetailsCubit());
     locator.registerFactory(() => BusinessDetailsCubit());
     locator.registerFactory(() => CorporateDetailsCubit());
@@ -34,9 +38,12 @@ class RegisterBlocs {
     locator.registerFactory(() => CreateProfileCubit());
     locator.registerFactory(() => HomeCubit());
     locator.registerFactory(() => ContactsCubit());
-    locator.registerFactory(() => AcademicPortfolioCubit());
     locator.registerFactory(() => ProfileDetailsCubit());
     locator.registerFactory(() => NotificationCubit());
+    locator.registerFactory(() => AcademicPortfolioCubit());
     locator.registerFactory(() => PersonalPortfolioCubit());
+    locator.registerFactory(() => BusinessPortfolioCubit());
+    locator.registerFactory(() => CorporatePortfolioCubit());
+    locator.registerFactory(() => MatrimonialPortfolioCubit());
   }
 }

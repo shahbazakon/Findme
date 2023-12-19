@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
@@ -155,3 +156,11 @@ int? calculateAge({required String dobString}) {
     return null;
   }
 }
+
+// placeHolder Images
+Widget placeHolderImage = Image.asset(
+  AppIcons.placeholderImage, // Replace with the path to your placeholder image
+  width: width,
+  height: height,
+  fit: BoxFit.cover,
+);

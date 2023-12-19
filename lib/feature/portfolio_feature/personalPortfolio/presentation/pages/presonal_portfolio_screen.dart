@@ -1,6 +1,7 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
+import 'package:find_me/core/helper/formatter.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_profile_info_tile.dart';
@@ -34,7 +35,15 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
 
   @override
   void initState() {
+    apiCall();
     super.initState();
+  }
+
+  // fetch Academic Portfolio Data
+  void apiCall() {
+    context
+        .read<PersonalPortfolioCubit>()
+        .fetchPersonalPortfolioDetails(cardID: widget.personalCardID);
   }
 
   @override
@@ -52,10 +61,11 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
             return const Loading(isSmall: false);
           } else if (state is PersonalPortfolioLoaded) {
             PersonalResult? data = state.personalDetailsModel.result;
+            String? profilePicture = data?.picture?.first.url;
             return Stack(
               children: [
                 BlurBackground(
-                  bgImage: profileImage,
+                  bgImage: profilePicture,
                 ),
                 SingleChildScrollView(
                   physics: const ScrollPhysics(
@@ -80,13 +90,20 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Text(
-                                  translate!.translate("Aliya Hayat"),
-                                  style: TextHelper.h2
-                                      .copyWith(color: AppFontsColors.light),
+                                SizedBox(
+                                  width: width * .8,
+                                  child: Text(
+                                    translate!.translate(
+                                        "${data?.suffix ?? ""} ${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName ?? ""}" ??
+                                            ""),
+                                    overflow: TextOverflow.visible,
+                                    style: TextHelper.h5
+                                        .copyWith(color: AppFontsColors.light),
+                                  ),
                                 ),
                                 Text(
-                                  translate!.translate("@theroselady"),
+                                  translate!.translate(
+                                      "@theroselady"), //TODO: add username
                                   style: SubTitleHelper.h9
                                       .copyWith(color: AppFontsColors.light),
                                 ),
@@ -99,7 +116,12 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                       SizedBox(
                         height: height * .05,
                       ),
-                      profileBanner(),
+                      profileBanner(
+                          profileImage: profilePicture,
+                          followerCount:
+                              "0", //TODO: add Follower Following and views
+                          followingCount: "0",
+                          viewCount: "0"),
                       Container(
                         margin: const EdgeInsets.all(15),
                         decoration: appBoxDecoration,
@@ -109,25 +131,29 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                             sectionTitle(title: translate!.personalDetails),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.beg,
-                              title: translate!.lorem,
+                              title: data?.tagLine ?? "",
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.beg,
-                              title: "Aliyahayat97@email.com",
+                              title: "${data?.primaryEmail}",
                             ),
-                            CustomProfileInfoTile(
-                              leadingImage: AppIcons.portfolio,
-                              title: "02-01-1997",
+                            Visibility(
+                              visible: data?.dob != null,
+                              child: CustomProfileInfoTile(
+                                leadingImage: AppIcons.portfolio,
+                                title: dateFormatter2.format(
+                                    DateTime.parse(data!.dob.toString())),
+                              ),
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.creditCard,
                               title: '''
-${translate!.street}: ${translate!.translate("Deerah Dist.")},
-${translate!.city}: ${translate!.translate("Riyadh Deerah Dist.")}
-${translate!.street}: ${translate!.translate("Riyadh")}
-${translate!.phoneNumber}: ${translate!.translate("00966 1 4132260")}
-${translate!.countryCallingCode}: ${translate!.translate("+966")}
-${translate!.country}: ${translate!.translate("Saudi Arabia")}
+${translate!.street}: ${translate!.translate("${data.primaryAddress}")},
+${translate!.city}: ${translate!.translate("${data.city}")}
+zipCode: ${translate!.translate("${data.zipCode}")} //TODO: make Zip Code dynamic 
+${translate!.country}: ${translate!.translate("${data.country}")}
+${translate!.countryCallingCode}: ${translate!.translate("${data.mobile?.first.phoneCode}")}
+${translate!.phoneNumber}: ${translate!.translate("${data.mobile?.first.number}")}
                         ''',
                             ),
                             CustomProfileInfoTile(
@@ -228,6 +254,7 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
           } else {
             return const Center(
               child: Text("OOps, Something went wrong"),
+              //TODO: make String Code dynamic
             );
           }
         },
@@ -236,7 +263,11 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
   }
 
   // Profile banner
-  Widget profileBanner() {
+  Widget profileBanner(
+      {String? profileImage,
+      String? followerCount,
+      String? viewCount,
+      String? followingCount}) {
     AppLocalizations? translate = AppLocalizations.of(context);
     return SizedBox(
       height: height * .38,
@@ -247,10 +278,12 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
             top: 0,
             child: ClipperShape(
               size: width * .37,
-              child: Image.network(
-                profileImage,
-                fit: BoxFit.cover,
-              ),
+              child: profileImage == null
+                  ? placeHolderImage
+                  : Image.network(
+                      profileImage,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           Positioned(
@@ -262,7 +295,7 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(translate!.translate("1450"),
+                  Text(translate!.translate(followerCount ?? "0"),
                       style: TextHelper.h5
                           .copyWith(color: AppFontsColors.primary)),
                   Text(translate!.followers,
@@ -281,7 +314,7 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(translate!.translate("28k"),
+                  Text(translate!.translate(viewCount ?? "0"),
                       style: TextHelper.h6
                           .copyWith(color: AppFontsColors.primary)),
                   Text(translate!.views,
@@ -300,7 +333,7 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(translate!.translate("720"),
+                  Text(translate!.translate(followingCount ?? "0"),
                       style: TextHelper.h7
                           .copyWith(color: AppFontsColors.primary)),
                   Text(translate!.following,
