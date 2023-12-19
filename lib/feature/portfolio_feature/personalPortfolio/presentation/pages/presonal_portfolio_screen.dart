@@ -28,11 +28,7 @@ class PersonalPortfolioScreen extends StatefulWidget {
 }
 
 class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
-  String videoUrl =
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-  String profileImage =
-      "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
-
+  PersonalResult? data;
   @override
   void initState() {
     apiCall();
@@ -44,6 +40,15 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
     context
         .read<PersonalPortfolioCubit>()
         .fetchPersonalPortfolioDetails(cardID: widget.personalCardID);
+  }
+
+  String getSocialMediaURL({required String name}) {
+    for (var element in data?.social ?? []) {
+      if (name.toLowerCase() == element.title.toString()) {
+        return element.label;
+      }
+    }
+    return "";
   }
 
   @override
@@ -60,7 +65,7 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
           if (state is PersonalPortfolioLoading) {
             return const Loading(isSmall: false);
           } else if (state is PersonalPortfolioLoaded) {
-            PersonalResult? data = state.personalDetailsModel.result;
+            data = state.personalDetailsModel.result;
             String? profilePicture = data?.picture?.first.url;
             return Stack(
               children: [
@@ -148,12 +153,12 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.creditCard,
                               title: '''
-${translate!.street}: ${translate!.translate("${data.primaryAddress}")},
-${translate!.city}: ${translate!.translate("${data.city}")}
-zipCode: ${translate!.translate("${data.zipCode}")} //TODO: make Zip Code dynamic 
-${translate!.country}: ${translate!.translate("${data.country}")}
-${translate!.countryCallingCode}: ${translate!.translate("${data.mobile?.first.phoneCode}")}
-${translate!.phoneNumber}: ${translate!.translate("${data.mobile?.first.number}")}
+${translate!.street}: ${translate!.translate("${data?.primaryAddress}")},
+${translate!.city}: ${translate!.translate("${data?.city}")}
+zipCode: ${translate!.translate("${data?.zipCode}")} //TODO: make Zip Code dynamic 
+${translate!.country}: ${translate!.translate("${data?.country}")}
+${translate!.countryCallingCode}: ${translate!.translate("${data?.mobile?.first.phoneCode}")}
+${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}")}
                         ''',
                             ),
                             CustomProfileInfoTile(
@@ -162,83 +167,93 @@ ${translate!.phoneNumber}: ${translate!.translate("${data.mobile?.first.number}"
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.promoCode,
-                              title: "+678-9876543456",
+                              title:
+                                  "${extractPhoneCode(completeValue: data?.mobile?.first.phoneCode ?? "")} ${data?.mobile?.first.number}",
                             ),
                             sectionTitle(title: translate!.socialProfile),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                children: [
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.facebook,
+                              // child: Row(
+                              //   children: [
+                              //     socialAccountsButton(
+                              //         iconImage: AppIcons.facebook,
+                              //         onTap: () {
+                              //           launchURL(
+                              //               url: getSocialMediaURL(
+                              //                   name: "facebook"));
+                              //         }),
+                              //     socialAccountsButton(
+                              //         iconImage: AppIcons.instagram,
+                              //         onTap: () {
+                              //           showSnackBar(
+                              //               title: translate!
+                              //                   .linkInstagramAccount);
+                              //         }),
+                              //     socialAccountsButton(
+                              //         iconImage: AppIcons.twitter,
+                              //         onTap: () {
+                              //           showSnackBar(
+                              //               title:
+                              //                   translate!.linkTwitterAccount);
+                              //         }),
+                              //     socialAccountsButton(
+                              //         iconImage: AppIcons.snapchat,
+                              //         onTap: () {
+                              //           showSnackBar(
+                              //               title:
+                              //                   translate!.linkSnapchatAccount);
+                              //         }),
+                              //   ],
+                              // ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: data?.social?.length ?? 0,
+                                itemBuilder: (context, index) {
+                                  return socialAccountsButton(
+                                      iconImage:
+                                          "assets/icons/${data?.social?[index].title?.toLowerCase()}.png",
                                       onTap: () {
-                                        showSnackBar(
-                                            title:
-                                                translate!.linkFacebookAccount);
-                                      }),
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.instagram,
-                                      onTap: () {
-                                        showSnackBar(
-                                            title: translate!
-                                                .linkInstagramAccount);
-                                      }),
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.twitter,
-                                      onTap: () {
-                                        showSnackBar(
-                                            title:
-                                                translate!.linkTwitterAccount);
-                                      }),
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.snapchat,
-                                      onTap: () {
-                                        showSnackBar(
-                                            title:
-                                                translate!.linkSnapchatAccount);
-                                      }),
-                                ],
+                                        launchURL(
+                                            url: getSocialMediaURL(
+                                                name:
+                                                    "${data?.social?[index].title}"));
+                                      });
+                                },
                               ),
                             ),
                             sectionTitle(title: "Video"),
-                            SizedBox(
-                              width: width,
-                              height: height * .2,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Hero(
-                                      tag: "AttachedVideo",
-                                      child: CustomVideoContainer(
-                                        thumbnail:
-                                            "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                                        videoUrl: videoUrl,
-                                      ),
-                                    ),
+                            GridView.count(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 5.0,
+                              mainAxisSpacing: 5.0,
+                              childAspectRatio: 15 / 11,
+                              shrinkWrap: true,
+                              children: List.generate(
+                                  data?.videoLink?.length ?? 0, (index) {
+                                return Hero(
+                                  tag: "AttachedVideo",
+                                  child: CustomVideoContainer(
+                                    videoUrl: "${data?.videoLink![index].link}",
                                   ),
-                                  Expanded(
-                                    child: CustomVideoContainer(
-                                      thumbnail:
-                                          "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                                      videoUrl: videoUrl,
-                                    ),
-                                  )
-                                ],
-                              ),
+                                );
+                              }),
                             ),
-                            sectionTitle(title: translate!.attachments),
+                            Visibility(
+                                visible: data?.achievements?.length != 0,
+                                child: sectionTitle(
+                                    title: translate!.attachments)),
                             ListView.builder(
                               physics: const ScrollPhysics(
                                   parent: NeverScrollableScrollPhysics()),
                               shrinkWrap: true,
-                              itemCount: 2,
+                              itemCount: /* data.achievements?.length ?? 0*/ 2,
                               itemBuilder: (context, index) {
                                 return AttachmentListTile(
                                   title: translate!.resume,
                                   onDownloadClick: () {
                                     //TODO: Add Download Functionality
-                                    showSnackBar(title: translate!.download);
+                                    // showSnackBar(title: translate!.download);
                                   },
                                 );
                               },

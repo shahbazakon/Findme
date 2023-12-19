@@ -28,6 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
     String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
     if (userID != null) {
       context.read<ProfileDetailsCubit>().fetchProfileDetails(userID: userID);
+    } else {
+      Timer(const Duration(seconds: 3), () => logInNavigator());
     }
   }
 
@@ -37,12 +39,18 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: BlocListener<ProfileDetailsCubit, ProfileDetailsState>(
         listener: (context, state) {
-          if (state is ProfileDetailsLoaded) {
+          if (state is ProfileDetailsLoading) {
+          } else if (state is ProfileDetailsLoaded) {
             sharedPreferences?.setString(
                 LocaleStorageKey.userProfileImage,
                 state.portfolioGetModel.result?.picture?.first.url ??
                     "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png");
             // route Space screen after saving userProfile Image
+            if (buildContext.widget.runtimeType ==
+                const SplashScreen().runtimeType) {
+              Timer(const Duration(seconds: 3), () => logInNavigator());
+            }
+          } else {
             if (buildContext.widget.runtimeType ==
                 const SplashScreen().runtimeType) {
               Timer(const Duration(seconds: 3), () => logInNavigator());

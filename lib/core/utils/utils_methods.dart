@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 ///--------------------- Value Initialization
 ///-----------------------------------------------------------------------------
@@ -164,3 +165,26 @@ Widget placeHolderImage = Image.asset(
   height: height,
   fit: BoxFit.cover,
 );
+
+//get Only Phone Code
+String extractPhoneCode({required String completeValue}) {
+  // Define the regular expression pattern
+  RegExp regex = RegExp(r'\+(\d+)');
+
+  // Use firstMatch to find the first occurrence in the string
+  RegExpMatch? match = regex.firstMatch(completeValue);
+
+  // Check if a match is found
+  if (match != null) {
+    return "+${match.group(1)!}";
+  } else {
+    return '';
+  }
+}
+
+Future<void> launchURL({required String url}) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    showSnackBar(title: 'Could not launch $url');
+    throw Exception('Could not launch $url');
+  }
+}
