@@ -4,12 +4,12 @@ import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/formatter.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
+import 'package:find_me/core/widget/custom_profile_banner.dart';
 import 'package:find_me/core/widget/custom_profile_info_tile.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/data/models/personal_details_model.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
-import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/cilpper_shape.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +44,7 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
 
   String getSocialMediaURL({required String name}) {
     for (var element in data?.social ?? []) {
-      if (name.toLowerCase() == element.title.toString()) {
+      if (name.toLowerCase() == element.title.toLowerCase()) {
         return element.label;
       }
     }
@@ -121,7 +121,7 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                       SizedBox(
                         height: height * .05,
                       ),
-                      profileBanner(
+                      CustomProfileBanner(
                           profileImage: profilePicture,
                           followerCount:
                               "0", //TODO: add Follower Following and views
@@ -170,56 +170,40 @@ ${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}
                               title:
                                   "${extractPhoneCode(completeValue: data?.mobile?.first.phoneCode ?? "")} ${data?.mobile?.first.number}",
                             ),
-                            sectionTitle(title: translate!.socialProfile),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              // child: Row(
-                              //   children: [
-                              //     socialAccountsButton(
-                              //         iconImage: AppIcons.facebook,
-                              //         onTap: () {
-                              //           launchURL(
-                              //               url: getSocialMediaURL(
-                              //                   name: "facebook"));
-                              //         }),
-                              //     socialAccountsButton(
-                              //         iconImage: AppIcons.instagram,
-                              //         onTap: () {
-                              //           showSnackBar(
-                              //               title: translate!
-                              //                   .linkInstagramAccount);
-                              //         }),
-                              //     socialAccountsButton(
-                              //         iconImage: AppIcons.twitter,
-                              //         onTap: () {
-                              //           showSnackBar(
-                              //               title:
-                              //                   translate!.linkTwitterAccount);
-                              //         }),
-                              //     socialAccountsButton(
-                              //         iconImage: AppIcons.snapchat,
-                              //         onTap: () {
-                              //           showSnackBar(
-                              //               title:
-                              //                   translate!.linkSnapchatAccount);
-                              //         }),
-                              //   ],
-                              // ),
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: data?.social?.length ?? 0,
-                                itemBuilder: (context, index) {
-                                  return socialAccountsButton(
-                                      iconImage:
-                                          "assets/icons/${data?.social?[index].title?.toLowerCase()}.png",
-                                      onTap: () {
-                                        launchURL(
-                                            url: getSocialMediaURL(
-                                                name:
-                                                    "${data?.social?[index].title}"));
-                                      });
-                                },
+                            Visibility(
+                              visible: data?.social?.length != 0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  sectionTitle(title: translate!.socialProfile),
+                                  SizedBox(
+                                    height: height * .055,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: SizedBox(
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: data?.social?.length ?? 0,
+                                          itemBuilder: (context, index) {
+                                            return FittedBox(
+                                              child: socialAccountsButton(
+                                                  iconImage:
+                                                      "assets/icons/${data?.social?[index].title?.toLowerCase()}.png",
+                                                  onTap: () {
+                                                    openOnBrowser(
+                                                        url: getSocialMediaURL(
+                                                            name:
+                                                                "${data?.social?[index].title}"));
+                                                  }),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                             sectionTitle(title: "Video"),
@@ -278,90 +262,6 @@ ${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}
   }
 
   // Profile banner
-  Widget profileBanner(
-      {String? profileImage,
-      String? followerCount,
-      String? viewCount,
-      String? followingCount}) {
-    AppLocalizations? translate = AppLocalizations.of(context);
-    return SizedBox(
-      height: height * .38,
-      child: Stack(
-        children: [
-          Positioned(
-            left: width * .3,
-            top: 0,
-            child: ClipperShape(
-              size: width * .37,
-              child: profileImage == null
-                  ? placeHolderImage
-                  : Image.network(
-                      profileImage,
-                      fit: BoxFit.cover,
-                    ),
-            ),
-          ),
-          Positioned(
-            left: width * .15,
-            top: height * .129,
-            child: ClipperShape(
-              size: width * .3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(translate!.translate(followerCount ?? "0"),
-                      style: TextHelper.h5
-                          .copyWith(color: AppFontsColors.primary)),
-                  Text(translate!.followers,
-                      style: TextHelper.h10
-                          .copyWith(color: AppFontsColors.lightGrey3)),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            left: width * .51,
-            top: height * .143,
-            child: ClipperShape(
-              size: width * .26,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(translate!.translate(viewCount ?? "0"),
-                      style: TextHelper.h6
-                          .copyWith(color: AppFontsColors.primary)),
-                  Text(translate!.views,
-                      style: TextHelper.h10
-                          .copyWith(color: AppFontsColors.lightGrey3)),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            left: width * .37,
-            top: height * .22,
-            child: ClipperShape(
-              size: width * .22,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(translate!.translate(followingCount ?? "0"),
-                      style: TextHelper.h7
-                          .copyWith(color: AppFontsColors.primary)),
-                  Text(translate!.following,
-                      style: TextHelper.h12
-                          .copyWith(color: AppFontsColors.lightGrey3)),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   //Section Title
   Padding sectionTitle({required String title}) {
@@ -384,7 +284,6 @@ ${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}
         onTap: onTap,
         child: Image.asset(
           iconImage,
-          width: 40,
         ),
       ),
     );

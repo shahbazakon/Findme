@@ -1,10 +1,14 @@
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
+import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/core/widget/profile_stack_banner.dart';
+import 'package:find_me/feature/portfolio_feature/businessPortfolio/data/models/business_portfolio_model.dart';
+import 'package:find_me/feature/portfolio_feature/businessPortfolio/presentation/cubit/business_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/attachment_list_tile.com.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
@@ -12,6 +16,7 @@ import '../../../../../core/constants/app_color.dart';
 
 class BusinessPortfolioScreen extends StatefulWidget {
   final String businessCardID;
+
   const BusinessPortfolioScreen({super.key, required this.businessCardID});
 
   @override
@@ -22,164 +27,166 @@ class BusinessPortfolioScreen extends StatefulWidget {
 class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
   @override
   void initState() {
+    apiCall();
     super.initState();
   }
 
-  String videoUrl =
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-  String profileImage =
-      "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
-  List<Map> projectList = [
-    {
-      "project_name": "Project name 1",
-      "description": "Project description 1",
-      "role": "Flutter Developer 1",
-    },
-    {
-      "project_name": "Project name 2",
-      "description": "Project description 2",
-      "role": "Flutter Developer 2",
-    },
-    {
-      "project_name": "Project name 3",
-      "description": "Project description 3",
-      "role": "Flutter Developer 3",
-    },
-    {
-      "project_name": "Project name 4",
-      "description": "Project description 4",
-      "role": "Flutter Developer 4",
-    }
-  ];
+  // fetch Academic Portfolio Data
+  void apiCall() {
+    context
+        .read<BusinessPortfolioCubit>()
+        .fetchBusinessPortfolioDetails(cardID: widget.businessCardID);
+  }
 
   @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ProfileStackBanner(
-              backgroundImage:
-                  "https://fs.npstatic.com/userfiles/7687254/image/MIUI_Super_Wallpapers-w810h462.jpg",
-              title: translate!.translate("Aliya Hayat"),
-              subTitle: translate!.translate("Female, 27yrs"),
-            ),
-            SizedBox(height: height * .03),
-            sectionTitle(
-                title: translate!.projects, isPadding: false, isCenter: true),
-            Column(
-              children: [
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: projectList.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    bool isProjectLeftSide = (index % 2) == 0;
-                    List<Widget> data = [
-                      Text(projectList[index]["project_name"]),
-                      Text(projectList[index]["description"]),
-                      Text(projectList[index]["role"]),
-                    ];
-                    return Column(
-                      children: [
-                        Visibility(
-                          visible: index == 0,
-                          child: TimelineTile(
-                            alignment: TimelineAlign.center,
-                            isFirst: true,
-                            indicatorStyle: timelineMainIndicator(),
-                          ),
-                        ),
-                        TimelineTile(
-                          alignment: TimelineAlign.center,
-                          indicatorStyle:
-                              timelineSubIndicator(isLeft: isProjectLeftSide),
-                          endChild: !isProjectLeftSide
-                              ? null
-                              : Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: Column(
-                                    crossAxisAlignment: isProjectLeftSide
-                                        ? CrossAxisAlignment.start
-                                        : CrossAxisAlignment.end,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: data,
-                                  ),
-                                ),
-                          startChild: isProjectLeftSide
-                              ? null
-                              : Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: Column(
-                                    crossAxisAlignment: isProjectLeftSide
-                                        ? CrossAxisAlignment.start
-                                        : CrossAxisAlignment.end,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: data,
-                                  ),
-                                ),
-                        ),
-                        Visibility(
-                          visible: index == projectList.length - 1,
-                          child: TimelineTile(
-                            alignment: TimelineAlign.center,
-                            isLast: true,
-                            indicatorStyle: timelineMainIndicator(),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                sectionTitle(title: translate!.video),
-                SizedBox(
-                  width: width,
-                  height: height * .2,
-                  child: Row(
+      body: BlocConsumer<BusinessPortfolioCubit, BusinessPortfolioState>(
+        listener: (context, state) {
+          if (state is BusinessPortfolioError) {
+            showSnackBar(title: state.errorMsg);
+          }
+        },
+        builder: (context, state) {
+          if (state is BusinessPortfolioLoading) {
+            return const Loading(isSmall: false);
+          } else if (state is BusinessPortfolioLoaded) {
+            BusinessResult? data = state.businessPortfolioModel.result;
+            String? profilePicture = data?.picture?.first.url;
+            var age = calculateAge(
+                dobString: data?.dob?.toString() ?? DateTime.now().toString());
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  ProfileStackBanner(
+                    backgroundImage: profilePicture,
+                    title: translate!.translate(
+                        "${data?.suffix ?? ""} ${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName ?? ""}" ??
+                            ""),
+                    subTitle: translate.translate(
+                        "${data?.gender != null ? "${data?.gender}," : ""} ${age != 0 ? "" : ""}"),
+                  ),
+                  SizedBox(height: height * .03),
+                  sectionTitle(
+                      title: translate!.projects,
+                      isPadding: false,
+                      isCenter: true),
+                  Column(
                     children: [
-                      Expanded(
-                        child: Hero(
-                          tag: "AttachedVideo",
-                          child: CustomVideoContainer(
-                            thumbnail:
-                                "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                            videoUrl: videoUrl,
-                          ),
-                        ),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: data?.projects?.length ?? 0,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          bool isProjectLeftSide = (index % 2) == 0;
+                          List<Widget> projectData = [
+                            Text("${data?.projects?[index].title}"),
+                            Text("${data?.projects?[index].detail}"),
+                            Text("${data?.projects?[index].label}"),
+                          ];
+                          return Column(
+                            children: [
+                              Visibility(
+                                visible: index == 0,
+                                child: TimelineTile(
+                                  alignment: TimelineAlign.center,
+                                  isFirst: true,
+                                  indicatorStyle: timelineMainIndicator(),
+                                ),
+                              ),
+                              TimelineTile(
+                                alignment: TimelineAlign.center,
+                                indicatorStyle: timelineSubIndicator(
+                                    isLeft: isProjectLeftSide),
+                                endChild: !isProjectLeftSide
+                                    ? null
+                                    : Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Column(
+                                          crossAxisAlignment: isProjectLeftSide
+                                              ? CrossAxisAlignment.start
+                                              : CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: projectData,
+                                        ),
+                                      ),
+                                startChild: isProjectLeftSide
+                                    ? null
+                                    : Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8),
+                                        child: Column(
+                                          crossAxisAlignment: isProjectLeftSide
+                                              ? CrossAxisAlignment.start
+                                              : CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: projectData,
+                                        ),
+                                      ),
+                              ),
+                              Visibility(
+                                visible:
+                                    index == (data?.projects?.length ?? 0) - 1,
+                                child: TimelineTile(
+                                  alignment: TimelineAlign.center,
+                                  isLast: true,
+                                  indicatorStyle: timelineMainIndicator(),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
-                      Expanded(
-                        child: CustomVideoContainer(
-                          thumbnail:
-                              "https://mainstreammarketing.ca/wp-content/uploads/2021/08/Post-4-Image-scaled.jpeg",
-                          videoUrl: videoUrl,
-                        ),
+                      sectionTitle(title: translate!.video),
+                      GridView.count(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 5.0,
+                        mainAxisSpacing: 5.0,
+                        childAspectRatio: 15 / 11,
+                        shrinkWrap: true,
+                        children: List.generate(data?.videoLink?.length ?? 0,
+                            (index) {
+                          return Hero(
+                            tag: "AttachedVideo",
+                            child: CustomVideoContainer(
+                              videoUrl: data!.videoLink![index].link.toString(),
+                            ),
+                          );
+                        }),
+                      ),
+                      sectionTitle(title: translate!.attachments),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        shrinkWrap: true,
+                        itemCount: /* data.achievements?.length ?? 0*/ 2,
+                        itemBuilder: (context, index) {
+                          return AttachmentListTile(
+                            title: translate!.resume,
+                            onDownloadClick: () {
+                              //TODO: Add Download Functionality
+                              showSnackBar(title: translate!.download);
+                            },
+                          );
+                        },
                       )
                     ],
-                  ),
-                ),
-                sectionTitle(title: translate!.attachments),
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  physics: const ScrollPhysics(
-                      parent: NeverScrollableScrollPhysics()),
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return AttachmentListTile(
-                      title: translate!.resume,
-                      onDownloadClick: () {
-                        //TODO: Add Download Functionality
-                        showSnackBar(title: translate!.download);
-                      },
-                    );
-                  },
-                )
-              ],
-            )
-          ],
-        ),
+                  )
+                ],
+              ),
+            );
+          } else {
+            return const Center(
+              child: Text("OOps, Something went wrong"),
+              //TODO: make String Code dynamic
+            );
+          }
+        },
       ),
     );
   }

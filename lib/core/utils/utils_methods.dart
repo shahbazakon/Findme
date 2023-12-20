@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 ///--------------------- Value Initialization
 ///-----------------------------------------------------------------------------
@@ -182,8 +182,13 @@ String extractPhoneCode({required String completeValue}) {
   }
 }
 
-Future<void> launchURL({required String url}) async {
-  if (!await launchUrl(Uri.parse(url))) {
+// One Link in Web View
+Future<void> openOnBrowser({required String url}) async {
+  log("URL : $url");
+  if (!await launchUrlString(
+    url,
+    mode: LaunchMode.inAppBrowserView,
+  )) {
     showSnackBar(title: 'Could not launch $url');
     throw Exception('Could not launch $url');
   }

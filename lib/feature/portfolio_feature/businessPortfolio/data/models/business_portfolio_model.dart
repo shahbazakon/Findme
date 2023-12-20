@@ -1,36 +1,38 @@
 import 'dart:convert';
 
-class BusinessDetailsModel {
+class BusinessPortfolioModel {
   final bool? success;
-  final Result? result;
+  final BusinessResult? result;
   final String? message;
 
-  BusinessDetailsModel({
+  BusinessPortfolioModel({
     this.success,
     this.result,
     this.message,
   });
 
-  BusinessDetailsModel copyWith({
+  BusinessPortfolioModel copyWith({
     bool? success,
-    Result? result,
+    BusinessResult? result,
     String? message,
   }) =>
-      BusinessDetailsModel(
+      BusinessPortfolioModel(
         success: success ?? this.success,
         result: result ?? this.result,
         message: message ?? this.message,
       );
 
-  factory BusinessDetailsModel.fromRawJson(String str) =>
-      BusinessDetailsModel.fromJson(json.decode(str));
+  factory BusinessPortfolioModel.fromRawJson(String str) =>
+      BusinessPortfolioModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory BusinessDetailsModel.fromJson(Map<String, dynamic> json) =>
-      BusinessDetailsModel(
+  factory BusinessPortfolioModel.fromJson(Map<String, dynamic> json) =>
+      BusinessPortfolioModel(
         success: json["success"],
-        result: json["result"] == null ? null : Result.fromJson(json["result"]),
+        result: json["result"] == null
+            ? null
+            : BusinessResult.fromJson(json["result"]),
         message: json["message"],
       );
 
@@ -41,7 +43,7 @@ class BusinessDetailsModel {
       };
 }
 
-class Result {
+class BusinessResult {
   final List<String>? officeDays;
   final List<dynamic>? skills;
   final List<dynamic>? degreeLevel;
@@ -97,7 +99,7 @@ class Result {
   final int? id;
   final int? v;
 
-  Result({
+  BusinessResult({
     this.officeDays,
     this.skills,
     this.degreeLevel,
@@ -154,7 +156,7 @@ class Result {
     this.v,
   });
 
-  Result copyWith({
+  BusinessResult copyWith({
     List<String>? officeDays,
     List<dynamic>? skills,
     List<dynamic>? degreeLevel,
@@ -210,7 +212,7 @@ class Result {
     int? id,
     int? v,
   }) =>
-      Result(
+      BusinessResult(
         officeDays: officeDays ?? this.officeDays,
         skills: skills ?? this.skills,
         degreeLevel: degreeLevel ?? this.degreeLevel,
@@ -267,11 +269,12 @@ class Result {
         v: v ?? this.v,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory BusinessResult.fromRawJson(String str) =>
+      BusinessResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory BusinessResult.fromJson(Map<String, dynamic> json) => BusinessResult(
         officeDays: json["officeDays"] == null
             ? []
             : List<String>.from(json["officeDays"]!.map((x) => x)),

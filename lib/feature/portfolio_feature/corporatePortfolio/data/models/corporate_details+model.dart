@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class CorporateDetailsModel {
   final bool? success;
-  final Result? result;
+  final CorporateResult? result;
   final String? message;
 
   CorporateDetailsModel({
@@ -13,7 +13,7 @@ class CorporateDetailsModel {
 
   CorporateDetailsModel copyWith({
     bool? success,
-    Result? result,
+    CorporateResult? result,
     String? message,
   }) =>
       CorporateDetailsModel(
@@ -30,7 +30,9 @@ class CorporateDetailsModel {
   factory CorporateDetailsModel.fromJson(Map<String, dynamic> json) =>
       CorporateDetailsModel(
         success: json["success"],
-        result: json["result"] == null ? null : Result.fromJson(json["result"]),
+        result: json["result"] == null
+            ? null
+            : CorporateResult.fromJson(json["result"]),
         message: json["message"],
       );
 
@@ -41,7 +43,7 @@ class CorporateDetailsModel {
       };
 }
 
-class Result {
+class CorporateResult {
   final List<String>? officeDays;
   final List<String>? skills;
   final List<dynamic>? degreeLevel;
@@ -97,7 +99,7 @@ class Result {
   final int? id;
   final int? v;
 
-  Result({
+  CorporateResult({
     this.officeDays,
     this.skills,
     this.degreeLevel,
@@ -154,7 +156,7 @@ class Result {
     this.v,
   });
 
-  Result copyWith({
+  CorporateResult copyWith({
     List<String>? officeDays,
     List<String>? skills,
     List<dynamic>? degreeLevel,
@@ -210,7 +212,7 @@ class Result {
     int? id,
     int? v,
   }) =>
-      Result(
+      CorporateResult(
         officeDays: officeDays ?? this.officeDays,
         skills: skills ?? this.skills,
         degreeLevel: degreeLevel ?? this.degreeLevel,
@@ -267,11 +269,13 @@ class Result {
         v: v ?? this.v,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory CorporateResult.fromRawJson(String str) =>
+      CorporateResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory CorporateResult.fromJson(Map<String, dynamic> json) =>
+      CorporateResult(
         officeDays: json["officeDays"] == null
             ? []
             : List<String>.from(json["officeDays"]!.map((x) => x)),

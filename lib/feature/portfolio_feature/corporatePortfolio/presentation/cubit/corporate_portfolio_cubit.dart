@@ -9,11 +9,11 @@ part 'corporate_portfolio_state.dart';
 class CorporatePortfolioCubit extends Cubit<CorporatePortfolioState> {
   CorporatePortfolioCubit() : super(CorporatePortfolioInitial());
 
-  fetchCorporatePortfolioDetails({required String userID}) async {
+  fetchCorporatePortfolioDetails({required String cardID}) async {
     try {
       emit(CorporatePortfolioLoading());
       CorporateDetailsModel result = await CorporateRemoteDataSource()
-          .fetchCorporateDetails(cardID: userID);
+          .fetchCorporateDetails(cardID: cardID);
       emit(CorporatePortfolioLoaded(academicDetailsModel: result));
     } on DioException catch (error) {
       emit(CorporatePortfolioError(

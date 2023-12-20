@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:find_me/core/api/api.dart';
 import 'package:find_me/core/error/faliures.dart';
-import 'package:find_me/feature/portfolio_feature/businessPortfolio/data/models/business_details_model.dart';
+import 'package:find_me/feature/portfolio_feature/businessPortfolio/data/models/business_portfolio_model.dart';
 
 class BusinessRemoteDataSource {
   API api = API();
-  Future<BusinessDetailsModel> fetchBusinessDetails(
+  Future<BusinessPortfolioModel> fetchBusinessDetails(
       {required String cardID}) async {
     try {
       final Response response = await api.sendRequest.get(
@@ -13,8 +13,8 @@ class BusinessRemoteDataSource {
       );
       final status = await hanldeStatusCode(response);
       if (status.status) {
-        BusinessDetailsModel data =
-            BusinessDetailsModel.fromJson(response.data);
+        BusinessPortfolioModel data =
+            BusinessPortfolioModel.fromJson(response.data);
         return data;
       } else {
         throw status.failure!;

@@ -8,8 +8,8 @@ class BusinessPortfolioInitial extends BusinessPortfolioState {}
 class BusinessPortfolioLoading extends BusinessPortfolioState {}
 
 class BusinessPortfolioLoaded extends BusinessPortfolioState {
-  final BusinessDetailsModel academicDetailsModel;
-  BusinessPortfolioLoaded({required this.academicDetailsModel});
+  final BusinessPortfolioModel businessPortfolioModel;
+  BusinessPortfolioLoaded({required this.businessPortfolioModel});
 }
 
 class BusinessPortfolioError extends BusinessPortfolioState {
