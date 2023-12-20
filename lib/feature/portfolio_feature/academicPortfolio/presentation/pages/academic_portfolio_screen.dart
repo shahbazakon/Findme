@@ -141,8 +141,8 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
               ),
             );
           } else {
-            return const Center(
-              child: Text("OOps, Something Went Wrong"),
+            return Center(
+              child: Text(translate!.oopsSomethingWentWrong),
             );
           }
         },

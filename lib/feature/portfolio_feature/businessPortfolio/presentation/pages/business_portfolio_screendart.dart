@@ -25,6 +25,7 @@ class BusinessPortfolioScreen extends StatefulWidget {
 }
 
 class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
+  BusinessResult? data;
   @override
   void initState() {
     apiCall();
@@ -36,6 +37,16 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
     context
         .read<BusinessPortfolioCubit>()
         .fetchBusinessPortfolioDetails(cardID: widget.businessCardID);
+  }
+
+  //get Social Mi
+  String getSocialMediaURL({required String name}) {
+    for (var element in data?.social ?? []) {
+      if (name.toLowerCase() == element.title.toLowerCase()) {
+        return element.label;
+      }
+    }
+    return "";
   }
 
   @override
@@ -52,7 +63,7 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
           if (state is BusinessPortfolioLoading) {
             return const Loading(isSmall: false);
           } else if (state is BusinessPortfolioLoaded) {
-            BusinessResult? data = state.businessPortfolioModel.result;
+            data = state.businessPortfolioModel.result;
             String? profilePicture = data?.picture?.first.url;
             var age = calculateAge(
                 dobString: data?.dob?.toString() ?? DateTime.now().toString());
@@ -60,7 +71,7 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
               child: Column(
                 children: [
                   ProfileStackBanner(
-                    backgroundImage: profilePicture,
+                    backgroundImage: profilePicture, // TODO: add cover Image
                     title: translate!.translate(
                         "${data?.suffix ?? ""} ${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName ?? ""}" ??
                             ""),
@@ -148,6 +159,7 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
                         mainAxisSpacing: 5.0,
                         childAspectRatio: 15 / 11,
                         shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                         children: List.generate(data?.videoLink?.length ?? 0,
                             (index) {
                           return Hero(
@@ -181,8 +193,8 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
               ),
             );
           } else {
-            return const Center(
-              child: Text("OOps, Something went wrong"),
+            return Center(
+              child: Text(translate!.oopsSomethingWentWrong),
               //TODO: make String Code dynamic
             );
           }

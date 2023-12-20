@@ -52,7 +52,7 @@ portfolioListPop({
     'Business': BusinessPortfolioScreen(
         businessCardID: await getCardID(cardName: 'Business')),
     'Matrimony': MatrimonialPortfolioScreen(
-        matrimonialCardID: await getCardID(cardName: 'Matrimony'))
+        matrimonialCardID: await getCardID(cardName: 'Matrimonial'))
   };
   AppLocalizations? translate =
       AppLocalizations.of(navigatorKey.currentContext!);

@@ -185,11 +185,15 @@ String extractPhoneCode({required String completeValue}) {
 // One Link in Web View
 Future<void> openOnBrowser({required String url}) async {
   log("URL : $url");
-  if (!await launchUrlString(
-    url,
-    mode: LaunchMode.inAppBrowserView,
-  )) {
+  try {
+    if (await canLaunchUrlString(url)) {
+      launchUrlString(url);
+    } else {
+      showSnackBar(title: 'Could not launch $url');
+      throw Exception('Could not launch $url');
+    }
+  } catch (error) {
     showSnackBar(title: 'Could not launch $url');
-    throw Exception('Could not launch $url');
+    rethrow;
   }
 }

@@ -84,8 +84,8 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     child: Text(state.errorMsg),
                   );
                 } else {
-                  return const Center(
-                    child: Text("OOps, Something Went Wrong"),
+                  return Center(
+                    child: Text(translate!.oopsSomethingWentWrong),
                   );
                 }
               },

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class MatrimonialDetailsModel {
   final bool? success;
-  final Result? result;
+  final MatrimonialDetailsResult? result;
   final String? message;
 
   MatrimonialDetailsModel({
@@ -13,7 +13,7 @@ class MatrimonialDetailsModel {
 
   MatrimonialDetailsModel copyWith({
     bool? success,
-    Result? result,
+    MatrimonialDetailsResult? result,
     String? message,
   }) =>
       MatrimonialDetailsModel(
@@ -30,7 +30,9 @@ class MatrimonialDetailsModel {
   factory MatrimonialDetailsModel.fromJson(Map<String, dynamic> json) =>
       MatrimonialDetailsModel(
         success: json["success"],
-        result: json["result"] == null ? null : Result.fromJson(json["result"]),
+        result: json["result"] == null
+            ? null
+            : MatrimonialDetailsResult.fromJson(json["result"]),
         message: json["message"],
       );
 
@@ -41,7 +43,7 @@ class MatrimonialDetailsModel {
       };
 }
 
-class Result {
+class MatrimonialDetailsResult {
   final List<dynamic>? officeDays;
   final List<dynamic>? skills;
   final List<dynamic>? degreeLevel;
@@ -110,7 +112,7 @@ class Result {
   final String? specifiedBad;
   final String? idealMatch;
 
-  Result({
+  MatrimonialDetailsResult({
     this.officeDays,
     this.skills,
     this.degreeLevel,
@@ -180,7 +182,7 @@ class Result {
     this.idealMatch,
   });
 
-  Result copyWith({
+  MatrimonialDetailsResult copyWith({
     List<dynamic>? officeDays,
     List<dynamic>? skills,
     List<dynamic>? degreeLevel,
@@ -249,7 +251,7 @@ class Result {
     String? specifiedBad,
     String? idealMatch,
   }) =>
-      Result(
+      MatrimonialDetailsResult(
         officeDays: officeDays ?? this.officeDays,
         skills: skills ?? this.skills,
         degreeLevel: degreeLevel ?? this.degreeLevel,
@@ -319,11 +321,13 @@ class Result {
         idealMatch: idealMatch ?? this.idealMatch,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory MatrimonialDetailsResult.fromRawJson(String str) =>
+      MatrimonialDetailsResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory MatrimonialDetailsResult.fromJson(Map<String, dynamic> json) =>
+      MatrimonialDetailsResult(
         officeDays: json["officeDays"] == null
             ? []
             : List<dynamic>.from(json["officeDays"]!.map((x) => x)),

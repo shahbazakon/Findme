@@ -61,8 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     isSmall: false,
                   ));
             } else if (state is HomeError) {
-              return const Center(
-                child: Text("Oops, Something went Wrong"),
+              return Center(
+                child: Text(translate!.oopsSomethingWentWrong),
               );
             } else if (state is HomeLoaded) {
               data = state.homeModel;

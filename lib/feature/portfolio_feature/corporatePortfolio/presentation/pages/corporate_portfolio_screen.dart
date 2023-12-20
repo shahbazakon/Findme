@@ -1,6 +1,7 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
+import 'package:find_me/core/helper/formatter.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_profile_banner.dart';
@@ -26,8 +27,10 @@ class CorporatePortfolioScreen extends StatefulWidget {
 }
 
 class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
+  CorporateResult? data;
   @override
   void initState() {
+    apiCall();
     super.initState();
   }
 
@@ -35,6 +38,15 @@ class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
     context
         .read<CorporatePortfolioCubit>()
         .fetchCorporatePortfolioDetails(cardID: widget.corporateCardID);
+  }
+
+  String getSocialMediaURL({required String name}) {
+    for (var element in data?.social ?? []) {
+      if (name.toLowerCase() == element.title.toLowerCase()) {
+        return element.label;
+      }
+    }
+    return "";
   }
 
   @override
@@ -48,10 +60,10 @@ class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
           }
         },
         builder: (context, state) {
-          if (state is CorporatePortfolioError) {
+          if (state is CorporatePortfolioLoading) {
             return const Loading(isSmall: false);
           } else if (state is CorporatePortfolioLoaded) {
-            CorporateResult? data = state.academicDetailsModel.result;
+            data = state.academicDetailsModel.result;
             String? profilePicture = data?.picture?.first.url;
             return Stack(
               children: [
@@ -81,12 +93,16 @@ class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Text(
-                                  translate!.translate(
-                                      "${data?.suffix ?? ""} ${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName ?? ""}" ??
-                                          " "),
-                                  style: TextHelper.h2
-                                      .copyWith(color: AppFontsColors.light),
+                                SizedBox(
+                                  width: width * .8,
+                                  child: Text(
+                                    translate!.translate(
+                                        "${data?.suffix ?? ""} ${data?.firstName ?? ""} ${data?.middleName ?? ""} ${data?.lastName ?? ""}" ??
+                                            " "),
+                                    overflow: TextOverflow.visible,
+                                    style: TextHelper.h2
+                                        .copyWith(color: AppFontsColors.light),
+                                  ),
                                 ),
                                 Text(
                                   translate!.translate("@theroselady"),
@@ -98,7 +114,7 @@ class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
                                   width: width * .85,
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Text(
-                                    translate!.lorem,
+                                    "${data?.intro}",
                                     textAlign: TextAlign.center,
                                     style: SubTitleHelper.h12
                                         .copyWith(color: AppFontsColors.light),
@@ -128,71 +144,75 @@ class _CorporatePortfolioScreenState extends State<CorporatePortfolioScreen> {
                             sectionTitle(
                                 title:
                                     "${translate!.corporate} ${translate!.details}"),
-                            CustomProfileInfoTile(
-                              leadingImage: AppIcons.beg,
-                              title: translate!.lorem,
+                            Visibility(
+                              visible: data?.intro != "",
+                              child: CustomProfileInfoTile(
+                                leadingImage: AppIcons.beg,
+                                title: "${data?.intro}",
+                              ),
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.beg,
-                              title: "Aliyahayat97@email.com",
+                              title: data?.primaryEmail ?? "",
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.portfolio,
-                              title: "02-01-1997",
+                              title: dateFormatter2
+                                  .format(DateTime.parse(data!.dob.toString())),
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.creditCard,
                               title: '''
-${translate!.street}: ${translate!.translate("Deerah Dist.")},
-${translate!.city}: ${translate!.translate("Riyadh Deerah Dist.")}
-${translate!.street}: ${translate!.translate("Riyadh")}
-${translate!.phoneNumber}: ${translate!.translate("00966 1 4132260")}
-${translate!.countryCallingCode}: ${translate!.translate("+966")}
-${translate!.country}: ${translate!.translate("Saudi Arabia")}
+${translate!.street}: ${translate!.translate("${data?.primaryAddress}")},
+${translate!.city}: ${translate!.translate("${data?.city}")}
+${translate!.zipCode}: ${translate!.translate("${data?.zipCode}")} 
+${translate!.country}: ${translate!.translate("${data?.country}")}
+${translate!.countryCallingCode}: ${translate!.translate("${data?.mobile?.first.phoneCode}")}
+${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}")}
                         ''',
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.promoCode,
-                              title: translate!.female,
+                              title: "${data?.gender}",
                             ),
                             CustomProfileInfoTile(
                               leadingImage: AppIcons.promoCode,
-                              title: translate!.translate("+678-9876543456"),
+                              title:
+                                  "${extractPhoneCode(completeValue: data?.mobile?.first.phoneCode ?? "")} ${data?.mobile?.first.number}",
                             ),
-                            sectionTitle(title: translate!.socialProfile),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
+                            Visibility(
+                              visible: data?.social?.length != 0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.facebook,
-                                      onTap: () {
-                                        showSnackBar(
-                                            title:
-                                                translate!.linkFacebookAccount);
-                                      }),
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.instagram,
-                                      onTap: () {
-                                        showSnackBar(
-                                            title: translate!
-                                                .linkInstagramAccount);
-                                      }),
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.twitter,
-                                      onTap: () {
-                                        showSnackBar(
-                                            title:
-                                                translate!.linkTwitterAccount);
-                                      }),
-                                  socialAccountsButton(
-                                      iconImage: AppIcons.snapchat,
-                                      onTap: () {
-                                        showSnackBar(
-                                            title:
-                                                translate!.linkSnapchatAccount);
-                                      }),
+                                  sectionTitle(title: translate!.socialProfile),
+                                  SizedBox(
+                                    height: height * .055,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: SizedBox(
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: data?.social?.length ?? 0,
+                                          itemBuilder: (context, index) {
+                                            return FittedBox(
+                                              child: socialAccountsButton(
+                                                  iconImage:
+                                                      "assets/icons/${data?.social?[index].title?.toLowerCase()}.png",
+                                                  onTap: () {
+                                                    openOnBrowser(
+                                                        url: getSocialMediaURL(
+                                                            name:
+                                                                "${data?.social?[index].title}"));
+                                                  }),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -203,6 +223,7 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
                               mainAxisSpacing: 5.0,
                               childAspectRatio: 15 / 11,
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               children: List.generate(
                                   data?.videoLink?.length ?? 0, (index) {
                                 return Hero(
@@ -238,9 +259,8 @@ ${translate!.country}: ${translate!.translate("Saudi Arabia")}
               ],
             );
           } else {
-            return const Center(
-              child: Text("OOps, Something went wrong"),
-              //TODO: make String Code dynamic
+            return Center(
+              child: Text(translate!.oopsSomethingWentWrong),
             );
           }
         },

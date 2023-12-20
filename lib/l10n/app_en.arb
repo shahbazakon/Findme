@@ -177,6 +177,14 @@
     "strongPasswordMsg":"The password must be at least 8 characters long also contain minimum 1 numeric,special character, uppercase and lowercase letter.",
     "invalidDateFormat": "Invalid date format",
     "pleaseEnterPhoneNumber":"Please enter phone number",
-    "pleaseEnterValidPhoneNumber": "Please enter valid phone number"
+    "pleaseEnterValidPhoneNumber": "Please enter valid phone number",
 
+
+
+
+
+
+
+    "zipCode":"ZipCode",
+    "oopsSomethingWentWrong" : "OOps, Something went wrong"
 }

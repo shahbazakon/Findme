@@ -9,11 +9,11 @@ part 'matrimonial_portfolio_state.dart';
 class MatrimonialPortfolioCubit extends Cubit<MatrimonialPortfolioState> {
   MatrimonialPortfolioCubit() : super(MatrimonialPortfolioInitial());
 
-  fetchMatrimonialPortfolioDetails({required String userID}) async {
+  fetchMatrimonialPortfolioDetails({required String cardID}) async {
     try {
       emit(MatrimonialPortfolioLoading());
       MatrimonialDetailsModel result = await MatrimonialRemoteDataSource()
-          .fetchMatrimonialDetails(cardID: userID);
+          .fetchMatrimonialDetails(cardID: cardID);
       emit(MatrimonialPortfolioLoaded(academicDetailsModel: result));
     } on DioException catch (error) {
       emit(MatrimonialPortfolioError(

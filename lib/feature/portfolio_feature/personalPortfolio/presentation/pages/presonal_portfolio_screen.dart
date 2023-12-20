@@ -155,7 +155,7 @@ class _PersonalPortfolioScreenState extends State<PersonalPortfolioScreen> {
                               title: '''
 ${translate!.street}: ${translate!.translate("${data?.primaryAddress}")},
 ${translate!.city}: ${translate!.translate("${data?.city}")}
-zipCode: ${translate!.translate("${data?.zipCode}")} //TODO: make Zip Code dynamic 
+${translate!.zipCode}: ${translate!.translate("${data?.zipCode}")} 
 ${translate!.country}: ${translate!.translate("${data?.country}")}
 ${translate!.countryCallingCode}: ${translate!.translate("${data?.mobile?.first.phoneCode}")}
 ${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}")}
@@ -206,13 +206,14 @@ ${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}
                                 ],
                               ),
                             ),
-                            sectionTitle(title: "Video"),
+                            sectionTitle(title: translate.video),
                             GridView.count(
                               crossAxisCount: 2,
                               crossAxisSpacing: 5.0,
                               mainAxisSpacing: 5.0,
                               childAspectRatio: 15 / 11,
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               children: List.generate(
                                   data?.videoLink?.length ?? 0, (index) {
                                 return Hero(
@@ -251,17 +252,14 @@ ${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}
               ],
             );
           } else {
-            return const Center(
-              child: Text("OOps, Something went wrong"),
-              //TODO: make String Code dynamic
+            return Center(
+              child: Text(translate!.oopsSomethingWentWrong),
             );
           }
         },
       ),
     );
   }
-
-  // Profile banner
 
   //Section Title
   Padding sectionTitle({required String title}) {
