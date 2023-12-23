@@ -13,16 +13,18 @@ import '../constants/app_color.dart';
 import 'dialogBox/pick_images_dialogbox.dart';
 
 class ProfilePictureAvatar extends StatefulWidget {
-  const ProfilePictureAvatar(
+  ProfilePictureAvatar(
       {super.key,
       required this.radius,
       this.showEditButton = false,
       this.isShadowDown = false,
+      this.onPictureChange,
       this.isBorderVisible = true});
   final bool showEditButton;
   final double radius;
   final bool isBorderVisible;
   final bool isShadowDown;
+  Function(XFile value)? onPictureChange;
   @override
   State<ProfilePictureAvatar> createState() => _ProfilePictureAvatarState();
 }
@@ -91,6 +93,10 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
               onTap: () async {
                 // Get Image Form Image Picker Dialog
                 pickedImage = await dialogBox.pickImages();
+                if (pickedImage != null) {
+                  widget.onPictureChange!(pickedImage!);
+                }
+
                 setState(() {});
               },
               child: Container(

@@ -23,6 +23,8 @@ import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../feature/settings_features/followRequest/presentation/cubit/search_cubit.dart';
+
 List<BlocProvider> providers = [
   BlocProvider<SignInCubit>(
     create: (BuildContext context) => locator<SignInCubit>(),
@@ -91,5 +93,8 @@ List<BlocProvider> providers = [
   ),
   BlocProvider<MatrimonialPortfolioCubit>(
     create: (BuildContext context) => locator<MatrimonialPortfolioCubit>(),
+  ),
+  BlocProvider<SearchCubit>(
+    create: (BuildContext context) => locator<SearchCubit>(),
   ),
 ];

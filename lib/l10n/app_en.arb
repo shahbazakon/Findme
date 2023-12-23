@@ -186,5 +186,6 @@
 
 
     "zipCode":"ZipCode",
-    "oopsSomethingWentWrong" : "OOps, Something went wrong"
+    "oopsSomethingWentWrong" : "OOps, Something went wrong",
+    "search": "Search"
 }

@@ -26,7 +26,7 @@ class ProfileBanner extends StatelessWidget {
       margin: EdgeInsets.only(top: height * .08),
       child: Row(
         children: [
-          const ProfilePictureAvatar(
+          ProfilePictureAvatar(
             radius: 45,
             isShadowDown: true,
             isBorderVisible: false,

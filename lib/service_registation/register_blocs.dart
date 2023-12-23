@@ -19,6 +19,7 @@ import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation
 import 'package:find_me/feature/portfolio_feature/businessPortfolio/presentation/cubit/business_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentation/cubit/corporate_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
+import 'package:find_me/feature/settings_features/followRequest/presentation/cubit/search_cubit.dart';
 
 import '../feature/portfolio_feature/matrimonyPortfolio/presentation/cubit/matrimonial_portfolio_cubit.dart';
 
@@ -45,5 +46,6 @@ class RegisterBlocs {
     locator.registerFactory(() => BusinessPortfolioCubit());
     locator.registerFactory(() => CorporatePortfolioCubit());
     locator.registerFactory(() => MatrimonialPortfolioCubit());
+    locator.registerFactory(() => SearchCubit());
   }
 }

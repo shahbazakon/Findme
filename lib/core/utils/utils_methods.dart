@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -9,6 +10,7 @@ import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -196,4 +198,13 @@ Future<void> openOnBrowser({required String url}) async {
     showSnackBar(title: 'Could not launch $url');
     rethrow;
   }
+}
+
+// convert XFile to Base64String
+Future<String> getBase64File({required XFile imageFile}) async {
+  // Read the image file as bytes
+  List<int> imageBytes = await imageFile.readAsBytes();
+
+  // Convert the bytes to base64 encoding
+  return base64Encode(imageBytes);
 }

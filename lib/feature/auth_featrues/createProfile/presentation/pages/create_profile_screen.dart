@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:find_me/core/constants/theme_constants.dart';
 import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
@@ -13,6 +15,7 @@ import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateProfile extends StatefulWidget {
   final String id;
@@ -31,6 +34,7 @@ class _CreateProfileState extends State<CreateProfile> {
   final TextEditingController _statusCodeController = TextEditingController();
   final TextEditingController _phoneNumberCodeController =
       TextEditingController();
+  XFile? pickedImage;
 
   ProfileModel? profileModel;
 
@@ -46,20 +50,34 @@ class _CreateProfileState extends State<CreateProfile> {
   }
 
   // Submit Form
-  void submitForm() {
+  Future<void> submitForm() async {
+    String? fileType = pickedImage?.name.split(".").last.toString();
+    //TODO: solve Upload file Issue
     context.read<CreateProfileCubit>().createProfile(
             data: ProfileModel(
           result: ProfileResult(
-            resultId: widget.id,
-            name: _nameController.text,
-            email: _emailController.text,
-            country: _countryController.text,
-            phoneCode: _statusCodeController.text,
-            ipDetail: IpDetail(
-                countryCode: _countryController.text,
-                state: _statusCodeController.text),
-            isLoggedIn: true,
-          ),
+              resultId: widget.id,
+              name: _nameController.text,
+              email: _emailController.text,
+              country: _countryController.text,
+              phoneCode: _statusCodeController.text,
+              ipDetail: IpDetail(
+                  countryCode: _countryController.text,
+                  state: _statusCodeController.text),
+              isLoggedIn: true,
+              picture: pickedImage == null
+                  ? null
+                  : [
+                      Cover(
+                        url:
+                            'base64,${await getBase64File(imageFile: pickedImage!)}',
+                        thumbUrl:
+                            'base64,${await getBase64File(imageFile: pickedImage!)}',
+                        name: pickedImage?.name,
+                        status: 'done',
+                        type: 'image/$fileType',
+                      ),
+                    ]),
         ));
   }
 
@@ -78,9 +96,15 @@ class _CreateProfileState extends State<CreateProfile> {
               Text(translate!.doNotWorryOnlyYouCanSeeYourPersonalData,
                   style: SubTitleHelper.h11, textAlign: TextAlign.center),
               SizedBox(height: height * .05),
-              const ProfilePictureAvatar(
+              ProfilePictureAvatar(
                 radius: 80,
                 showEditButton: true,
+                onPictureChange: (value) {
+                  pickedImage = value;
+                  log("pickedImage name : ${pickedImage?.name}");
+                  log("pickedImage : ${pickedImage?.name.split(".").last}");
+                  log("pickedImage : ${pickedImage?.path}");
+                },
               ),
               SizedBox(height: height * .04),
               CustomTestField(

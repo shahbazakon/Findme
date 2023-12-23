@@ -26,7 +26,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               cupertinoNavigator(screenName: const NotificationScreen());
             },
             icon: Image.asset(AppIcons.bell)),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(top: 10, right: 15),
           child: ProfilePictureAvatar(radius: 18),
         ),

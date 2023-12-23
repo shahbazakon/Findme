@@ -40,6 +40,7 @@ class AppDialogBox {
                   color: AppColors.lightGrey1,
                   border: Border.all(color: AppColors.lightGrey2, width: 2)),
               child: Material(
+                color: AppColors.lightGrey1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -80,6 +81,7 @@ class AppDialogBox {
     required Function() onClick,
   }) {
     return Material(
+      color: AppColors.lightGrey1,
       child: InkWell(
         onTap: onClick,
         child: FittedBox(
