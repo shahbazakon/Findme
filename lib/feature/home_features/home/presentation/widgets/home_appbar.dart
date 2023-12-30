@@ -5,10 +5,9 @@ import 'package:find_me/feature/notifications/presentation/pages/notification_sc
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({
-    super.key,
-  });
-
+  const HomeAppBar({super.key, this.profileImage, this.onProfileClick});
+  final String? profileImage;
+  final Function()? onProfileClick;
   @override
   Size get preferredSize => const Size.fromHeight(60);
 
@@ -28,7 +27,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: Image.asset(AppIcons.bell)),
         Padding(
           padding: EdgeInsets.only(top: 10, right: 15),
-          child: ProfilePictureAvatar(radius: 18),
+          child: GestureDetector(
+              onTap: onProfileClick, child: ProfilePictureAvatar(radius: 18)),
         ),
       ],
     );

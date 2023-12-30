@@ -1,5 +1,6 @@
 import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:find_me/core/constants/app_assets.dart';
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/contacts/presentation/pages/contacts_screen.dart';
@@ -20,12 +21,17 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int selectedIndex = 0;
   PageController pageController = PageController();
-  String barcode = 'Tap  to scan';
+  // String barcode = 'Tap  to scan';
 
   @override
   void initState() {
     setValue();
     super.initState();
+  }
+
+  bool isLinkValid(String link) {
+    RegExp pattern = RegExp(r'https://fyndme\.net/detail/[0-9a-f]{24}');
+    return pattern.hasMatch(link);
   }
 
   @override
@@ -41,16 +47,22 @@ class _DashboardState extends State<Dashboard> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => AiBarcodeScanner(
-            // validator: (value) {
-            //   return value.startsWith('https://');
-            // },
-            canPop: true,
+            canPop: false,
+            // validator: (value) => isLinkValid(value),
             onScan: (String value) {
-              debugPrint(value);
-              setState(() {
-                barcode = value;
-              });
-              showSnackBar(title: barcode);
+              // debugPrint(value);
+              // setState(() {
+              //   barcode = value;
+              // });
+              if (isLinkValid(value)) {
+                cupertinoNavigator(
+                    type: NavigatorType.PUSHREPLACE,
+                    screenName:
+                        ProfileScreen(followUserID: value.split("/").last));
+                showSnackBar(title: value, isColorPrimary: true);
+              } else {
+                showSnackBar(title: "Invalid QR: $value");
+              }
             },
             onDetect: (p0) {},
             onDispose: () {

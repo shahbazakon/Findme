@@ -10,6 +10,7 @@ import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -176,17 +177,78 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
                         physics: const ScrollPhysics(
                             parent: NeverScrollableScrollPhysics()),
                         shrinkWrap: true,
-                        itemCount: /* data.achievements?.length ?? 0*/ 2,
+                        itemCount: /* data.achievements?.length ?? 0*/
+                            data?.coverLetter?.length ?? 0,
                         itemBuilder: (context, index) {
                           return AttachmentListTile(
-                            title: translate!.resume,
+                            title: data!.coverLetter![index].name ??
+                                translate!.coverLetter,
+                            onClick: () {
+                              if (data?.coverLetter?[index].url != null) {
+                                SfPdfViewer.network(
+                                    data!.coverLetter![index].url!);
+                              } else {
+                                showSnackBar(title: "URL not Found");
+                              }
+                            },
                             onDownloadClick: () {
                               //TODO: Add Download Functionality
                               showSnackBar(title: translate!.download);
                             },
                           );
                         },
-                      )
+                      ),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        shrinkWrap: true,
+                        itemCount: /* data.achievements?.length ?? 0*/
+                            data?.resume?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return AttachmentListTile(
+                            title:
+                                data!.resume![index].name ?? translate!.resume,
+                            onClick: () {
+                              if (data?.resume?[index].url != null) {
+                                SfPdfViewer.network(data!.resume![index].url!);
+                              } else {
+                                showSnackBar(title: "URL not Found");
+                              }
+                            },
+                            onDownloadClick: () {
+                              //TODO: Add Download Functionality
+                              showSnackBar(title: translate!.download);
+                            },
+                          );
+                        },
+                      ),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        shrinkWrap: true,
+                        itemCount: /* data.achievements?.length ?? 0*/
+                            data?.transcipt?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return AttachmentListTile(
+                            title: data!.transcipt![index].name ??
+                                translate!.transcript,
+                            onClick: () {
+                              if (data?.transcipt?[index].url != null) {
+                                SfPdfViewer.network(
+                                    data!.transcipt![index].url!);
+                              } else {
+                                showSnackBar(title: "URL not Found");
+                              }
+                            },
+                            onDownloadClick: () {
+                              //TODO: Add Download Functionality
+                              showSnackBar(title: translate!.download);
+                            },
+                          );
+                        },
+                      ),
                     ],
                   )
                 ],

@@ -1,9 +1,11 @@
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/theme_constants.dart';
+import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/widget/Input%20Field/custom_searchbar.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/loading.dart';
+import 'package:find_me/feature/Profile/presentation/pages/profile_screen.dart';
 import 'package:find_me/feature/settings_features/followRequest/data/models/search_model.dart';
 import 'package:find_me/feature/settings_features/followRequest/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +102,12 @@ class _FollowRequestScreenState extends State<FollowRequestScreen> {
                           leadingImage: (searchData!.picture!.isEmpty)
                               ? null
                               : searchData?.picture?.first.url,
+                          onTap: () {
+                            cupertinoNavigator(
+                                screenName: ProfileScreen(
+                              followUserID: searchData?.resultId,
+                            ));
+                          },
                         );
                       },
                       separatorBuilder: (context, index) {

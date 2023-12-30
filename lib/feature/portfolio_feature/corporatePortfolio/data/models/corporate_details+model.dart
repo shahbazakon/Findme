@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:find_me/core/models/cover_letter_model.dart';
+
 class CorporateDetailsModel {
   final bool? success;
   final CorporateResult? result;
@@ -91,9 +93,9 @@ class CorporateResult {
   final List<Logo>? video;
   final List<dynamic>? contactShareWith;
   final List<dynamic>? collegeDetail;
-  final List<dynamic>? resume;
-  final List<dynamic>? transcipt;
-  final List<dynamic>? coverLetter;
+  final List<CoverLetter>? resume;
+  final List<CoverLetter>? transcipt;
+  final List<CoverLetter>? coverLetter;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? id;
@@ -204,9 +206,9 @@ class CorporateResult {
     List<Logo>? video,
     List<dynamic>? contactShareWith,
     List<dynamic>? collegeDetail,
-    List<dynamic>? resume,
-    List<dynamic>? transcipt,
-    List<dynamic>? coverLetter,
+    List<CoverLetter>? resume,
+    List<CoverLetter>? transcipt,
+    List<CoverLetter>? coverLetter,
     DateTime? createdAt,
     DateTime? updatedAt,
     int? id,
@@ -373,13 +375,13 @@ class CorporateResult {
             : List<dynamic>.from(json["collegeDetail"]!.map((x) => x)),
         resume: json["resume"] == null
             ? []
-            : List<dynamic>.from(json["resume"]!.map((x) => x)),
+            : List<CoverLetter>.from(json["resume"]!.map((x) => x)),
         transcipt: json["transcipt"] == null
             ? []
-            : List<dynamic>.from(json["transcipt"]!.map((x) => x)),
+            : List<CoverLetter>.from(json["transcipt"]!.map((x) => x)),
         coverLetter: json["coverLetter"] == null
             ? []
-            : List<dynamic>.from(json["coverLetter"]!.map((x) => x)),
+            : List<CoverLetter>.from(json["coverLetter"]!.map((x) => x)),
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -476,13 +478,13 @@ class CorporateResult {
             ? []
             : List<dynamic>.from(collegeDetail!.map((x) => x)),
         "resume":
-            resume == null ? [] : List<dynamic>.from(resume!.map((x) => x)),
+            resume == null ? [] : List<CoverLetter>.from(resume!.map((x) => x)),
         "transcipt": transcipt == null
             ? []
-            : List<dynamic>.from(transcipt!.map((x) => x)),
+            : List<CoverLetter>.from(transcipt!.map((x) => x)),
         "coverLetter": coverLetter == null
             ? []
-            : List<dynamic>.from(coverLetter!.map((x) => x)),
+            : List<CoverLetter>.from(coverLetter!.map((x) => x)),
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "Id": id,

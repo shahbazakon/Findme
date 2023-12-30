@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
@@ -5,10 +7,13 @@ import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/core/widget/profile_stack_banner.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/data/models/academic_details_model.dart';
 import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation/cubit/academic_portfolio_cubit.dart';
+import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/attachment_list_tile.com.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/widget/video_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:open_file/open_file.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -134,7 +139,88 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                             ),
                           );
                         }),
-                      )
+                      ),
+                      sectionTitle(title: translate!.attachments),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        shrinkWrap: true,
+                        itemCount: /* data.achievements?.length ?? 0*/
+                            data?.coverLetter?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return AttachmentListTile(
+                            title: data!.coverLetter![index].name ??
+                                translate!.coverLetter,
+                            onClick: () {
+                              log("CV Clicked");
+                              log("${data?.coverLetter?[index].url}");
+                              if (data?.coverLetter?[index].url != null) {
+                                OpenFile.open(data!.coverLetter![index].url!);
+                              } else {
+                                showSnackBar(title: "URL not Found");
+                              }
+                            },
+                            onDownloadClick: () {
+                              //TODO: Add Download Functionality
+                              showSnackBar(title: translate!.download);
+                            },
+                          );
+                        },
+                      ),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        shrinkWrap: true,
+                        itemCount: /* data.achievements?.length ?? 0*/
+                            data?.resume?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return AttachmentListTile(
+                            title:
+                                data!.resume![index].name ?? translate!.resume,
+                            onClick: () {
+                              if (data?.resume?[index].url != null) {
+                                OpenFile.open(data!.resume![index].url!);
+                              } else {
+                                showSnackBar(
+                                    title:
+                                        "Document not Found"); // TODO: dynamic String
+                              }
+                            },
+                            onDownloadClick: () {
+                              //TODO: Add Download Functionality
+                              showSnackBar(title: translate!.download);
+                            },
+                          );
+                        },
+                      ),
+                      ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ScrollPhysics(
+                            parent: NeverScrollableScrollPhysics()),
+                        shrinkWrap: true,
+                        itemCount: /* data.achievements?.length ?? 0*/
+                            data?.transcipt?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return AttachmentListTile(
+                            title: data!.transcipt![index].name ??
+                                translate!.transcript,
+                            onClick: () {
+                              if (data?.transcipt?[index].url != null) {
+                                SfPdfViewer.network(
+                                    data!.transcipt![index].url!);
+                              } else {
+                                showSnackBar(title: "URL not Found");
+                              }
+                            },
+                            onDownloadClick: () {
+                              //TODO: Add Download Functionality
+                              showSnackBar(title: translate!.download);
+                            },
+                          );
+                        },
+                      ),
                     ],
                   )
                 ],

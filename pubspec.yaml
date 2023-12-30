@@ -45,7 +45,8 @@ dependencies:
   dartz: ^0.10.1
   ai_barcode_scanner: ^3.4.1
   url_launcher: ^6.2.2
-
+  syncfusion_flutter_pdfviewer: ^24.1.43
+  open_file: ^3.3.2
 
 # dev dependencies
 dev_dependencies:

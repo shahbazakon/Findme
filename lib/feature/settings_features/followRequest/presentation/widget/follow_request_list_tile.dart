@@ -12,10 +12,12 @@ class FollowRequestListTile extends StatelessWidget {
       this.title = '',
       this.subTitle = '',
       this.leadingImage,
+      this.onTap,
       this.isShowButton = true,
       this.isSent = false});
 
   String title;
+  Function()? onTap;
   String subTitle;
   String? leadingImage;
   bool isShowButton;
@@ -26,6 +28,7 @@ class FollowRequestListTile extends StatelessWidget {
     return Padding(
       padding: primaryPadding,
       child: ListTile(
+        onTap: onTap,
         splashColor: AppColors.primary,
         contentPadding: EdgeInsets.zero,
         leading: leadingImage == null

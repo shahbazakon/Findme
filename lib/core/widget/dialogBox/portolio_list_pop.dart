@@ -9,7 +9,7 @@ import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/feature/home_features/home/data/datasource/home_remote_data_source.dart';
 import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
 import 'package:find_me/feature/portfolio_feature/AcademicPortfolio/presentation/pages/Academic_portfolio_screen.dart';
-import 'package:find_me/feature/portfolio_feature/BusinessPortfolio/presentation/pages/business_portfolio_screendart.dart';
+import 'package:find_me/feature/portfolio_feature/BusinessPortfolio/presentation/pages/business_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentation/pages/corporate_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/matrimonyPortfolio/presentation/pages/matrimonial_portfolio_screen.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/pages/presonal_portfolio_screen.dart';
@@ -23,10 +23,13 @@ portfolioListPop({
   bool isTransparent = false,
   isReplacementRoute = false,
   final String? bgImage,
+  final String? followUserID,
 }) async {
   Future<String> getCardID({required String cardName}) async {
     try {
-      String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
+      String? userID =
+          followUserID ?? sharedPreferences?.getString(LocaleStorageKey.userID);
+
       HomeModel response =
           await HomeRemoteDataSource().fetchHomeData(userID: userID!);
 
@@ -147,6 +150,7 @@ portfolioListPop({
                               itemBuilder: (context, index) {
                                 String keys =
                                     portfolioList.keys.toList()[index];
+
                                 return portfolioListTile(
                                     isReplacementRoute: isReplacementRoute,
                                     title: keys,

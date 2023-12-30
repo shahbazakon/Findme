@@ -23,8 +23,9 @@ import 'package:shadow_overlay/shadow_overlay.dart';
 import '../../../../core/utils/utils_methods.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, this.followUserID});
 
+  final String? followUserID;
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -35,13 +36,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    // apiCall();
+    apiCall();
     super.initState();
   }
 
   // API Calling
   void apiCall() {
-    String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
+    String? userID = widget.followUserID ??
+        sharedPreferences?.getString(LocaleStorageKey.userID);
+
+    // Follow user Id
     if (userID != null) {
       context.read<ProfileDetailsCubit>().fetchProfileDetails(userID: userID);
     }
@@ -145,32 +149,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Hero(
-                                    tag: "profileNameKey",
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: Text(
-                                        translate!.translate("${data?.name}"),
-                                        style: TextHelper.h1.copyWith(
-                                            fontWeight: FontWeight.w500),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Hero(
+                                      tag: "profileNameKey",
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: Text(
+                                          translate!.translate("${data?.name}"),
+                                          style: TextHelper.h1.copyWith(
+                                              fontWeight: FontWeight.w500),
+                                          overflow: TextOverflow.visible,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Hero(
-                                    tag: "profileUsernameKey",
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: Text(
-                                        translate!
-                                            .translate("${data?.purpleId}"),
-                                        style: SubTitleHelper.h10,
+                                    Hero(
+                                      tag: "profileUsernameKey",
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: Text(
+                                          translate!
+                                              .translate("${data?.purpleId}"),
+                                          style: SubTitleHelper.h10,
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ],
                           ),

@@ -32,16 +32,16 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
-    apiCall();
+    // apiCall();
     super.initState();
   }
 
-  void apiCall() {
-    String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
-    if (userID != null) {
-      context.read<ProfileDetailsCubit>().fetchProfileDetails(userID: userID);
-    }
-  }
+  // void apiCall() {
+  //   String? userID = sharedPreferences?.getString(LocaleStorageKey.userID);
+  //   if (userID != null) {
+  //     context.read<ProfileDetailsCubit>().fetchProfileDetails(userID: userID);
+  //   }
+  // }
 
   // Select language
   void _selectLanguage() async {

@@ -3,10 +3,7 @@ import 'dart:io';
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/local_storege_key.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
-import 'package:find_me/core/widget/loading.dart';
-import 'package:find_me/feature/Profile/presentation/cubit/profile_details_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../constants/app_color.dart';
@@ -19,12 +16,14 @@ class ProfilePictureAvatar extends StatefulWidget {
       this.showEditButton = false,
       this.isShadowDown = false,
       this.onPictureChange,
+      this.image,
       this.isBorderVisible = true});
   final bool showEditButton;
   final double radius;
   final bool isBorderVisible;
   final bool isShadowDown;
   Function(XFile value)? onPictureChange;
+  final String? image;
   @override
   State<ProfilePictureAvatar> createState() => _ProfilePictureAvatarState();
 }
@@ -32,14 +31,21 @@ class ProfilePictureAvatar extends StatefulWidget {
 class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
   AppDialogBox dialogBox = AppDialogBox();
   XFile? pickedImage;
-
   @override
   void initState() {
+    if (widget.image != null) {
+      sharedPreferences?.setString(
+          LocaleStorageKey.userProfileImage, widget.image!);
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    String profileImage = sharedPreferences
+            ?.getString(LocaleStorageKey.userProfileImage) ??
+        "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png";
+
     return Stack(
       children: [
         Container(
@@ -58,31 +64,18 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
                           : widget.radius * .21,
                       color: AppColors.lightGrey3)
                 ]),
-            child: BlocBuilder<ProfileDetailsCubit, ProfileDetailsState>(
-              builder: (context, state) {
-                if (state is ProfileDetailsLoading) {
-                  return const Loading();
-                } else if (state is ProfileDetailsLoaded) {
-                  String profileImage = sharedPreferences
-                          ?.getString(LocaleStorageKey.userProfileImage) ??
-                      "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png";
-                  return CircleAvatar(
-                    radius: widget.radius,
-                    backgroundImage: pickedImage != null
-                        ? Image.file(
-                            File(pickedImage!.path),
-                            fit: BoxFit.cover,
-                          ).image
-                        : FadeInImage(
-                            placeholder: AssetImage(AppIcons.placeholderImage),
-                            image: NetworkImage(profileImage),
-                            fit: BoxFit.cover,
-                          ).image,
-                  );
-                } else {
-                  return Center(child: Icon(Icons.error, color: AppColors.red));
-                }
-              },
+            child: CircleAvatar(
+              radius: widget.radius,
+              backgroundImage: pickedImage != null
+                  ? Image.file(
+                      File(pickedImage!.path),
+                      fit: BoxFit.cover,
+                    ).image
+                  : FadeInImage(
+                      placeholder: AssetImage(AppIcons.placeholderImage),
+                      image: NetworkImage(widget.image ?? profileImage),
+                      fit: BoxFit.cover,
+                    ).image,
             )),
         Visibility(
           visible: widget.showEditButton,

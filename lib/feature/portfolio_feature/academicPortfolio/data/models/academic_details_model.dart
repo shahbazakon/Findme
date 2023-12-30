@@ -1,5 +1,10 @@
 import 'dart:convert';
 
+import 'package:find_me/core/models/cover_letter_model.dart';
+import 'package:find_me/core/models/mobile_model.dart';
+
+import '../../../../../core/models/video_link_model.dart';
+
 class AcademicDetailsModel {
   final bool? success;
   final AcademicResult? result;
@@ -597,154 +602,5 @@ class CollegeDetail {
         "degreeLevel": degreeLevel,
         "degreeEnd": degreeEnd?.toIso8601String(),
         "degreeStart": degreeStart?.toIso8601String(),
-      };
-}
-
-class CoverLetter {
-  final String? id;
-  final String? url;
-  final String? thumbUrl;
-  final String? uid;
-  final String? name;
-  final String? status;
-  final String? type;
-
-  CoverLetter({
-    this.id,
-    this.url,
-    this.thumbUrl,
-    this.uid,
-    this.name,
-    this.status,
-    this.type,
-  });
-
-  CoverLetter copyWith({
-    String? id,
-    String? url,
-    String? thumbUrl,
-    String? uid,
-    String? name,
-    String? status,
-    String? type,
-  }) =>
-      CoverLetter(
-        id: id ?? this.id,
-        url: url ?? this.url,
-        thumbUrl: thumbUrl ?? this.thumbUrl,
-        uid: uid ?? this.uid,
-        name: name ?? this.name,
-        status: status ?? this.status,
-        type: type ?? this.type,
-      );
-
-  factory CoverLetter.fromRawJson(String str) =>
-      CoverLetter.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory CoverLetter.fromJson(Map<String, dynamic> json) => CoverLetter(
-        id: json["_id"],
-        url: json["url"],
-        thumbUrl: json["thumbUrl"],
-        uid: json["uid"],
-        name: json["name"],
-        status: json["status"],
-        type: json["type"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "url": url,
-        "thumbUrl": thumbUrl,
-        "uid": uid,
-        "name": name,
-        "status": status,
-        "type": type,
-      };
-}
-
-class Mobile {
-  final String? id;
-  final String? label;
-  final String? number;
-  final String? phoneCode;
-
-  Mobile({
-    this.id,
-    this.label,
-    this.number,
-    this.phoneCode,
-  });
-
-  Mobile copyWith({
-    String? id,
-    String? label,
-    String? number,
-    String? phoneCode,
-  }) =>
-      Mobile(
-        id: id ?? this.id,
-        label: label ?? this.label,
-        number: number ?? this.number,
-        phoneCode: phoneCode ?? this.phoneCode,
-      );
-
-  factory Mobile.fromRawJson(String str) => Mobile.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Mobile.fromJson(Map<String, dynamic> json) => Mobile(
-        id: json["_id"],
-        label: json["label"],
-        number: json["number"],
-        phoneCode: json["phoneCode"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "label": label,
-        "number": number,
-        "phoneCode": phoneCode,
-      };
-}
-
-class VideoLink {
-  final String? id;
-  final String? link;
-  final String? title;
-
-  VideoLink({
-    this.id,
-    this.link,
-    this.title,
-  });
-
-  VideoLink copyWith({
-    String? id,
-    String? link,
-    String? title,
-  }) =>
-      VideoLink(
-        id: id ?? this.id,
-        link: link ?? this.link,
-        title: title ?? this.title,
-      );
-
-  factory VideoLink.fromRawJson(String str) =>
-      VideoLink.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory VideoLink.fromJson(Map<String, dynamic> json) => VideoLink(
-        id: json["_id"],
-        link: json["link"],
-        title: json["title"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "link": link,
-        "title": title,
       };
 }

@@ -10,6 +10,7 @@ import 'package:find_me/core/widget/loading.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/pages/academic_details_screen.dart';
 import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
 import 'package:find_me/feature/home_features/home/presentation/cubit/home__cubit.dart';
+import 'package:find_me/feature/settings_features/settings/presentation/pages/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -41,114 +42,121 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
-    return Scaffold(
-      appBar: const HomeAppBar(),
-      body: SingleChildScrollView(
-        physics: const ScrollPhysics(
-            parent:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())),
-        child: BlocConsumer<HomeCubit, HomeState>(
-          listener: (context, state) {
-            if (state is HomeError) {
-              showSnackBar(title: state.errorMsg);
-            }
-          },
-          builder: (context, state) {
-            if (state is HomeLoading) {
-              return SizedBox(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is HomeError) {
+          showSnackBar(title: state.errorMsg);
+        }
+      },
+      builder: (context, state) {
+        if (state is HomeLoading) {
+          return SizedBox(
+              height: height,
+              child: const Loading(
+                isSmall: false,
+              ));
+        } else if (state is HomeError) {
+          return Center(
+            child: Text(translate!.oopsSomethingWentWrong),
+          );
+        } else if (state is HomeLoaded) {
+          data = state.homeModel;
+          return Scaffold(
+            appBar: HomeAppBar(
+              profileImage: data?.result?.first.picture?.first.url,
+              onProfileClick: () {
+                cupertinoNavigator(screenName: const SettingsScreen());
+              },
+            ),
+            body: SingleChildScrollView(
+                physics: const ScrollPhysics(
+                    parent: BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics())),
+                child: Container(
+                  padding: primaryPadding,
                   height: height,
-                  child: const Loading(
-                    isSmall: false,
-                  ));
-            } else if (state is HomeError) {
-              return Center(
-                child: Text(translate!.oopsSomethingWentWrong),
-              );
-            } else if (state is HomeLoaded) {
-              data = state.homeModel;
-              sharedPreferences?.setString(
-                  LocaleStorageKey.userProfileImage,
-                  state.homeModel.result?.first.picture?.first.url ??
-                      "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png");
-              return Container(
-                padding: primaryPadding,
-                height: height,
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        translate!.hiThere(
-                            "${data?.result?.first.firstName ?? ""} ${data?.result?.first.lastName ?? ""}"),
-                        textAlign: TextAlign.left,
-                        style: SubTitleHelper.h3,
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          translate!.hiThere(
+                              "${data?.result?.first.firstName ?? ""} ${data?.result?.first.lastName ?? ""}"),
+                          textAlign: TextAlign.left,
+                          style: SubTitleHelper.h3,
+                        ),
                       ),
-                    ),
-                    // CustomSearchBar(searchController: searchController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Expanded(
-                      child: GridView(
-                        shrinkWrap: true,
-                        physics: const ScrollPhysics(
-                            parent: NeverScrollableScrollPhysics()),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount:
-                                    2, // number of items in each row
-                                mainAxisSpacing: 10.0, // spacing between rows
-                                crossAxisSpacing: 10.0,
-                                childAspectRatio: 1.1 // spacing between columns
-                                ),
-                        children: [
-                          customGridTile(
-                              title: translate!.personal,
-                              image: AppImages.personal,
-                              onTap: () {
-                                cupertinoNavigator(
-                                    screenName: const PersonalDetailsScreen());
-                              }),
-                          customGridTile(
-                              title: translate!.business,
-                              image: AppImages.business,
-                              onTap: () {
-                                cupertinoNavigator(
-                                    screenName: const BusinessDetailsScreen());
-                              }),
-                          customGridTile(
-                              title: translate!.corporate,
-                              image: AppImages.corporate,
-                              onTap: () {
-                                cupertinoNavigator(
-                                    screenName: const CorporateDetailsScreen());
-                              }),
-                          customGridTile(
-                              title: translate!.academic,
-                              image: AppImages.academic,
-                              onTap: () {
-                                cupertinoNavigator(
-                                    screenName: const AcademicDetailsScreen());
-                              }),
-                          customGridTile(
-                              title: translate!.matrimony,
-                              image: AppImages.matrimony,
-                              onTap: () {
-                                cupertinoNavigator(
-                                    screenName: const MatrimonyDetailsScreen());
-                              }),
-                        ],
+                      // CustomSearchBar(searchController: searchController),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    )
-                  ],
-                ),
-              );
-            } else {
-              return const Center(child: Text("Error"));
-            }
-          },
-        ),
-      ),
+                      Expanded(
+                        child: GridView(
+                          shrinkWrap: true,
+                          physics: const ScrollPhysics(
+                              parent: NeverScrollableScrollPhysics()),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  // number of items in each row
+                                  mainAxisSpacing: 10.0,
+                                  // spacing between rows
+                                  crossAxisSpacing: 10.0,
+                                  childAspectRatio:
+                                      1.1 // spacing between columns
+                                  ),
+                          children: [
+                            customGridTile(
+                                title: translate!.personal,
+                                image: AppImages.personal,
+                                onTap: () {
+                                  cupertinoNavigator(
+                                      screenName:
+                                          const PersonalDetailsScreen());
+                                }),
+                            customGridTile(
+                                title: translate!.business,
+                                image: AppImages.business,
+                                onTap: () {
+                                  cupertinoNavigator(
+                                      screenName:
+                                          const BusinessDetailsScreen());
+                                }),
+                            customGridTile(
+                                title: translate!.corporate,
+                                image: AppImages.corporate,
+                                onTap: () {
+                                  cupertinoNavigator(
+                                      screenName:
+                                          const CorporateDetailsScreen());
+                                }),
+                            customGridTile(
+                                title: translate!.academic,
+                                image: AppImages.academic,
+                                onTap: () {
+                                  cupertinoNavigator(
+                                      screenName:
+                                          const AcademicDetailsScreen());
+                                }),
+                            customGridTile(
+                                title: translate!.matrimony,
+                                image: AppImages.matrimony,
+                                onTap: () {
+                                  cupertinoNavigator(
+                                      screenName:
+                                          const MatrimonyDetailsScreen());
+                                }),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )),
+          );
+        } else {
+          return Center(child: Text(translate!.oopsSomethingWentWrong));
+        }
+      },
     );
   }
 
