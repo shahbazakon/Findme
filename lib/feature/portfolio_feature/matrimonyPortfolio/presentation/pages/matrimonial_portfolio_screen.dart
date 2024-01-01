@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../core/utils/download_files.dart';
+
 class MatrimonialPortfolioScreen extends StatefulWidget {
   final String matrimonialCardID;
   const MatrimonialPortfolioScreen(
@@ -239,8 +241,10 @@ ${translate!.phoneNumber}: ${translate!.translate("${data?.mobile?.first.number}
                                 return AttachmentListTile(
                                   title: translate!.resume,
                                   onDownloadClick: () {
-                                    //TODO: Add Download Functionality
-                                    showSnackBar(title: translate!.download);
+                                    downloadFile(
+                                        url: data!.coverLetter![index].url!,
+                                        fileName:
+                                            data!.coverLetter?[index].name);
                                   },
                                 );
                               },

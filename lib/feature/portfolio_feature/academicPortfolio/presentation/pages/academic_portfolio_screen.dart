@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:find_me/core/utils/download_files.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
@@ -12,8 +11,6 @@ import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:open_file/open_file.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -39,47 +36,6 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
         .read<AcademicPortfolioCubit>()
         .fetchAcademicPortfolioDetails(userID: widget.academicCardID);
   }
-
-  String videoUrl =
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-  String profileImage =
-      "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
-  List<Map> projectList = [
-    {
-      "project_name": "Project name 1",
-      "description": "Project description 1",
-      "role": "Flutter Developer 1",
-    },
-    {
-      "project_name": "Project name 2",
-      "description": "Project description 2",
-      "role": "Flutter Developer 2",
-    },
-    {
-      "project_name": "Project name 3",
-      "description": "Project description 3",
-      "role": "Flutter Developer 3",
-    },
-    {
-      "project_name": "Project name 4",
-      "description": "Project description 4",
-      "role": "Flutter Developer 4",
-    }
-  ];
-  List<String> certificationsList = [
-    'Certifications 1',
-    'Certifications 2',
-    'Certifications 3',
-    'Certifications 4',
-    'Certifications 5',
-  ];
-  List<String> achievementsList = [
-    'Achievements 1',
-    'Achievements 2',
-    'Achievements 3',
-    'Achievements 4',
-    'Achievements 5',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -153,17 +109,18 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                             title: data!.coverLetter![index].name ??
                                 translate!.coverLetter,
                             onClick: () {
-                              log("CV Clicked");
-                              log("${data?.coverLetter?[index].url}");
-                              if (data?.coverLetter?[index].url != null) {
-                                OpenFile.open(data!.coverLetter![index].url!);
+                              if (data?.resume?[index].url != null) {
+                                openFile(
+                                    url: data!.coverLetter![index].url!,
+                                    fileName: data!.coverLetter?[index].name);
                               } else {
-                                showSnackBar(title: "URL not Found");
+                                showSnackBar(title: translate.documentNotFound);
                               }
                             },
                             onDownloadClick: () {
-                              //TODO: Add Download Functionality
-                              showSnackBar(title: translate!.download);
+                              downloadFile(
+                                  url: data!.coverLetter![index].url!,
+                                  fileName: data!.coverLetter?[index].name);
                             },
                           );
                         },
@@ -181,16 +138,17 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                                 data!.resume![index].name ?? translate!.resume,
                             onClick: () {
                               if (data?.resume?[index].url != null) {
-                                OpenFile.open(data!.resume![index].url!);
+                                openFile(
+                                    url: data!.coverLetter![index].url!,
+                                    fileName: data!.coverLetter?[index].name);
                               } else {
-                                showSnackBar(
-                                    title:
-                                        "Document not Found"); // TODO: dynamic String
+                                showSnackBar(title: translate.documentNotFound);
                               }
                             },
                             onDownloadClick: () {
-                              //TODO: Add Download Functionality
-                              showSnackBar(title: translate!.download);
+                              downloadFile(
+                                  url: data!.coverLetter![index].url!,
+                                  fileName: data!.coverLetter?[index].name);
                             },
                           );
                         },
@@ -207,16 +165,18 @@ class _AcademicPortfolioScreenState extends State<AcademicPortfolioScreen> {
                             title: data!.transcipt![index].name ??
                                 translate!.transcript,
                             onClick: () {
-                              if (data?.transcipt?[index].url != null) {
-                                SfPdfViewer.network(
-                                    data!.transcipt![index].url!);
+                              if (data?.resume?[index].url != null) {
+                                openFile(
+                                    url: data!.coverLetter![index].url!,
+                                    fileName: data!.coverLetter?[index].name);
                               } else {
-                                showSnackBar(title: "URL not Found");
+                                showSnackBar(title: translate.documentNotFound);
                               }
                             },
                             onDownloadClick: () {
-                              //TODO: Add Download Functionality
-                              showSnackBar(title: translate!.download);
+                              downloadFile(
+                                  url: data!.coverLetter![index].url!,
+                                  fileName: data!.coverLetter?[index].name);
                             },
                           );
                         },

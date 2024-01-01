@@ -187,5 +187,6 @@
 
     "zipCode":"ZipCode",
     "oopsSomethingWentWrong" : "OOps, Something went wrong",
-    "search": "Search"
+    "search": "Search",
+    "documentNotFound": "Document not Found"
 }

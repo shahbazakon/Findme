@@ -10,10 +10,10 @@ import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/constants/app_color.dart';
+import '../../../../../core/utils/download_files.dart';
 
 class BusinessPortfolioScreen extends StatefulWidget {
   final String businessCardID;
@@ -184,16 +184,18 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
                             title: data!.coverLetter![index].name ??
                                 translate!.coverLetter,
                             onClick: () {
-                              if (data?.coverLetter?[index].url != null) {
-                                SfPdfViewer.network(
-                                    data!.coverLetter![index].url!);
+                              if (data?.resume?[index].url != null) {
+                                openFile(
+                                    url: data!.coverLetter![index].url!,
+                                    fileName: data!.coverLetter?[index].name);
                               } else {
-                                showSnackBar(title: "URL not Found");
+                                showSnackBar(title: translate.documentNotFound);
                               }
                             },
                             onDownloadClick: () {
-                              //TODO: Add Download Functionality
-                              showSnackBar(title: translate!.download);
+                              downloadFile(
+                                  url: data!.coverLetter![index].url!,
+                                  fileName: data!.coverLetter?[index].name);
                             },
                           );
                         },
@@ -211,14 +213,17 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
                                 data!.resume![index].name ?? translate!.resume,
                             onClick: () {
                               if (data?.resume?[index].url != null) {
-                                SfPdfViewer.network(data!.resume![index].url!);
+                                openFile(
+                                    url: data!.coverLetter![index].url!,
+                                    fileName: data!.coverLetter?[index].name);
                               } else {
-                                showSnackBar(title: "URL not Found");
+                                showSnackBar(title: translate.documentNotFound);
                               }
                             },
                             onDownloadClick: () {
-                              //TODO: Add Download Functionality
-                              showSnackBar(title: translate!.download);
+                              downloadFile(
+                                  url: data!.coverLetter![index].url!,
+                                  fileName: data!.coverLetter?[index].name);
                             },
                           );
                         },
@@ -235,16 +240,18 @@ class _BusinessPortfolioScreenState extends State<BusinessPortfolioScreen> {
                             title: data!.transcipt![index].name ??
                                 translate!.transcript,
                             onClick: () {
-                              if (data?.transcipt?[index].url != null) {
-                                SfPdfViewer.network(
-                                    data!.transcipt![index].url!);
+                              if (data?.resume?[index].url != null) {
+                                openFile(
+                                    url: data!.coverLetter![index].url!,
+                                    fileName: data!.coverLetter?[index].name);
                               } else {
-                                showSnackBar(title: "URL not Found");
+                                showSnackBar(title: translate.documentNotFound);
                               }
                             },
                             onDownloadClick: () {
-                              //TODO: Add Download Functionality
-                              showSnackBar(title: translate!.download);
+                              downloadFile(
+                                  url: data!.coverLetter![index].url!,
+                                  fileName: data!.coverLetter?[index].name);
                             },
                           );
                         },

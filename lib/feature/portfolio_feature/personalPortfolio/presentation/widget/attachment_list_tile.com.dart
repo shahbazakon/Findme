@@ -1,15 +1,21 @@
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/utils/text_style.dart';
+import 'package:find_me/core/widget/loading.dart';
 import 'package:flutter/material.dart';
 
 class AttachmentListTile extends StatelessWidget {
   const AttachmentListTile(
-      {super.key, required this.title, this.onDownloadClick, this.onClick});
+      {super.key,
+      required this.title,
+      this.onDownloadClick,
+      this.onClick,
+      this.isDownloading = false});
 
   final String title;
   final Function()? onDownloadClick;
   final Function()? onClick;
+  final bool isDownloading;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +38,15 @@ class AttachmentListTile extends StatelessWidget {
             style: SubTitleHelper.h9.copyWith(color: AppFontsColors.light)),
         trailing: InkWell(
           onTap: onDownloadClick,
-          child: Text(
-            "Download",
-            style: SubTitleHelper.h10.copyWith(
-              color: AppFontsColors.light,
-              decoration: TextDecoration.underline,
-            ),
-          ),
+          child: isDownloading
+              ? const Loading()
+              : Text(
+                  "Download",
+                  style: SubTitleHelper.h10.copyWith(
+                    color: AppFontsColors.light,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
         ),
       ),
     );

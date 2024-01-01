@@ -29,11 +29,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:requestLegacyExternalStorage="true"
         android:label="Find Me"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+<!--        file path provider to open file -->
 
         <activity
             android:name=".MainActivity"
@@ -59,6 +61,7 @@
         </activity>
 
 
+
 <!--        <provider-->
 <!--            android:name="androidx.core.content.FileProvider"-->
 <!--            android:authorities="${applicationId}.fileProvider"-->
@@ -77,5 +80,17 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="${applicationId}.fileProvider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true"-->
+<!--            tools:replace="android:authorities">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/filepaths"-->
+<!--                tools:replace="android:resource" />-->
+<!--        </provider>-->
     </application>
 </manifest>
