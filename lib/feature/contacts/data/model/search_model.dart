@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:find_me/feature/contacts/data/model/search_user_model.dart';
+
 class SearchModel {
   final bool? success;
   final List<SearchResult>? result;
@@ -350,51 +352,6 @@ class Cover {
         "name": name,
         "status": status,
         "type": type,
-      };
-}
-
-class Follow {
-  final bool? status;
-  final String? id;
-  final String? user;
-  final String? description;
-
-  Follow({
-    this.status,
-    this.id,
-    this.user,
-    this.description,
-  });
-
-  Follow copyWith({
-    bool? status,
-    String? id,
-    String? user,
-    String? description,
-  }) =>
-      Follow(
-        status: status ?? this.status,
-        id: id ?? this.id,
-        user: user ?? this.user,
-        description: description ?? this.description,
-      );
-
-  factory Follow.fromRawJson(String str) => Follow.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Follow.fromJson(Map<String, dynamic> json) => Follow(
-        status: json["status"],
-        id: json["_id"],
-        user: json["user"],
-        description: json["description"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "_id": id,
-        "user": user,
-        "description": description,
       };
 }
 

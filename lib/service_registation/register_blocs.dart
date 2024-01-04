@@ -8,6 +8,7 @@ import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/forgot_p
 import 'package:find_me/feature/auth_featrues/signIn/presentation/cubit/sign_in_cubit.dart';
 import 'package:find_me/feature/auth_featrues/signUp/presentation/cubit/sign_up_cubit.dart';
 import 'package:find_me/feature/contacts/presentation/cubit/contacts_cubit.dart';
+import 'package:find_me/feature/contacts/presentation/cubit/search_cubit.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/cubit/academic_details_cubit.dart';
 import 'package:find_me/feature/home_features/businessDetails/presentation/cubit/business_details_cubit.dart';
 import 'package:find_me/feature/home_features/corporateDetails/presentation/cubit/corporate_details_cubit.dart';
@@ -19,7 +20,6 @@ import 'package:find_me/feature/portfolio_feature/academicPortfolio/presentation
 import 'package:find_me/feature/portfolio_feature/businessPortfolio/presentation/cubit/business_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/corporatePortfolio/presentation/cubit/corporate_portfolio_cubit.dart';
 import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation/cubit/personal_portfolio_cubit.dart';
-import 'package:find_me/feature/settings_features/followRequest/presentation/cubit/search_cubit.dart';
 
 import '../feature/portfolio_feature/matrimonyPortfolio/presentation/cubit/matrimonial_portfolio_cubit.dart';
 

@@ -23,7 +23,7 @@ import 'package:find_me/feature/portfolio_feature/personalPortfolio/presentation
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../feature/settings_features/followRequest/presentation/cubit/search_cubit.dart';
+import '../feature/contacts/presentation/cubit/search_cubit.dart';
 
 List<BlocProvider> providers = [
   BlocProvider<SignInCubit>(

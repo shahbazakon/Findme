@@ -1,5 +1,3 @@
-// open and Downlad File handling
-
 import 'dart:developer';
 import 'dart:io';
 
@@ -11,10 +9,10 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future openFile({String? fileName, required String url}) async {
-  final _downloadedFile =
+  final downloadedFile =
       await downloadFile(url: url, fileName: fileName, openOnly: true);
-  if (_downloadedFile == null) return;
-  OpenFile.open(_downloadedFile.path);
+  if (downloadedFile == null) return;
+  OpenFile.open(downloadedFile.path);
 }
 
 Future<File?> downloadFile(
