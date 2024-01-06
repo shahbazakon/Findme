@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/local_storege_key.dart';
@@ -45,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       for (var element in data?.result ?? []) {
         if (cardName.toLowerCase() == element.cardTitle?.toLowerCase()) {
-          log("element Type: ${element.runtimeType}");
           return element;
         }
       }

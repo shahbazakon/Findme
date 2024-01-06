@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:find_me/core/api/api.dart';
 import 'package:find_me/core/error/faliures.dart';
@@ -10,7 +8,6 @@ class PortfolioRemoteDataSource {
   API api = API();
   Future<PortfolioSetModel> createPortfolio(
       {required PortfolioSetModel data}) async {
-    log("data: ${data.toJson()}");
     try {
       final Response response = await api.sendRequest.post(
         "/card/create",
