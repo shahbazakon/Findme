@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:find_me/core/constants/theme_constants.dart';
-import 'package:find_me/core/helper/navigators.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
@@ -11,7 +10,6 @@ import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/profile_picture_avatar.dart';
 import 'package:find_me/feature/auth_featrues/createProfile/data/models/complete_profile_model.dart';
 import 'package:find_me/feature/auth_featrues/createProfile/presentation/cubit/create_profile_cubit.dart';
-import 'package:find_me/feature/dashboard/presentation/pages/dashboard_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -70,12 +68,13 @@ class _CreateProfileState extends State<CreateProfile> {
                   : [
                       Cover(
                         url:
-                            'base64,${await getBase64File(imageFile: pickedImage!)}',
+                            'data:image/$fileType;base64,${await getBase64File(imageFile: pickedImage!)}',
+                        // 'base64,,
                         thumbUrl:
-                            'base64,${await getBase64File(imageFile: pickedImage!)}',
+                            'data:image/$fileType;base64,${await getBase64File(imageFile: pickedImage!)}',
                         name: pickedImage?.name,
                         status: 'done',
-                        type: 'image/$fileType',
+                        // type: 'image/$fileType',
                       ),
                     ]),
         ));
@@ -164,9 +163,12 @@ class _CreateProfileState extends State<CreateProfile> {
               BlocConsumer<CreateProfileCubit, CreateProfileState>(
                 listener: (context, state) {
                   if (state is CreateProfileLoaded) {
-                    cupertinoNavigator(
-                        type: NavigatorType.PUSHREMOVEUNTIL,
-                        screenName: Dashboard());
+                    // cupertinoNavigator(
+                    //     type: NavigatorType.PUSHREMOVEUNTIL,
+                    //     screenName: Dashboard());
+                    context
+                        .read<CreateProfileCubit>()
+                        .emit(CreateProfileInitial());
                   } else if (state is CreateProfileError) {
                     showSnackBar(title: state.errorMsg);
                   }

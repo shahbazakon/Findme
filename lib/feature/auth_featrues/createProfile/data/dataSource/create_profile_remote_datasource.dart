@@ -7,10 +7,10 @@ class CreateProfileRemoteDataSource {
   API api = API();
   Future<ProfileModel> createProfile({required ProfileModel data}) async {
     try {
-      final Response response = await api.sendRequest.patch(
-        "/admin/update/${data.result!.resultId}",
-        data: data,
-      );
+      final Response response = await api.sendRequest
+          .patch("/admin/update/${data.result!.resultId}", data: data
+              // options: Options(headers: {'Content-Type': 'application/json'})
+              );
       final status = await hanldeStatusCode(response);
       if (status.status) {
         ProfileModel data = ProfileModel.fromJson(response.data);

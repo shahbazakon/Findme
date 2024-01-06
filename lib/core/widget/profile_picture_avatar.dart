@@ -48,35 +48,38 @@ class _ProfilePictureAvatarState extends State<ProfilePictureAvatar> {
 
     return Stack(
       children: [
-        Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(
-                    width: widget.isBorderVisible ? widget.radius * .10 : 0,
-                    color: AppColors.light),
-                boxShadow: [
-                  BoxShadow(
-                      offset: widget.isShadowDown
-                          ? const Offset(1, 6)
-                          : const Offset(0, 0),
-                      blurRadius: widget.isShadowDown
-                          ? widget.radius * .1
-                          : widget.radius * .21,
-                      color: AppColors.lightGrey3)
-                ]),
-            child: CircleAvatar(
-              radius: widget.radius,
-              backgroundImage: pickedImage != null
-                  ? Image.file(
-                      File(pickedImage!.path),
-                      fit: BoxFit.cover,
-                    ).image
-                  : FadeInImage(
-                      placeholder: AssetImage(AppIcons.placeholderImage),
-                      image: NetworkImage(widget.image ?? profileImage),
-                      fit: BoxFit.cover,
-                    ).image,
-            )),
+        Hero(
+          tag: "ProfilePicture",
+          child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                      width: widget.isBorderVisible ? widget.radius * .10 : 0,
+                      color: AppColors.light),
+                  boxShadow: [
+                    BoxShadow(
+                        offset: widget.isShadowDown
+                            ? const Offset(1, 6)
+                            : const Offset(0, 0),
+                        blurRadius: widget.isShadowDown
+                            ? widget.radius * .1
+                            : widget.radius * .21,
+                        color: AppColors.lightGrey3)
+                  ]),
+              child: CircleAvatar(
+                radius: widget.radius,
+                backgroundImage: pickedImage != null
+                    ? Image.file(
+                        File(pickedImage!.path),
+                        fit: BoxFit.cover,
+                      ).image
+                    : FadeInImage(
+                        placeholder: AssetImage(AppIcons.placeholderImage),
+                        image: NetworkImage(widget.image ?? profileImage),
+                        fit: BoxFit.cover,
+                      ).image,
+              )),
+        ),
         Visibility(
           visible: widget.showEditButton,
           child: Positioned(

@@ -8,6 +8,7 @@ class API {
 
   Map<String, dynamic> headers = {
     "x-auth-token": sharedPreferences!.getString(LocaleStorageKey.xAuthToken),
+    // 'Content-Type': 'application/json',
   };
 
   API() {

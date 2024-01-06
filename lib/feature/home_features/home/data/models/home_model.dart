@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class HomeModel {
   final bool? success;
-  final List<Result>? result;
+  final List<HomeResult>? result;
   final String? message;
 
   HomeModel({
@@ -13,7 +13,7 @@ class HomeModel {
 
   HomeModel copyWith({
     bool? success,
-    List<Result>? result,
+    List<HomeResult>? result,
     String? message,
   }) =>
       HomeModel(
@@ -31,7 +31,8 @@ class HomeModel {
         success: json["success"],
         result: json["result"] == null
             ? []
-            : List<Result>.from(json["result"]!.map((x) => Result.fromJson(x))),
+            : List<HomeResult>.from(
+                json["result"]!.map((x) => HomeResult.fromJson(x))),
         message: json["message"],
       );
 
@@ -44,7 +45,7 @@ class HomeModel {
       };
 }
 
-class Result {
+class HomeResult {
   final List<dynamic>? officeDays;
   final List<String>? skills;
   final List<dynamic>? degreeLevel;
@@ -121,7 +122,7 @@ class Result {
   final String? specified;
   final String? specifiedBad;
 
-  Result({
+  HomeResult({
     this.officeDays,
     this.skills,
     this.degreeLevel,
@@ -199,7 +200,7 @@ class Result {
     this.specifiedBad,
   });
 
-  Result copyWith({
+  HomeResult copyWith({
     List<dynamic>? officeDays,
     List<String>? skills,
     List<dynamic>? degreeLevel,
@@ -276,7 +277,7 @@ class Result {
     String? specified,
     String? specifiedBad,
   }) =>
-      Result(
+      HomeResult(
         officeDays: officeDays ?? this.officeDays,
         skills: skills ?? this.skills,
         degreeLevel: degreeLevel ?? this.degreeLevel,
@@ -354,11 +355,12 @@ class Result {
         specifiedBad: specifiedBad ?? this.specifiedBad,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory HomeResult.fromRawJson(String str) =>
+      HomeResult.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory HomeResult.fromJson(Map<String, dynamic> json) => HomeResult(
         officeDays: json["officeDays"] == null
             ? []
             : List<dynamic>.from(json["officeDays"]!.map((x) => x)),

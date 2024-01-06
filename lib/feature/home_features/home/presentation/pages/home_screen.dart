@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:find_me/core/constants/app_assets.dart';
 import 'package:find_me/core/constants/app_color.dart';
 import 'package:find_me/core/constants/local_storege_key.dart';
@@ -37,6 +39,21 @@ class _HomeScreenState extends State<HomeScreen> {
     String? userId = sharedPreferences!.getString(LocaleStorageKey.userID);
     context.read<HomeCubit>().fetchHomeData(id: userId!);
     super.initState();
+  }
+
+  Future<HomeResult> getPortfolio({required String cardName}) async {
+    try {
+      for (var element in data?.result ?? []) {
+        if (cardName.toLowerCase() == element.cardTitle?.toLowerCase()) {
+          log("element Type: ${element.runtimeType}");
+          return element;
+        }
+      }
+      return HomeResult(); // or return ""; depending on your requirement
+    } catch (error) {
+      showSnackBar(title: error.toString());
+      return HomeResult(); // or return ""; depending on your requirement
+    }
   }
 
   @override
@@ -109,10 +126,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             customGridTile(
                                 title: translate!.personal,
                                 image: AppImages.personal,
-                                onTap: () {
+                                onTap: () async {
+                                  HomeResult data =
+                                      await getPortfolio(cardName: 'Personal');
                                   cupertinoNavigator(
                                       screenName:
-                                          const PersonalDetailsScreen());
+                                          PersonalDetailsScreen(data: data));
                                 }),
                             customGridTile(
                                 title: translate!.business,

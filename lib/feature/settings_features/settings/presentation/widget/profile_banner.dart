@@ -44,7 +44,7 @@ class ProfileBanner extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       String userID = sharedPreferences!
-                          .getString(LocaleStorageKey.userEmail)!;
+                          .getString(LocaleStorageKey.userID)!;
                       cupertinoNavigator(
                           screenName: CreateProfile(
                         id: userID,

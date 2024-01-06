@@ -16,6 +16,7 @@ import 'package:find_me/core/widget/button/app_switch_button.dart';
 import 'package:find_me/core/widget/custom_appbar.dart';
 import 'package:find_me/core/widget/custom_snackBar.dart';
 import 'package:find_me/core/widget/success_screen.dart';
+import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
 import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_cubit.dart';
 import 'package:find_me/feature/home_features/personalDetails/presentation/cubit/presontation_details_state.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +24,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
-  const PersonalDetailsScreen({super.key});
-
+  const PersonalDetailsScreen({super.key, this.data});
+  final HomeResult? data;
   @override
   State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
 }
@@ -38,23 +39,59 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   FilePickerResult? pickedVideo;
   DateTime? pickedDate;
 
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _middleNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _prefixController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _addressLine1Controller = TextEditingController();
-  final TextEditingController _countryCode1Controller = TextEditingController();
-  final TextEditingController _countryCode2Controller = TextEditingController();
-  final TextEditingController _phoneNumber1Controller = TextEditingController();
-  final TextEditingController _phoneNumber2Controller = TextEditingController();
-  final TextEditingController _imageController = TextEditingController();
-  final TextEditingController _videoController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
-  final List<TextEditingController> _socialMediaURLController = [
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _middleNameController;
+  late final TextEditingController _lastNameController;
+  late final TextEditingController _prefixController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _addressLine1Controller;
+  late final TextEditingController _countryCode1Controller;
+  late final TextEditingController _countryCode2Controller;
+  late final TextEditingController _phoneNumber1Controller;
+  late final TextEditingController _phoneNumber2Controller;
+  late final TextEditingController _imageController;
+  late final TextEditingController _videoController;
+  late final TextEditingController _dobController;
+  late final List<TextEditingController> _socialMediaURLController = [
     TextEditingController()
   ];
   TextFieldValidator validator = TextFieldValidator();
+
+  @override
+  void initState() {
+    //Prefilling the data
+    HomeResult? prefillData = widget.data ?? HomeResult();
+    _firstNameController = TextEditingController(text: prefillData.firstName);
+    _middleNameController = TextEditingController(text: prefillData.middleName);
+    _lastNameController = TextEditingController(text: prefillData.lastName);
+    _prefixController = TextEditingController(text: prefillData.suffix);
+    _emailController = TextEditingController(text: prefillData.primaryEmail);
+    _addressLine1Controller =
+        TextEditingController(text: prefillData.primaryAddress);
+    _countryCode1Controller =
+        TextEditingController(text: prefillData.mobile?.first.phoneCode);
+    _countryCode2Controller = TextEditingController(
+        text: prefillData.mobile!.length > 1
+            ? prefillData.mobile![1].phoneCode
+            : "");
+    _phoneNumber1Controller =
+        TextEditingController(text: prefillData.mobile?.first.number);
+    _phoneNumber2Controller = TextEditingController(
+        text: prefillData.mobile!.length > 1
+            ? prefillData.mobile![1].number
+            : "");
+    _imageController =
+        TextEditingController(text: prefillData.picture?.first.url);
+    _videoController =
+        TextEditingController(text: prefillData.video?.first.url);
+    _dobController = TextEditingController(text: prefillData?.dob.toString());
+
+    prefillData.social?.forEach((element) {
+      _socialMediaURLController.add(TextEditingController(text: element.label));
+    });
+
+    super.initState();
+  }
 
   // dispose Controllers
   @override
@@ -157,6 +194,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations? translate = AppLocalizations.of(context);
+
     return Scaffold(
       appBar:
           CustomAppbar(title: "${translate!.personal} ${translate.details} "),
