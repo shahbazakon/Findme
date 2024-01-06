@@ -127,11 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: translate!.personal,
                                 image: AppImages.personal,
                                 onTap: () async {
-                                  HomeResult data =
+                                  HomeResult presonalData =
                                       await getPortfolio(cardName: 'Personal');
                                   cupertinoNavigator(
-                                      screenName:
-                                          PersonalDetailsScreen(data: data));
+                                      screenName: PersonalDetailsScreen(
+                                          data: presonalData));
                                 }),
                             customGridTile(
                                 title: translate!.business,
@@ -152,10 +152,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             customGridTile(
                                 title: translate!.academic,
                                 image: AppImages.academic,
-                                onTap: () {
+                                onTap: () async {
+                                  HomeResult academicData =
+                                      await getPortfolio(cardName: 'Academic');
                                   cupertinoNavigator(
-                                      screenName:
-                                          const AcademicDetailsScreen());
+                                      screenName: AcademicDetailsScreen(
+                                          data: academicData));
                                 }),
                             customGridTile(
                                 title: translate!.matrimony,

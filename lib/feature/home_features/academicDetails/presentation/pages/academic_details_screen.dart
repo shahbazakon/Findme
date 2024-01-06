@@ -22,12 +22,14 @@ import 'package:find_me/core/widget/dialogBox/add_project_pop.dart';
 import 'package:find_me/core/widget/project_tile.dart';
 import 'package:find_me/core/widget/success_screen.dart';
 import 'package:find_me/feature/home_features/academicDetails/presentation/cubit/academic_details_cubit.dart';
+import 'package:find_me/feature/home_features/home/data/models/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AcademicDetailsScreen extends StatefulWidget {
-  const AcademicDetailsScreen({super.key});
+  final HomeResult? data;
+  const AcademicDetailsScreen({super.key, this.data});
 
   @override
   State<AcademicDetailsScreen> createState() => _AcademicDetailsScreenState();
@@ -44,31 +46,30 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   FilePickerResult? pickedResume;
   FilePickerResult? pickedTranscript;
   DateTime? pickedDate;
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _middleNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _prefixController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _addressLine1Controller = TextEditingController();
-  final TextEditingController _countryCode1Controller = TextEditingController();
-  final TextEditingController _countryCode2Controller = TextEditingController();
-  final TextEditingController _phoneNumber1Controller = TextEditingController();
-  final TextEditingController _phoneNumber2Controller = TextEditingController();
-  final TextEditingController _coverImageController = TextEditingController();
-  final TextEditingController _coverLetterController = TextEditingController();
-  final TextEditingController _resumeController = TextEditingController();
-  final TextEditingController _transcriptController = TextEditingController();
-  final TextEditingController _videoController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _programmingLanguageController =
-      TextEditingController();
-  final List<TextEditingController> _socialMediaURLController = [
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _middleNameController;
+  late final TextEditingController _lastNameController;
+  late final TextEditingController _prefixController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _addressLine1Controller;
+  late final TextEditingController _countryCode1Controller;
+  late final TextEditingController _countryCode2Controller;
+  late final TextEditingController _phoneNumber1Controller;
+  late final TextEditingController _phoneNumber2Controller;
+  late final TextEditingController _coverImageController;
+  late final TextEditingController _coverLetterController;
+  late final TextEditingController _resumeController;
+  late final TextEditingController _transcriptController;
+  late final TextEditingController _videoController;
+  late final TextEditingController _dobController;
+  late final TextEditingController _programmingLanguageController;
+  late final List<TextEditingController> _socialMediaURLController = [
     TextEditingController()
   ];
-  final List<TextEditingController> _skillsController = [
+  late final List<TextEditingController> _skillsController = [
     TextEditingController()
   ];
-  final List<TextEditingController> _certificationsController = [
+  late final List<TextEditingController> _certificationsController = [
     TextEditingController()
   ];
   TextFieldValidator validator = TextFieldValidator();
@@ -76,6 +77,48 @@ class _AcademicDetailsScreenState extends State<AcademicDetailsScreen> {
   @override
   void initState() {
     super.initState();
+    HomeResult? prefillData = widget.data ?? HomeResult();
+    _firstNameController = TextEditingController(text: prefillData.firstName);
+    _middleNameController = TextEditingController(text: prefillData.middleName);
+    _lastNameController = TextEditingController(text: prefillData.lastName);
+    _prefixController = TextEditingController(text: prefillData.suffix);
+    _emailController = TextEditingController(text: prefillData.primaryEmail);
+    _addressLine1Controller =
+        TextEditingController(text: prefillData.primaryAddress);
+    _countryCode1Controller =
+        TextEditingController(text: prefillData.mobile?.first.phoneCode);
+    _countryCode2Controller = TextEditingController(
+        text: prefillData.mobile!.length > 1
+            ? prefillData.mobile![1].phoneCode
+            : "");
+    _phoneNumber1Controller =
+        TextEditingController(text: prefillData.mobile?.first.number);
+    _phoneNumber2Controller = TextEditingController(
+        text: prefillData.mobile!.length > 1
+            ? prefillData.mobile![1].number
+            : "");
+    _coverImageController =
+        TextEditingController(); //TODO: not getting the cover Image
+    _coverLetterController =
+        TextEditingController(text: prefillData.coverLetter?.first.url);
+    _resumeController =
+        TextEditingController(text: prefillData.resume?.first.url);
+    _transcriptController =
+        TextEditingController(text: prefillData.transcipt?.first.url);
+    _videoController =
+        TextEditingController(text: prefillData.video?.first.url);
+    _dobController = TextEditingController(text: prefillData.dob.toString());
+    _programmingLanguageController =
+        TextEditingController(text: prefillData.programmingLanguage?.first);
+    prefillData.social?.forEach((element) {
+      _socialMediaURLController.add(TextEditingController(text: element.label));
+    });
+    prefillData.skills?.forEach((element) {
+      _skillsController.add(TextEditingController(text: element));
+    });
+    prefillData.certification?.forEach((element) {
+      _certificationsController.add(TextEditingController(text: element.title));
+    });
   }
 
   // dispose Controllers
