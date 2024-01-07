@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:find_me/core/constants/theme_constants.dart';
+import 'package:find_me/core/datasource/upload_file_datasource.dart';
 import 'package:find_me/core/utils/text_style.dart';
 import 'package:find_me/core/utils/utils_methods.dart';
 import 'package:find_me/core/widget/Input%20Field/county_code_picker.dart';
@@ -51,6 +52,12 @@ class _CreateProfileState extends State<CreateProfile> {
   Future<void> submitForm() async {
     String? fileType = pickedImage?.name.split(".").last.toString();
     //TODO: solve Upload file Issue
+    String? imageURL;
+    if (pickedImage != null) {
+      imageURL = await UploadDocumentRemoteDataSource()
+          .upload(folderName: "profile", file: pickedImage!);
+    }
+
     context.read<CreateProfileCubit>().createProfile(
             data: ProfileModel(
           result: ProfileResult(
@@ -67,11 +74,8 @@ class _CreateProfileState extends State<CreateProfile> {
                   ? null
                   : [
                       Cover(
-                        url:
-                            'data:image/$fileType;base64,${await getBase64File(imageFile: pickedImage!)}',
-                        // 'base64,,
-                        thumbUrl:
-                            'data:image/$fileType;base64,${await getBase64File(imageFile: pickedImage!)}',
+                        url: "$imageURL",
+                        thumbUrl: "$imageURL",
                         name: pickedImage?.name,
                         status: 'done',
                         // type: 'image/$fileType',
