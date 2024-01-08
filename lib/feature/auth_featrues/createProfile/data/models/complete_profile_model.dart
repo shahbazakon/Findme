@@ -233,7 +233,7 @@ class ProfileResult {
         "role": role,
         "root": root,
         "createdat":
-            "${createdat!.year.toString().padLeft(4, '0')}-${createdat!.month.toString().padLeft(2, '0')}-${createdat!.day.toString().padLeft(2, '0')}",
+            "${createdat?.year.toString().padLeft(4, '0')}-${createdat?.month.toString().padLeft(2, '0')}-${createdat?.day.toString().padLeft(2, '0')}",
         "avatar": avatar,
         "_id": resultId,
         "email": email,
